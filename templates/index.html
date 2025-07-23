@@ -115,7 +115,7 @@
                             <!-- Action Button -->
                             <div class="product-action">
                                 {% if product.available %}
-                                    <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-primary btn-comprar">
+                                    <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn-comprar">
                                         Comprar
                                     </a>
                                     <div class="installment-info">
@@ -123,7 +123,7 @@
                                         <small>Incluindo...</small>
                                     </div>
                                 {% else %}
-                                    <a href="{{ url_for('notify_when_available', product_id=product.id) }}" class="btn btn-outline-primary btn-notify">
+                                    <a href="{{ url_for('notify_when_available', product_id=product.id) }}" class="btn-notify">
                                         Avise-me quando chegar!
                                     </a>
                                 {% endif %}
@@ -185,7 +185,7 @@
                             <!-- Action Button -->
                             <div class="product-action">
                                 {% if product.available %}
-                                    <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-primary btn-comprar">
+                                    <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn-comprar">
                                         Comprar
                                     </a>
                                     <div class="installment-info">
@@ -193,7 +193,7 @@
                                         <small>Incluindo...</small>
                                     </div>
                                 {% else %}
-                                    <a href="{{ url_for('notify_when_available', product_id=product.id) }}" class="btn btn-outline-primary btn-notify">
+                                    <a href="{{ url_for('notify_when_available', product_id=product.id) }}" class="btn-notify">
                                         Avise-me quando chegar!
                                     </a>
                                 {% endif %}

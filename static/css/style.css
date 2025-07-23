@@ -431,59 +431,38 @@ body.cookie-notice-visible {
 
 .btn-comprar, .btn-notify {
     width: 100%;
-    padding: 15px 20px;
-    font-weight: 700;
-    border-radius: 6px;
+    padding: 12px 20px;
+    font-weight: 600;
+    border-radius: 4px;
     text-decoration: none;
     text-align: center;
     display: block;
-    transition: all 0.3s ease;
-    font-size: 16px;
+    transition: all 0.2s ease;
+    font-size: 14px;
     border: none;
-    position: relative;
-    overflow: hidden;
-}
-
-.btn-comprar {
-    background: linear-gradient(135deg, #ff6b35 0%, #e55a2b 100%);
-    color: white;
     text-transform: none;
     font-family: inherit;
 }
 
-.btn-comprar::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    transition: left 0.5s;
-}
-
-.btn-comprar:hover::before {
-    left: 100%;
+.btn-comprar {
+    background-color: #ff6b35;
+    color: white;
 }
 
 .btn-comprar:hover {
-    background: linear-gradient(135deg, #e55a2b 0%, #d44d1f 100%);
+    background-color: #e55a2b;
     color: white;
     text-decoration: none;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
 }
 
 .btn-notify {
-    background: #28a745;
+    background-color: #28a745;
     color: white;
-    text-transform: none;
     cursor: not-allowed;
-    opacity: 0.9;
 }
 
 .btn-notify:hover {
-    background: #28a745;
+    background-color: #28a745;
     color: white;
     text-decoration: none;
 }
@@ -508,7 +487,7 @@ body.cookie-notice-visible {
 /* Footer */
 .footer {
     background-color: #f8f9fa;
-    padding: 60px 0 20px;
+    padding: 60px 0 0;
     margin-top: 60px;
 }
 
