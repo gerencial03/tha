@@ -429,44 +429,52 @@ body.cookie-notice-visible {
     margin-top: auto;
 }
 
+/* Botões exatamente como no site original */
 .btn-comprar, .btn-notify {
     width: 100%;
-    padding: 12px 20px;
-    font-weight: 600;
-    border-radius: 4px;
+    padding: 8px 16px;
+    font-weight: 400;
+    border-radius: 6px;
     text-decoration: none;
     text-align: center;
     display: block;
-    transition: all 0.2s ease;
-    font-size: 14px;
-    border: none;
+    transition: all 0.15s ease;
+    font-size: 13px;
+    border: 1px solid;
     text-transform: none;
     font-family: inherit;
+    line-height: 1.4;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-comprar {
-    background-color: #ff6b35;
+    background-color: #ff6939;
     color: white;
+    border-color: #ff6939;
 }
 
 .btn-comprar:hover {
     background-color: #e55a2b;
     color: white;
     text-decoration: none;
+    border-color: #e55a2b;
 }
 
 .btn-notify {
     background-color: #f8f9fa;
-    color: #666;
-    border: 1px solid #ddd;
+    color: #6c757d;
+    border-color: #dee2e6;
     cursor: pointer;
 }
 
 .btn-notify:hover {
     background-color: #e9ecef;
-    color: #666;
+    color: #6c757d;
     text-decoration: none;
-    border-color: #ccc;
+    border-color: #adb5bd;
 }
 
 .installment-info {
