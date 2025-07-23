@@ -284,8 +284,8 @@ body.cookie-notice-visible {
 /* Product Cards (Mobile First) */
 .product-card {
     background: white;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     overflow: hidden;
     height: 100%;
     display: flex;
@@ -293,6 +293,7 @@ body.cookie-notice-visible {
     transition: all 0.3s ease;
     position: relative;
     margin-bottom: 15px;
+    border: 1px solid #f0f0f0;
 }
 
 .product-card:hover {
@@ -335,9 +336,10 @@ body.cookie-notice-visible {
 
 .product-image {
     width: 100%;
-    height: 200px;
+    height: 240px;
     overflow: hidden;
     position: relative;
+    background-color: #f8f9fa;
 }
 
 .product-image img {
@@ -429,37 +431,61 @@ body.cookie-notice-visible {
 
 .btn-comprar, .btn-notify {
     width: 100%;
-    padding: 10px;
-    font-weight: 600;
-    border-radius: var(--border-radius);
+    padding: 15px 20px;
+    font-weight: 700;
+    border-radius: 6px;
     text-decoration: none;
     text-align: center;
     display: block;
     transition: all 0.3s ease;
-    font-size: 0.9rem;
+    font-size: 16px;
+    border: none;
+    position: relative;
+    overflow: hidden;
 }
 
 .btn-comprar {
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, #ff6b35 0%, #e55a2b 100%);
     color: white;
-    border: 2px solid var(--primary-color);
+    text-transform: none;
+    font-family: inherit;
+}
+
+.btn-comprar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn-comprar:hover::before {
+    left: 100%;
 }
 
 .btn-comprar:hover {
-    background-color: var(--primary-dark);
-    border-color: var(--primary-dark);
+    background: linear-gradient(135deg, #e55a2b 0%, #d44d1f 100%);
     color: white;
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
 }
 
 .btn-notify {
-    background-color: transparent;
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
+    background: #28a745;
+    color: white;
+    text-transform: none;
+    cursor: not-allowed;
+    opacity: 0.9;
 }
 
 .btn-notify:hover {
-    background-color: var(--primary-color);
+    background: #28a745;
     color: white;
+    text-decoration: none;
 }
 
 .installment-info {
