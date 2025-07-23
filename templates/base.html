@@ -37,22 +37,39 @@
 
     <!-- Header -->
     <header class="header">
-        <div class="container">
+        <div class="container-fluid px-3">
             <div class="row align-items-center">
-                <div class="col-3">
-                    <button class="btn btn-link menu-toggle d-md-none">
+                <!-- Menu Toggle (Mobile) -->
+                <div class="col-2 d-md-none">
+                    <button class="btn btn-link menu-toggle">
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>
-                <div class="col-6 col-md-4">
+                
+                <!-- Logo (Centered on Mobile) -->
+                <div class="col-8 col-md-6 text-center text-md-start">
                     <div class="logo">
                         <h1><span class="logo-tha">tha</span><br><span class="logo-beauty">beauty</span></h1>
                     </div>
                 </div>
-                <div class="col-3 col-md-8">
+                
+                <!-- Cart Icon (Mobile) -->
+                <div class="col-2 d-md-none text-end">
+                    <div class="cart-icon">
+                        <a href="#" class="cart-link">
+                            <i class="fas fa-shopping-cart"></i>
+                            {% if cart_count > 0 %}
+                            <span class="cart-count">{{ cart_count }}</span>
+                            {% endif %}
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Desktop Actions -->
+                <div class="col-md-6 d-none d-md-block">
                     <div class="header-actions">
                         <!-- Search Bar -->
-                        <div class="search-container d-none d-md-block">
+                        <div class="search-container">
                             <form action="{{ url_for('search') }}" method="GET" class="search-form">
                                 <input type="text" name="q" placeholder="Buscar..." class="search-input" value="{{ search_query or '' }}">
                                 <button type="submit" class="search-btn">
@@ -74,11 +91,11 @@
                 </div>
             </div>
             
-            <!-- Mobile Search -->
-            <div class="row d-md-none mt-3">
+            <!-- Mobile Search Bar (Full Width) -->
+            <div class="row d-md-none mt-2">
                 <div class="col-12">
                     <form action="{{ url_for('search') }}" method="GET" class="search-form">
-                        <input type="text" name="q" placeholder="Buscar..." class="search-input mobile-search" value="{{ search_query or '' }}">
+                        <input type="text" name="q" placeholder="Buscar" class="search-input mobile-search" value="{{ search_query or '' }}">
                         <button type="submit" class="search-btn">
                             <i class="fas fa-search"></i>
                         </button>
