@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Banner -->
+<section class="hero-banner">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="hero-content">
+                    <h2 class="hero-title">
+                        <span class="highlight">Tha Beauty</span>: beleza que inspira.<br>
+                        Fragrâncias que contam histórias.
+                    </h2>
+                    <p class="hero-subtitle">Descubra nossa linha completa de produtos de beleza e cuidado pessoal.</p>
+                    <div class="hero-website">
+                        <i class="fas fa-globe me-2"></i>
+                        usethabeauty.com.br
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="hero-image">
+                    <img src="https://pixabay.com/get/g6093a2c1eb021f5989e42ba48e85042fbcc9e94d0f07e6cdbf246491bde9f490c679eb7b4ff5cef0c466b52e41b0440aa1c3645264800ff4bafe65b1eda001b5_1280.jpg" alt="Modelo Tha Beauty" class="img-fluid">
+                    <!-- Products showcase overlay -->
+                    <div class="hero-products">
+                        <img src="https://pixabay.com/get/gbb23ea86b092d88e24cd8dad5ebf40e024740361b4b396f09f940bbf32bb27fbe24f763d745476b7d198a6f452f1973b2d4319e0c1f450013c80ea3920caf8b4_1280.jpg" alt="Produtos Tha Beauty" class="products-showcase">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Launch Banner -->
+<div class="launch-banner">
+    <div class="container text-center">
+        <h3>Lançamento esfoliantes Toque Essencial!</h3>
+    </div>
+</div>
+
+{% if search_results is defined %}
+<!-- Search Results -->
+<section class="search-results">
+    <div class="container">
+        <h2 class="section-title">Resultados da busca por "{{ search_query }}"</h2>
+        {% if search_results %}
+            <div class="row">
+                {% for product in search_results %}
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                        {% include 'product_card.html' %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="text-center py-5">
+                <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                <h4>Nenhum produto encontrado</h4>
+                <p class="text-muted">Tente buscar por outros termos</p>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% else %}
+
+<!-- Linha Toque Essencial -->
+<section class="product-section">
+    <div class="container">
+        <h2 class="section-title">Linha Toque Essencial</h2>
+        <div class="row">
+            {% for product in linha_toque_essencial %}
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="product-card">
+                        <!-- Product Status Badges -->
+                        <div class="product-badges">
+                            {% if not product.available %}
+                                <span class="badge-esgotado">Esgotado</span>
+                            {% endif %}
+                            {% if product.free_shipping %}
+                                <span class="badge-frete">Frete grátis</span>
+                            {% endif %}
+                            {% if product.get('limited_stock') %}
+                                <span class="badge-limited">ESTOQUE LIMITADO</span>
+                            {% endif %}
+                        </div>
+
+                        <!-- Product Image -->
+                        <div class="product-image">
+                            <img src="{{ product.image_url }}" alt="{{ product.name }}" loading="lazy">
+                        </div>
+
+                        <!-- Product Info -->
+                        <div class="product-info">
+                            <h3 class="product-name">{{ product.name }}</h3>
+                            
+                            <!-- Rating -->
+                            <div class="product-rating">
+                                {% for i in range(5) %}
+                                    <i class="fas fa-star {{ 'active' if i < product.rating else '' }}"></i>
+                                {% endfor %}
+                                <span class="review-count">({{ product.review_count }})</span>
+                            </div>
+
+                            <!-- Price -->
+                            <div class="product-price">
+                                <span class="current-price">R${{ "%.2f"|format(product.price) }}</span>
+                                {% if product.original_price %}
+                                    <div class="price-discount">
+                                        <span class="discount-badge">-{{ product.discount }}% OFF</span>
+                                        <span class="original-price">R${{ "%.2f"|format(product.original_price) }}</span>
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Action Button -->
+                            <div class="product-action">
+                                {% if product.available %}
+                                    <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-primary btn-comprar">
+                                        Comprar
+                                    </a>
+                                    <div class="installment-info">
+                                        <small>Incluindo frete e impostos</small>
+                                    </div>
+                                {% else %}
+                                    <a href="{{ url_for('notify_when_available', product_id=product.id) }}" class="btn btn-outline-primary btn-notify">
+                                        Avise-me quando chegar!
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Queridinhos da marca -->
+<section class="product-section">
+    <div class="container">
+        <h2 class="section-title">Queridinhos da marca!</h2>
+        <div class="row">
+            {% for product in queridinhos %}
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="product-card">
+                        <!-- Product Status Badges -->
+                        <div class="product-badges">
+                            {% if not product.available %}
+                                <span class="badge-esgotado">Esgotado</span>
+                            {% endif %}
+                            {% if product.free_shipping %}
+                                <span class="badge-frete">Frete grátis</span>
+                            {% endif %}
+                        </div>
+
+                        <!-- Product Image -->
+                        <div class="product-image">
+                            <img src="{{ product.image_url }}" alt="{{ product.name }}" loading="lazy">
+                        </div>
+
+                        <!-- Product Info -->
+                        <div class="product-info">
+                            <h3 class="product-name">{{ product.name }}</h3>
+                            
+                            <!-- Rating -->
+                            <div class="product-rating">
+                                {% for i in range(5) %}
+                                    <i class="fas fa-star {{ 'active' if i < product.rating else '' }}"></i>
+                                {% endfor %}
+                                <span class="review-count">({{ product.review_count }})</span>
+                            </div>
+
+                            <!-- Price -->
+                            <div class="product-price">
+                                <span class="current-price">R${{ "%.2f"|format(product.price) }}</span>
+                                {% if product.original_price %}
+                                    <div class="price-discount">
+                                        <span class="discount-badge">-{{ product.discount }}% OFF</span>
+                                        <span class="original-price">R${{ "%.2f"|format(product.original_price) }}</span>
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Action Button -->
+                            <div class="product-action">
+                                {% if product.available %}
+                                    <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-primary btn-comprar">
+                                        Comprar
+                                    </a>
+                                    <div class="installment-info">
+                                        <small>Incluindo frete e impostos</small>
+                                    </div>
+                                {% else %}
+                                    <a href="{{ url_for('notify_when_available', product_id=product.id) }}" class="btn btn-outline-primary btn-notify">
+                                        Avise-me quando chegar!
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endif %}
+{% endblock %}
