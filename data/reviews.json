@@ -5,14 +5,28 @@
       "date": "24/07/2025",
       "rating": 5,
       "text": "O body splash é perfeito! O cheiro doce é delicioso, tem brilhos lindos na pele e a fixação é excelente. A loção hidrata muito bem!",
-      "image": null
+      "image": "/attached_assets/2059a7b2-0ed7-4235-bc9c-c1b3cf382a2c_1753345298278.jpeg"
+    },
+    {
+      "name": "Camila Santana",
+      "date": "23/07/2025",
+      "rating": 5,
+      "text": "Apaixonada por esse kit! A fragrância Céu de Algodão é única, doce e envolvente. A embalagem chegou perfeita e o cheiro é viciante!",
+      "image": "/attached_assets/431bf68b-921a-4e63-86b8-41c63656d81a_1753345298276.jpeg"
     },
     {
       "name": "Fernanda Rodrigues",
       "date": "15/06/2025",
       "rating": 5,
       "text": "Esse body splash é incrível! A fragrância é suave e duradoura, borrifo e fico cheirosa o dia todo. Kit completo perfeito!",
-      "image": null
+      "image": "/attached_assets/448d3eb1-6852-4ec9-a88e-67e15793012a_1753345298277.jpeg"
+    },
+    {
+      "name": "Mariana Silva",
+      "date": "10/06/2025",
+      "rating": 5,
+      "text": "Que perfume maravilhoso! O cheiro de algodão doce é exatamente como esperava. Uso tanto o body splash quanto a loção, combinação perfeita!",
+      "image": "/attached_assets/7b1a10e8-2a62-4d7d-9547-ba61f3551e9d_1753345298277.jpeg"
     },
     {
       "name": "Luana Pereira",
@@ -34,6 +48,27 @@
       "rating": 5,
       "text": "Body splash incrível! A fragrância não é enjoativa, é delicada e marcante. Uso todos os dias e sempre recebo elogios!",
       "image": null
+    },
+    {
+      "name": "Letícia Santos",
+      "date": "28/01/2024",
+      "rating": 5,
+      "text": "Produto de qualidade excepcional! O cheiro é doce na medida certa, muito feminino. A entrega foi super rápida também!",
+      "image": null
+    },
+    {
+      "name": "Amanda Costa",
+      "date": "10/01/2024",
+      "rating": 5,
+      "text": "Melhor compra que fiz! A fragrância é incrível, lembra realmente algodão doce. Kit completo com ótimo custo-benefício!",
+      "image": null
+    },
+    {
+      "name": "Júlia Ferreira",
+      "date": "05/12/2023",
+      "rating": 5,
+      "text": "Esse kit é um sonho! O body splash tem fixação incrível e a loção deixa a pele perfumada por horas. Recomendo muito!",
+      "image": null
     }
   ],
   "kit-passion": [
@@ -42,14 +77,21 @@
       "date": "24/07/2025",
       "rating": 5,
       "text": "Esse body splash é perfeito! O cheiro é marcante sem ser enjoativo, fixa super bem na pele. A loção hidrata incrivelmente. Adoro!",
-      "image": null
+      "image": "/attached_assets/b90a1bdc-5ec3-4a67-81d3-2d865b88333a_1753345298278.jpeg"
+    },
+    {
+      "name": "Patricia Lima",
+      "date": "22/07/2025",
+      "rating": 5,
+      "text": "Kit Passion é sensacional! O perfume é romântico e elegante, perfeito para ocasiões especiais. A qualidade é impressionante!",
+      "image": "/attached_assets/322a2fd0-896a-417a-bfb8-7a5bc1f8dece_1753348791476.jpeg"
     },
     {
       "name": "Mariana Sousa",
       "date": "18/06/2025",
       "rating": 5,
       "text": "Body splash maravilhoso! A fragrância é doce na medida certa, feminina e romântica. Fixação excelente, dura o dia todo!",
-      "image": null
+      "image": "/attached_assets/download (4)_1753348100992.jpeg"
     },
     {
       "name": "Juliana Barbosa",
@@ -70,6 +112,34 @@
       "date": "15/02/2024",
       "rating": 5,
       "text": "Esse body splash é viciante! A fragrância Passion é marcante e duradoura. Uso todos os dias e me sinto confiante!",
+      "image": null
+    },
+    {
+      "name": "Renata Oliveira",
+      "date": "08/02/2024",
+      "rating": 5,
+      "text": "Fragrância incrível! O Passion tem um cheiro único, marcante e muito feminino. A loção complementa perfeitamente o body splash!",
+      "image": null
+    },
+    {
+      "name": "Daniela Carvalho",
+      "date": "25/01/2024",
+      "rating": 5,
+      "text": "Melhor investimento! O kit Passion é perfeito para quem quer se sentir poderosa. O cheiro é viciante e dura muito na pele!",
+      "image": null
+    },
+    {
+      "name": "Tatiana Ramos",
+      "date": "12/01/2024",
+      "rating": 5,
+      "text": "Esse body splash é um amor! Uso todos os dias e sempre recebo elogios. A fragrância Passion é única e marcante!",
+      "image": null
+    },
+    {
+      "name": "Solange Melo",
+      "date": "03/12/2023",
+      "rating": 5,
+      "text": "Kit maravilhoso! O perfume Passion é sofisticado e romântico. A combinação body splash + loção é perfeita para o dia a dia!",
       "image": null
     }
   ],

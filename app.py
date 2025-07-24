@@ -122,8 +122,8 @@ def product_detail(product_id):
     reviews_db = load_reviews()
     product_reviews = reviews_db.get(product_id, [])
     
-    # Sort reviews: images first, then text-only
-    reviews = sorted(product_reviews, key=lambda x: (x['image'] is None, x['date']), reverse=True)
+    # Sort reviews: images first (priority), then text-only  
+    reviews = sorted(product_reviews, key=lambda x: (x.get('image') is None, x.get('date', '')), reverse=False)
     
     return render_template('product_detail.html', 
                          product=product,
