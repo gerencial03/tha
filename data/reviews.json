@@ -1,393 +1,1486 @@
 {
   "kit-ceu-algodao": [
     {
-      "name": "Gabriela Oliveira",
-      "date": "24/07/2025",
+      "nome": "Célia Tavares",
       "rating": 5,
-      "text": "O body splash é perfeito! O cheiro doce é delicioso, tem brilhos lindos na pele e a fixação é excelente. A loção hidrata muito bem!",
-      "image": "/attached_assets/2059a7b2-0ed7-4235-bc9c-c1b3cf382a2c_1753345298278.jpeg"
+      "comment": "Qualidade surpreendente pelo preço!",
+      "date": "2025-05-26",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1515688594390-b649af70d282?w=150&h=150&fit=crop"
     },
     {
-      "name": "Camila Santana",
-      "date": "23/07/2025",
+      "nome": "Renata Alves",
       "rating": 5,
-      "text": "Apaixonada por esse kit! A fragrância Céu de Algodão é única, doce e envolvente. A embalagem chegou perfeita e o cheiro é viciante!",
-      "image": "/attached_assets/431bf68b-921a-4e63-86b8-41c63656d81a_1753345298276.jpeg"
+      "comment": "Qualidade excelente, voltarei a comprar.",
+      "date": "2025-05-27",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1515688594390-b649af70d282?w=150&h=150&fit=crop"
     },
     {
-      "name": "Fernanda Rodrigues",
-      "date": "15/06/2025",
-      "rating": 5,
-      "text": "Esse body splash é incrível! A fragrância é suave e duradoura, borrifo e fico cheirosa o dia todo. Kit completo perfeito!",
-      "image": "/attached_assets/448d3eb1-6852-4ec9-a88e-67e15793012a_1753345298277.jpeg"
+      "nome": "Daniele Araújo",
+      "rating": 4,
+      "comment": "Já sou cliente há um tempo e sempre fico satisfeita com a qualidade. Este kit especificamente tem um aroma incrível que recebo elogios sempre que uso. Vale muito a pena o investimento!",
+      "date": "2025-05-28",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=150&h=150&fit=crop"
     },
     {
-      "name": "Mariana Silva",
-      "date": "10/06/2025",
+      "nome": "Fernanda Lima",
       "rating": 5,
-      "text": "Que perfume maravilhoso! O cheiro de algodão doce é exatamente como esperava. Uso tanto o body splash quanto a loção, combinação perfeita!",
-      "image": "/attached_assets/7b1a10e8-2a62-4d7d-9547-ba61f3551e9d_1753345298277.jpeg"
+      "comment": "Cheiro maravilhoso, adorei!",
+      "date": "2025-05-28",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=150&h=150&fit=crop"
     },
     {
-      "name": "Luana Pereira",
-      "date": "28/04/2025",
+      "nome": "Ingrid Carneiro",
       "rating": 5,
-      "text": "Body splash maravilhoso! O perfume é delicado e feminino, não é enjoativo. A loção deixa a pele sedosa. Recomendo!",
-      "image": null
+      "comment": "Que produto maravilhoso! Há muito tempo procurava um kit completo com essa qualidade. A fragrância é sofisticada e envolvente, nada daqueles cheiros enjoativos que encontramos por aí. O que mais me impressionou foi a durabilidade - aplicei pela manhã e no final do dia ainda estava perceptível. A loção hidratante é outro ponto forte, tem uma textura cremosa mas não oleosa, absorve rápido e deixa a pele sedosa. Recebi o produto muito bem embalado, com cuidado nos detalhes. A entrega foi rápida e o pós-venda é excelente. Já estou na minha segunda compra e pretendo continuar sendo cliente. Recomendo de olhos fechados!",
+      "date": "2025-06-01",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1541643600914-78b084683601?w=150&h=150&fit=crop"
     },
     {
-      "name": "Bianca Almeida",
-      "date": "12/03/2025",
+      "nome": "Mônica Reis",
       "rating": 5,
-      "text": "Amo esse body splash! O cheiro é único e sofisticado, a fixação é ótima. Kit perfeito para o dia a dia!",
-      "image": null
+      "comment": "Qualidade excelente, voltarei a comprar.",
+      "date": "2025-06-01",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=150&h=150&fit=crop"
     },
     {
-      "name": "Rafaela Gonçalves",
-      "date": "15/02/2024",
+      "nome": "Sandra Pinto",
       "rating": 5,
-      "text": "Body splash incrível! A fragrância não é enjoativa, é delicada e marcante. Uso todos os dias e sempre recebo elogios!",
-      "image": null
+      "comment": "Superou minhas expectativas! Pensei que seria mais um body splash comum, mas a qualidade e durabilidade da fragrância me surpreenderam. Definitivamente vou comprar outros produtos da marca.",
+      "date": "2025-06-03",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=150&h=150&fit=crop"
     },
     {
-      "name": "Letícia Santos",
-      "date": "28/01/2024",
+      "nome": "Bruna Moreira",
       "rating": 5,
-      "text": "Produto de qualidade excepcional! O cheiro é doce na medida certa, muito feminino. A entrega foi super rápida também!",
-      "image": null
+      "comment": "Cheiro dura o dia todo, adorei!",
+      "date": "2025-06-03",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=150&h=150&fit=crop"
     },
     {
-      "name": "Amanda Costa",
-      "date": "10/01/2024",
-      "rating": 5,
-      "text": "Melhor compra que fiz! A fragrância é incrível, lembra realmente algodão doce. Kit completo com ótimo custo-benefício!",
-      "image": null
+      "nome": "Carla Santos",
+      "rating": 4,
+      "comment": "Já sou cliente há um tempo e sempre fico satisfeita com a qualidade. Este kit especificamente tem um aroma incrível que recebo elogios sempre que uso. Vale muito a pena o investimento!",
+      "date": "2025-06-04",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=150&h=150&fit=crop"
     },
     {
-      "name": "Júlia Ferreira",
-      "date": "05/12/2023",
+      "nome": "Larissa Cavalcanti",
       "rating": 5,
-      "text": "Esse kit é um sonho! O body splash tem fixação incrível e a loção deixa a pele perfumada por horas. Recomendo muito!",
-      "image": null
+      "comment": "Melhor kit que já comprei!",
+      "date": "2025-06-04",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Raquel Mendes",
+      "rating": 4,
+      "comment": "Cheiro dura o dia todo, adorei!",
+      "date": "2025-06-05",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1541643600914-78b084683601?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Mônica Reis",
+      "rating": 5,
+      "comment": "Já sou cliente há um tempo e sempre fico satisfeita com a qualidade. Este kit especificamente tem um aroma incrível que recebo elogios sempre que uso. Vale muito a pena o investimento!",
+      "date": "2025-06-05",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1556228578-dd6a0cca2c3e?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Ingrid Carneiro",
+      "rating": 5,
+      "comment": "Posso dizer sem medo que este é o melhor investimento em produtos de beleza que fiz recentemente. A qualidade é excepcional e a fragrância é simplesmente viciante - recebo elogios onde quer que eu vá. O kit vem completo e cada produto tem sua função específica, criando uma harmonia perfeita quando usados juntos. A duração na pele é impressionante, mesmo depois de um dia inteiro de trabalho ainda consigo sentir o aroma. A empresa está de parabéns pela qualidade dos produtos e pelo cuidado com o cliente. A embalagem chegou perfeita, demonstrando o carinho com que tratam cada pedido. Já indiquei para família e amigas, todas ficaram encantadas. Definitivamente uma marca que merece reconhecimento!",
+      "date": "2025-06-14",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1556228578-dd6a0cca2c3e?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Bruna Moreira",
+      "rating": 4,
+      "comment": "Cheiro maravilhoso, adorei!",
+      "date": "2025-06-15",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Carolina Teixeira",
+      "rating": 5,
+      "comment": "Produto incrível! Super recomendo!",
+      "date": "2025-06-19",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1556228578-dd6a0cca2c3e?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Priscila Cardoso",
+      "rating": 5,
+      "comment": "Comprei este produto depois de ler várias avaliações positivas e não me decepcionei. A fragrância é suave e elegante, perfeita para o dia a dia. A embalagem chegou intacta e o atendimento foi muito bom.",
+      "date": "2025-06-20",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1515688594390-b649af70d282?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Leticia Campos",
+      "rating": 5,
+      "comment": "Que produto maravilhoso! Há muito tempo procurava um kit completo com essa qualidade. A fragrância é sofisticada e envolvente, nada daqueles cheiros enjoativos que encontramos por aí. O que mais me impressionou foi a durabilidade - aplicei pela manhã e no final do dia ainda estava perceptível. A loção hidratante é outro ponto forte, tem uma textura cremosa mas não oleosa, absorve rápido e deixa a pele sedosa. Recebi o produto muito bem embalado, com cuidado nos detalhes. A entrega foi rápida e o pós-venda é excelente. Já estou na minha segunda compra e pretendo continuar sendo cliente. Recomendo de olhos fechados!",
+      "date": "2025-06-21",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1541643600914-78b084683601?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Eliane Sousa",
+      "rating": 5,
+      "comment": "Produto maravilhoso, chegou bem embalado.",
+      "date": "2025-06-21",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Fernanda Lima",
+      "rating": 5,
+      "comment": "Estou completamente apaixonada por este kit! O cheiro é divino e a qualidade dos produtos é excelente. A loção hidrata muito bem e o body splash tem uma fragrância que dura horas. Recomendo muito!",
+      "date": "2025-06-22",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1541643600914-78b084683601?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Lúcia Brito",
+      "rating": 5,
+      "comment": "Já sou cliente há um tempo e sempre fico satisfeita com a qualidade. Este kit especificamente tem um aroma incrível que recebo elogios sempre que uso. Vale muito a pena o investimento!",
+      "date": "2025-06-22",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Denise Magalhães",
+      "rating": 5,
+      "comment": "Superou minhas expectativas! Pensei que seria mais um body splash comum, mas a qualidade e durabilidade da fragrância me surpreenderam. Definitivamente vou comprar outros produtos da marca.",
+      "date": "2025-06-24",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1541643600914-78b084683601?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Renata Alves",
+      "rating": 5,
+      "comment": "Cheiro dura o dia todo, adorei!",
+      "date": "2025-06-27",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1515688594390-b649af70d282?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Camila Rodrigues",
+      "rating": 5,
+      "comment": "Produto de ótima qualidade! A fragrância é marcante mas não enjoativa. Uso pela manhã e ainda sinto o cheiro no final do dia. A loção hidratante também é muito boa, deixa a pele macia.",
+      "date": "2025-06-27",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Ingrid Carneiro",
+      "rating": 5,
+      "comment": "Cheiro maravilhoso, adorei!",
+      "date": "2025-06-28",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Priscila Cardoso",
+      "rating": 5,
+      "comment": "Estou absolutamente encantada com este kit! Comprei após muita pesquisa e posso dizer que foi uma das melhores compras que fiz este ano. A fragrância é simplesmente divina - uma combinação perfeita entre elegância e sensualidade. O body splash tem uma fixação excelente, dura facilmente mais de 8 horas na pele. A loção hidratante complementa perfeitamente, além de hidratar muito bem, potencializa o aroma. A embalagem é linda e chegou super bem protegida. O atendimento da empresa também foi impecável, tiraram todas as minhas dúvidas rapidamente. Já recomendei para várias amigas e todas adoraram! Com certeza voltarei a comprar e já estou de olho em outros produtos da linha.",
+      "date": "2025-07-02",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Daniele Araújo",
+      "rating": 5,
+      "comment": "Produto maravilhoso, chegou bem embalado.",
+      "date": "2025-07-03",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1515688594390-b649af70d282?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Kátia Lopes",
+      "rating": 4,
+      "comment": "Já sou cliente há um tempo e sempre fico satisfeita com a qualidade. Este kit especificamente tem um aroma incrível que recebo elogios sempre que uso. Vale muito a pena o investimento!",
+      "date": "2025-07-08",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Andreia Machado",
+      "rating": 5,
+      "comment": "Amei o produto, super indicado!",
+      "date": "2025-07-08",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Andreia Machado",
+      "rating": 4,
+      "comment": "Amei o produto, super indicado!",
+      "date": "2025-07-09",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Solange Vieira",
+      "rating": 5,
+      "comment": "Cheiro maravilhoso, adorei!",
+      "date": "2025-07-11",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Carla Santos",
+      "rating": 5,
+      "comment": "Fragrância deliciosa, uso todos os dias.",
+      "date": "2025-07-13",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Andreia Machado",
+      "rating": 4,
+      "comment": "Posso dizer sem medo que este é o melhor investimento em produtos de beleza que fiz recentemente. A qualidade é excepcional e a fragrância é simplesmente viciante - recebo elogios onde quer que eu vá. O kit vem completo e cada produto tem sua função específica, criando uma harmonia perfeita quando usados juntos. A duração na pele é impressionante, mesmo depois de um dia inteiro de trabalho ainda consigo sentir o aroma. A empresa está de parabéns pela qualidade dos produtos e pelo cuidado com o cliente. A embalagem chegou perfeita, demonstrando o carinho com que tratam cada pedido. Já indiquei para família e amigas, todas ficaram encantadas. Definitivamente uma marca que merece reconhecimento!",
+      "date": "2025-07-15",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Vanessa Gomes",
+      "rating": 5,
+      "comment": "Produto incrível! Super recomendo!",
+      "date": "2025-07-17",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1556228578-dd6a0cca2c3e?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Marcela Caldeira",
+      "rating": 4,
+      "comment": "Superou minhas expectativas! Pensei que seria mais um body splash comum, mas a qualidade e durabilidade da fragrância me surpreenderam. Definitivamente vou comprar outros produtos da marca.",
+      "date": "2025-07-17",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Cláudia Azevedo",
+      "rating": 4,
+      "comment": "Melhor kit que já comprei!",
+      "date": "2025-07-20",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1556228578-dd6a0cca2c3e?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Ana Silva",
+      "rating": 5,
+      "comment": "Cheiro dura o dia todo, adorei!",
+      "date": "2025-07-20",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1556228578-dd6a0cca2c3e?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Amanda Ferreira",
+      "rating": 4,
+      "comment": "Entrega rápida e produto perfeito!",
+      "date": "2025-07-20",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Lúcia Brito",
+      "rating": 5,
+      "comment": "Melhor kit que já comprei!",
+      "date": "2025-07-21",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Regina Paiva",
+      "rating": 4,
+      "comment": "Estou completamente apaixonada por este kit! O cheiro é divino e a qualidade dos produtos é excelente. A loção hidrata muito bem e o body splash tem uma fragrância que dura horas. Recomendo muito!",
+      "date": "2025-07-22",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Camila Rodrigues",
+      "rating": 5,
+      "comment": "Fragrância deliciosa, uso todos os dias.",
+      "date": "2025-07-23",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Patrícia Melo",
+      "rating": 4,
+      "comment": "Cheiro dura o dia todo, adorei!",
+      "date": "2025-05-25",
+      "verified": true
+    },
+    {
+      "nome": "Adriana Nunes",
+      "rating": 5,
+      "comment": "Qualidade surpreendente pelo preço!",
+      "date": "2025-05-26",
+      "verified": true
+    },
+    {
+      "nome": "Patricia Souza",
+      "rating": 5,
+      "comment": "Que produto maravilhoso! Há muito tempo procurava um kit completo com essa qualidade. A fragrância é sofisticada e envolvente, nada daqueles cheiros enjoativos que encontramos por aí. O que mais me impressionou foi a durabilidade - aplicei pela manhã e no final do dia ainda estava perceptível. A loção hidratante é outro ponto forte, tem uma textura cremosa mas não oleosa, absorve rápido e deixa a pele sedosa. Recebi o produto muito bem embalado, com cuidado nos detalhes. A entrega foi rápida e o pós-venda é excelente. Já estou na minha segunda compra e pretendo continuar sendo cliente. Recomendo de olhos fechados!",
+      "date": "2025-05-26",
+      "verified": true
+    },
+    {
+      "nome": "Simone Dias",
+      "rating": 5,
+      "comment": "Cheiro maravilhoso, adorei!",
+      "date": "2025-05-30",
+      "verified": true
+    },
+    {
+      "nome": "Isabel Moura",
+      "rating": 4,
+      "comment": "Amei o produto, super indicado!",
+      "date": "2025-05-31",
+      "verified": true
+    },
+    {
+      "nome": "Camila Rodrigues",
+      "rating": 5,
+      "comment": "Estou absolutamente encantada com este kit! Comprei após muita pesquisa e posso dizer que foi uma das melhores compras que fiz este ano. A fragrância é simplesmente divina - uma combinação perfeita entre elegância e sensualidade. O body splash tem uma fixação excelente, dura facilmente mais de 8 horas na pele. A loção hidratante complementa perfeitamente, além de hidratar muito bem, potencializa o aroma. A embalagem é linda e chegou super bem protegida. O atendimento da empresa também foi impecável, tiraram todas as minhas dúvidas rapidamente. Já recomendei para várias amigas e todas adoraram! Com certeza voltarei a comprar e já estou de olho em outros produtos da linha.",
+      "date": "2025-06-01",
+      "verified": true
+    },
+    {
+      "nome": "Patrícia Melo",
+      "rating": 5,
+      "comment": "Entrega rápida e produto perfeito!",
+      "date": "2025-06-01",
+      "verified": true
+    },
+    {
+      "nome": "Larissa Cavalcanti",
+      "rating": 5,
+      "comment": "Produto de ótima qualidade! A fragrância é marcante mas não enjoativa. Uso pela manhã e ainda sinto o cheiro no final do dia. A loção hidratante também é muito boa, deixa a pele macia.",
+      "date": "2025-06-02",
+      "verified": true
+    },
+    {
+      "nome": "Natália Freitas",
+      "rating": 4,
+      "comment": "Estou completamente apaixonada por este kit! O cheiro é divino e a qualidade dos produtos é excelente. A loção hidrata muito bem e o body splash tem uma fragrância que dura horas. Recomendo muito!",
+      "date": "2025-06-02",
+      "verified": true
+    },
+    {
+      "nome": "Sandra Pinto",
+      "rating": 5,
+      "comment": "Comprei este produto depois de ler várias avaliações positivas e não me decepcionei. A fragrância é suave e elegante, perfeita para o dia a dia. A embalagem chegou intacta e o atendimento foi muito bom.",
+      "date": "2025-06-02",
+      "verified": true
+    },
+    {
+      "nome": "Carolina Teixeira",
+      "rating": 4,
+      "comment": "Que produto maravilhoso! Há muito tempo procurava um kit completo com essa qualidade. A fragrância é sofisticada e envolvente, nada daqueles cheiros enjoativos que encontramos por aí. O que mais me impressionou foi a durabilidade - aplicei pela manhã e no final do dia ainda estava perceptível. A loção hidratante é outro ponto forte, tem uma textura cremosa mas não oleosa, absorve rápido e deixa a pele sedosa. Recebi o produto muito bem embalado, com cuidado nos detalhes. A entrega foi rápida e o pós-venda é excelente. Já estou na minha segunda compra e pretendo continuar sendo cliente. Recomendo de olhos fechados!",
+      "date": "2025-06-03",
+      "verified": true
+    },
+    {
+      "nome": "Sabrina Monteiro",
+      "rating": 5,
+      "comment": "Produto maravilhoso, chegou bem embalado.",
+      "date": "2025-06-05",
+      "verified": true
+    },
+    {
+      "nome": "Patricia Souza",
+      "rating": 5,
+      "comment": "Comprei este produto depois de ler várias avaliações positivas e não me decepcionei. A fragrância é suave e elegante, perfeita para o dia a dia. A embalagem chegou intacta e o atendimento foi muito bom.",
+      "date": "2025-06-06",
+      "verified": true
+    },
+    {
+      "nome": "Simone Dias",
+      "rating": 5,
+      "comment": "Superou minhas expectativas! Pensei que seria mais um body splash comum, mas a qualidade e durabilidade da fragrância me surpreenderam. Definitivamente vou comprar outros produtos da marca.",
+      "date": "2025-06-06",
+      "verified": true
+    },
+    {
+      "nome": "Carla Santos",
+      "rating": 4,
+      "comment": "Comprei este produto depois de ler várias avaliações positivas e não me decepcionei. A fragrância é suave e elegante, perfeita para o dia a dia. A embalagem chegou intacta e o atendimento foi muito bom.",
+      "date": "2025-06-07",
+      "verified": true
+    },
+    {
+      "nome": "Adriana Nunes",
+      "rating": 5,
+      "comment": "Produto de ótima qualidade! A fragrância é marcante mas não enjoativa. Uso pela manhã e ainda sinto o cheiro no final do dia. A loção hidratante também é muito boa, deixa a pele macia.",
+      "date": "2025-06-08",
+      "verified": true
+    },
+    {
+      "nome": "Patrícia Melo",
+      "rating": 5,
+      "comment": "Já sou cliente há um tempo e sempre fico satisfeita com a qualidade. Este kit especificamente tem um aroma incrível que recebo elogios sempre que uso. Vale muito a pena o investimento!",
+      "date": "2025-06-08",
+      "verified": true
+    },
+    {
+      "nome": "Fabiana Rocha",
+      "rating": 5,
+      "comment": "Produto maravilhoso, chegou bem embalado.",
+      "date": "2025-06-08",
+      "verified": true
+    },
+    {
+      "nome": "Marcela Caldeira",
+      "rating": 5,
+      "comment": "Produto incrível! Super recomendo!",
+      "date": "2025-06-09",
+      "verified": true
+    },
+    {
+      "nome": "Leticia Campos",
+      "rating": 5,
+      "comment": "Produto maravilhoso, chegou bem embalado.",
+      "date": "2025-06-10",
+      "verified": true
+    },
+    {
+      "nome": "Natália Freitas",
+      "rating": 5,
+      "comment": "Fragrância deliciosa, uso todos os dias.",
+      "date": "2025-06-11",
+      "verified": true
+    },
+    {
+      "nome": "Priscila Cardoso",
+      "rating": 5,
+      "comment": "Melhor kit que já comprei!",
+      "date": "2025-06-11",
+      "verified": true
+    },
+    {
+      "nome": "Isabel Moura",
+      "rating": 5,
+      "comment": "Já sou cliente há um tempo e sempre fico satisfeita com a qualidade. Este kit especificamente tem um aroma incrível que recebo elogios sempre que uso. Vale muito a pena o investimento!",
+      "date": "2025-06-14",
+      "verified": true
+    },
+    {
+      "nome": "Amanda Ferreira",
+      "rating": 5,
+      "comment": "Já sou cliente há um tempo e sempre fico satisfeita com a qualidade. Este kit especificamente tem um aroma incrível que recebo elogios sempre que uso. Vale muito a pena o investimento!",
+      "date": "2025-06-14",
+      "verified": true
+    },
+    {
+      "nome": "Patricia Souza",
+      "rating": 4,
+      "comment": "Qualidade excelente, voltarei a comprar.",
+      "date": "2025-06-14",
+      "verified": true
+    },
+    {
+      "nome": "Roberta Nascimento",
+      "rating": 5,
+      "comment": "Cheiro maravilhoso, adorei!",
+      "date": "2025-06-16",
+      "verified": true
+    },
+    {
+      "nome": "Fabiana Rocha",
+      "rating": 4,
+      "comment": "Já sou cliente há um tempo e sempre fico satisfeita com a qualidade. Este kit especificamente tem um aroma incrível que recebo elogios sempre que uso. Vale muito a pena o investimento!",
+      "date": "2025-06-17",
+      "verified": true
+    },
+    {
+      "nome": "Juliana Costa",
+      "rating": 5,
+      "comment": "Posso dizer sem medo que este é o melhor investimento em produtos de beleza que fiz recentemente. A qualidade é excepcional e a fragrância é simplesmente viciante - recebo elogios onde quer que eu vá. O kit vem completo e cada produto tem sua função específica, criando uma harmonia perfeita quando usados juntos. A duração na pele é impressionante, mesmo depois de um dia inteiro de trabalho ainda consigo sentir o aroma. A empresa está de parabéns pela qualidade dos produtos e pelo cuidado com o cliente. A embalagem chegou perfeita, demonstrando o carinho com que tratam cada pedido. Já indiquei para família e amigas, todas ficaram encantadas. Definitivamente uma marca que merece reconhecimento!",
+      "date": "2025-06-17",
+      "verified": true
+    },
+    {
+      "nome": "Kátia Lopes",
+      "rating": 5,
+      "comment": "Produto incrível! Super recomendo!",
+      "date": "2025-06-18",
+      "verified": true
+    },
+    {
+      "nome": "Carla Santos",
+      "rating": 5,
+      "comment": "Fragrância deliciosa, uso todos os dias.",
+      "date": "2025-06-19",
+      "verified": true
+    },
+    {
+      "nome": "Denise Magalhães",
+      "rating": 5,
+      "comment": "Amei o produto, super indicado!",
+      "date": "2025-06-19",
+      "verified": true
+    },
+    {
+      "nome": "Luciana Ribeiro",
+      "rating": 4,
+      "comment": "Já sou cliente há um tempo e sempre fico satisfeita com a qualidade. Este kit especificamente tem um aroma incrível que recebo elogios sempre que uso. Vale muito a pena o investimento!",
+      "date": "2025-06-20",
+      "verified": true
+    },
+    {
+      "nome": "Carolina Teixeira",
+      "rating": 5,
+      "comment": "Melhor kit que já comprei!",
+      "date": "2025-06-20",
+      "verified": true
+    },
+    {
+      "nome": "Renata Alves",
+      "rating": 5,
+      "comment": "Entrega rápida e produto perfeito!",
+      "date": "2025-06-23",
+      "verified": true
+    },
+    {
+      "nome": "Isabel Moura",
+      "rating": 4,
+      "comment": "Amei o produto, super indicado!",
+      "date": "2025-06-24",
+      "verified": true
+    },
+    {
+      "nome": "Isabel Moura",
+      "rating": 4,
+      "comment": "Já sou cliente há um tempo e sempre fico satisfeita com a qualidade. Este kit especificamente tem um aroma incrível que recebo elogios sempre que uso. Vale muito a pena o investimento!",
+      "date": "2025-06-25",
+      "verified": true
+    },
+    {
+      "nome": "Mariana Correia",
+      "rating": 5,
+      "comment": "Produto de ótima qualidade! A fragrância é marcante mas não enjoativa. Uso pela manhã e ainda sinto o cheiro no final do dia. A loção hidratante também é muito boa, deixa a pele macia.",
+      "date": "2025-06-25",
+      "verified": true
+    },
+    {
+      "nome": "Kátia Lopes",
+      "rating": 5,
+      "comment": "Fragrância deliciosa, uso todos os dias.",
+      "date": "2025-06-27",
+      "verified": true
+    },
+    {
+      "nome": "Marcela Caldeira",
+      "rating": 5,
+      "comment": "Que produto maravilhoso! Há muito tempo procurava um kit completo com essa qualidade. A fragrância é sofisticada e envolvente, nada daqueles cheiros enjoativos que encontramos por aí. O que mais me impressionou foi a durabilidade - aplicei pela manhã e no final do dia ainda estava perceptível. A loção hidratante é outro ponto forte, tem uma textura cremosa mas não oleosa, absorve rápido e deixa a pele sedosa. Recebi o produto muito bem embalado, com cuidado nos detalhes. A entrega foi rápida e o pós-venda é excelente. Já estou na minha segunda compra e pretendo continuar sendo cliente. Recomendo de olhos fechados!",
+      "date": "2025-06-28",
+      "verified": true
+    },
+    {
+      "nome": "Carla Santos",
+      "rating": 5,
+      "comment": "Que produto maravilhoso! Há muito tempo procurava um kit completo com essa qualidade. A fragrância é sofisticada e envolvente, nada daqueles cheiros enjoativos que encontramos por aí. O que mais me impressionou foi a durabilidade - aplicei pela manhã e no final do dia ainda estava perceptível. A loção hidratante é outro ponto forte, tem uma textura cremosa mas não oleosa, absorve rápido e deixa a pele sedosa. Recebi o produto muito bem embalado, com cuidado nos detalhes. A entrega foi rápida e o pós-venda é excelente. Já estou na minha segunda compra e pretendo continuar sendo cliente. Recomendo de olhos fechados!",
+      "date": "2025-06-28",
+      "verified": true
+    },
+    {
+      "nome": "Bruna Moreira",
+      "rating": 5,
+      "comment": "Que produto maravilhoso! Há muito tempo procurava um kit completo com essa qualidade. A fragrância é sofisticada e envolvente, nada daqueles cheiros enjoativos que encontramos por aí. O que mais me impressionou foi a durabilidade - aplicei pela manhã e no final do dia ainda estava perceptível. A loção hidratante é outro ponto forte, tem uma textura cremosa mas não oleosa, absorve rápido e deixa a pele sedosa. Recebi o produto muito bem embalado, com cuidado nos detalhes. A entrega foi rápida e o pós-venda é excelente. Já estou na minha segunda compra e pretendo continuar sendo cliente. Recomendo de olhos fechados!",
+      "date": "2025-06-29",
+      "verified": true
+    },
+    {
+      "nome": "Daniele Araújo",
+      "rating": 5,
+      "comment": "Que produto maravilhoso! Há muito tempo procurava um kit completo com essa qualidade. A fragrância é sofisticada e envolvente, nada daqueles cheiros enjoativos que encontramos por aí. O que mais me impressionou foi a durabilidade - aplicei pela manhã e no final do dia ainda estava perceptível. A loção hidratante é outro ponto forte, tem uma textura cremosa mas não oleosa, absorve rápido e deixa a pele sedosa. Recebi o produto muito bem embalado, com cuidado nos detalhes. A entrega foi rápida e o pós-venda é excelente. Já estou na minha segunda compra e pretendo continuar sendo cliente. Recomendo de olhos fechados!",
+      "date": "2025-06-29",
+      "verified": true
+    },
+    {
+      "nome": "Andreia Machado",
+      "rating": 5,
+      "comment": "Fragrância deliciosa, uso todos os dias.",
+      "date": "2025-07-02",
+      "verified": true
+    },
+    {
+      "nome": "Simone Dias",
+      "rating": 5,
+      "comment": "Posso dizer sem medo que este é o melhor investimento em produtos de beleza que fiz recentemente. A qualidade é excepcional e a fragrância é simplesmente viciante - recebo elogios onde quer que eu vá. O kit vem completo e cada produto tem sua função específica, criando uma harmonia perfeita quando usados juntos. A duração na pele é impressionante, mesmo depois de um dia inteiro de trabalho ainda consigo sentir o aroma. A empresa está de parabéns pela qualidade dos produtos e pelo cuidado com o cliente. A embalagem chegou perfeita, demonstrando o carinho com que tratam cada pedido. Já indiquei para família e amigas, todas ficaram encantadas. Definitivamente uma marca que merece reconhecimento!",
+      "date": "2025-07-02",
+      "verified": true
+    },
+    {
+      "nome": "Tatiana Martins",
+      "rating": 5,
+      "comment": "Cheiro dura o dia todo, adorei!",
+      "date": "2025-07-03",
+      "verified": true
+    },
+    {
+      "nome": "Mariana Correia",
+      "rating": 5,
+      "comment": "Superou minhas expectativas! Pensei que seria mais um body splash comum, mas a qualidade e durabilidade da fragrância me surpreenderam. Definitivamente vou comprar outros produtos da marca.",
+      "date": "2025-07-03",
+      "verified": true
+    },
+    {
+      "nome": "Sabrina Monteiro",
+      "rating": 5,
+      "comment": "Que produto maravilhoso! Há muito tempo procurava um kit completo com essa qualidade. A fragrância é sofisticada e envolvente, nada daqueles cheiros enjoativos que encontramos por aí. O que mais me impressionou foi a durabilidade - aplicei pela manhã e no final do dia ainda estava perceptível. A loção hidratante é outro ponto forte, tem uma textura cremosa mas não oleosa, absorve rápido e deixa a pele sedosa. Recebi o produto muito bem embalado, com cuidado nos detalhes. A entrega foi rápida e o pós-venda é excelente. Já estou na minha segunda compra e pretendo continuar sendo cliente. Recomendo de olhos fechados!",
+      "date": "2025-07-03",
+      "verified": true
+    },
+    {
+      "nome": "Daniele Araújo",
+      "rating": 4,
+      "comment": "Entrega rápida e produto perfeito!",
+      "date": "2025-07-10",
+      "verified": true
+    },
+    {
+      "nome": "Kátia Lopes",
+      "rating": 5,
+      "comment": "Fragrância deliciosa, uso todos os dias.",
+      "date": "2025-07-10",
+      "verified": true
+    },
+    {
+      "nome": "Rosana Cunha",
+      "rating": 5,
+      "comment": "Amei o produto, super indicado!",
+      "date": "2025-07-11",
+      "verified": true
+    },
+    {
+      "nome": "Eliane Sousa",
+      "rating": 5,
+      "comment": "Estou absolutamente encantada com este kit! Comprei após muita pesquisa e posso dizer que foi uma das melhores compras que fiz este ano. A fragrância é simplesmente divina - uma combinação perfeita entre elegância e sensualidade. O body splash tem uma fixação excelente, dura facilmente mais de 8 horas na pele. A loção hidratante complementa perfeitamente, além de hidratar muito bem, potencializa o aroma. A embalagem é linda e chegou super bem protegida. O atendimento da empresa também foi impecável, tiraram todas as minhas dúvidas rapidamente. Já recomendei para várias amigas e todas adoraram! Com certeza voltarei a comprar e já estou de olho em outros produtos da linha.",
+      "date": "2025-07-11",
+      "verified": true
+    },
+    {
+      "nome": "Regina Paiva",
+      "rating": 5,
+      "comment": "Comprei este produto depois de ler várias avaliações positivas e não me decepcionei. A fragrância é suave e elegante, perfeita para o dia a dia. A embalagem chegou intacta e o atendimento foi muito bom.",
+      "date": "2025-07-12",
+      "verified": true
+    },
+    {
+      "nome": "Tatiana Martins",
+      "rating": 5,
+      "comment": "Superou minhas expectativas! Pensei que seria mais um body splash comum, mas a qualidade e durabilidade da fragrância me surpreenderam. Definitivamente vou comprar outros produtos da marca.",
+      "date": "2025-07-13",
+      "verified": true
+    },
+    {
+      "nome": "Cláudia Azevedo",
+      "rating": 5,
+      "comment": "Amei o produto, super indicado!",
+      "date": "2025-07-15",
+      "verified": true
+    },
+    {
+      "nome": "Mariana Correia",
+      "rating": 5,
+      "comment": "Qualidade surpreendente pelo preço!",
+      "date": "2025-07-15",
+      "verified": true
+    },
+    {
+      "nome": "Regina Paiva",
+      "rating": 4,
+      "comment": "Produto maravilhoso, chegou bem embalado.",
+      "date": "2025-07-18",
+      "verified": true
+    },
+    {
+      "nome": "Renata Alves",
+      "rating": 5,
+      "comment": "Entrega rápida e produto perfeito!",
+      "date": "2025-07-19",
+      "verified": true
+    },
+    {
+      "nome": "Débora Castro",
+      "rating": 5,
+      "comment": "Produto maravilhoso, chegou bem embalado.",
+      "date": "2025-07-19",
+      "verified": true
+    },
+    {
+      "nome": "Cristina Barbosa",
+      "rating": 5,
+      "comment": "Cheiro maravilhoso, adorei!",
+      "date": "2025-07-20",
+      "verified": true
+    },
+    {
+      "nome": "Carla Santos",
+      "rating": 5,
+      "comment": "Melhor kit que já comprei!",
+      "date": "2025-07-20",
+      "verified": true
     }
   ],
   "kit-passion": [
     {
-      "name": "Isabela Fernandes",
-      "date": "24/07/2025",
-      "rating": 5,
-      "text": "Esse body splash é perfeito! O cheiro é marcante sem ser enjoativo, fixa super bem na pele. A loção hidrata incrivelmente. Adoro!",
-      "image": "/attached_assets/b90a1bdc-5ec3-4a67-81d3-2d865b88333a_1753345298278.jpeg"
-    },
-    {
-      "name": "Patricia Lima",
-      "date": "22/07/2025",
-      "rating": 5,
-      "text": "Kit Passion é sensacional! O perfume é romântico e elegante, perfeito para ocasiões especiais. A qualidade é impressionante!",
-      "image": "/attached_assets/322a2fd0-896a-417a-bfb8-7a5bc1f8dece_1753348791476.jpeg"
-    },
-    {
-      "name": "Mariana Sousa",
-      "date": "18/06/2025",
-      "rating": 5,
-      "text": "Body splash maravilhoso! A fragrância é doce na medida certa, feminina e romântica. Fixação excelente, dura o dia todo!",
-      "image": "/attached_assets/download (4)_1753348100992.jpeg"
-    },
-    {
-      "name": "Juliana Barbosa",
-      "date": "05/05/2025",
-      "rating": 5,
-      "text": "Amo esse body splash! O cheiro é bem feminino e romântico, perfeito para conquistar. A qualidade é excepcional!",
-      "image": null
-    },
-    {
-      "name": "Carolina Martins",
-      "date": "20/03/2025",
-      "rating": 5,
-      "text": "Body splash incrível! O perfume é único e sofisticado, sempre recebo elogios quando uso. Kit completo perfeito!",
-      "image": null
-    },
-    {
-      "name": "Vanessa Ribeiro",
-      "date": "15/02/2024",
-      "rating": 5,
-      "text": "Esse body splash é viciante! A fragrância Passion é marcante e duradoura. Uso todos os dias e me sinto confiante!",
-      "image": null
-    },
-    {
-      "name": "Renata Oliveira",
-      "date": "08/02/2024",
-      "rating": 5,
-      "text": "Fragrância incrível! O Passion tem um cheiro único, marcante e muito feminino. A loção complementa perfeitamente o body splash!",
-      "image": null
-    },
-    {
-      "name": "Daniela Carvalho",
-      "date": "25/01/2024",
-      "rating": 5,
-      "text": "Melhor investimento! O kit Passion é perfeito para quem quer se sentir poderosa. O cheiro é viciante e dura muito na pele!",
-      "image": null
-    },
-    {
-      "name": "Tatiana Ramos",
-      "date": "12/01/2024",
-      "rating": 5,
-      "text": "Esse body splash é um amor! Uso todos os dias e sempre recebo elogios. A fragrância Passion é única e marcante!",
-      "image": null
-    },
-    {
-      "name": "Solange Melo",
-      "date": "03/12/2023",
-      "rating": 5,
-      "text": "Kit maravilhoso! O perfume Passion é sofisticado e romântico. A combinação body splash + loção é perfeita para o dia a dia!",
-      "image": null
-    }
-  ],
-  "watermelon-fresh": [
-    {
-      "name": "Beatriz Souza",
-      "date": "24/07/2025",
-      "rating": 5,
-      "text": "Que delícia! O cheiro de melancia é refrescante e a textura é ótima. Perfeito para o verão!",
-      "image": null
-    },
-    {
-      "name": "Carolina Mendes",
-      "date": "23/07/2025",
-      "rating": 5,
-      "text": "Produto incrível! Hidrata muito bem e o cheiro é viciante. Minha pele ficou super sedosa.",
-      "image": null
-    },
-    {
-      "name": "Sabrina",
-      "date": "22/07/2025",
+      "nome": "Marcela Caldeira",
       "rating": 4,
-      "text": "Gostei muito, o cheiro é bem gostoso e fresco.",
-      "image": null
+      "comment": "Posso dizer sem medo que este é o melhor investimento em produtos de beleza que fiz recentemente. A qualidade é excepcional e a fragrância é simplesmente viciante - recebo elogios onde quer que eu vá. O kit vem completo e cada produto tem sua função específica, criando uma harmonia perfeita quando usados juntos. A duração na pele é impressionante, mesmo depois de um dia inteiro de trabalho ainda consigo sentir o aroma. A empresa está de parabéns pela qualidade dos produtos e pelo cuidado com o cliente. A embalagem chegou perfeita, demonstrando o carinho com que tratam cada pedido. Já indiquei para família e amigas, todas ficaram encantadas. Definitivamente uma marca que merece reconhecimento!",
+      "date": "2025-05-26",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=150&h=150&fit=crop"
     },
     {
-      "name": "Amanda",
-      "date": "21/07/2025",
+      "nome": "Daniele Araújo",
       "rating": 5,
-      "text": "Perfeito! O produto chegou rápido e o cheiro é maravilhoso.",
-      "image": null
-    }
-  ],
-  "kit-aurora": [
-    {
-      "name": "Priscila Campos",
-      "date": "24/07/2025",
-      "rating": 5,
-      "text": "Esse body splash é um sonho! O cheiro me lembra manhãs de primavera, delicado e elegante. Fixação perfeita na pele!",
-      "image": null
+      "comment": "Que produto maravilhoso! Há muito tempo procurava um kit completo com essa qualidade. A fragrância é sofisticada e envolvente, nada daqueles cheiros enjoativos que encontramos por aí. O que mais me impressionou foi a durabilidade - aplicei pela manhã e no final do dia ainda estava perceptível. A loção hidratante é outro ponto forte, tem uma textura cremosa mas não oleosa, absorve rápido e deixa a pele sedosa. Recebi o produto muito bem embalado, com cuidado nos detalhes. A entrega foi rápida e o pós-venda é excelente. Já estou na minha segunda compra e pretendo continuar sendo cliente. Recomendo de olhos fechados!",
+      "date": "2025-05-26",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=150&h=150&fit=crop"
     },
     {
-      "name": "Natália Carvalho",
-      "date": "22/06/2025",
+      "nome": "Silvana Ramos",
       "rating": 5,
-      "text": "Body splash incrível! Apaixonada pela fragrância Aurora, é sofisticada e feminina. A qualidade é excepcional!",
-      "image": null
+      "comment": "Produto maravilhoso, chegou bem embalado.",
+      "date": "2025-05-27",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=150&h=150&fit=crop"
     },
     {
-      "name": "Letícia Moreira",
-      "date": "10/05/2025",
-      "rating": 5,
-      "text": "Produto de qualidade incrível! O body splash tem cheiro maravilhoso e duradouro, uso todos os dias e adoro!",
-      "image": null
-    },
-    {
-      "name": "Daniela Nunes",
-      "date": "25/03/2025",
-      "rating": 5,
-      "text": "Body splash perfeito! A fragrância Aurora é única e marcante, sem ser enjoativa. Kit completo maravilhoso!",
-      "image": null
-    },
-    {
-      "name": "Andressa Santos",
-      "date": "15/02/2024",
-      "rating": 5,
-      "text": "Esse body splash é viciante! O perfume é fresco e feminino, fixa muito bem na pele. Sempre recebo elogios!",
-      "image": null
-    }
-  ],
-  "kit-noite-estrelada": [
-    {
-      "name": "Vitória Santos",
-      "date": "24/07/2025",
-      "rating": 5,
-      "text": "Fragrância misteriosa e envolvente! Perfeita para a noite, me sinto mais confiante usando.",
-      "image": null
-    },
-    {
-      "name": "Gabriela",
-      "date": "23/07/2025",
+      "nome": "Isabel Moura",
       "rating": 4,
-      "text": "Muito bom, o cheiro é marcante e elegante.",
-      "image": null
+      "comment": "Qualidade surpreendente pelo preço!",
+      "date": "2025-05-29",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1541643600914-78b084683601?w=150&h=150&fit=crop"
     },
     {
-      "name": "Melissa",
-      "date": "22/07/2025",
+      "nome": "Débora Castro",
       "rating": 5,
-      "text": "Amo essa fragrância! É única e sofisticada.",
-      "image": null
-    }
-  ],
-  "kit-maresia": [
-    {
-      "name": "Rafaela Costa",
-      "date": "24/07/2025",
-      "rating": 5,
-      "text": "Me transporta para a praia! O cheiro é fresco e relaxante, perfeito para quem ama o mar.",
-      "image": null
+      "comment": "Posso dizer sem medo que este é o melhor investimento em produtos de beleza que fiz recentemente. A qualidade é excepcional e a fragrância é simplesmente viciante - recebo elogios onde quer que eu vá. O kit vem completo e cada produto tem sua função específica, criando uma harmonia perfeita quando usados juntos. A duração na pele é impressionante, mesmo depois de um dia inteiro de trabalho ainda consigo sentir o aroma. A empresa está de parabéns pela qualidade dos produtos e pelo cuidado com o cliente. A embalagem chegou perfeita, demonstrando o carinho com que tratam cada pedido. Já indiquei para família e amigas, todas ficaram encantadas. Definitivamente uma marca que merece reconhecimento!",
+      "date": "2025-05-29",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=150&h=150&fit=crop"
     },
     {
-      "name": "Natália",
-      "date": "23/07/2025",
-      "rating": 5,
-      "text": "Produto maravilhoso, o cheiro é refrescante e duradouro.",
-      "image": null
-    },
-    {
-      "name": "Bruna",
-      "date": "22/07/2025",
+      "nome": "Ana Silva",
       "rating": 4,
-      "text": "Gostei muito da fragrância, bem suave e agradável.",
-      "image": null
-    }
-  ],
-  "kit-dunna": [
-    {
-      "name": "Priscila Oliveira",
-      "date": "24/07/2025",
-      "rating": 5,
-      "text": "Que fragrância incrível! É bem marcante e sofisticada, me sinto poderosa usando.",
-      "image": null
+      "comment": "Cheiro maravilhoso, adorei!",
+      "date": "2025-05-30",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1515688594390-b649af70d282?w=150&h=150&fit=crop"
     },
     {
-      "name": "Thais",
-      "date": "23/07/2025",
-      "rating": 5,
-      "text": "Produto de qualidade excelente, o cheiro é único.",
-      "image": null
-    },
-    {
-      "name": "Patricia",
-      "date": "22/07/2025",
+      "nome": "Marcela Caldeira",
       "rating": 4,
-      "text": "Gostei muito, fragrância bem feminina e elegante.",
-      "image": null
-    }
-  ],
-  "noite-estrelada-scrub": [
-    {
-      "name": "Aline Ferreira",
-      "date": "24/07/2025",
-      "rating": 5,
-      "text": "Esse esfoliante é perfeito! Remove todas as células mortas e deixa a pele renovada. O cheiro noturno é relaxante e sofisticado.",
-      "image": null
+      "comment": "Cheiro maravilhoso, adorei!",
+      "date": "2025-05-30",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=150&h=150&fit=crop"
     },
     {
-      "name": "Thaís Araújo",
-      "date": "18/06/2025",
+      "nome": "Carla Santos",
       "rating": 5,
-      "text": "Melhor esfoliante que já usei! A textura do açúcar é ideal, não machuca a pele. Fico com a pele sedosa depois de usar.",
-      "image": null
+      "comment": "Melhor kit que já comprei!",
+      "date": "2025-06-02",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1515688594390-b649af70d282?w=150&h=150&fit=crop"
     },
     {
-      "name": "Bruna Macedo",
-      "date": "05/05/2025",
-      "rating": 5,
-      "text": "Incrível como renova a pele! Uso uma vez por semana e o resultado é visível. A fragrância fica na pele e é maravilhosa.",
-      "image": null
+      "nome": "Ana Silva",
+      "rating": 4,
+      "comment": "Já sou cliente há um tempo e sempre fico satisfeita com a qualidade. Este kit especificamente tem um aroma incrível que recebo elogios sempre que uso. Vale muito a pena o investimento!",
+      "date": "2025-06-03",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=150&h=150&fit=crop"
     },
     {
-      "name": "Renata Vieira",
-      "date": "22/04/2025",
-      "rating": 5,
-      "text": "Esfoliação perfeita! Remove toda a aspereza e deixa a pele macia como seda. O perfume é único e relaxante.",
-      "image": null
+      "nome": "Bruna Moreira",
+      "rating": 4,
+      "comment": "Já sou cliente há um tempo e sempre fico satisfeita com a qualidade. Este kit especificamente tem um aroma incrível que recebo elogios sempre que uso. Vale muito a pena o investimento!",
+      "date": "2025-06-03",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1541643600914-78b084683601?w=150&h=150&fit=crop"
     },
     {
-      "name": "Camila Rocha",
-      "date": "15/02/2024",
+      "nome": "Juliana Costa",
       "rating": 5,
-      "text": "Esse sugar scrub é viciante! A esfoliação é suave mas eficaz, e o perfume noturno é incrível. Recomendo!",
-      "image": null
-    }
-  ],
-  "passion-scrub": [
-    {
-      "name": "Larissa Monteiro",
-      "date": "24/07/2025",
-      "rating": 5,
-      "text": "O melhor esfoliante que já usei! Remove células mortas perfeitamente e o cheiro Passion é viciante. Pele fica renovada!",
-      "image": null
+      "comment": "Que produto maravilhoso! Há muito tempo procurava um kit completo com essa qualidade. A fragrância é sofisticada e envolvente, nada daqueles cheiros enjoativos que encontramos por aí. O que mais me impressionou foi a durabilidade - aplicei pela manhã e no final do dia ainda estava perceptível. A loção hidratante é outro ponto forte, tem uma textura cremosa mas não oleosa, absorve rápido e deixa a pele sedosa. Recebi o produto muito bem embalado, com cuidado nos detalhes. A entrega foi rápida e o pós-venda é excelente. Já estou na minha segunda compra e pretendo continuar sendo cliente. Recomendo de olhos fechados!",
+      "date": "2025-06-05",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=150&h=150&fit=crop"
     },
     {
-      "name": "Jessica Pinheiro",
-      "date": "12/06/2025",
+      "nome": "Lúcia Brito",
       "rating": 5,
-      "text": "Esfoliante incrível! A textura é suave mas eficaz, renova completamente a pele. O perfume romântico é maravilhoso.",
-      "image": null
+      "comment": "Produto incrível! Super recomendo!",
+      "date": "2025-06-07",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=150&h=150&fit=crop"
     },
     {
-      "name": "Patrícia Freitas",
-      "date": "28/04/2025",
+      "nome": "Carla Santos",
       "rating": 5,
-      "text": "Produto excelente! A esfoliação é perfeita, não agride e deixa a pele sedosa. A fragrância Passion é única.",
-      "image": null
+      "comment": "Estou absolutamente encantada com este kit! Comprei após muita pesquisa e posso dizer que foi uma das melhores compras que fiz este ano. A fragrância é simplesmente divina - uma combinação perfeita entre elegância e sensualidade. O body splash tem uma fixação excelente, dura facilmente mais de 8 horas na pele. A loção hidratante complementa perfeitamente, além de hidratar muito bem, potencializa o aroma. A embalagem é linda e chegou super bem protegida. O atendimento da empresa também foi impecável, tiraram todas as minhas dúvidas rapidamente. Já recomendei para várias amigas e todas adoraram! Com certeza voltarei a comprar e já estou de olho em outros produtos da linha.",
+      "date": "2025-06-12",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=150&h=150&fit=crop"
     },
     {
-      "name": "Roberta Duarte",
-      "date": "15/03/2025",
+      "nome": "Denise Magalhães",
       "rating": 5,
-      "text": "Amo esse scrub! Remove toda aspereza da pele e hidrata ao mesmo tempo. O cheiro é romântico e duradouro.",
-      "image": null
+      "comment": "Melhor kit que já comprei!",
+      "date": "2025-06-12",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1515688594390-b649af70d282?w=150&h=150&fit=crop"
     },
     {
-      "name": "Adriana Silveira",
-      "date": "15/02/2024",
-      "rating": 5,
-      "text": "Sugar scrub perfeito! A pele fica renovada e macia. Uso toda semana e sempre tenho resultados incríveis!",
-      "image": null
-    }
-  ],
-  "maresia-scrub": [
-    {
-      "name": "Milena Rezende",
-      "date": "24/07/2025",
-      "rating": 5,
-      "text": "Sensação de spa em casa! Remove células mortas perfeitamente, o cheiro me lembra férias na praia. Pele fica sedosa!",
-      "image": null
+      "nome": "Sandra Pinto",
+      "rating": 4,
+      "comment": "Já sou cliente há um tempo e sempre fico satisfeita com a qualidade. Este kit especificamente tem um aroma incrível que recebo elogios sempre que uso. Vale muito a pena o investimento!",
+      "date": "2025-06-15",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1541643600914-78b084683601?w=150&h=150&fit=crop"
     },
     {
-      "name": "Taiana Lopes",
-      "date": "10/06/2025",
+      "nome": "Solange Vieira",
       "rating": 5,
-      "text": "Esfoliante maravilhoso! A textura é ideal, renova a pele sem agredir. O perfume maresia é refrescante e relaxante.",
-      "image": null
+      "comment": "Qualidade excelente, voltarei a comprar.",
+      "date": "2025-06-15",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1556228578-dd6a0cca2c3e?w=150&h=150&fit=crop"
     },
     {
-      "name": "Simone Batista",
-      "date": "25/04/2025",
-      "rating": 5,
-      "text": "Produto incrível! A esfoliação é suave mas eficaz, deixa a pele renovada. O cheiro do mar é viciante!",
-      "image": null
+      "nome": "Leticia Campos",
+      "rating": 4,
+      "comment": "Estou completamente apaixonada por este kit! O cheiro é divino e a qualidade dos produtos é excelente. A loção hidrata muito bem e o body splash tem uma fragrância que dura horas. Recomendo muito!",
+      "date": "2025-06-22",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=150&h=150&fit=crop"
     },
     {
-      "name": "Viviane Torres",
-      "date": "08/03/2025",
+      "nome": "Eliane Sousa",
       "rating": 5,
-      "text": "Melhor scrub que já usei! Remove toda aspereza e hidrata ao mesmo tempo. A fragrância maresia é única.",
-      "image": null
+      "comment": "Que produto maravilhoso! Há muito tempo procurava um kit completo com essa qualidade. A fragrância é sofisticada e envolvente, nada daqueles cheiros enjoativos que encontramos por aí. O que mais me impressionou foi a durabilidade - aplicei pela manhã e no final do dia ainda estava perceptível. A loção hidratante é outro ponto forte, tem uma textura cremosa mas não oleosa, absorve rápido e deixa a pele sedosa. Recebi o produto muito bem embalado, com cuidado nos detalhes. A entrega foi rápida e o pós-venda é excelente. Já estou na minha segunda compra e pretendo continuar sendo cliente. Recomendo de olhos fechados!",
+      "date": "2025-06-23",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1556228578-dd6a0cca2c3e?w=150&h=150&fit=crop"
     },
     {
-      "name": "Eliane Nascimento",
-      "date": "15/02/2024",
+      "nome": "Daniele Araújo",
+      "rating": 4,
+      "comment": "Qualidade excelente, voltarei a comprar.",
+      "date": "2025-06-25",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Raquel Mendes",
       "rating": 5,
-      "text": "Sugar scrub perfeito! A pele fica macia como seda e o perfume fresco dura na pele. Recomendo muito!",
-      "image": null
+      "comment": "Produto de ótima qualidade! A fragrância é marcante mas não enjoativa. Uso pela manhã e ainda sinto o cheiro no final do dia. A loção hidratante também é muito boa, deixa a pele macia.",
+      "date": "2025-06-27",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Marcela Caldeira",
+      "rating": 5,
+      "comment": "Superou minhas expectativas! Pensei que seria mais um body splash comum, mas a qualidade e durabilidade da fragrância me surpreenderam. Definitivamente vou comprar outros produtos da marca.",
+      "date": "2025-06-27",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Célia Tavares",
+      "rating": 5,
+      "comment": "Estou completamente apaixonada por este kit! O cheiro é divino e a qualidade dos produtos é excelente. A loção hidrata muito bem e o body splash tem uma fragrância que dura horas. Recomendo muito!",
+      "date": "2025-06-27",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Lúcia Brito",
+      "rating": 4,
+      "comment": "Estou absolutamente encantada com este kit! Comprei após muita pesquisa e posso dizer que foi uma das melhores compras que fiz este ano. A fragrância é simplesmente divina - uma combinação perfeita entre elegância e sensualidade. O body splash tem uma fixação excelente, dura facilmente mais de 8 horas na pele. A loção hidratante complementa perfeitamente, além de hidratar muito bem, potencializa o aroma. A embalagem é linda e chegou super bem protegida. O atendimento da empresa também foi impecável, tiraram todas as minhas dúvidas rapidamente. Já recomendei para várias amigas e todas adoraram! Com certeza voltarei a comprar e já estou de olho em outros produtos da linha.",
+      "date": "2025-06-29",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Solange Vieira",
+      "rating": 5,
+      "comment": "Produto de ótima qualidade! A fragrância é marcante mas não enjoativa. Uso pela manhã e ainda sinto o cheiro no final do dia. A loção hidratante também é muito boa, deixa a pele macia.",
+      "date": "2025-06-30",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Fernanda Lima",
+      "rating": 5,
+      "comment": "Já sou cliente há um tempo e sempre fico satisfeita com a qualidade. Este kit especificamente tem um aroma incrível que recebo elogios sempre que uso. Vale muito a pena o investimento!",
+      "date": "2025-07-01",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1541643600914-78b084683601?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Camila Rodrigues",
+      "rating": 5,
+      "comment": "Fragrância deliciosa, uso todos os dias.",
+      "date": "2025-07-03",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Denise Magalhães",
+      "rating": 5,
+      "comment": "Qualidade surpreendente pelo preço!",
+      "date": "2025-07-03",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1556228578-dd6a0cca2c3e?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Patrícia Melo",
+      "rating": 5,
+      "comment": "Cheiro dura o dia todo, adorei!",
+      "date": "2025-07-04",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1556228578-dd6a0cca2c3e?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Eliane Sousa",
+      "rating": 5,
+      "comment": "Cheiro dura o dia todo, adorei!",
+      "date": "2025-07-04",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Cláudia Azevedo",
+      "rating": 5,
+      "comment": "Qualidade surpreendente pelo preço!",
+      "date": "2025-07-07",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Mariana Correia",
+      "rating": 5,
+      "comment": "Posso dizer sem medo que este é o melhor investimento em produtos de beleza que fiz recentemente. A qualidade é excepcional e a fragrância é simplesmente viciante - recebo elogios onde quer que eu vá. O kit vem completo e cada produto tem sua função específica, criando uma harmonia perfeita quando usados juntos. A duração na pele é impressionante, mesmo depois de um dia inteiro de trabalho ainda consigo sentir o aroma. A empresa está de parabéns pela qualidade dos produtos e pelo cuidado com o cliente. A embalagem chegou perfeita, demonstrando o carinho com que tratam cada pedido. Já indiquei para família e amigas, todas ficaram encantadas. Definitivamente uma marca que merece reconhecimento!",
+      "date": "2025-07-09",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1541643600914-78b084683601?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Lúcia Brito",
+      "rating": 5,
+      "comment": "Cheiro dura o dia todo, adorei!",
+      "date": "2025-07-09",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1541643600914-78b084683601?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Fabiana Rocha",
+      "rating": 5,
+      "comment": "Estou completamente apaixonada por este kit! O cheiro é divino e a qualidade dos produtos é excelente. A loção hidrata muito bem e o body splash tem uma fragrância que dura horas. Recomendo muito!",
+      "date": "2025-07-10",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Luciana Ribeiro",
+      "rating": 5,
+      "comment": "Cheiro dura o dia todo, adorei!",
+      "date": "2025-07-15",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1556228578-dd6a0cca2c3e?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Gabriela Pereira",
+      "rating": 4,
+      "comment": "Produto maravilhoso, chegou bem embalado.",
+      "date": "2025-07-15",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Renata Alves",
+      "rating": 5,
+      "comment": "Qualidade excelente, voltarei a comprar.",
+      "date": "2025-07-16",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Patricia Souza",
+      "rating": 5,
+      "comment": "Produto maravilhoso, chegou bem embalado.",
+      "date": "2025-07-19",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Ana Silva",
+      "rating": 5,
+      "comment": "Melhor kit que já comprei!",
+      "date": "2025-07-19",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1541643600914-78b084683601?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Ingrid Carneiro",
+      "rating": 4,
+      "comment": "Estou completamente apaixonada por este kit! O cheiro é divino e a qualidade dos produtos é excelente. A loção hidrata muito bem e o body splash tem uma fragrância que dura horas. Recomendo muito!",
+      "date": "2025-07-20",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Amanda Ferreira",
+      "rating": 5,
+      "comment": "Cheiro maravilhoso, adorei!",
+      "date": "2025-07-22",
+      "verified": true,
+      "image": "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=150&h=150&fit=crop"
+    },
+    {
+      "nome": "Natália Freitas",
+      "rating": 5,
+      "comment": "Estou absolutamente encantada com este kit! Comprei após muita pesquisa e posso dizer que foi uma das melhores compras que fiz este ano. A fragrância é simplesmente divina - uma combinação perfeita entre elegância e sensualidade. O body splash tem uma fixação excelente, dura facilmente mais de 8 horas na pele. A loção hidratante complementa perfeitamente, além de hidratar muito bem, potencializa o aroma. A embalagem é linda e chegou super bem protegida. O atendimento da empresa também foi impecável, tiraram todas as minhas dúvidas rapidamente. Já recomendei para várias amigas e todas adoraram! Com certeza voltarei a comprar e já estou de olho em outros produtos da linha.",
+      "date": "2025-05-25",
+      "verified": true
+    },
+    {
+      "nome": "Cristina Barbosa",
+      "rating": 4,
+      "comment": "Estou completamente apaixonada por este kit! O cheiro é divino e a qualidade dos produtos é excelente. A loção hidrata muito bem e o body splash tem uma fragrância que dura horas. Recomendo muito!",
+      "date": "2025-05-27",
+      "verified": true
+    },
+    {
+      "nome": "Maria Oliveira",
+      "rating": 5,
+      "comment": "Que produto maravilhoso! Há muito tempo procurava um kit completo com essa qualidade. A fragrância é sofisticada e envolvente, nada daqueles cheiros enjoativos que encontramos por aí. O que mais me impressionou foi a durabilidade - aplicei pela manhã e no final do dia ainda estava perceptível. A loção hidratante é outro ponto forte, tem uma textura cremosa mas não oleosa, absorve rápido e deixa a pele sedosa. Recebi o produto muito bem embalado, com cuidado nos detalhes. A entrega foi rápida e o pós-venda é excelente. Já estou na minha segunda compra e pretendo continuar sendo cliente. Recomendo de olhos fechados!",
+      "date": "2025-05-27",
+      "verified": true
+    },
+    {
+      "nome": "Silvana Ramos",
+      "rating": 5,
+      "comment": "Comprei este produto depois de ler várias avaliações positivas e não me decepcionei. A fragrância é suave e elegante, perfeita para o dia a dia. A embalagem chegou intacta e o atendimento foi muito bom.",
+      "date": "2025-05-30",
+      "verified": true
+    },
+    {
+      "nome": "Rosana Cunha",
+      "rating": 5,
+      "comment": "Amei o produto, super indicado!",
+      "date": "2025-06-01",
+      "verified": true
+    },
+    {
+      "nome": "Renata Alves",
+      "rating": 5,
+      "comment": "Posso dizer sem medo que este é o melhor investimento em produtos de beleza que fiz recentemente. A qualidade é excepcional e a fragrância é simplesmente viciante - recebo elogios onde quer que eu vá. O kit vem completo e cada produto tem sua função específica, criando uma harmonia perfeita quando usados juntos. A duração na pele é impressionante, mesmo depois de um dia inteiro de trabalho ainda consigo sentir o aroma. A empresa está de parabéns pela qualidade dos produtos e pelo cuidado com o cliente. A embalagem chegou perfeita, demonstrando o carinho com que tratam cada pedido. Já indiquei para família e amigas, todas ficaram encantadas. Definitivamente uma marca que merece reconhecimento!",
+      "date": "2025-06-01",
+      "verified": true
+    },
+    {
+      "nome": "Marcela Caldeira",
+      "rating": 4,
+      "comment": "Já sou cliente há um tempo e sempre fico satisfeita com a qualidade. Este kit especificamente tem um aroma incrível que recebo elogios sempre que uso. Vale muito a pena o investimento!",
+      "date": "2025-06-02",
+      "verified": true
+    },
+    {
+      "nome": "Luciana Ribeiro",
+      "rating": 5,
+      "comment": "Posso dizer sem medo que este é o melhor investimento em produtos de beleza que fiz recentemente. A qualidade é excepcional e a fragrância é simplesmente viciante - recebo elogios onde quer que eu vá. O kit vem completo e cada produto tem sua função específica, criando uma harmonia perfeita quando usados juntos. A duração na pele é impressionante, mesmo depois de um dia inteiro de trabalho ainda consigo sentir o aroma. A empresa está de parabéns pela qualidade dos produtos e pelo cuidado com o cliente. A embalagem chegou perfeita, demonstrando o carinho com que tratam cada pedido. Já indiquei para família e amigas, todas ficaram encantadas. Definitivamente uma marca que merece reconhecimento!",
+      "date": "2025-06-02",
+      "verified": true
+    },
+    {
+      "nome": "Ingrid Carneiro",
+      "rating": 5,
+      "comment": "Qualidade excelente, voltarei a comprar.",
+      "date": "2025-06-03",
+      "verified": true
+    },
+    {
+      "nome": "Amanda Ferreira",
+      "rating": 5,
+      "comment": "Qualidade excelente, voltarei a comprar.",
+      "date": "2025-06-03",
+      "verified": true
+    },
+    {
+      "nome": "Mariana Correia",
+      "rating": 5,
+      "comment": "Produto maravilhoso, chegou bem embalado.",
+      "date": "2025-06-05",
+      "verified": true
+    },
+    {
+      "nome": "Débora Castro",
+      "rating": 5,
+      "comment": "Entrega rápida e produto perfeito!",
+      "date": "2025-06-06",
+      "verified": true
+    },
+    {
+      "nome": "Simone Dias",
+      "rating": 5,
+      "comment": "Produto incrível! Super recomendo!",
+      "date": "2025-06-07",
+      "verified": true
+    },
+    {
+      "nome": "Andreia Machado",
+      "rating": 5,
+      "comment": "Amei o produto, super indicado!",
+      "date": "2025-06-07",
+      "verified": true
+    },
+    {
+      "nome": "Andreia Machado",
+      "rating": 5,
+      "comment": "Comprei este produto depois de ler várias avaliações positivas e não me decepcionei. A fragrância é suave e elegante, perfeita para o dia a dia. A embalagem chegou intacta e o atendimento foi muito bom.",
+      "date": "2025-06-08",
+      "verified": true
+    },
+    {
+      "nome": "Ingrid Carneiro",
+      "rating": 5,
+      "comment": "Entrega rápida e produto perfeito!",
+      "date": "2025-06-08",
+      "verified": true
+    },
+    {
+      "nome": "Larissa Cavalcanti",
+      "rating": 5,
+      "comment": "Cheiro maravilhoso, adorei!",
+      "date": "2025-06-10",
+      "verified": true
+    },
+    {
+      "nome": "Natália Freitas",
+      "rating": 5,
+      "comment": "Estou completamente apaixonada por este kit! O cheiro é divino e a qualidade dos produtos é excelente. A loção hidrata muito bem e o body splash tem uma fragrância que dura horas. Recomendo muito!",
+      "date": "2025-06-12",
+      "verified": true
+    },
+    {
+      "nome": "Solange Vieira",
+      "rating": 5,
+      "comment": "Amei o produto, super indicado!",
+      "date": "2025-06-12",
+      "verified": true
+    },
+    {
+      "nome": "Carla Santos",
+      "rating": 5,
+      "comment": "Produto maravilhoso, chegou bem embalado.",
+      "date": "2025-06-13",
+      "verified": true
+    },
+    {
+      "nome": "Débora Castro",
+      "rating": 5,
+      "comment": "Superou minhas expectativas! Pensei que seria mais um body splash comum, mas a qualidade e durabilidade da fragrância me surpreenderam. Definitivamente vou comprar outros produtos da marca.",
+      "date": "2025-06-14",
+      "verified": true
+    },
+    {
+      "nome": "Amanda Ferreira",
+      "rating": 5,
+      "comment": "Superou minhas expectativas! Pensei que seria mais um body splash comum, mas a qualidade e durabilidade da fragrância me surpreenderam. Definitivamente vou comprar outros produtos da marca.",
+      "date": "2025-06-16",
+      "verified": true
+    },
+    {
+      "nome": "Renata Alves",
+      "rating": 5,
+      "comment": "Produto incrível! Super recomendo!",
+      "date": "2025-06-17",
+      "verified": true
+    },
+    {
+      "nome": "Ingrid Carneiro",
+      "rating": 5,
+      "comment": "Que produto maravilhoso! Há muito tempo procurava um kit completo com essa qualidade. A fragrância é sofisticada e envolvente, nada daqueles cheiros enjoativos que encontramos por aí. O que mais me impressionou foi a durabilidade - aplicei pela manhã e no final do dia ainda estava perceptível. A loção hidratante é outro ponto forte, tem uma textura cremosa mas não oleosa, absorve rápido e deixa a pele sedosa. Recebi o produto muito bem embalado, com cuidado nos detalhes. A entrega foi rápida e o pós-venda é excelente. Já estou na minha segunda compra e pretendo continuar sendo cliente. Recomendo de olhos fechados!",
+      "date": "2025-06-18",
+      "verified": true
+    },
+    {
+      "nome": "Juliana Costa",
+      "rating": 4,
+      "comment": "Amei o produto, super indicado!",
+      "date": "2025-06-18",
+      "verified": true
+    },
+    {
+      "nome": "Solange Vieira",
+      "rating": 4,
+      "comment": "Superou minhas expectativas! Pensei que seria mais um body splash comum, mas a qualidade e durabilidade da fragrância me surpreenderam. Definitivamente vou comprar outros produtos da marca.",
+      "date": "2025-06-19",
+      "verified": true
+    },
+    {
+      "nome": "Priscila Cardoso",
+      "rating": 5,
+      "comment": "Estou completamente apaixonada por este kit! O cheiro é divino e a qualidade dos produtos é excelente. A loção hidrata muito bem e o body splash tem uma fragrância que dura horas. Recomendo muito!",
+      "date": "2025-06-19",
+      "verified": true
+    },
+    {
+      "nome": "Fabiana Rocha",
+      "rating": 5,
+      "comment": "Produto de ótima qualidade! A fragrância é marcante mas não enjoativa. Uso pela manhã e ainda sinto o cheiro no final do dia. A loção hidratante também é muito boa, deixa a pele macia.",
+      "date": "2025-06-19",
+      "verified": true
+    },
+    {
+      "nome": "Roberta Nascimento",
+      "rating": 5,
+      "comment": "Produto incrível! Super recomendo!",
+      "date": "2025-06-20",
+      "verified": true
+    },
+    {
+      "nome": "Marcela Caldeira",
+      "rating": 5,
+      "comment": "Amei o produto, super indicado!",
+      "date": "2025-06-20",
+      "verified": true
+    },
+    {
+      "nome": "Juliana Costa",
+      "rating": 5,
+      "comment": "Qualidade excelente, voltarei a comprar.",
+      "date": "2025-06-21",
+      "verified": true
+    },
+    {
+      "nome": "Cláudia Azevedo",
+      "rating": 5,
+      "comment": "Já sou cliente há um tempo e sempre fico satisfeita com a qualidade. Este kit especificamente tem um aroma incrível que recebo elogios sempre que uso. Vale muito a pena o investimento!",
+      "date": "2025-06-21",
+      "verified": true
+    },
+    {
+      "nome": "Sandra Pinto",
+      "rating": 4,
+      "comment": "Produto maravilhoso, chegou bem embalado.",
+      "date": "2025-06-21",
+      "verified": true
+    },
+    {
+      "nome": "Carla Santos",
+      "rating": 5,
+      "comment": "Melhor kit que já comprei!",
+      "date": "2025-06-21",
+      "verified": true
+    },
+    {
+      "nome": "Michele Torres",
+      "rating": 5,
+      "comment": "Qualidade surpreendente pelo preço!",
+      "date": "2025-06-24",
+      "verified": true
+    },
+    {
+      "nome": "Vanessa Gomes",
+      "rating": 4,
+      "comment": "Fragrância deliciosa, uso todos os dias.",
+      "date": "2025-06-25",
+      "verified": true
+    },
+    {
+      "nome": "Mariana Correia",
+      "rating": 4,
+      "comment": "Qualidade excelente, voltarei a comprar.",
+      "date": "2025-06-25",
+      "verified": true
+    },
+    {
+      "nome": "Michele Torres",
+      "rating": 5,
+      "comment": "Fragrância deliciosa, uso todos os dias.",
+      "date": "2025-06-25",
+      "verified": true
+    },
+    {
+      "nome": "Vanessa Gomes",
+      "rating": 5,
+      "comment": "Já sou cliente há um tempo e sempre fico satisfeita com a qualidade. Este kit especificamente tem um aroma incrível que recebo elogios sempre que uso. Vale muito a pena o investimento!",
+      "date": "2025-06-25",
+      "verified": true
+    },
+    {
+      "nome": "Raquel Mendes",
+      "rating": 5,
+      "comment": "Já sou cliente há um tempo e sempre fico satisfeita com a qualidade. Este kit especificamente tem um aroma incrível que recebo elogios sempre que uso. Vale muito a pena o investimento!",
+      "date": "2025-06-28",
+      "verified": true
+    },
+    {
+      "nome": "Daniele Araújo",
+      "rating": 5,
+      "comment": "Amei o produto, super indicado!",
+      "date": "2025-06-28",
+      "verified": true
+    },
+    {
+      "nome": "Denise Magalhães",
+      "rating": 5,
+      "comment": "Qualidade surpreendente pelo preço!",
+      "date": "2025-06-30",
+      "verified": true
+    },
+    {
+      "nome": "Eliane Sousa",
+      "rating": 5,
+      "comment": "Qualidade surpreendente pelo preço!",
+      "date": "2025-07-01",
+      "verified": true
+    },
+    {
+      "nome": "Kátia Lopes",
+      "rating": 5,
+      "comment": "Qualidade excelente, voltarei a comprar.",
+      "date": "2025-07-02",
+      "verified": true
+    },
+    {
+      "nome": "Rosana Cunha",
+      "rating": 5,
+      "comment": "Produto de ótima qualidade! A fragrância é marcante mas não enjoativa. Uso pela manhã e ainda sinto o cheiro no final do dia. A loção hidratante também é muito boa, deixa a pele macia.",
+      "date": "2025-07-02",
+      "verified": true
+    },
+    {
+      "nome": "Adriana Nunes",
+      "rating": 5,
+      "comment": "Superou minhas expectativas! Pensei que seria mais um body splash comum, mas a qualidade e durabilidade da fragrância me surpreenderam. Definitivamente vou comprar outros produtos da marca.",
+      "date": "2025-07-02",
+      "verified": true
+    },
+    {
+      "nome": "Andreia Machado",
+      "rating": 5,
+      "comment": "Produto de ótima qualidade! A fragrância é marcante mas não enjoativa. Uso pela manhã e ainda sinto o cheiro no final do dia. A loção hidratante também é muito boa, deixa a pele macia.",
+      "date": "2025-07-03",
+      "verified": true
+    },
+    {
+      "nome": "Carolina Teixeira",
+      "rating": 5,
+      "comment": "Que produto maravilhoso! Há muito tempo procurava um kit completo com essa qualidade. A fragrância é sofisticada e envolvente, nada daqueles cheiros enjoativos que encontramos por aí. O que mais me impressionou foi a durabilidade - aplicei pela manhã e no final do dia ainda estava perceptível. A loção hidratante é outro ponto forte, tem uma textura cremosa mas não oleosa, absorve rápido e deixa a pele sedosa. Recebi o produto muito bem embalado, com cuidado nos detalhes. A entrega foi rápida e o pós-venda é excelente. Já estou na minha segunda compra e pretendo continuar sendo cliente. Recomendo de olhos fechados!",
+      "date": "2025-07-04",
+      "verified": true
+    },
+    {
+      "nome": "Carolina Teixeira",
+      "rating": 5,
+      "comment": "Que produto maravilhoso! Há muito tempo procurava um kit completo com essa qualidade. A fragrância é sofisticada e envolvente, nada daqueles cheiros enjoativos que encontramos por aí. O que mais me impressionou foi a durabilidade - aplicei pela manhã e no final do dia ainda estava perceptível. A loção hidratante é outro ponto forte, tem uma textura cremosa mas não oleosa, absorve rápido e deixa a pele sedosa. Recebi o produto muito bem embalado, com cuidado nos detalhes. A entrega foi rápida e o pós-venda é excelente. Já estou na minha segunda compra e pretendo continuar sendo cliente. Recomendo de olhos fechados!",
+      "date": "2025-07-05",
+      "verified": true
+    },
+    {
+      "nome": "Cláudia Azevedo",
+      "rating": 4,
+      "comment": "Amei o produto, super indicado!",
+      "date": "2025-07-05",
+      "verified": true
+    },
+    {
+      "nome": "Ana Silva",
+      "rating": 5,
+      "comment": "Já sou cliente há um tempo e sempre fico satisfeita com a qualidade. Este kit especificamente tem um aroma incrível que recebo elogios sempre que uso. Vale muito a pena o investimento!",
+      "date": "2025-07-06",
+      "verified": true
+    },
+    {
+      "nome": "Aline Batista",
+      "rating": 5,
+      "comment": "Cheiro dura o dia todo, adorei!",
+      "date": "2025-07-07",
+      "verified": true
+    },
+    {
+      "nome": "Priscila Cardoso",
+      "rating": 5,
+      "comment": "Entrega rápida e produto perfeito!",
+      "date": "2025-07-07",
+      "verified": true
+    },
+    {
+      "nome": "Daniele Araújo",
+      "rating": 5,
+      "comment": "Melhor kit que já comprei!",
+      "date": "2025-07-10",
+      "verified": true
+    },
+    {
+      "nome": "Fernanda Lima",
+      "rating": 5,
+      "comment": "Qualidade surpreendente pelo preço!",
+      "date": "2025-07-16",
+      "verified": true
+    },
+    {
+      "nome": "Daniele Araújo",
+      "rating": 5,
+      "comment": "Já sou cliente há um tempo e sempre fico satisfeita com a qualidade. Este kit especificamente tem um aroma incrível que recebo elogios sempre que uso. Vale muito a pena o investimento!",
+      "date": "2025-07-18",
+      "verified": true
+    },
+    {
+      "nome": "Patricia Souza",
+      "rating": 4,
+      "comment": "Já sou cliente há um tempo e sempre fico satisfeita com a qualidade. Este kit especificamente tem um aroma incrível que recebo elogios sempre que uso. Vale muito a pena o investimento!",
+      "date": "2025-07-18",
+      "verified": true
+    },
+    {
+      "nome": "Silvana Ramos",
+      "rating": 5,
+      "comment": "Posso dizer sem medo que este é o melhor investimento em produtos de beleza que fiz recentemente. A qualidade é excepcional e a fragrância é simplesmente viciante - recebo elogios onde quer que eu vá. O kit vem completo e cada produto tem sua função específica, criando uma harmonia perfeita quando usados juntos. A duração na pele é impressionante, mesmo depois de um dia inteiro de trabalho ainda consigo sentir o aroma. A empresa está de parabéns pela qualidade dos produtos e pelo cuidado com o cliente. A embalagem chegou perfeita, demonstrando o carinho com que tratam cada pedido. Já indiquei para família e amigas, todas ficaram encantadas. Definitivamente uma marca que merece reconhecimento!",
+      "date": "2025-07-20",
+      "verified": true
+    },
+    {
+      "nome": "Carolina Teixeira",
+      "rating": 5,
+      "comment": "Já sou cliente há um tempo e sempre fico satisfeita com a qualidade. Este kit especificamente tem um aroma incrível que recebo elogios sempre que uso. Vale muito a pena o investimento!",
+      "date": "2025-07-20",
+      "verified": true
+    },
+    {
+      "nome": "Carla Santos",
+      "rating": 5,
+      "comment": "Produto de ótima qualidade! A fragrância é marcante mas não enjoativa. Uso pela manhã e ainda sinto o cheiro no final do dia. A loção hidratante também é muito boa, deixa a pele macia.",
+      "date": "2025-07-23",
+      "verified": true
     }
   ]
 }

@@ -483,7 +483,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const shippingOptions = document.querySelectorAll('input[name="shipping"]');
     const summaryShipping = document.getElementById('summary-shipping');
     const summaryTotal = document.getElementById('summary-total');
-    const pixTotal = document.getElementById('pix-total');
+    const pixTotalMainElement = document.getElementById('pix-total');
     
     console.log('Subtotal calculado:', subtotal);
     
@@ -588,13 +588,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('❌ ERRO: Elemento summary-subtotal não encontrado!');
         }
         
-        // Update total value as well (if different from subtotal)
-        const totalElement = document.getElementById('summary-total');
-        if (totalElement) {
-            const formattedTotal = `R$ ${totalValue.toFixed(2).replace('.', ',')}`;
-            totalElement.textContent = formattedTotal;
-            console.log('✅ Total atualizado para:', formattedTotal);
-        }
+        // Note: Total will be updated later with shipping calculation
         
         // Update products info in payment summary
         const productsSummaryDiv = document.getElementById('payment-products-summary');
