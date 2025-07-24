@@ -15,8 +15,15 @@
         </nav>
     </div>
 
-    <!-- Main Product Section -->
+    <!-- Product Title - Large and Above Image -->
     <div class="container mt-4">
+        <div class="text-center mb-4">
+            <h1 class="product-title-large" style="font-size: 2.5rem; font-weight: bold; color: #333; line-height: 1.2;">{{ product.name }}</h1>
+        </div>
+    </div>
+
+    <!-- Main Product Section -->
+    <div class="container">
         <div class="row">
             <!-- Product Image -->
             <div class="col-md-6 mb-4">
@@ -28,8 +35,6 @@
             <!-- Product Info -->
             <div class="col-md-6">
                 <div class="product-info-section">
-                    <!-- Product Title -->
-                    <h1 class="product-title">{{ product.name }}</h1>
 
                     <!-- Rating -->
                     <div class="product-rating mb-3">
