@@ -395,9 +395,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateTotals() {
         const selectedShipping = document.querySelector('input[name="shipping"]:checked');
-        const shippingCost = parseFloat(selectedShipping.value);
+        if (!selectedShipping) {
+            console.log('Nenhuma opção de frete selecionada');
+            return;
+        }
+        
+        const shippingCost = parseFloat(selectedShipping.value) || 0;
         const total = subtotal + shippingCost;
         const pixDiscountTotal = total * 0.9;
+
+        console.log('Subtotal:', subtotal);
+        console.log('Frete selecionado:', shippingCost);
+        console.log('Total:', total);
+        console.log('PIX total:', pixDiscountTotal);
 
         // Update shipping display
         if (shippingCost === 0) {
@@ -419,8 +429,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    shippingOptions.forEach(option => {
-        option.addEventListener('change', updateTotals);
+    // Debug: verificar se os elementos existem
+    console.log('Opções de frete encontradas:', shippingOptions.length);
+    console.log('Elemento summary-shipping:', summaryShipping);
+    console.log('Elemento summary-total:', summaryTotal);
+    console.log('Elemento pix-total:', pixTotal);
+
+    shippingOptions.forEach((option, index) => {
+        console.log(`Opção ${index}:`, option.value, option.checked);
+        option.addEventListener('change', function() {
+            console.log('Mudança detectada para:', this.value);
+            updateTotals();
+        });
     });
 
     // Initial update
