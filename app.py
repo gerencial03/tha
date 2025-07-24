@@ -142,10 +142,37 @@ def checkout(product_id):
     if not product:
         return redirect(url_for('index'))
     
-    # Para deploy limpo - apenas produto único sem carrinho
+    # Initialize checkout cart if not exists
+    if 'checkout_cart' not in session:
+        session['checkout_cart'] = {}
+    
+    # Add the current product to checkout cart if not already there
     quantity = int(request.args.get('quantity', 1))
-    total_value = product['price'] * quantity
-    checkout_items = []  # Carrinho vazio para deploy
+    if product_id not in session['checkout_cart']:
+        session['checkout_cart'][product_id] = quantity
+        session.modified = True
+    
+    # Build checkout items from cart
+    checkout_items = []
+    total_value = 0
+    
+    for item_id, item_qty in session['checkout_cart'].items():
+        item_product = next((p for p in all_products if p['id'] == item_id), None)
+        if item_product:
+            subtotal = item_product['price'] * item_qty
+            checkout_items.append({
+                'product': item_product,
+                'quantity': item_qty,
+                'subtotal': subtotal
+            })
+            total_value += subtotal
+    
+    print(f"CHECKOUT DEBUG - Produto principal: {product_id}")
+    print(f"CHECKOUT DEBUG - Carrinho atual: {session['checkout_cart']}")
+    print(f"CHECKOUT DEBUG - Total produtos: {len(checkout_items)}")
+    print(f"CHECKOUT DEBUG - Valor total: {total_value}")
+    for item in checkout_items:
+        print(f"  - {item['product']['name']}: {item['quantity']}x R${item['product']['price']} = R${item['subtotal']}")
     
     # Get similar products for recommendations
     if product_id in [p['id'] for p in products_data.get('linha_toque_essencial', [])]:
