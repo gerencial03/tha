@@ -45,9 +45,7 @@
                     <div class="product-card">
                         <!-- Product Status Badges -->
                         <div class="product-badges">
-                            {% if product.free_shipping %}
-                                <span class="badge-frete">Frete grátis a partir de R$ 100</span>
-                            {% endif %}
+                            <!-- Removed free shipping badge - now displayed above header -->
                             {% if product.get('limited_stock') %}
                                 <span class="badge-limited">ESTOQUE LIMITADO</span>
                             {% endif %}
@@ -109,9 +107,7 @@
                     <div class="product-card">
                         <!-- Product Status Badges -->
                         <div class="product-badges">
-                            {% if product.free_shipping %}
-                                <span class="badge-frete">Frete grátis a partir de R$ 100</span>
-                            {% endif %}
+                            <!-- Removed free shipping badge - now displayed above header -->
                         </div>
 
                         <!-- Product Image -->
