@@ -487,6 +487,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 updatePaymentSummary(data.total_value, data.checkout_items);
                 // Show success message
                 showSuccessMessage('Produto adicionado com sucesso!');
+                // Scroll smoothly to payment summary
+                scrollToPaymentSummary();
             } else {
                 console.error('Erro na resposta:', data);
             }
@@ -621,6 +623,65 @@ document.addEventListener('DOMContentLoaded', function() {
                 alertDiv.remove();
             }
         }, 3000);
+    }
+    
+    function scrollToPaymentSummary() {
+        // Find the payment summary section using multiple strategies
+        let paymentSummaryElement = null;
+        
+        // Strategy 1: Look for h5 elements containing the specific text
+        const h5Elements = document.querySelectorAll('h5');
+        for (let h5 of h5Elements) {
+            if (h5.textContent && h5.textContent.includes('💳 Resumo do Pagamento')) {
+                paymentSummaryElement = h5;
+                break;
+            }
+        }
+        
+        // Strategy 2: Look for any element containing this text
+        if (!paymentSummaryElement) {
+            const allElements = document.querySelectorAll('*');
+            for (let element of allElements) {
+                if (element.textContent && element.textContent.trim() === '💳 Resumo do Pagamento') {
+                    paymentSummaryElement = element;
+                    break;
+                }
+            }
+        }
+        
+        // Strategy 3: Look for elements containing just "Resumo do Pagamento"
+        if (!paymentSummaryElement) {
+            const allElements = document.querySelectorAll('*');
+            for (let element of allElements) {
+                if (element.textContent && element.textContent.includes('Resumo do Pagamento')) {
+                    paymentSummaryElement = element;
+                    break;
+                }
+            }
+        }
+        
+        if (paymentSummaryElement) {
+            // Calculate position to center the element on screen
+            const elementRect = paymentSummaryElement.getBoundingClientRect();
+            const elementTop = elementRect.top + window.pageYOffset;
+            const windowHeight = window.innerHeight;
+            const scrollToPosition = elementTop - (windowHeight / 2) + (elementRect.height / 2);
+            
+            console.log('Scrolling to payment summary at position:', scrollToPosition);
+            
+            // Smooth scroll to the calculated position
+            window.scrollTo({
+                top: Math.max(0, scrollToPosition),
+                behavior: 'smooth'
+            });
+        } else {
+            console.log('Payment summary element not found, scrolling up');
+            // Fallback: scroll up a bit
+            window.scrollTo({
+                top: Math.max(0, window.pageYOffset - 400),
+                behavior: 'smooth'
+            });
+        }
     }
     
     // Function to remove product from summary
