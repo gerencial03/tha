@@ -452,16 +452,17 @@ body.cookie-notice-visible {
 }
 
 .btn-comprar {
-    background-color: #ffc107 !important;
-    color: #212529 !important;
-    border-color: #ffc107 !important;
+    background-color: #e67e22 !important;
+    color: white !important;
+    border-color: #e67e22 !important;
+    border-radius: 8px !important;
 }
 
 .btn-comprar:hover {
-    background-color: #ffca2c !important;
-    color: #212529 !important;
+    background-color: #d35400 !important;
+    color: white !important;
     text-decoration: none !important;
-    border-color: #ffca2c !important;
+    border-color: #d35400 !important;
 }
 
 .btn-notify {
