@@ -541,46 +541,36 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Elemento payment-products-summary encontrado:', !!productsSummaryDiv);
         
         if (productsSummaryDiv) {
-            console.log('Atualizando produtos no resumo (sem remover existentes)...');
+            console.log('Recriando lista completa de produtos no resumo...');
+            
+            // Clear existing products to rebuild complete list
+            productsSummaryDiv.innerHTML = '';
             
             console.log('Processando', checkoutItems.length, 'produtos...');
             checkoutItems.forEach((item, index) => {
-                console.log(`Processando produto ${index + 1}:`, item.product.name);
+                console.log(`Adicionando produto ${index + 1}:`, item.product.name);
                 
-                // Check if product already exists in summary
-                const existingProduct = productsSummaryDiv.querySelector(`[data-product-id="${item.product.id}"]`);
-                
-                if (existingProduct) {
-                    console.log('Produto já existe, atualizando quantidade...');
-                    // Update existing product quantity and price
-                    const quantityDiv = existingProduct.querySelector('.product-quantity-info');
-                    if (quantityDiv) {
-                        quantityDiv.innerHTML = `Quantidade: ${item.quantity} × R$ ${item.product.price.toFixed(2).replace('.', ',')} = R$ ${item.subtotal.toFixed(2).replace('.', ',')}`;
-                    }
-                } else {
-                    console.log('Novo produto, adicionando ao resumo...');
-                    // Add new product to summary
-                    const productHtml = `
-                        <div class="mb-2 p-2 product-summary-item" style="background-color: #f8f9fa; border-radius: 5px; border: 1px solid #dee2e6; position: relative;" data-product-id="${item.product.id}">
-                            <button class="btn-remove-product" onclick="removeProductFromSummary('${item.product.id}')" style="position: absolute; top: 5px; right: 5px; background: #dc3545; color: white; border: none; border-radius: 50%; width: 18px; height: 18px; font-size: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center;">×</button>
-                            <div class="d-flex align-items-center">
-                                <img src="${item.product.image_url}" alt="${item.product.name}" 
-                                     class="rounded me-2" style="width: 35px; height: 35px; object-fit: cover;">
-                                <div style="flex: 1;">
-                                    <div style="font-size: 11px; font-weight: 600; color: #333; margin-bottom: 2px;">
-                                        ${item.product.name}
-                                    </div>
-                                    <div class="product-quantity-info" style="font-size: 9px; color: #666;">
-                                        Quantidade: ${item.quantity} × R$ ${item.product.price.toFixed(2).replace('.', ',')} = R$ ${item.subtotal.toFixed(2).replace('.', ',')}
-                                    </div>
+                // Add product to summary
+                const productHtml = `
+                    <div class="mb-2 p-2 product-summary-item" style="background-color: #f8f9fa; border-radius: 5px; border: 1px solid #dee2e6; position: relative;" data-product-id="${item.product.id}">
+                        <button class="btn-remove-product" onclick="removeProductFromSummary('${item.product.id}')" style="position: absolute; top: 5px; right: 5px; background: #dc3545; color: white; border: none; border-radius: 50%; width: 18px; height: 18px; font-size: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center;">×</button>
+                        <div class="d-flex align-items-center">
+                            <img src="${item.product.image_url}" alt="${item.product.name}" 
+                                 class="rounded me-2" style="width: 35px; height: 35px; object-fit: cover;">
+                            <div style="flex: 1;">
+                                <div style="font-size: 11px; font-weight: 600; color: #333; margin-bottom: 2px;">
+                                    ${item.product.name}
+                                </div>
+                                <div class="product-quantity-info" style="font-size: 9px; color: #666;">
+                                    Quantidade: ${item.quantity} × R$ ${item.product.price.toFixed(2).replace('.', ',')} = R$ ${item.subtotal.toFixed(2).replace('.', ',')}
                                 </div>
                             </div>
                         </div>
-                    `;
-                    productsSummaryDiv.innerHTML += productHtml;
-                }
+                    </div>
+                `;
+                productsSummaryDiv.innerHTML += productHtml;
             });
-            console.log('=== FIM: Produtos atualizados no resumo:', checkoutItems.length, '===');
+            console.log('=== FIM: Lista completa de produtos recriada:', checkoutItems.length, '===');
         } else {
             console.error('ERRO: Elemento payment-products-summary não encontrado!');
         }
