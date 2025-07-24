@@ -251,5 +251,8 @@
     
     <!-- Custom JS -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    
+    <!-- Page specific scripts -->
+    {% block scripts %}{% endblock %}
 </body>
 </html>

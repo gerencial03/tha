@@ -41,17 +41,17 @@
 
                     <!-- Price -->
                     <div class="product-price mb-4">
-                        <div class="current-price h2 text-success">R${{ "%.2f"|format(product.price) }}</div>
+                        <div class="current-price h2 text-success" id="current-price">R${{ "%.2f"|format(product.price) }}</div>
                         {% if product.original_price %}
                             <div class="price-details">
                                 <span class="discount-badge bg-success text-white px-2 py-1 rounded">-{{ product.discount }}% OFF</span>
-                                <div class="original-price text-muted text-decoration-line-through">R${{ "%.2f"|format(product.original_price) }}</div>
+                                <div class="original-price text-muted text-decoration-line-through" id="original-price">R${{ "%.2f"|format(product.original_price) }}</div>
                             </div>
                         {% endif %}
                         
                         <!-- Installments -->
                         <div class="installments mt-2">
-                            <small class="text-muted">12x de R${{ "%.2f"|format(product.price / 12) }}</small>
+                            <small class="text-muted" id="installments">12x de R${{ "%.2f"|format(product.price / 12) }}</small>
                             <div><small class="text-primary">💳 Ver mais detalhes</small></div>
                         </div>
                     </div>
@@ -61,9 +61,9 @@
                         <div class="row align-items-center">
                             <div class="col-4">
                                 <div class="quantity-selector d-flex align-items-center border rounded">
-                                    <button class="btn btn-sm" type="button">-</button>
-                                    <input type="number" class="form-control text-center border-0" value="1" min="1">
-                                    <button class="btn btn-sm" type="button">+</button>
+                                    <button class="btn btn-sm quantity-decrease" type="button">-</button>
+                                    <input type="number" class="form-control text-center border-0 quantity-input" value="1" min="1" data-price="{{ product.price }}">
+                                    <button class="btn btn-sm quantity-increase" type="button">+</button>
                                 </div>
                             </div>
                             <div class="col-8">
@@ -74,9 +74,9 @@
                         </div>
                     </div>
 
-                    <!-- Shipping Calculator -->
+                    <!-- Shipping Info -->
                     <div class="shipping-section mb-4">
-                        <h6>📦 Meios de envio <i class="fas fa-plus float-end"></i></h6>
+                        <h6>🚚 Frete grátis a partir de R$ 100</h6>
                     </div>
                 </div>
             </div>
@@ -196,4 +196,66 @@
     {% endif %}
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const quantityInput = document.querySelector('.quantity-input');
+    const decreaseBtn = document.querySelector('.quantity-decrease');
+    const increaseBtn = document.querySelector('.quantity-increase');
+    const currentPriceEl = document.getElementById('current-price');
+    const originalPriceEl = document.getElementById('original-price');
+    const installmentsEl = document.getElementById('installments');
+    
+    const basePrice = parseFloat(quantityInput.dataset.price);
+    const baseOriginalPrice = {{ product.original_price or 'null' }};
+    
+    function updatePrice() {
+        const quantity = parseInt(quantityInput.value) || 1;
+        const totalPrice = basePrice * quantity;
+        const totalOriginalPrice = baseOriginalPrice ? baseOriginalPrice * quantity : null;
+        
+        // Update current price
+        currentPriceEl.textContent = `R$${totalPrice.toFixed(2).replace('.', ',')}`;
+        
+        // Update original price if exists
+        if (originalPriceEl && totalOriginalPrice) {
+            originalPriceEl.textContent = `R$${totalOriginalPrice.toFixed(2).replace('.', ',')}`;
+        }
+        
+        // Update installments
+        const installmentValue = totalPrice / 12;
+        installmentsEl.textContent = `12x de R$${installmentValue.toFixed(2).replace('.', ',')}`;
+    }
+    
+    // Decrease quantity
+    decreaseBtn.addEventListener('click', function() {
+        let quantity = parseInt(quantityInput.value) || 1;
+        if (quantity > 1) {
+            quantity--;
+            quantityInput.value = quantity;
+            updatePrice();
+        }
+    });
+    
+    // Increase quantity
+    increaseBtn.addEventListener('click', function() {
+        let quantity = parseInt(quantityInput.value) || 1;
+        quantity++;
+        quantityInput.value = quantity;
+        updatePrice();
+    });
+    
+    // Handle direct input change
+    quantityInput.addEventListener('input', function() {
+        let quantity = parseInt(this.value) || 1;
+        if (quantity < 1) {
+            quantity = 1;
+            this.value = quantity;
+        }
+        updatePrice();
+    });
+});
+</script>
 {% endblock %}
