@@ -429,52 +429,53 @@ body.cookie-notice-visible {
     margin-top: auto;
 }
 
-/* Botões exatamente como no site original */
+/* Botões exatamente como no site original - Forçando estilos */
 .btn-comprar, .btn-notify {
-    width: 100%;
-    padding: 8px 16px;
-    font-weight: 400;
-    border-radius: 6px;
-    text-decoration: none;
-    text-align: center;
-    display: block;
-    transition: all 0.15s ease;
-    font-size: 13px;
-    border: 1px solid;
-    text-transform: none;
-    font-family: inherit;
-    line-height: 1.4;
-    min-height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 100% !important;
+    padding: 8px 16px !important;
+    font-weight: 400 !important;
+    border-radius: 6px !important;
+    text-decoration: none !important;
+    text-align: center !important;
+    display: flex !important;
+    transition: all 0.15s ease !important;
+    font-size: 13px !important;
+    border: 1px solid !important;
+    text-transform: none !important;
+    font-family: inherit !important;
+    line-height: 1.4 !important;
+    min-height: 36px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: none !important;
+    outline: none !important;
 }
 
 .btn-comprar {
-    background-color: #ff6939;
-    color: white;
-    border-color: #ff6939;
+    background-color: #ff6939 !important;
+    color: white !important;
+    border-color: #ff6939 !important;
 }
 
 .btn-comprar:hover {
-    background-color: #e55a2b;
-    color: white;
-    text-decoration: none;
-    border-color: #e55a2b;
+    background-color: #e55a2b !important;
+    color: white !important;
+    text-decoration: none !important;
+    border-color: #e55a2b !important;
 }
 
 .btn-notify {
-    background-color: #f8f9fa;
-    color: #6c757d;
-    border-color: #dee2e6;
-    cursor: pointer;
+    background-color: #f8f9fa !important;
+    color: #6c757d !important;
+    border-color: #dee2e6 !important;
+    cursor: pointer !important;
 }
 
 .btn-notify:hover {
-    background-color: #e9ecef;
-    color: #6c757d;
-    text-decoration: none;
-    border-color: #adb5bd;
+    background-color: #e9ecef !important;
+    color: #6c757d !important;
+    text-decoration: none !important;
+    border-color: #adb5bd !important;
 }
 
 .installment-info {
