@@ -109,7 +109,7 @@ Preferred communication style: Simple, everyday language.
   - Clean layout with product name, quantity, and pricing
 - **Heroku Deployment Ready**: Production configuration files
   - Procfile configured for Gunicorn
-  - Runtime.txt with Python 3.11.7
+  - .python-version with Python 3.11 (uv compatible)
   - Environment variables for session secrets
   - **Clean deployment state**: All carts and sessions cleared for fresh start
 - **Enhanced Checkout Flow**: Improved form validation and user experience
