@@ -103,11 +103,15 @@ Preferred communication style: Simple, everyday language.
   - Real-time cart count badge
   - Finalizar Compra button redirects to checkout
   - Dynamic cart content loading via AJAX
+- **Enhanced Checkout Product Display**: Product information in payment summary
+  - Compact product cards with photos in resumo do pagamento
+  - Support for single and multiple products display
+  - Clean layout with product name, quantity, and pricing
 - **Heroku Deployment Ready**: Production configuration files
   - Procfile configured for Gunicorn
   - Runtime.txt with Python 3.11.7
   - Environment variables for session secrets
-  - Clean cart session for fresh deployment
+  - **Clean deployment state**: All carts and sessions cleared for fresh start
 - **Enhanced Checkout Flow**: Improved form validation and user experience
 - **Multiple QR Code Libraries**: Fallback system for reliable QR code generation
 - **PayBets API Integration**: Production-ready implementation with proper authentication

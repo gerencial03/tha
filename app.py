@@ -26,7 +26,8 @@ def load_reviews():
 def index():
     products_data = load_products()
     
-    # Limpar carrinho para deploy
+    # Limpar todas as sessões para deploy limpo
+    session.clear()
     session['cart'] = {}
     session['checkout_cart'] = {}
     session['product_quantity'] = {}
@@ -40,7 +41,8 @@ def index():
 @app.route('/get_cart_data')
 def get_cart_data():
     """Rota para obter dados do carrinho para o dropdown"""
-    # Sempre retornar carrinho vazio para deploy limpo
+    # Limpar session e retornar carrinho vazio para deploy
+    session.clear()
     return jsonify({'items': [], 'total': 0, 'count': 0})
 
 @app.route('/clear_cart')
@@ -140,52 +142,16 @@ def checkout(product_id):
     if not product:
         return redirect(url_for('index'))
     
-    # Get quantity from URL parameter or session or default to 1
-    quantity = int(request.args.get('quantity', 0))
-    if quantity == 0:
-        quantity = session.get('product_quantity', {}).get(product_id, 1)
-    else:
-        # Update session with new quantity
-        if 'product_quantity' not in session:
-            session['product_quantity'] = {}
-        session['product_quantity'][product_id] = quantity
-        session.modified = True
+    # Para deploy limpo - apenas produto único sem carrinho
+    quantity = int(request.args.get('quantity', 1))
+    total_value = product['price'] * quantity
+    checkout_items = []  # Carrinho vazio para deploy
     
-    # CORRIGIDO: Suporte para múltiplos produtos no checkout
-    checkout_items = []
-    total_value = 0
-    
-    # Inicializar carrinho se não existir
-    if 'checkout_cart' not in session:
-        session['checkout_cart'] = {}
-    
-    # Adicionar/atualizar produto atual no carrinho
-    session['checkout_cart'][product_id] = quantity
-    session.modified = True
-    
-    # Calcular todos os produtos no carrinho
-    for item_id, item_qty in session['checkout_cart'].items():
-        item_product = next((p for p in all_products if p['id'] == item_id), None)
-        if item_product:
-            subtotal = item_product['price'] * item_qty
-            checkout_items.append({
-                'product': item_product,
-                'quantity': item_qty,
-                'subtotal': subtotal
-            })
-            total_value += subtotal
-    
-    print(f"Checkout - {len(checkout_items)} produto(s), Total: R${total_value:.2f}")
-    for item in checkout_items:
-        print(f"  - {item['product']['name']}: {item['quantity']}x R${item['product']['price']:.2f} = R${item['subtotal']:.2f}")
-    
-    # Get similar products for recommendations (excluding those in cart)
+    # Get similar products for recommendations
     if product_id in [p['id'] for p in products_data.get('linha_toque_essencial', [])]:
-        similar_products = [p for p in products_data.get('linha_toque_essencial', []) 
-                          if p['id'] != product_id and p['id'] not in session['checkout_cart']][:6]
+        similar_products = [p for p in products_data.get('linha_toque_essencial', []) if p['id'] != product_id][:6]
     else:
-        similar_products = [p for p in products_data.get('queridinhos', []) 
-                          if p['id'] != product_id and p['id'] not in session['checkout_cart']][:6]
+        similar_products = [p for p in products_data.get('queridinhos', []) if p['id'] != product_id][:6]
     
     return render_template('checkout.html', 
                          product=product,
@@ -193,7 +159,7 @@ def checkout(product_id):
                          checkout_items=checkout_items,
                          total_value=total_value,
                          similar_products=similar_products,
-                         cart_count=len(session.get('cart', {})))
+                         cart_count=0)
 
 @app.route('/buy/<product_id>')
 def buy_product(product_id):
