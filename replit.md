@@ -113,6 +113,11 @@ Preferred communication style: Simple, everyday language.
   - Photos showing actual Labubu products in real-life scenarios
   - Enhanced credibility with visual proof of product quality
   - Customer testimonials aligned with authentic experiences
+- **PIX Payment Discount Enhancement** (July 24, 2025):
+  - Increased PIX payment discount from 10% to 45% 
+  - Updated all calculation points: backend (app.py) and frontend (checkout.html)
+  - Enhanced promotional messaging to highlight major savings opportunity
+  - Applied across all JavaScript functions for real-time calculations
 
 ### Previous Changes
 - **PIX Payment Integration**: Complete implementation with PayBets gateway

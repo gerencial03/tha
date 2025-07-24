@@ -378,8 +378,8 @@ def process_pix_payment():
         import io
         import base64
         
-        # Valor com desconto PIX (10%)
-        pix_discount = 0.10
+        # Valor com desconto PIX (45%)
+        pix_discount = 0.45
         pix_amount = total_amount * (1 - pix_discount)
         
         # Gerar external_id único
