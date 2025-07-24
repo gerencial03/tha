@@ -2,7 +2,6 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all components
-    initCookieNotice();
     initSearch();
     initProductCards();
     initCart();
@@ -10,26 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initLazyLoading();
 });
 
-// Cookie Notice Management
-function initCookieNotice() {
-    const cookieNotice = document.getElementById('cookieNotice');
-    
-    // Check if user has already accepted cookies
-    if (!localStorage.getItem('cookiesAccepted')) {
-        setTimeout(() => {
-            cookieNotice.classList.add('show');
-            document.body.classList.add('cookie-notice-visible');
-        }, 1000);
-    }
-}
 
-function acceptCookies() {
-    const cookieNotice = document.getElementById('cookieNotice');
-    localStorage.setItem('cookiesAccepted', 'true');
-    
-    cookieNotice.classList.remove('show');
-    document.body.classList.remove('cookie-notice-visible');
-}
 
 // Search Functionality
 function initSearch() {
