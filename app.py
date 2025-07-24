@@ -235,6 +235,9 @@ def add_to_checkout_ajax(product_id):
     print(f"Produto adicionado ao carrinho: {product_id}, Quantidade: {session['checkout_cart'][product_id]}")
     print(f"Carrinho atual: {session['checkout_cart']}")
     print(f"Total de produtos no retorno: {len(checkout_items)}")
+    print(f"Valor total calculado: {total_value}")
+    for item in checkout_items:
+        print(f"  - {item['product']['name']}: {item['quantity']}x R${item['product']['price']} = R${item['subtotal']}")
     
     return jsonify({
         'success': True,
