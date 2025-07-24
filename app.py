@@ -112,5 +112,37 @@ def product_detail(product_id):
                          reviews=reviews,
                          cart_count=len(session.get('cart', {})))
 
+@app.route('/checkout/<product_id>')
+def checkout(product_id):
+    products_data = load_products()
+    all_products = products_data.get('linha_toque_essencial', []) + products_data.get('queridinhos', [])
+    
+    # Find product by ID
+    product = next((p for p in all_products if p['id'] == product_id), None)
+    
+    if not product:
+        flash('Produto não encontrado!', 'error')
+        return redirect(url_for('index'))
+    
+    # Get quantity from session or default to 1
+    quantity = session.get('product_quantity', {}).get(product_id, 1)
+    
+    return render_template('checkout.html', 
+                         product=product,
+                         quantity=quantity,
+                         cart_count=len(session.get('cart', {})))
+
+@app.route('/buy/<product_id>')
+def buy_product(product_id):
+    # Get quantity from request args
+    quantity = int(request.args.get('quantity', 1))
+    
+    # Store quantity in session
+    if 'product_quantity' not in session:
+        session['product_quantity'] = {}
+    session['product_quantity'][product_id] = quantity
+    
+    return redirect(url_for('checkout', product_id=product_id))
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

@@ -67,9 +67,9 @@
                                 </div>
                             </div>
                             <div class="col-8">
-                                <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-warning w-100 btn-lg" style="background-color: #e67e22; border-color: #e67e22;">
+                                <button class="btn btn-warning w-100 btn-lg" style="background-color: #e67e22; border-color: #e67e22;" onclick="buyProduct()">
                                     Comprar
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -256,6 +256,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         updatePrice();
     });
+    
+    // Buy product function
+    window.buyProduct = function() {
+        const quantity = parseInt(quantityInput.value) || 1;
+        window.location.href = `/buy/{{ product.id }}?quantity=${quantity}`;
+    };
 });
 </script>
 {% endblock %}
