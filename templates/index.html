@@ -4,10 +4,25 @@
 
 
 
-<!-- Hero Banner Original -->
+<!-- Hero Banner Labubu -->
 <section class="hero-banner-original">
-    <div class="banner-container">
-        <img src="{{ url_for('static', filename='banner-tha-beauty.png') }}" alt="Tha Beauty Banner" class="hero-banner-image">
+    <div class="banner-container" style="background: linear-gradient(135deg, #ff6b9d, #ffd93d, #6bcf7f); padding: 40px 20px; text-align: center; color: white;">
+        <h1 style="font-size: 3rem; font-weight: bold; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">🌟 Labubu Brasil</h1>
+        <p style="font-size: 1.5rem; margin-bottom: 30px;">Colecionáveis Kawaii Oficiais</p>
+        <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-star" style="color: #ffd700;"></i>
+                <span>Produtos Autênticos</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-shipping-fast" style="color: #00ff88;"></i>
+                <span>Frete Grátis Brasil</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-heart" style="color: #ff69b4;"></i>
+                <span>Vendedor Autorizado</span>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -39,17 +54,17 @@
 <section class="pix-discount-banner">
     <div class="container-fluid px-3">
         <div class="text-center py-2">
-            <small class="text-success fw-bold">💳 10% de desconto em todos os produtos no PIX!</small>
+            <small class="text-success fw-bold">🎁 Pagamento no PIX e ganhe 5% OFF! Parcelamento em até 12x</small>
         </div>
     </div>
 </section>
 
-<!-- Linha Toque Essencial -->
+<!-- Coleção Labubu -->
 <section class="product-section">
     <div class="container-fluid px-3">
-        <h2 class="section-title">Linha Toque Essencial</h2>
+        <h2 class="section-title">🎁 Coleção Labubu Oficial</h2>
         <div class="row g-3">
-            {% for product in linha_toque_essencial %}
+            {% for product in labubu_collection %}
                 <div class="col-6 col-md-4 col-lg-3">
                     <div class="product-card">
                         <!-- Product Status Badges -->
@@ -106,12 +121,12 @@
     </div>
 </section>
 
-<!-- Queridinhos da marca -->
+<!-- Acessórios Labubu -->
 <section class="product-section">
     <div class="container-fluid px-3">
-        <h2 class="section-title">Queridinhos da marca!</h2>
+        <h2 class="section-title">✨ Acessórios Kawaii Labubu</h2>
         <div class="row g-3">
-            {% for product in queridinhos %}
+            {% for product in acessorios_labubu %}
                 <div class="col-6 col-md-4 col-lg-3">
                     <div class="product-card">
                         <!-- Product Status Badges -->

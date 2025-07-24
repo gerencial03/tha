@@ -12,7 +12,7 @@ def load_products():
         with open('data/products.json', 'r', encoding='utf-8') as f:
             return json.load(f)
     except FileNotFoundError:
-        return {"linha_toque_essencial": [], "queridinhos": []}
+        return {"labubu_collection": [], "acessorios_labubu": []}
 
 # Load reviews data
 def load_reviews():
@@ -62,7 +62,7 @@ def add_to_cart(product_id):
         session['cart'] = {}
     
     products_data = load_products()
-    all_products = products_data.get('linha_toque_essencial', []) + products_data.get('queridinhos', [])
+    all_products = products_data.get('labubu_collection', []) + products_data.get('acessorios_labubu', [])
     
     # Find product by ID
     product = next((p for p in all_products if p['id'] == product_id), None)
@@ -89,7 +89,7 @@ def search():
         return redirect(url_for('index'))
     
     # Search in all products
-    all_products = products_data.get('linha_toque_essencial', []) + products_data.get('queridinhos', [])
+    all_products = products_data.get('labubu_collection', []) + products_data.get('acessorios_labubu', [])
     results = [p for p in all_products if query in p['name'].lower() or query in p.get('description', '').lower()]
     
     return render_template('index.html', 
@@ -105,7 +105,7 @@ def notify_when_available(product_id):
 @app.route('/produto/<product_id>')
 def product_detail(product_id):
     products_data = load_products()
-    all_products = products_data.get('linha_toque_essencial', []) + products_data.get('queridinhos', [])
+    all_products = products_data.get('labubu_collection', []) + products_data.get('acessorios_labubu', [])
     
     # Find product by ID
     product = next((p for p in all_products if p['id'] == product_id), None)
@@ -115,10 +115,10 @@ def product_detail(product_id):
     
     # Get similar products (same category)
     similar_products = []
-    if product_id in [p['id'] for p in products_data.get('linha_toque_essencial', [])]:
-        similar_products = [p for p in products_data.get('linha_toque_essencial', []) if p['id'] != product_id][:4]
+    if product_id in [p['id'] for p in products_data.get('labubu_collection', [])]:
+        similar_products = [p for p in products_data.get('labubu_collection', []) if p['id'] != product_id][:4]
     else:
-        similar_products = [p for p in products_data.get('queridinhos', []) if p['id'] != product_id][:4]
+        similar_products = [p for p in products_data.get('acessorios_labubu', []) if p['id'] != product_id][:4]
     
     # Load authentic reviews for this specific product
     reviews_db = load_reviews()
@@ -136,7 +136,7 @@ def product_detail(product_id):
 @app.route('/checkout/<product_id>')
 def checkout(product_id):
     products_data = load_products()
-    all_products = products_data.get('linha_toque_essencial', []) + products_data.get('queridinhos', [])
+    all_products = products_data.get('labubu_collection', []) + products_data.get('acessorios_labubu', [])
     
     # Find product by ID
     product = next((p for p in all_products if p['id'] == product_id), None)
@@ -179,10 +179,10 @@ def checkout(product_id):
         print(f"  - {item['product']['name']}: {item['quantity']}x R${item['product']['price']} = R${item['subtotal']}")
     
     # Get similar products for recommendations
-    if product_id in [p['id'] for p in products_data.get('linha_toque_essencial', [])]:
-        similar_products = [p for p in products_data.get('linha_toque_essencial', []) if p['id'] != product_id][:6]
+    if product_id in [p['id'] for p in products_data.get('labubu_collection', [])]:
+        similar_products = [p for p in products_data.get('labubu_collection', []) if p['id'] != product_id][:6]
     else:
-        similar_products = [p for p in products_data.get('queridinhos', []) if p['id'] != product_id][:6]
+        similar_products = [p for p in products_data.get('acessorios_labubu', []) if p['id'] != product_id][:6]
     
     return render_template('checkout.html', 
                          product=product,
@@ -223,7 +223,7 @@ def add_to_checkout(product_id):
     
     # Get current product for redirect
     products_data = load_products()
-    all_products = products_data.get('linha_toque_essencial', []) + products_data.get('queridinhos', [])
+    all_products = products_data.get('labubu_collection', []) + products_data.get('acessorios_labubu', [])
     current_product = next((p for p in all_products if p['id'] in session['checkout_cart']), None)
     
     if current_product:
@@ -234,7 +234,7 @@ def add_to_checkout(product_id):
 @app.route('/add_to_checkout_ajax/<product_id>', methods=['POST'])
 def add_to_checkout_ajax(product_id):
     products_data = load_products()
-    all_products = products_data.get('linha_toque_essencial', []) + products_data.get('queridinhos', [])
+    all_products = products_data.get('labubu_collection', []) + products_data.get('acessorios_labubu', [])
     
     # Add product to checkout cart
     if 'checkout_cart' not in session:
@@ -279,7 +279,7 @@ def add_to_checkout_ajax(product_id):
 @app.route('/remove_from_checkout_ajax/<product_id>', methods=['POST'])
 def remove_from_checkout_ajax(product_id):
     products_data = load_products()
-    all_products = products_data.get('linha_toque_essencial', []) + products_data.get('queridinhos', [])
+    all_products = products_data.get('labubu_collection', []) + products_data.get('acessorios_labubu', [])
     
     # Remove product from checkout cart
     if 'checkout_cart' in session and product_id in session['checkout_cart']:
@@ -359,7 +359,7 @@ def process_pix_payment():
         
         # Get products for transaction description
         products_data = load_products()
-        all_products = products_data.get('linha_toque_essencial', []) + products_data.get('queridinhos', [])
+        all_products = products_data.get('labubu_collection', []) + products_data.get('acessorios_labubu', [])
         
         # Build transaction description
         checkout_items = []
