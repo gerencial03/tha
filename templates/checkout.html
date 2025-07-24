@@ -571,29 +571,40 @@ document.addEventListener('DOMContentLoaded', function() {
             // Clear existing products and rebuild from backend data
             productsSummaryDiv.innerHTML = '';
             
-            checkoutItems.forEach((item, index) => {
-                console.log(`Adicionando produto ${index + 1}:`, item.product.name, `(${item.quantity}x)`);
-                
-                // Add product to summary
-                const productHtml = `
-                    <div class="mb-2 p-2 product-summary-item" style="background-color: #f8f9fa; border-radius: 5px; border: 1px solid #dee2e6; position: relative;" data-product-id="${item.product.id}">
-                        <button class="btn-remove-product" onclick="removeProductFromSummary('${item.product.id}')" style="position: absolute; top: 5px; right: 5px; background: #dc3545; color: white; border: none; border-radius: 50%; width: 18px; height: 18px; font-size: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center;">×</button>
-                        <div class="d-flex align-items-center">
-                            <img src="${item.product.image_url}" alt="${item.product.name}" 
-                                 class="rounded me-2" style="width: 35px; height: 35px; object-fit: cover;">
-                            <div style="flex: 1;">
-                                <div style="font-size: 11px; font-weight: 600; color: #333; margin-bottom: 2px;">
-                                    ${item.product.name}
-                                </div>
-                                <div class="product-quantity-info" style="font-size: 9px; color: #666;">
-                                    Quantidade: ${item.quantity} × R$ ${item.product.price.toFixed(2).replace('.', ',')} = R$ ${item.subtotal.toFixed(2).replace('.', ',')}
+            if (checkoutItems.length === 0) {
+                // Show empty cart message
+                productsSummaryDiv.innerHTML = `
+                    <div class="text-center p-4" style="color: #666; font-style: italic;">
+                        <i class="fas fa-shopping-cart" style="font-size: 24px; color: #ccc; margin-bottom: 10px;"></i>
+                        <br>Carrinho vazio
+                        <br><small>Adicione produtos para continuar</small>
+                    </div>
+                `;
+            } else {
+                checkoutItems.forEach((item, index) => {
+                    console.log(`Adicionando produto ${index + 1}:`, item.product.name, `(${item.quantity}x)`);
+                    
+                    // Add product to summary
+                    const productHtml = `
+                        <div class="mb-2 p-2 product-summary-item" style="background-color: #f8f9fa; border-radius: 5px; border: 1px solid #dee2e6; position: relative;" data-product-id="${item.product.id}">
+                            <button class="btn-remove-product" onclick="removeProductFromSummary('${item.product.id}')" style="position: absolute; top: 5px; right: 5px; background: #dc3545; color: white; border: none; border-radius: 50%; width: 18px; height: 18px; font-size: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center;" title="Remover este produto">×</button>
+                            <div class="d-flex align-items-center">
+                                <img src="${item.product.image_url}" alt="${item.product.name}" 
+                                     class="rounded me-2" style="width: 35px; height: 35px; object-fit: cover;">
+                                <div style="flex: 1;">
+                                    <div style="font-size: 11px; font-weight: 600; color: #333; margin-bottom: 2px;">
+                                        ${item.product.name}
+                                    </div>
+                                    <div class="product-quantity-info" style="font-size: 9px; color: #666;">
+                                        Quantidade: ${item.quantity} × R$ ${item.product.price.toFixed(2).replace('.', ',')} = R$ ${item.subtotal.toFixed(2).replace('.', ',')}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                `;
-                productsSummaryDiv.innerHTML += productHtml;
-            });
+                    `;
+                    productsSummaryDiv.innerHTML += productHtml;
+                });
+            }
             console.log('=== FIM: Resumo reconstruído com', checkoutItems.length, 'produtos ===');
         } else {
             console.error('ERRO: Elemento payment-products-summary não encontrado!');
@@ -715,6 +726,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Function to remove product from summary
     window.removeProductFromSummary = function(productId) {
+        // Get product name for better feedback
+        const productElement = document.querySelector(`[data-product-id="${productId}"]`);
+        const productName = productElement ? productElement.querySelector('.product-summary-item div div div').textContent : 'Produto';
+        
         fetch(`/remove_from_checkout_ajax/${productId}`, {
             method: 'POST',
             headers: {
@@ -724,16 +739,30 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
+                console.log('Produto removido:', productId);
+                console.log('Produtos restantes:', data.checkout_items.length);
+                
                 // Update the selected products section
                 updateSelectedProducts(data.checkout_items);
                 // Update payment summary
                 updatePaymentSummary(data.total_value, data.checkout_items);
-                // Show success message
-                showSuccessMessage('Produto removido!');
+                
+                // Show appropriate message
+                if (data.checkout_items.length === 0) {
+                    showSuccessMessage('Carrinho vazio! Adicione produtos para continuar.');
+                    // Hide payment form when cart is empty
+                    const paymentForm = document.querySelector('form[action="/process_pix_payment"]');
+                    if (paymentForm) {
+                        paymentForm.style.display = 'none';
+                    }
+                } else {
+                    showSuccessMessage(`${productName.split(':')[0]} removido do carrinho!`);
+                }
             }
         })
         .catch(error => {
             console.error('Erro ao remover produto:', error);
+            showSuccessMessage('Erro ao remover produto. Tente novamente.');
         });
     };
 
