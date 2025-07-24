@@ -72,5 +72,62 @@ def notify_when_available(product_id):
     flash('Você será notificado quando o produto estiver disponível!', 'info')
     return redirect(url_for('index'))
 
+@app.route('/produto/<product_id>')
+def product_detail(product_id):
+    products_data = load_products()
+    all_products = products_data.get('linha_toque_essencial', []) + products_data.get('queridinhos', [])
+    
+    # Find product by ID
+    product = next((p for p in all_products if p['id'] == product_id), None)
+    
+    if not product:
+        flash('Produto não encontrado!', 'error')
+        return redirect(url_for('index'))
+    
+    # Get similar products (same category)
+    similar_products = []
+    if product_id in [p['id'] for p in products_data.get('linha_toque_essencial', [])]:
+        similar_products = [p for p in products_data.get('linha_toque_essencial', []) if p['id'] != product_id][:4]
+    else:
+        similar_products = [p for p in products_data.get('queridinhos', []) if p['id'] != product_id][:4]
+    
+    # Mock reviews for demonstration
+    reviews = [
+        {
+            "name": "Mariana Carvalho",
+            "date": "23/07/2025",
+            "rating": 5,
+            "text": "O cheiro é bem doce de jeito que adoro, o body splash tem vários brilhos e fica lindo na pele, e ainda chegou antes do prazo estava previsto para o dia 05/08 e chegou dia 23/07 ❤️",
+            "image": "https://cdn.pixabay.com/photo/2020/05/18/16/17/cosmetics-5187421_1280.jpg"
+        },
+        {
+            "name": "Olga",
+            "date": "22/07/2025", 
+            "rating": 5,
+            "text": "Muito bom",
+            "image": None
+        },
+        {
+            "name": "Jasmin",
+            "date": "23/07/2025",
+            "rating": 5,
+            "text": "Amei o cheiro e do jeitinho gosto amei super",
+            "image": None
+        },
+        {
+            "name": "Ana",
+            "date": "23/07/2025",
+            "rating": 5,
+            "text": "Amei, fragrância não é enjoativa uma delícia. Chegou 2 semanas do previsto.",
+            "image": None
+        }
+    ]
+    
+    return render_template('product_detail.html', 
+                         product=product,
+                         similar_products=similar_products,
+                         reviews=reviews,
+                         cart_count=len(session.get('cart', {})))
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Product Detail Page -->
+<div class="product-detail-page">
+    <!-- Breadcrumb -->
+    <div class="container mt-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Início</a></li>
+                <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Perfumaria</a></li>
+                <li class="breadcrumb-item active">{{ product.name }}</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Main Product Section -->
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Product Image -->
+            <div class="col-md-6 mb-4">
+                <div class="product-image-container">
+                    <img src="{{ product.image_url }}" alt="{{ product.name }}" class="img-fluid product-main-image">
+                </div>
+            </div>
+
+            <!-- Product Info -->
+            <div class="col-md-6">
+                <div class="product-info-section">
+                    <!-- Product Title -->
+                    <h1 class="product-title">{{ product.name }}</h1>
+
+                    <!-- Rating -->
+                    <div class="product-rating mb-3">
+                        {% for i in range(5) %}
+                            <i class="fas fa-star {{ 'text-warning' if i < product.rating else 'text-muted' }}"></i>
+                        {% endfor %}
+                        <span class="ms-2">{{ reviews|length }} avaliações</span>
+                    </div>
+
+                    <!-- Price -->
+                    <div class="product-price mb-4">
+                        <div class="current-price h2 text-success">R${{ "%.2f"|format(product.price) }}</div>
+                        {% if product.original_price %}
+                            <div class="price-details">
+                                <span class="discount-badge bg-success text-white px-2 py-1 rounded">-{{ product.discount }}% OFF</span>
+                                <div class="original-price text-muted text-decoration-line-through">R${{ "%.2f"|format(product.original_price) }}</div>
+                            </div>
+                        {% endif %}
+                        
+                        <!-- Installments -->
+                        <div class="installments mt-2">
+                            <small class="text-muted">12x de R${{ "%.2f"|format(product.price / 12) }}</small>
+                            <div><small class="text-primary">💳 Ver mais detalhes</small></div>
+                        </div>
+                    </div>
+
+                    <!-- Quantity and Buy Button -->
+                    <div class="purchase-section mb-4">
+                        <div class="row align-items-center">
+                            <div class="col-4">
+                                <div class="quantity-selector d-flex align-items-center border rounded">
+                                    <button class="btn btn-sm" type="button">-</button>
+                                    <input type="number" class="form-control text-center border-0" value="1" min="1">
+                                    <button class="btn btn-sm" type="button">+</button>
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-warning w-100 btn-lg" style="background-color: #e67e22; border-color: #e67e22;">
+                                    Comprar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shipping Calculator -->
+                    <div class="shipping-section mb-4">
+                        <h6>📦 Meios de envio <i class="fas fa-plus float-end"></i></h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Description -->
+    <div class="container mt-5">
+        <div class="product-description">
+            <h3>Descrição</h3>
+            <div class="description-content">
+                <p>O <strong>{{ product.name.split(':')[0] if ':' in product.name else product.name }}</strong> é como um carinho em forma de fragrância. Inspirado na leveza das nuvens e na doçura do algodão doce, ele transforma a sua rotina de autocuidado em um momento suave, doce e cheio de afeto.</p>
+                
+                <p>Com uma fragrância delicadamente envolvente, esse duo une a hidratação que sua pele merece com um perfume leve, alegre e marcante na medida certa.</p>
+                
+                <h5>Você vai amar porque:</h5>
+                <ul>
+                    <li>Tem aquele cheirinho doce, leve e encantador que te faz se sentir abraçada.</li>
+                    <li>Hidrata e perfuma ao mesmo tempo, deixando a pele macia e cheirosa o dia todo.</li>
+                    <li>É perfeito para quem ama fragrâncias delicadas, femininas e com um toque de nostalgia.</li>
+                </ul>
+
+                <h5>O Kit Contém:</h5>
+                <p><strong>Céu de Algodão – Loção Hidratante 200ml:</strong> Textura leve, hidratação suave e perfume que permanece.</p>
+                <p><strong>Céu de Algodão – Body Splash 200ml:</strong> Fragrância adocicada e delicada para te acompanhar em todos os momentos.</p>
+
+                <h5>Pirâmide Olfativa – Céu de Algodão</h5>
+                <p><strong>Saída:</strong> Acorde Algodão Doce, Limão, Mandarina</p>
+                <p><strong>Corpo:</strong> Jasmim, Fava Tonka, Anis</p>
+                <p><strong>Fundo:</strong> Musk, Vanilla, Caramelo</p>
+
+                <p><strong>Precauções:</strong><br>
+                Evite contato com os olhos.<br>
+                Mantenha fora do alcance de crianças e animais.<br>
+                Em caso de irritação, suspenda o uso e consulte um médico.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <div class="container mt-5">
+        <div class="reviews-section">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3>⭐ Avaliar</h3>
+                <div>
+                    <span class="fw-bold">Avaliações</span>
+                    <span class="badge bg-secondary">{{ reviews|length }}</span>
+                </div>
+            </div>
+
+            <!-- Reviews List -->
+            <div class="reviews-list">
+                {% for review in reviews %}
+                <div class="review-item border rounded p-3 mb-3">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="review-stars">
+                            {% for i in range(5) %}
+                                <i class="fas fa-star text-warning"></i>
+                            {% endfor %}
+                        </div>
+                        <span class="review-date text-muted">{{ review.date }}</span>
+                    </div>
+                    
+                    <p class="review-text mt-2">{{ review.text }}</p>
+                    
+                    {% if review.image %}
+                    <div class="review-image mb-2">
+                        <img src="{{ review.image }}" alt="Foto da avaliação" class="img-thumbnail" style="max-width: 150px;">
+                    </div>
+                    {% endif %}
+                    
+                    <div class="reviewer-name text-end">
+                        <strong>{{ review.name }}</strong>
+                    </div>
+                </div>
+                {% endfor %}
+                
+                <!-- Ver mais button -->
+                <div class="text-center mt-4">
+                    <button class="btn btn-outline-secondary">Ver mais</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Similar Products -->
+    {% if similar_products %}
+    <div class="container mt-5">
+        <h3 class="mb-4">Produtos similares</h3>
+        <div class="row">
+            {% for product in similar_products %}
+            <div class="col-6 col-md-3 mb-4">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="{{ product.image_url }}" alt="{{ product.name }}" class="img-fluid">
+                    </div>
+                    <div class="product-info p-3">
+                        <h6 class="product-name">{{ product.name }}</h6>
+                        <div class="product-price">
+                            <span class="current-price fw-bold">R${{ "%.2f"|format(product.price) }}</span>
+                            {% if product.original_price %}
+                                <div class="price-discount">
+                                    <span class="discount-badge">-{{ product.discount }}% OFF</span>
+                                    <span class="original-price text-muted text-decoration-line-through">R${{ "%.2f"|format(product.original_price) }}</span>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn btn-warning btn-sm w-100 mt-2" style="background-color: #e67e22; border-color: #e67e22;">
+                            Comprar
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}
