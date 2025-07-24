@@ -61,9 +61,10 @@
                         <div class="row align-items-center">
                             <div class="col-4">
                                 <div class="quantity-selector d-flex align-items-center border rounded">
-                                    <button class="btn btn-sm quantity-decrease" type="button">-</button>
-                                    <input type="number" class="form-control text-center border-0 quantity-input" value="1" min="1" data-price="{{ product.price }}">
-                                    <button class="btn btn-sm quantity-increase" type="button">+</button>
+                                    <button class="btn btn-sm quantity-decrease" type="button" style="border: none; background: none; color: #666; font-size: 18px; padding: 8px 12px;">-</button>
+                                    <div class="quantity-display text-center" style="min-width: 40px; font-weight: 600; font-size: 16px; color: #333;">1</div>
+                                    <input type="number" class="form-control text-center border-0 quantity-input" value="1" min="1" data-price="{{ product.price }}" style="display: none;">
+                                    <button class="btn btn-sm quantity-increase" type="button" style="border: none; background: none; color: #666; font-size: 16px; padding: 8px 12px;">+</button>
                                 </div>
                             </div>
                             <div class="col-8">
@@ -202,6 +203,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const quantityInput = document.querySelector('.quantity-input');
+    const quantityDisplay = document.querySelector('.quantity-display');
     const decreaseBtn = document.querySelector('.quantity-decrease');
     const increaseBtn = document.querySelector('.quantity-increase');
     const currentPriceEl = document.getElementById('current-price');
@@ -215,6 +217,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const quantity = parseInt(quantityInput.value) || 1;
         const totalPrice = basePrice * quantity;
         const totalOriginalPrice = baseOriginalPrice ? baseOriginalPrice * quantity : null;
+        
+        // Update quantity display
+        quantityDisplay.textContent = quantity;
         
         // Update current price
         currentPriceEl.textContent = `R$${totalPrice.toFixed(2).replace('.', ',')}`;
@@ -244,16 +249,6 @@ document.addEventListener('DOMContentLoaded', function() {
         let quantity = parseInt(quantityInput.value) || 1;
         quantity++;
         quantityInput.value = quantity;
-        updatePrice();
-    });
-    
-    // Handle direct input change
-    quantityInput.addEventListener('input', function() {
-        let quantity = parseInt(this.value) || 1;
-        if (quantity < 1) {
-            quantity = 1;
-            this.value = quantity;
-        }
         updatePrice();
     });
     
