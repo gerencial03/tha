@@ -1,7 +1,7 @@
 import os
 import json
 import requests
-from flask import Flask, render_template, request, session, redirect, url_for, flash, jsonify
+from flask import Flask, render_template, request, session, redirect, url_for, flash, jsonify, send_from_directory
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SESSION_SECRET", "tha-beauty-secret-key")
@@ -604,6 +604,11 @@ def payment_success(transaction_hash):
                              transaction_info=transaction_info)
     
     return redirect(url_for('index'))
+
+@app.route('/attached_assets/<filename>')
+def serve_attached_asset(filename):
+    """Serve attached assets files"""
+    return send_from_directory('attached_assets', filename)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
