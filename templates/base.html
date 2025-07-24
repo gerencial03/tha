@@ -38,65 +38,42 @@
     <!-- Header -->
     <header class="header">
         <div class="container-fluid px-3">
-            <div class="row align-items-center">
-                <!-- Menu Toggle (Mobile) -->
-                <div class="col-2 d-md-none">
-                    <button class="btn btn-link menu-toggle">
+            <!-- Main Header Row -->
+            <div class="row align-items-center py-2">
+                <!-- Menu Hambúrguer -->
+                <div class="col-2">
+                    <button class="btn btn-link menu-toggle p-0" style="color: white; font-size: 18px;">
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>
                 
-                <!-- Logo (Centered on Mobile) -->
-                <div class="col-8 col-md-6 text-center text-md-start">
+                <!-- Logo Centralizada -->
+                <div class="col-8 text-center">
                     <div class="logo">
-                        <h1><span class="logo-tha">tha</span><br><span class="logo-beauty">beauty</span></h1>
+                        <div style="color: white; font-weight: bold; font-size: 24px; line-height: 1;">
+                            <div>tha</div>
+                            <div style="font-size: 16px;">beauty</div>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Cart Icon (Mobile) -->
-                <div class="col-2 d-md-none text-end">
-                    <div class="cart-icon">
-                        <a href="#" class="cart-link">
+                <!-- Carrinho -->
+                <div class="col-2 text-end">
+                    <div class="cart-icon position-relative">
+                        <a href="#" class="cart-link" style="color: white; font-size: 20px; text-decoration: none;">
                             <i class="fas fa-shopping-cart"></i>
-                            {% if cart_count > 0 %}
-                            <span class="cart-count">{{ cart_count }}</span>
-                            {% endif %}
+                            <span class="cart-count-badge" style="position: absolute; top: -8px; right: -8px; background: white; color: #e67e22; border-radius: 50%; width: 18px; height: 18px; font-size: 12px; display: flex; align-items: center; justify-content: center; font-weight: bold;">0</span>
                         </a>
-                    </div>
-                </div>
-                
-                <!-- Desktop Actions -->
-                <div class="col-md-6 d-none d-md-block">
-                    <div class="header-actions">
-                        <!-- Search Bar -->
-                        <div class="search-container">
-                            <form action="{{ url_for('search') }}" method="GET" class="search-form">
-                                <input type="text" name="q" placeholder="Buscar..." class="search-input" value="{{ search_query or '' }}">
-                                <button type="submit" class="search-btn">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </form>
-                        </div>
-                        
-                        <!-- Cart -->
-                        <div class="cart-icon">
-                            <a href="#" class="cart-link">
-                                <i class="fas fa-shopping-cart"></i>
-                                {% if cart_count > 0 %}
-                                <span class="cart-count">{{ cart_count }}</span>
-                                {% endif %}
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Mobile Search Bar (Full Width) -->
-            <div class="row d-md-none mt-2">
+            <!-- Barra de Busca -->
+            <div class="row mb-2">
                 <div class="col-12">
-                    <form action="{{ url_for('search') }}" method="GET" class="search-form">
-                        <input type="text" name="q" placeholder="Buscar" class="search-input mobile-search" value="{{ search_query or '' }}">
-                        <button type="submit" class="search-btn">
+                    <form action="{{ url_for('search') }}" method="GET" class="search-form position-relative">
+                        <input type="text" name="q" placeholder="Buscar" class="form-control search-input" value="{{ search_query or '' }}" style="background: rgba(255,255,255,0.9); border: none; border-radius: 25px; padding: 10px 45px 10px 15px; font-size: 14px;">
+                        <button type="submit" class="search-btn" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #666;">
                             <i class="fas fa-search"></i>
                         </button>
                     </form>
@@ -104,6 +81,11 @@
             </div>
         </div>
     </header>
+    
+    <!-- Banner de Lançamento -->
+    <div class="launch-banner text-center" style="background-color: #f39c12; color: white; padding: 8px 0; font-size: 14px; font-weight: 500;">
+        Lançamento esfoliantes Toque Essencial!
+    </div>
 
     <!-- Flash Messages -->
     {% with messages = get_flashed_messages(with_categories=true) %}

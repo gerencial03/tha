@@ -56,21 +56,30 @@ body.cookie-notice-visible {
 
 /* Header */
 .header {
-    background-color: var(--primary-color);
+    background-color: #e67e22;
     color: white;
-    padding: 12px 0;
     position: sticky;
     top: 0;
     z-index: 999;
-    box-shadow: var(--shadow);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.logo h1 {
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 1.1;
-    margin: 0;
-    text-align: center;
+.menu-toggle {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.menu-toggle:hover {
+    color: rgba(255,255,255,0.8) !important;
+}
+
+.search-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.3);
+}
+
+.search-btn:hover {
+    color: #333 !important;
 }
 
 .logo-tha {
@@ -247,12 +256,12 @@ body.cookie-notice-visible {
 
 /* Launch Banner */
 .launch-banner {
-    background-color: var(--warning-color);
-    color: var(--text-dark);
-    padding: 15px 0;
+    background-color: #f39c12;
+    color: white;
+    padding: 8px 0;
     text-align: center;
-    font-weight: 600;
-    margin-bottom: 40px;
+    font-weight: 500;
+    font-size: 14px;
 }
 
 /* Product Sections */
