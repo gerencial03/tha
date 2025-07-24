@@ -378,6 +378,24 @@ body.cookie-notice-visible {
 
 
 
+/* Hero Banner Original */
+.hero-banner-original {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.banner-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.hero-banner-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
 /* Product Sections */
 .product-section {
     padding: 40px 0;
