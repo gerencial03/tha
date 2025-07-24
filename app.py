@@ -322,13 +322,15 @@ def process_pix_payment():
                 
                 # Processar resposta da API PayBets
                 if response_data.get("success"):
-                    qr_data = response_data.get("data", {}).get("qrCodeResponse", {})
+                    # A resposta da PayBets vem diretamente em 'data'
+                    qr_data = response_data.get("data", {})
+                    qr_code = qr_data.get("qrcode", "")
                     
                     transaction_result = {
                         'success': True,
                         'hash': qr_data.get("transactionId", external_id),
-                        'pix_qr_code': qr_data.get("qrcode", ""),
-                        'pix_copy_paste': qr_data.get("qrcode", ""),
+                        'pix_qr_code': qr_code,
+                        'pix_copy_paste': qr_code,
                         'qr_code_base64': '',
                         'status': 'pending',
                         'amount': pix_amount,
@@ -337,6 +339,8 @@ def process_pix_payment():
                         'customer': customer_data,
                         'paybets_data': response_data
                     }
+                    
+                    print(f"QR Code extraído: {qr_code[:50]}...")  # Log para debug
                     
                     print(f"PIX gerado com sucesso via PayBets!")
                     print(f"Transaction ID: {transaction_result['hash']}")
