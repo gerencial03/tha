@@ -1,0 +1,171 @@
+/* Botões Personalizados - Tha Beauty */
+
+/* Botão de Comprar Principal */
+.btn-comprar-melhorado {
+    background: linear-gradient(135deg, #e67e22 0%, #d35400 100%) !important;
+    color: white !important;
+    border: none !important;
+    padding: 12px 20px !important;
+    border-radius: 10px !important;
+    text-decoration: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    min-height: 44px !important;
+    width: 100% !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    cursor: pointer !important;
+}
+
+.btn-comprar-melhorado:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 16px rgba(230, 126, 34, 0.4) !important;
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.btn-comprar-melhorado:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 2px 8px rgba(230, 126, 34, 0.3) !important;
+}
+
+/* Botão de Finalizar Pagamento */
+.btn-finalizar-pagamento {
+    background: linear-gradient(135deg, #27ae60 0%, #229954 100%) !important;
+    color: white !important;
+    border: none !important;
+    padding: 16px 24px !important;
+    border-radius: 12px !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.8px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 6px 16px rgba(39, 174, 96, 0.3) !important;
+    width: 100% !important;
+    min-height: 52px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+}
+
+.btn-finalizar-pagamento:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 20px rgba(39, 174, 96, 0.4) !important;
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%) !important;
+}
+
+.btn-finalizar-pagamento:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3) !important;
+}
+
+/* Botão PIX Finalizar */
+.btn-pix-finalizar {
+    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%) !important;
+    color: white !important;
+    border: none !important;
+    padding: 16px 24px !important;
+    border-radius: 12px !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.8px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 6px 16px rgba(243, 156, 18, 0.3) !important;
+    width: 100% !important;
+    min-height: 52px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+}
+
+.btn-pix-finalizar:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 20px rgba(243, 156, 18, 0.4) !important;
+    background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%) !important;
+}
+
+.btn-pix-finalizar:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3) !important;
+}
+
+/* Botão de Copiar PIX */
+.btn-copiar-pix {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+    color: white !important;
+    border: none !important;
+    padding: 12px 16px !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 3px 8px rgba(52, 152, 219, 0.3) !important;
+    cursor: pointer !important;
+}
+
+.btn-copiar-pix:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 12px rgba(52, 152, 219, 0.4) !important;
+    background: linear-gradient(135deg, #5dade2 0%, #3498db 100%) !important;
+}
+
+/* Botão Secundário (Ver mais, etc) */
+.btn-secundario {
+    background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%) !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px 16px !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 3px 8px rgba(149, 165, 166, 0.3) !important;
+    cursor: pointer !important;
+}
+
+.btn-secundario:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 12px rgba(149, 165, 166, 0.4) !important;
+    color: white !important;
+}
+
+/* Botão de Adicionar ao Carrinho */
+.btn-add-carrinho {
+    background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%) !important;
+    color: white !important;
+    border: none !important;
+    padding: 14px 20px !important;
+    border-radius: 10px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 12px rgba(142, 68, 173, 0.3) !important;
+    width: 100% !important;
+    min-height: 48px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+}
+
+.btn-add-carrinho:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 16px rgba(142, 68, 173, 0.4) !important;
+    background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%) !important;
+}
+
+/* Remover estilos antigos conflitantes */
+.btn-comprar {
+    all: unset !important;
+}

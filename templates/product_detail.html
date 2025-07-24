@@ -67,8 +67,8 @@
                                 </div>
                             </div>
                             <div class="col-8">
-                                <button class="btn btn-warning w-100 btn-lg" style="background-color: #e67e22; border-color: #e67e22;" onclick="buyProduct()">
-                                    Comprar
+                                <button class="btn-finalizar-pagamento" onclick="buyProduct()">
+                                    🛒 Comprar Agora
                                 </button>
                             </div>
                         </div>
@@ -156,7 +156,7 @@
                 
                 <!-- Ver mais button -->
                 <div class="text-center mt-4">
-                    <button class="btn btn-outline-secondary">Ver mais</button>
+                    <button class="btn-secundario">Ver mais avaliações</button>
                 </div>
             </div>
         </div>
@@ -184,8 +184,8 @@
                                 </div>
                             {% endif %}
                         </div>
-                        <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn btn-warning btn-sm w-100 mt-2" style="background-color: #e67e22; border-color: #e67e22;">
-                            Comprar
+                        <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn-comprar-melhorado mt-2">
+                            🛒 Comprar Agora
                         </a>
                     </div>
                 </div>
