@@ -18,7 +18,7 @@
     <!-- Product Title - Large and Above Image -->
     <div class="container mt-4">
         <div class="text-center mb-4">
-            <h1 class="product-title-large" style="font-size: 2.5rem; font-weight: bold; color: #333; line-height: 1.2;">{{ product.name }}</h1>
+            <h1 class="product-title-large" style="font-size: 1.8rem; font-weight: bold; color: #333; line-height: 1.2;">{{ product.name }}</h1>
         </div>
     </div>
 
@@ -28,7 +28,7 @@
             <!-- Product Image -->
             <div class="col-md-6 mb-4">
                 <div class="product-image-container">
-                    <img src="{{ product.image_url }}" alt="{{ product.name }}" class="img-fluid product-main-image">
+                    <img src="{{ product.image_url }}" alt="{{ product.name }}" class="img-fluid product-main-image" style="max-height: 300px; object-fit: cover; width: 100%;">
                 </div>
             </div>
 
@@ -46,11 +46,11 @@
 
                     <!-- Price -->
                     <div class="product-price mb-4">
-                        <div class="current-price text-success" id="current-price" style="font-size: 3rem; font-weight: bold;">R${{ "%.2f"|format(product.price) }}</div>
+                        <div class="current-price text-success" id="current-price" style="font-size: 2.2rem; font-weight: bold;">R${{ "%.2f"|format(product.price) }}</div>
                         {% if product.original_price %}
                             <div class="price-details">
                                 <span class="discount-badge bg-success text-white px-2 py-1 rounded">-{{ product.discount }}% OFF</span>
-                                <div class="original-price text-muted text-decoration-line-through" id="original-price" style="font-size: 1.5rem;">R${{ "%.2f"|format(product.original_price) }}</div>
+                                <div class="original-price text-muted text-decoration-line-through" id="original-price" style="font-size: 1.2rem;">R${{ "%.2f"|format(product.original_price) }}</div>
                             </div>
                         {% endif %}
                     </div>
