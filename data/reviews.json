@@ -1,5 +1,5 @@
 {
-  "labubu-rosa-classico": [
+  "labubu-rosa": [
     {
       "id": 1,
       "customer_name": "Marina Silva",
@@ -25,12 +25,12 @@
       "verified_purchase": true
     }
   ],
-  "labubu-azul-classico": [
+  "labubu-verde": [
     {
       "id": 4,
       "customer_name": "Felipe Santos",
       "rating": 5,
-      "comment": "O Labubu azul é lindo demais! Cor vibrante, acabamento perfeito. Chegou super bem embalado. Vendedor confiável!",
+      "comment": "O Labubu verde é lindo demais! Cor única e vibrante, acabamento perfeito. Chegou super bem embalado. Vendedor confiável!",
       "date": "2025-07-19",
       "verified_purchase": true
     },
@@ -38,12 +38,12 @@
       "id": 5,
       "customer_name": "Ana Paula",
       "rating": 5,
-      "comment": "Minha coleção de Labubu está crescendo! Este azul é especial, a cor é linda e o material é muito macio. Adorei!",
+      "comment": "Minha coleção de Labubu está crescendo! Este verde é especial, a cor é linda e o material é muito macio. Adorei!",
       "date": "2025-07-17",
       "verified_purchase": true
     }
   ],
-  "labubu-coca-cola-raro": [
+  "labubu-coca-cola-rarissimo": [
     {
       "id": 6,
       "customer_name": "Ricardo Oliveira",
@@ -61,17 +61,17 @@
       "verified_purchase": true
     }
   ],
-  "roupinha-labubu-prada": [
+  "labubu-lacinhos-rosa": [
     {
       "id": 8,
       "customer_name": "Camila Rodrigues",
       "rating": 5,
-      "comment": "A roupinha Prada deixou meu Labubu ainda mais estiloso! Qualidade premium, costura perfeita. Meu boneco virou um fashionista!",
+      "comment": "O Labubu com lacinhos é o mais kawaii de todos! Minha parte favorita da coleção. Super delicado e bem feito!",
       "date": "2025-07-16",
       "verified_purchase": true
     }
   ],
-  "labubu-one-piece-luffy": [
+  "labubu-one-piece-luffy-nika": [
     {
       "id": 9,
       "customer_name": "Gabriel Lima",
@@ -89,23 +89,33 @@
       "verified_purchase": true
     }
   ],
-  "stitch-plush-sortido": [
+  "cry-baby-coelhinho-meninas-super-poderosas": [
     {
       "id": 11,
       "customer_name": "Isabella Martins",
       "rating": 5,
-      "comment": "Recebi o Stitch pizza e é o mais fofo do mundo! Disney sempre com qualidade incrível. Muito satisfeita com a compra!",
+      "comment": "Cry Baby das Meninas Super Poderosas é muito fofo! Nostalgia total, lembrei da minha infância. Qualidade excelente!",
       "date": "2025-07-19",
       "verified_purchase": true
     }
   ],
-  "labubu-lacinhos-rosa": [
+  "labubu-marrom-claro": [
     {
       "id": 12,
       "customer_name": "Sofia Barbosa",
       "rating": 5,
-      "comment": "O Labubu com lacinhos é o mais kawaii de todos! Minha parte favorita da coleção. Super delicado e bem feito!",
+      "comment": "Labubu marrom claro é elegante e diferente! Cor linda que combina com tudo. Muito satisfeita com a qualidade!",
       "date": "2025-07-18",
+      "verified_purchase": true
+    }
+  ],
+  "labubu-halloween-rarissimo": [
+    {
+      "id": 13,
+      "customer_name": "Rafael Costa",
+      "rating": 5,
+      "comment": "Edição Halloween é demais! O Labubu com a abóbora é muito criativo. Peça rara que vale muito a pena ter!",
+      "date": "2025-07-16",
       "verified_purchase": true
     }
   ]

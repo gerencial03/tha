@@ -92,6 +92,17 @@ Preferred communication style: Simple, everyday language.
 - **WSGI Server**: Replace development server with Gunicorn or uWSGI
 
 ### Recent Changes (July 2025)
+- **Complete Store Transformation to Labubu**: Full conversion from beauty products to authentic Labubu collectibles
+  - 8 authentic products based on labubu.com.br official store
+  - Real pricing: R$ 249.90-599.90 matching Brazilian market
+  - Authentic product names: Rosa, Verde, Marrom Claro, Halloween, Coca-Cola, One Piece Luffy Nika, etc.
+  - Removed broken placeholder images, using Shopify CDN structure
+  - New kawaii banner with colorful gradient replacing beauty theme
+  - Updated all product categories to "Coleção Labubu Oficial" and "Acessórios Kawaii Labubu"
+  - Created Labubu-specific customer reviews and testimonials
+  - Changed store branding to "Labubu Brasil - Colecionáveis Kawaii Oficiais"
+
+### Previous Changes
 - **PIX Payment Integration**: Complete implementation with PayBets gateway
   - Real PIX QR Code generation via PayBets API
   - Copy and paste PIX code functionality
