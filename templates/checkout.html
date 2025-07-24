@@ -833,7 +833,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         document.getElementById('payment-success').style.display = 'block';
                         
                         // Don't redirect automatically - let user stay on the page
-                        console.log('Pagamento aprovado com sucesso!');
+                        console.log('PIX processado com sucesso');
                     } else if (result.status === 'cancelled' || result.status === 'expired') {
                         // Payment failed
                         clearInterval(statusInterval);

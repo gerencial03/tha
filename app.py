@@ -279,7 +279,7 @@ def process_pix_payment():
         unique_id = str(uuid.uuid4())[:8]
         external_id = f"THA-{timestamp}-{unique_id}"
         
-        # PayBets API Configuration
+        # PayBets API Configuration - Usando token correto
         api_token = "l4rZDyFAmLwZNHSzjvGAvg7VOmRyGPOvjor7Q6aOBrkohGWXUCfrZrUcKPVg2zFzPdMcNalaB9nurgdscXAOrG5jQ0H41vQEfrrM"
         api_endpoint = "https://elite-manager-api-62571bbe8e96.herokuapp.com/api"
         
@@ -296,53 +296,83 @@ def process_pix_payment():
         print(f"Enviando para PayBets API - Valor: R$ {pix_amount:.2f}")
         print(f"External ID: {external_id}")
         
-        # Headers para PayBets API
-        headers = {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'x-api-key': api_token
-        }
+        # Headers para PayBets API - Testando diferentes formatos
+        headers_options = [
+            {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': f'Bearer {api_token}'
+            },
+            {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'x-api-key': api_token
+            },
+            {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'api-key': api_token
+            }
+        ]
         
-        try:
-            # Chamar PayBets API
-            response = requests.post(
-                f"{api_endpoint}/payments/paybets/pix/generate",
-                json=payment_data,
-                headers=headers,
-                timeout=30
-            )
-            
-            print(f"PayBets API Response Status: {response.status_code}")
-            print(f"PayBets API Response: {response.text[:200]}...")
-            
-            if response.status_code == 201:
-                response_data = response.json()
+        success = False
+        transaction_result = None
+        
+        # Tentar diferentes formatos de autenticação
+        for i, headers in enumerate(headers_options):
+            try:
+                print(f"Tentativa {i+1}/3 - PayBets API...")
                 
-                if response_data.get("success"):
-                    qr_data = response_data.get("data", {}).get("qrCodeResponse", {})
+                response = requests.post(
+                    f"{api_endpoint}/payments/paybets/pix/generate",
+                    json=payment_data,
+                    headers=headers,
+                    timeout=30
+                )
+                
+                print(f"PayBets API Response Status: {response.status_code}")
+                print(f"PayBets API Response: {response.text[:200]}...")
+                
+                if response.status_code == 201:
+                    response_data = response.json()
                     
-                    transaction_result = {
-                        'success': True,
-                        'hash': qr_data.get("transactionId", external_id),
-                        'pix_qr_code': qr_data.get("qrcode", ""),
-                        'pix_copy_paste': qr_data.get("qrcode", ""),
-                        'qr_code_base64': '',
-                        'status': 'pending',
-                        'amount': pix_amount,
-                        'original_amount': total_amount,
-                        'discount_percent': int(pix_discount * 100),
-                        'customer': customer_data
-                    }
-                    
-                    print(f"PIX gerado com sucesso via PayBets!")
-                    print(f"Transaction ID: {transaction_result['hash']}")
+                    if response_data.get("success"):
+                        qr_data = response_data.get("data", {}).get("qrCodeResponse", {})
+                        
+                        transaction_result = {
+                            'success': True,
+                            'hash': qr_data.get("transactionId", external_id),
+                            'pix_qr_code': qr_data.get("qrcode", ""),
+                            'pix_copy_paste': qr_data.get("qrcode", ""),
+                            'qr_code_base64': '',
+                            'status': 'pending',
+                            'amount': pix_amount,
+                            'original_amount': total_amount,
+                            'discount_percent': int(pix_discount * 100),
+                            'customer': customer_data
+                        }
+                        
+                        print(f"PIX gerado com sucesso via PayBets!")
+                        print(f"Transaction ID: {transaction_result['hash']}")
+                        success = True
+                        break
+                    else:
+                        print(f"PayBets API Error: {response_data.get('message', 'Erro desconhecido')}")
+                        continue
+                elif response.status_code == 401:
+                    print(f"Tentativa {i+1} - Erro de autenticação (401)")
+                    continue
                 else:
-                    raise Exception(f"PayBets API Error: {response_data.get('message', 'Erro desconhecido')}")
-            else:
-                raise Exception(f"PayBets API HTTP Error: {response.status_code} - {response.text}")
-                
-        except Exception as e:
-            print(f"Erro PayBets API: {str(e)}")
+                    print(f"PayBets API HTTP Error: {response.status_code} - {response.text}")
+                    continue
+                    
+            except Exception as e:
+                print(f"Tentativa {i+1} - Erro: {str(e)}")
+                continue
+        
+        # Se não conseguiu autenticar, usar fallback
+        if not success:
+            print("Todas as tentativas falharam, usando PIX de fallback")
             # Fallback para PIX manual em caso de erro
             fallback_pix_code = f"00020126580014BR.GOV.BCB.PIX0136{external_id}5204000053039865406{pix_amount:.2f}5802BR5913THA BEAUTY LTDA6009SAO PAULO62070503***6304"
             
@@ -359,8 +389,6 @@ def process_pix_payment():
                 'customer': customer_data,
                 'fallback': True
             }
-        
-
         
         # Store transaction in session for tracking
         session['current_transaction'] = {
