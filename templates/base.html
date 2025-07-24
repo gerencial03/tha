@@ -35,9 +35,9 @@
         </div>
     </div>
 
-    <!-- Free Shipping Banner -->
-    <div class="free-shipping-banner text-center py-2" style="background-color: #e67e22; color: white; font-weight: 500;">
-        🚚 Frete grátis a partir de R$ 100
+    <!-- Rotating Banner -->
+    <div class="rotating-banner text-center py-2" style="background-color: #e67e22; color: white; font-weight: 500;">
+        <div id="banner-message">🚚 Frete grátis a partir de R$ 100</div>
     </div>
 
     <!-- Header -->
@@ -256,6 +256,43 @@
     
     <!-- Custom JS -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    
+    <!-- Rotating Banner Script -->
+    <script>
+        // Rotating Banner Messages
+        const bannerMessages = [
+            '🚚 Frete grátis a partir de R$ 100',
+            '🏖️ Promoção de férias'
+        ];
+        
+        let currentMessageIndex = 0;
+        
+        function rotateBannerMessage() {
+            const bannerElement = document.getElementById('banner-message');
+            if (bannerElement) {
+                // Fade out effect
+                bannerElement.style.opacity = '0';
+                
+                setTimeout(() => {
+                    // Change message
+                    currentMessageIndex = (currentMessageIndex + 1) % bannerMessages.length;
+                    bannerElement.textContent = bannerMessages[currentMessageIndex];
+                    
+                    // Fade in effect
+                    bannerElement.style.opacity = '1';
+                }, 300);
+            }
+        }
+        
+        // Start rotation after page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const bannerElement = document.getElementById('banner-message');
+            if (bannerElement) {
+                bannerElement.style.transition = 'opacity 0.3s ease-in-out';
+                setInterval(rotateBannerMessage, 5000); // Change every 5 seconds
+            }
+        });
+    </script>
     
     <!-- Page specific scripts -->
     {% block scripts %}{% endblock %}
