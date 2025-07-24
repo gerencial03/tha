@@ -361,23 +361,16 @@
                     <div id="selected-products">
                         {% for item in checkout_items %}
                         <div class="row align-items-center mb-3 pb-3 {% if not loop.last %}border-bottom{% endif %}" data-product-id="{{ item.product.id }}">
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <img src="{{ item.product.image_url }}" alt="{{ item.product.name }}" class="img-fluid rounded">
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-9">
                                 <h6>{{ item.product.name }}</h6>
                                 <div class="d-flex align-items-center">
                                     <span class="text-muted me-2">Quantidade:</span>
                                     <span class="badge bg-primary fs-6">{{ item.quantity }}x</span>
                                 </div>
-                            </div>
-                            <div class="col-md-2 text-center">
-                                <div class="fw-bold">R${{ "%.2f"|format(item.product.price) }}</div>
-                                <small class="text-muted">por unidade</small>
-                            </div>
-                            <div class="col-md-2 text-end">
-                                <div class="fw-bold text-success h5 mb-0">R${{ "%.2f"|format(item.subtotal) }}</div>
-                                <small class="text-muted">total</small>
+                                <small class="text-muted">{{ item.product.description }}</small>
                             </div>
                         </div>
                         {% endfor %}
@@ -508,23 +501,16 @@ document.addEventListener('DOMContentLoaded', function() {
         checkoutItems.forEach((item, index) => {
             const productHtml = `
                 <div class="row align-items-center mb-3 pb-3 ${index < checkoutItems.length - 1 ? 'border-bottom' : ''}" data-product-id="${item.product.id}">
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <img src="${item.product.image_url}" alt="${item.product.name}" class="img-fluid rounded">
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-9">
                         <h6>${item.product.name}</h6>
                         <div class="d-flex align-items-center">
                             <span class="text-muted me-2">Quantidade:</span>
                             <span class="badge bg-primary fs-6">${item.quantity}x</span>
                         </div>
-                    </div>
-                    <div class="col-md-2 text-center">
-                        <div class="fw-bold">R$${item.product.price.toFixed(2).replace('.', ',')}</div>
-                        <small class="text-muted">por unidade</small>
-                    </div>
-                    <div class="col-md-2 text-end">
-                        <div class="fw-bold text-success h5 mb-0">R$${item.subtotal.toFixed(2).replace('.', ',')}</div>
-                        <small class="text-muted">total</small>
+                        <small class="text-muted">${item.product.description}</small>
                     </div>
                 </div>
             `;
@@ -538,27 +524,29 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Update products info in payment summary
         const productsSummaryDiv = document.querySelector('.payment-summary .mb-3');
-        productsSummaryDiv.innerHTML = '';
-        
-        checkoutItems.forEach(item => {
-            const productHtml = `
-                <div class="mb-2 p-2" style="background-color: #f8f9fa; border-radius: 5px; border: 1px solid #dee2e6;">
-                    <div class="d-flex align-items-center">
-                        <img src="${item.product.image_url}" alt="${item.product.name}" 
-                             class="rounded me-2" style="width: 35px; height: 35px; object-fit: cover;">
-                        <div style="flex: 1;">
-                            <div style="font-size: 11px; font-weight: 600; color: #333; margin-bottom: 2px;">
-                                ${item.product.name}
-                            </div>
-                            <div style="font-size: 9px; color: #666;">
-                                Quantidade: ${item.quantity} × R$ ${item.product.price.toFixed(2).replace('.', ',')}
+        if (productsSummaryDiv) {
+            productsSummaryDiv.innerHTML = '';
+            
+            checkoutItems.forEach(item => {
+                const productHtml = `
+                    <div class="mb-2 p-2" style="background-color: #f8f9fa; border-radius: 5px; border: 1px solid #dee2e6;">
+                        <div class="d-flex align-items-center">
+                            <img src="${item.product.image_url}" alt="${item.product.name}" 
+                                 class="rounded me-2" style="width: 35px; height: 35px; object-fit: cover;">
+                            <div style="flex: 1;">
+                                <div style="font-size: 11px; font-weight: 600; color: #333; margin-bottom: 2px;">
+                                    ${item.product.name}
+                                </div>
+                                <div style="font-size: 9px; color: #666;">
+                                    Quantidade: ${item.quantity} × R$ ${item.product.price.toFixed(2).replace('.', ',')} = R$ ${item.subtotal.toFixed(2).replace('.', ',')}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            `;
-            productsSummaryDiv.innerHTML += productHtml;
-        });
+                `;
+                productsSummaryDiv.innerHTML += productHtml;
+            });
+        }
         
         // Calculate totals
         const shippingCost = totalValue >= 100 ? 0 : 11.90;
@@ -573,6 +561,12 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Update PIX total
         document.getElementById('pix-total').textContent = `R$ ${pixTotal.toFixed(2).replace('.', ',')}`;
+        
+        // Update finalize button
+        const finalizeButton = document.querySelector('.btn-warning');
+        if (finalizeButton) {
+            finalizeButton.innerHTML = `🔒 Finalizar Compra via PIX - R$ ${pixTotal.toFixed(2).replace('.', ',')}`;
+        }
     }
     
     function showSuccessMessage(message) {
