@@ -468,6 +468,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Function to add product to checkout
     window.addProductToCheckout = function(productId) {
+        console.log('Adicionando produto:', productId);
+        
         // Send AJAX request to add product and update page dynamically
         fetch(`/add_to_checkout_ajax/${productId}`, {
             method: 'POST',
@@ -475,8 +477,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 'Content-Type': 'application/json',
             }
         })
-        .then(response => response.json())
+        .then(response => {
+            console.log('Resposta recebida:', response.status);
+            return response.json();
+        })
         .then(data => {
+            console.log('Dados recebidos:', data);
             if (data.success) {
                 // Update the selected products section
                 updateSelectedProducts(data.checkout_items);
@@ -484,10 +490,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 updatePaymentSummary(data.total_value, data.checkout_items);
                 // Show success message
                 showSuccessMessage('Produto adicionado com sucesso!');
+            } else {
+                console.error('Erro na resposta:', data);
             }
         })
         .catch(error => {
             console.error('Erro ao adicionar produto:', error);
+            // Fallback: redirect to old method
+            window.location.href = `/add_to_checkout/${productId}`;
         });
     };
     
