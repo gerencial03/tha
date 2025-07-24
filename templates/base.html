@@ -390,44 +390,7 @@
             .catch(error => console.error('Erro ao remover item:', error));
         }
         
-        // Add to cart function (global)
-        window.addToCart = function(productId, quantity = 1) {
-            fetch(`/add_to_cart_ajax/${productId}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ quantity: quantity })
-            })
-            .then(response => response.json())
-            .then(data => {
-                updateCartDisplay(data);
-                // Show success message
-                const toast = document.createElement('div');
-                toast.className = 'toast align-items-center text-white bg-success border-0 position-fixed';
-                toast.style.cssText = 'top: 20px; right: 20px; z-index: 9999;';
-                toast.innerHTML = `
-                    <div class="d-flex">
-                        <div class="toast-body">
-                            Produto adicionado ao carrinho!
-                        </div>
-                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-                    </div>
-                `;
-                document.body.appendChild(toast);
-                const bsToast = new bootstrap.Toast(toast);
-                bsToast.show();
-                setTimeout(() => toast.remove(), 3000);
-            })
-            .catch(error => console.error('Erro ao adicionar ao carrinho:', error));
-        };
-        
-        // Add to cart from product detail page with quantity
-        window.addToCartFromDetail = function(productId) {
-            const quantityInput = document.querySelector('.quantity-input');
-            const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
-            addToCart(productId, quantity);
-        };
+
     });
     </script>
     
