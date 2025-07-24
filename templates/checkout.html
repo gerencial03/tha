@@ -24,32 +24,67 @@
                         <h5 class="mb-0">🛒 Resumo do Pedido</h5>
                     </div>
                     <div class="card-body">
-                        <div class="row align-items-center">
-                            <div class="col-md-2">
-                                <img src="{{ product.image_url }}" alt="{{ product.name }}" class="img-fluid rounded">
-                            </div>
-                            <div class="col-md-5">
-                                <h6>{{ product.name }}</h6>
-                                <div class="d-flex align-items-center">
-                                    <span class="text-muted me-2">Quantidade:</span>
-                                    <span class="badge bg-primary fs-6">{{ quantity }}x</span>
+                        <div id="cart-items">
+                            {% for item_id, item_quantity in checkout_cart.items() %}
+                                {% set item_product = all_products_dict[item_id] %}
+                                <div class="row align-items-center cart-item mb-3 pb-3 {% if not loop.last %}border-bottom{% endif %}" data-product-id="{{ item_id }}" data-price="{{ item_product.price }}" data-quantity="{{ item_quantity }}">
+                                    <div class="col-md-2">
+                                        <img src="{{ item_product.image_url }}" alt="{{ item_product.name }}" class="img-fluid rounded">
+                                    </div>
+                                    <div class="col-md-5">
+                                        <h6>{{ item_product.name }}</h6>
+                                        <div class="d-flex align-items-center">
+                                            <span class="text-muted me-2">Quantidade:</span>
+                                            <span class="badge bg-primary fs-6">{{ item_quantity }}x</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="text-center">
+                                            <div class="fw-bold">R${{ "%.2f"|format(item_product.price) }}</div>
+                                            <small class="text-muted">por unidade</small>
+                                            {% if item_product.original_price %}
+                                            <div><small class="text-muted text-decoration-line-through">R${{ "%.2f"|format(item_product.original_price) }}</small></div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 text-end">
+                                        <div class="text-center">
+                                            <div class="fw-bold text-success h5 mb-0">R${{ "%.2f"|format(item_product.price * item_quantity) }}</div>
+                                            <small class="text-muted">total</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Products -->
+                <div class="card mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0">➕ Adicionar mais produtos</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row" id="additional-products">
+                            {% for similar_product in similar_products %}
+                            <div class="col-md-4 mb-3">
+                                <div class="card h-100">
+                                    <img src="{{ similar_product.image_url }}" class="card-img-top" alt="{{ similar_product.name }}" style="height: 150px; object-fit: cover;">
+                                    <div class="card-body p-2">
+                                        <h6 class="card-title small">{{ similar_product.name }}</h6>
+                                        <div class="price mb-2">
+                                            <span class="fw-bold text-success">R${{ "%.2f"|format(similar_product.price) }}</span>
+                                            {% if similar_product.original_price %}
+                                            <small class="text-muted text-decoration-line-through ms-1">R${{ "%.2f"|format(similar_product.original_price) }}</small>
+                                            {% endif %}
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-warning w-100" onclick="addToCheckout('{{ similar_product.id }}')" style="border-color: #e67e22; color: #e67e22;">
+                                            + Adicionar
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-2">
-                                <div class="text-center">
-                                    <div class="fw-bold">R${{ "%.2f"|format(product.price) }}</div>
-                                    <small class="text-muted">por unidade</small>
-                                    {% if product.original_price %}
-                                    <div><small class="text-muted text-decoration-line-through">R${{ "%.2f"|format(product.original_price) }}</small></div>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            <div class="col-md-3 text-end">
-                                <div class="text-center">
-                                    <div class="fw-bold text-success h5 mb-0" id="subtotal">R${{ "%.2f"|format(product.price * quantity) }}</div>
-                                    <small class="text-muted">total</small>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -61,7 +96,10 @@
                     </div>
                     <div class="card-body">
                         <div class="shipping-options">
-                            {% set subtotal = product.price * quantity %}
+                            {% set subtotal = 0 %}
+                            {% for item_id, item_quantity in checkout_cart.items() %}
+                                {% set subtotal = subtotal + (all_products_dict[item_id].price * item_quantity) %}
+                            {% endfor %}
                             {% if subtotal >= 100 %}
                             <!-- Free shipping only for orders above R$ 100 -->
                             <div class="alert alert-success text-center mb-0 p-4" style="border: 2px solid #28a745; background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);">
@@ -204,16 +242,16 @@
                         <div class="payment-summary">
                             <div class="d-flex justify-content-between mb-2">
                                 <span>Subtotal:</span>
-                                <span id="summary-subtotal">R${{ "%.2f"|format(product.price * quantity) }}</span>
+                                <span id="summary-subtotal">R${{ "%.2f"|format(subtotal) }}</span>
                             </div>
                             <div class="d-flex justify-content-between mb-2">
                                 <span>Frete:</span>
-                                <span id="summary-shipping">{% if product.price * quantity >= 100 %}Grátis{% else %}R$ 11,90{% endif %}</span>
+                                <span id="summary-shipping">{% if subtotal >= 100 %}Grátis{% else %}R$ 11,90{% endif %}</span>
                             </div>
                             <hr>
                             <div class="d-flex justify-content-between mb-3">
                                 <strong>Total:</strong>
-                                <strong id="summary-total">R${{ "%.2f"|format(product.price * quantity + (0 if product.price * quantity >= 100 else 11.90)) }}</strong>
+                                <strong id="summary-total">R${{ "%.2f"|format(subtotal + (0 if subtotal >= 100 else 11.90)) }}</strong>
                             </div>
 
                             <!-- PIX Payment Option -->
@@ -226,7 +264,7 @@
                                     <div class="pix-calculation">
                                         <div class="d-flex justify-content-between">
                                             <span>Total com desconto PIX:</span>
-                                            <strong class="text-success" id="pix-total">R${{ "%.2f"|format((product.price * quantity + (0 if product.price * quantity >= 100 else 11.90)) * 0.9) }}</strong>
+                                            <strong class="text-success" id="pix-total">R${{ "%.2f"|format((subtotal + (0 if subtotal >= 100 else 11.90)) * 0.9) }}</strong>
                                         </div>
                                     </div>
                                 </div>
@@ -341,9 +379,19 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const basePrice = {{ product.price }};
-    const quantity = {{ quantity }};
-    const subtotal = basePrice * quantity;
+    // Calculate total from all cart items
+    let subtotal = 0;
+    const cartItems = document.querySelectorAll('.cart-item');
+    cartItems.forEach(item => {
+        const price = parseFloat(item.dataset.price);
+        const quantity = parseInt(item.dataset.quantity);
+        subtotal += price * quantity;
+    });
+    
+    // Add to checkout function
+    window.addToCheckout = function(productId) {
+        window.location.href = `/add_to_checkout/${productId}`;
+    };
     const shippingOptions = document.querySelectorAll('input[name="shipping"]');
     const summaryShipping = document.getElementById('summary-shipping');
     const summaryTotal = document.getElementById('summary-total');

@@ -135,9 +135,24 @@ def checkout(product_id):
         session['product_quantity'][product_id] = quantity
         session.modified = True
     
+    # Get checkout cart items (multiple products)
+    checkout_cart = session.get('checkout_cart', {product_id: quantity})
+    
+    # Get similar products for recommendations (excluding those already in cart)
+    similar_products = []
+    if product_id in [p['id'] for p in products_data.get('linha_toque_essencial', [])]:
+        similar_products = [p for p in products_data.get('linha_toque_essencial', []) 
+                          if p['id'] != product_id and p['id'] not in checkout_cart][:3]
+    else:
+        similar_products = [p for p in products_data.get('queridinhos', []) 
+                          if p['id'] != product_id and p['id'] not in checkout_cart][:3]
+    
     return render_template('checkout.html', 
                          product=product,
                          quantity=quantity,
+                         checkout_cart=checkout_cart,
+                         similar_products=similar_products,
+                         all_products_dict={p['id']: p for p in all_products},
                          cart_count=len(session.get('cart', {})))
 
 @app.route('/buy/<product_id>')
@@ -152,7 +167,30 @@ def buy_product(product_id):
     session.modified = True
     
     # Redirect to checkout with quantity parameter to ensure proper calculation
+    # Initialize checkout cart with this product
+    if 'checkout_cart' not in session:
+        session['checkout_cart'] = {}
+    session['checkout_cart'][product_id] = quantity
+    session.modified = True
+    
     return redirect(url_for('checkout', product_id=product_id, quantity=quantity))
+
+@app.route('/add_to_checkout/<product_id>')
+def add_to_checkout(product_id):
+    # Add product to checkout cart
+    if 'checkout_cart' not in session:
+        session['checkout_cart'] = {}
+    
+    if product_id in session['checkout_cart']:
+        session['checkout_cart'][product_id] += 1
+    else:
+        session['checkout_cart'][product_id] = 1
+    
+    session.modified = True
+    
+    # Return to checkout page (use the first product as primary)
+    primary_product = next(iter(session['checkout_cart']))
+    return redirect(url_for('checkout', product_id=primary_product))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
