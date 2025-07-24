@@ -91,13 +91,23 @@ Preferred communication style: Simple, everyday language.
 - **Static Assets**: Should be served by nginx or CDN in production
 - **WSGI Server**: Replace development server with Gunicorn or uWSGI
 
-### Recent Changes (January 2025)
+### Recent Changes (July 2025)
 - **PIX Payment Integration**: Complete implementation with PayBets gateway
   - Real PIX QR Code generation via PayBets API
   - Copy and paste PIX code functionality
   - Customer data validation and processing
   - Payment status monitoring (non-redirecting)
   - Robust error handling and fallbacks
+- **Shopping Cart Dropdown**: Functional cart display in header
+  - Shows products with photos when items are selected
+  - Real-time cart count badge
+  - Finalizar Compra button redirects to checkout
+  - Dynamic cart content loading via AJAX
+- **Heroku Deployment Ready**: Production configuration files
+  - Procfile configured for Gunicorn
+  - Runtime.txt with Python 3.11.7
+  - Environment variables for session secrets
+  - Clean cart session for fresh deployment
 - **Enhanced Checkout Flow**: Improved form validation and user experience
 - **Multiple QR Code Libraries**: Fallback system for reliable QR code generation
 - **PayBets API Integration**: Production-ready implementation with proper authentication

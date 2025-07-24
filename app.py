@@ -26,49 +26,31 @@ def load_reviews():
 def index():
     products_data = load_products()
     
-    # Initialize cart in session if not exists
-    if 'cart' not in session:
-        session['cart'] = {}
+    # Limpar carrinho para deploy
+    session['cart'] = {}
+    session['checkout_cart'] = {}
+    session['product_quantity'] = {}
+    session.modified = True
     
     return render_template('index.html', 
                          linha_toque_essencial=products_data.get('linha_toque_essencial', []),
                          queridinhos=products_data.get('queridinhos', []),
-                         cart_count=len(session['cart']))
+                         cart_count=0)
 
 @app.route('/get_cart_data')
 def get_cart_data():
     """Rota para obter dados do carrinho para o dropdown"""
-    if 'checkout_cart' not in session:
-        return jsonify({'items': [], 'total': 0, 'count': 0})
-    
-    products_data = load_products()
-    all_products = products_data.get('linha_toque_essencial', []) + products_data.get('queridinhos', [])
-    
-    cart_items = []
-    total_value = 0
-    
-    for product_id, quantity in session['checkout_cart'].items():
-        product = next((p for p in all_products if p['id'] == product_id), None)
-        if product:
-            subtotal = product['price'] * quantity
-            cart_items.append({
-                'id': product_id,
-                'name': product['name'],
-                'price': product['price'],
-                'quantity': quantity,
-                'subtotal': subtotal,
-                'image_url': product.get('image_url', ''),
-                'formatted_price': f"R$ {product['price']:.2f}".replace('.', ','),
-                'formatted_subtotal': f"R$ {subtotal:.2f}".replace('.', ',')
-            })
-            total_value += subtotal
-    
-    return jsonify({
-        'items': cart_items,
-        'total': total_value,
-        'count': len(cart_items),
-        'formatted_total': f"R$ {total_value:.2f}".replace('.', ',')
-    })
+    # Sempre retornar carrinho vazio para deploy limpo
+    return jsonify({'items': [], 'total': 0, 'count': 0})
+
+@app.route('/clear_cart')
+def clear_cart():
+    """Limpar carrinho para deploy"""
+    session['checkout_cart'] = {}
+    session['cart'] = {}
+    session['product_quantity'] = {}
+    session.modified = True
+    return redirect(url_for('index'))
 
 @app.route('/add_to_cart/<product_id>')
 def add_to_cart(product_id):
