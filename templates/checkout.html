@@ -76,27 +76,27 @@
                         <h5 class="mb-0">📋 Dados para Entrega</h5>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form id="checkout-form">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Nome Completo *</label>
-                                    <input type="text" class="form-control" required>
+                                    <input type="text" id="customer_name" name="customer_name" class="form-control" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">CPF *</label>
-                                    <input type="text" class="form-control" required>
+                                    <input type="text" id="customer_cpf" name="customer_cpf" class="form-control" required maxlength="14" placeholder="000.000.000-00">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">E-mail *</label>
-                                    <input type="email" class="form-control" required>
+                                    <input type="email" id="customer_email" name="customer_email" class="form-control" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Telefone *</label>
-                                    <input type="tel" class="form-control" required>
+                                    <input type="tel" id="customer_phone" name="customer_phone" class="form-control" required placeholder="(11) 99999-9999">
                                 </div>
                                 <div class="col-md-8 mb-3">
                                     <label class="form-label">CEP *</label>
-                                    <input type="text" id="cep" class="form-control" placeholder="00000-000" maxlength="9" required>
+                                    <input type="text" id="customer_cep" name="customer_cep" class="form-control" placeholder="00000-000" maxlength="9" required>
                                     <div class="loading-cep" id="cep-loading" style="display: none;">
                                         <small class="text-primary">🔍 Buscando CEP...</small>
                                     </div>
@@ -106,23 +106,23 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Número *</label>
-                                    <input type="text" id="numero" class="form-control" required>
+                                    <input type="text" id="customer_numero" name="customer_numero" class="form-control" required>
                                 </div>
                                 <div class="col-12 mb-3">
                                     <label class="form-label">Endereço *</label>
-                                    <input type="text" id="endereco" class="form-control" required>
+                                    <input type="text" id="customer_endereco" name="customer_endereco" class="form-control" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Bairro *</label>
-                                    <input type="text" id="bairro" class="form-control" required>
+                                    <input type="text" id="customer_bairro" name="customer_bairro" class="form-control" required>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Cidade *</label>
-                                    <input type="text" id="cidade" class="form-control" required>
+                                    <input type="text" id="customer_cidade" name="customer_cidade" class="form-control" required>
                                 </div>
                                 <div class="col-md-2 mb-3">
                                     <label class="form-label">UF *</label>
-                                    <select id="uf" class="form-control">
+                                    <select id="customer_uf" name="customer_uf" class="form-control">
                                         <option value="">Selecione</option>
                                         <option value="AC">AC</option>
                                         <option value="AL">AL</option>
@@ -198,9 +198,60 @@
                             </div>
 
                             <!-- Finalize Button -->
-                            <button class="btn btn-warning w-100 btn-lg mb-3" style="background-color: #e67e22; border-color: #e67e22;">
+                            <button type="button" id="finalize-pix-payment" class="btn btn-warning w-100 btn-lg mb-3" style="background-color: #e67e22; border-color: #e67e22;">
                                 🔒 Finalizar Compra via PIX
                             </button>
+                            
+                            <!-- Loading state -->
+                            <div id="payment-loading" class="text-center" style="display: none;">
+                                <div class="spinner-border text-warning" role="status">
+                                    <span class="visually-hidden">Processando...</span>
+                                </div>
+                                <p class="mt-2">Processando seu pagamento...</p>
+                            </div>
+                            
+                            <!-- PIX Payment Section -->
+                            <div id="pix-payment-section" style="display: none;">
+                                <div class="alert alert-info">
+                                    <h5 class="alert-heading">📱 Pagamento PIX Gerado!</h5>
+                                    <hr>
+                                    
+                                    <!-- QR Code -->
+                                    <div class="text-center mb-3">
+                                        <div id="qr-code-container" class="mb-3">
+                                            <div class="bg-white p-3 rounded d-inline-block">
+                                                <canvas id="qr-code"></canvas>
+                                            </div>
+                                        </div>
+                                        <p><strong>Escaneie o QR Code com seu banco</strong></p>
+                                    </div>
+                                    
+                                    <!-- PIX Copy and Paste -->
+                                    <div class="mb-3">
+                                        <label class="form-label"><strong>Ou copie e cole o código PIX:</strong></label>
+                                        <div class="input-group">
+                                            <input type="text" id="pix-code" class="form-control" readonly>
+                                            <button class="btn btn-outline-secondary" type="button" id="copy-pix-code">
+                                                📋 Copiar
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Payment Status -->
+                                    <div id="payment-status" class="text-center">
+                                        <p class="mb-2">⏳ Aguardando pagamento...</p>
+                                        <small class="text-muted">O pagamento será confirmado automaticamente</small>
+                                    </div>
+                                    
+                                    <!-- Success message -->
+                                    <div id="payment-success" class="text-center" style="display: none;">
+                                        <div class="alert alert-success">
+                                            <h5>✅ Pagamento Aprovado!</h5>
+                                            <p>Seu pedido foi confirmado com sucesso.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <!-- Security Icons -->
                             <div class="security-section">
@@ -374,8 +425,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const summaryTotal = document.getElementById('summary-total');
     const pixTotal = document.getElementById('pix-total');
     
-    console.log('Preço unitário:', basePrice);
-    console.log('Quantidade:', quantity);
     console.log('Subtotal calculado:', subtotal);
     
     // Function to add product to checkout
@@ -434,13 +483,13 @@ document.addEventListener('DOMContentLoaded', function() {
     updateTotals();
 
     // CEP Integration
-    const cepInput = document.getElementById('cep');
+    const cepInput = document.getElementById('customer_cep');
     const cepLoading = document.getElementById('cep-loading');
     const cepError = document.getElementById('cep-error');
-    const enderecoInput = document.getElementById('endereco');
-    const bairroInput = document.getElementById('bairro');
-    const cidadeInput = document.getElementById('cidade');
-    const ufSelect = document.getElementById('uf');
+    const enderecoInput = document.getElementById('customer_endereco');
+    const bairroInput = document.getElementById('customer_bairro');
+    const cidadeInput = document.getElementById('customer_cidade');
+    const ufSelect = document.getElementById('customer_uf');
 
     // Format CEP input
     cepInput.addEventListener('input', function(e) {
@@ -488,7 +537,7 @@ document.addEventListener('DOMContentLoaded', function() {
             cepLoading.style.display = 'none';
             
             // Focus on number field (next input after CEP)
-            const numberField = document.querySelector('input[placeholder]') || document.getElementById('numero');
+            const numberField = document.getElementById('customer_numero');
             if (numberField) numberField.focus();
 
         } catch (error) {
@@ -510,6 +559,184 @@ document.addEventListener('DOMContentLoaded', function() {
             fillAddressFromCEP(cep);
         }
     });
+
+    // PIX Payment Processing
+    const finalizeButton = document.getElementById('finalize-pix-payment');
+    const paymentLoading = document.getElementById('payment-loading');
+    const pixPaymentSection = document.getElementById('pix-payment-section');
+    
+    finalizeButton.addEventListener('click', function() {
+        processPixPayment();
+    });
+
+    // Format CPF input
+    const cpfInput = document.getElementById('customer_cpf');
+    cpfInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length <= 11) {
+            value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+        }
+        e.target.value = value;
+    });
+
+    // Format phone input
+    const phoneInput = document.getElementById('customer_phone');
+    phoneInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length <= 11) {
+            value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+        }
+        e.target.value = value;
+    });
+
+    async function processPixPayment() {
+        // Validate form
+        const form = document.getElementById('checkout-form');
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
+
+        // Get total amount with PIX discount
+        let selectedShipping = document.querySelector('input[name="shipping"]:checked');
+        if (!selectedShipping) {
+            selectedShipping = document.querySelector('input[name="shipping"][type="hidden"]');
+        }
+        
+        const shippingCost = selectedShipping ? parseFloat(selectedShipping.value) || 0 : 0;
+        const total = subtotal + shippingCost;
+        const pixDiscountTotal = total * 0.9; // 10% discount
+
+        // Show loading
+        finalizeButton.style.display = 'none';
+        paymentLoading.style.display = 'block';
+
+        try {
+            // Prepare form data
+            const formData = new FormData();
+            formData.append('customer_name', document.getElementById('customer_name').value);
+            formData.append('customer_email', document.getElementById('customer_email').value);
+            formData.append('customer_phone', document.getElementById('customer_phone').value.replace(/\D/g, ''));
+            formData.append('customer_cpf', document.getElementById('customer_cpf').value.replace(/\D/g, ''));
+            formData.append('customer_cep', document.getElementById('customer_cep').value.replace(/\D/g, ''));
+            formData.append('customer_endereco', document.getElementById('customer_endereco').value);
+            formData.append('customer_numero', document.getElementById('customer_numero').value);
+            formData.append('customer_bairro', document.getElementById('customer_bairro').value);
+            formData.append('customer_cidade', document.getElementById('customer_cidade').value);
+            formData.append('customer_uf', document.getElementById('customer_uf').value);
+            formData.append('total_amount', pixDiscountTotal.toFixed(2));
+
+            // Make API request
+            const response = await fetch('/process_pix_payment', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                // Hide loading and show PIX payment section
+                paymentLoading.style.display = 'none';
+                pixPaymentSection.style.display = 'block';
+
+                // Generate QR Code
+                if (result.transaction.pix_qr_code) {
+                    generateQRCode(result.transaction.pix_qr_code);
+                }
+
+                // Set PIX copy and paste code
+                if (result.transaction.pix_copy_paste) {
+                    document.getElementById('pix-code').value = result.transaction.pix_copy_paste;
+                }
+
+                // Start payment status polling
+                if (result.transaction.hash) {
+                    startPaymentStatusPolling(result.transaction.hash);
+                }
+            } else {
+                throw new Error(result.error || 'Erro ao processar pagamento');
+            }
+
+        } catch (error) {
+            console.error('Erro no pagamento PIX:', error);
+            alert('Erro ao processar pagamento: ' + error.message);
+            
+            // Show button again
+            paymentLoading.style.display = 'none';
+            finalizeButton.style.display = 'block';
+        }
+    }
+
+    function generateQRCode(qrCodeData) {
+        const canvas = document.getElementById('qr-code');
+        QRCode.toCanvas(canvas, qrCodeData, {
+            width: 200,
+            margin: 2,
+            color: {
+                dark: '#000000',
+                light: '#FFFFFF'
+            }
+        }, function (error) {
+            if (error) {
+                console.error('Erro ao gerar QR Code:', error);
+            }
+        });
+    }
+
+    // Copy PIX code to clipboard
+    document.getElementById('copy-pix-code').addEventListener('click', function() {
+        const pixCode = document.getElementById('pix-code');
+        pixCode.select();
+        document.execCommand('copy');
+        
+        // Visual feedback
+        const button = this;
+        const originalText = button.textContent;
+        button.textContent = '✅ Copiado!';
+        button.classList.add('btn-success');
+        button.classList.remove('btn-outline-secondary');
+        
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('btn-success');
+            button.classList.add('btn-outline-secondary');
+        }, 2000);
+    });
+
+    function startPaymentStatusPolling(transactionHash) {
+        const statusInterval = setInterval(async () => {
+            try {
+                const response = await fetch(`/check_payment_status/${transactionHash}`);
+                const result = await response.json();
+
+                if (result.success) {
+                    if (result.status === 'paid' || result.status === 'approved') {
+                        // Payment successful
+                        clearInterval(statusInterval);
+                        document.getElementById('payment-status').style.display = 'none';
+                        document.getElementById('payment-success').style.display = 'block';
+                        
+                        // Redirect to success page after 3 seconds
+                        setTimeout(() => {
+                            window.location.href = `/payment_success/${transactionHash}`;
+                        }, 3000);
+                    } else if (result.status === 'cancelled' || result.status === 'expired') {
+                        // Payment failed
+                        clearInterval(statusInterval);
+                        alert('Pagamento cancelado ou expirado. Tente novamente.');
+                        location.reload();
+                    }
+                }
+            } catch (error) {
+                console.error('Erro ao verificar status:', error);
+            }
+        }, 5000); // Check every 5 seconds
+
+        // Stop polling after 15 minutes
+        setTimeout(() => {
+            clearInterval(statusInterval);
+        }, 15 * 60 * 1000);
+    }
 });
 </script>
 {% endblock %}

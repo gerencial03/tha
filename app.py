@@ -1,6 +1,7 @@
 import os
 import json
-from flask import Flask, render_template, request, session, redirect, url_for, flash
+import requests
+from flask import Flask, render_template, request, session, redirect, url_for, flash, jsonify
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SESSION_SECRET", "tha-beauty-secret-key")
@@ -204,6 +205,149 @@ def add_to_checkout(product_id):
     # Redirect back to current checkout page
     current_product = next(iter(session['checkout_cart'].keys()))
     return redirect(url_for('checkout', product_id=current_product))
+
+@app.route('/process_pix_payment', methods=['POST'])
+def process_pix_payment():
+    try:
+        # Get customer data from form
+        customer_data = {
+            'name': request.form.get('customer_name'),
+            'email': request.form.get('customer_email'),
+            'phone_number': request.form.get('customer_phone'),
+            'document_number': request.form.get('customer_cpf'),
+            'address': {
+                'zipcode': request.form.get('customer_cep'),
+                'address': request.form.get('customer_endereco'),
+                'number': request.form.get('customer_numero'),
+                'neighborhood': request.form.get('customer_bairro'),
+                'city': request.form.get('customer_cidade'),
+                'state': request.form.get('customer_uf')
+            }
+        }
+        
+        # Calculate total amount
+        total_amount = float(request.form.get('total_amount', 0))
+        # Convert to cents for API
+        amount_in_cents = int(total_amount * 100)
+        
+        # Get products for transaction description
+        products_data = load_products()
+        all_products = products_data.get('linha_toque_essencial', []) + products_data.get('queridinhos', [])
+        
+        # Build transaction description
+        checkout_items = []
+        if 'checkout_cart' in session:
+            for item_id, item_qty in session['checkout_cart'].items():
+                item_product = next((p for p in all_products if p['id'] == item_id), None)
+                if item_product:
+                    checkout_items.append(f"{item_product['name']} (x{item_qty})")
+        
+        transaction_description = "Tha Beauty - " + ", ".join(checkout_items)
+        
+        # Prepare payment request
+        payment_data = {
+            "amount": amount_in_cents,
+            "offer_hash": "tha_beauty_offer",  # This should be configured in IronPay
+            "payment_method": "pix",
+            "customer": customer_data,
+            "description": transaction_description
+        }
+        
+        # Get API token from environment
+        api_token = os.environ.get("IRONPAY_API_TOKEN", "ipt1gW0D1eHPsBYL4zLfyzDc1PIUc1o2b7igHDgwJrXfQcDMPCHq6RTh41Tq")
+        api_endpoint = "https://api.ironpayapp.com.br"
+        
+        # Make API request to IronPay
+        headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+        
+        response = requests.post(
+            f"{api_endpoint}/public/v1/transactions?api_token={api_token}",
+            json=payment_data,
+            headers=headers,
+            timeout=30
+        )
+        
+        if response.status_code == 200 or response.status_code == 201:
+            transaction_data = response.json()
+            
+            # Store transaction in session for tracking
+            session['current_transaction'] = {
+                'hash': transaction_data.get('hash'),
+                'amount': total_amount,
+                'customer': customer_data,
+                'products': checkout_items
+            }
+            session.modified = True
+            
+            return jsonify({
+                'success': True,
+                'transaction': transaction_data
+            })
+        else:
+            return jsonify({
+                'success': False,
+                'error': f'Erro na API de pagamento: {response.status_code}',
+                'details': response.text
+            }), 400
+            
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': f'Erro interno: {str(e)}'
+        }), 500
+
+@app.route('/check_payment_status/<transaction_hash>')
+def check_payment_status(transaction_hash):
+    try:
+        api_token = os.environ.get("IRONPAY_API_TOKEN", "ipt1gW0D1eHPsBYL4zLfyzDc1PIUc1o2b7igHDgwJrXfQcDMPCHq6RTh41Tq")
+        api_endpoint = "https://api.ironpayapp.com.br"
+        
+        headers = {
+            'Accept': 'application/json'
+        }
+        
+        response = requests.get(
+            f"{api_endpoint}/public/v1/transactions/{transaction_hash}?api_token={api_token}",
+            headers=headers,
+            timeout=30
+        )
+        
+        if response.status_code == 200:
+            transaction_data = response.json()
+            return jsonify({
+                'success': True,
+                'status': transaction_data.get('status'),
+                'transaction': transaction_data
+            })
+        else:
+            return jsonify({
+                'success': False,
+                'error': 'Erro ao consultar status do pagamento'
+            }), 400
+            
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': f'Erro interno: {str(e)}'
+        }), 500
+
+@app.route('/payment_success/<transaction_hash>')
+def payment_success(transaction_hash):
+    # Clear checkout cart
+    if 'checkout_cart' in session:
+        session.pop('checkout_cart')
+    if 'current_transaction' in session:
+        transaction_info = session.pop('current_transaction')
+        session.modified = True
+        
+        return render_template('payment_success.html', 
+                             transaction_hash=transaction_hash,
+                             transaction_info=transaction_info)
+    
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

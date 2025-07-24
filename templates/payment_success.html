@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% block title %}Pagamento Aprovado - Tha Beauty{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="text-center mt-5 mb-5">
+                <!-- Success Icon -->
+                <div class="mb-4">
+                    <div class="bg-success rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 100px; height: 100px;">
+                        <i class="fas fa-check text-white" style="font-size: 50px;"></i>
+                    </div>
+                </div>
+
+                <!-- Success Message -->
+                <h1 class="text-success mb-3">🎉 Pagamento Aprovado!</h1>
+                <p class="lead mb-4">Seu pedido foi confirmado com sucesso. Você receberá um e-mail de confirmação em breve.</p>
+
+                <!-- Transaction Details -->
+                <div class="card mb-4">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">📄 Detalhes do Pedido</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if transaction_info %}
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <strong>ID da Transação:</strong><br>
+                                <code>{{ transaction_hash }}</code>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <strong>Valor Pago:</strong><br>
+                                <span class="text-success h5">R$ {{ "%.2f"|format(transaction_info.amount) }}</span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <strong>Cliente:</strong><br>
+                                {{ transaction_info.customer.name }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <strong>E-mail:</strong><br>
+                                {{ transaction_info.customer.email }}
+                            </div>
+                        </div>
+
+                        <!-- Products -->
+                        <div class="mt-4">
+                            <h6>🛒 Produtos Comprados:</h6>
+                            <ul class="list-unstyled">
+                                {% for product in transaction_info.products %}
+                                <li class="mb-1">✓ {{ product }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Next Steps -->
+                <div class="alert alert-info">
+                    <h6 class="alert-heading">📦 Próximos Passos</h6>
+                    <ul class="text-start mb-0">
+                        <li>Você receberá um e-mail de confirmação com todos os detalhes</li>
+                        <li>Seu pedido será preparado e enviado em até 2 dias úteis</li>
+                        <li>Você receberá o código de rastreamento por e-mail</li>
+                        <li>Em caso de dúvidas, entre em contato conosco</li>
+                    </ul>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                    <a href="{{ url_for('index') }}" class="btn btn-warning btn-lg me-md-2" style="background-color: #e67e22; border-color: #e67e22;">
+                        🏠 Voltar ao Início
+                    </a>
+                    <button class="btn btn-outline-secondary btn-lg" onclick="window.print()">
+                        🖨️ Imprimir Comprovante
+                    </button>
+                </div>
+
+                <!-- Customer Support -->
+                <div class="mt-5 p-4 bg-light rounded">
+                    <h6>💬 Precisa de Ajuda?</h6>
+                    <p class="mb-2">Nossa equipe está pronta para ajudar você!</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fab fa-whatsapp text-success me-2"></i>
+                                <span>(11) 99999-9999</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-envelope text-primary me-2"></i>
+                                <span>contato@thabeauty.com.br</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trust Badges -->
+                <div class="mt-4">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="d-flex justify-content-center align-items-center gap-3">
+                                <div class="text-center">
+                                    <i class="fas fa-shield-alt text-success fa-2x mb-1"></i>
+                                    <div class="small">Compra Segura</div>
+                                </div>
+                                <div class="text-center">
+                                    <i class="fas fa-truck text-warning fa-2x mb-1"></i>
+                                    <div class="small">Entrega Garantida</div>
+                                </div>
+                                <div class="text-center">
+                                    <i class="fas fa-medal text-primary fa-2x mb-1"></i>
+                                    <div class="small">Qualidade Premium</div>
+                                </div>
+                                <div class="text-center">
+                                    <i class="fas fa-heart text-danger fa-2x mb-1"></i>
+                                    <div class="small">100% Satisfação</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+@media print {
+    .btn, .bg-light, .alert {
+        display: none !important;
+    }
+    
+    .card {
+        border: 2px solid #000 !important;
+    }
+    
+    .text-success {
+        color: #000 !important;
+    }
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    border-color: #b8daff;
+}
+
+.gap-3 {
+    gap: 1rem !important;
+}
+</style>
+{% endblock %}
