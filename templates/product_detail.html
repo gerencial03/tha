@@ -46,19 +46,13 @@
 
                     <!-- Price -->
                     <div class="product-price mb-4">
-                        <div class="current-price h2 text-success" id="current-price">R${{ "%.2f"|format(product.price) }}</div>
+                        <div class="current-price text-success" id="current-price" style="font-size: 3rem; font-weight: bold;">R${{ "%.2f"|format(product.price) }}</div>
                         {% if product.original_price %}
                             <div class="price-details">
                                 <span class="discount-badge bg-success text-white px-2 py-1 rounded">-{{ product.discount }}% OFF</span>
-                                <div class="original-price text-muted text-decoration-line-through" id="original-price">R${{ "%.2f"|format(product.original_price) }}</div>
+                                <div class="original-price text-muted text-decoration-line-through" id="original-price" style="font-size: 1.5rem;">R${{ "%.2f"|format(product.original_price) }}</div>
                             </div>
                         {% endif %}
-                        
-                        <!-- Installments -->
-                        <div class="installments mt-2">
-                            <small class="text-muted" id="installments">12x de R${{ "%.2f"|format(product.price / 12) }}</small>
-                            <div><small class="text-primary">💳 Ver mais detalhes</small></div>
-                        </div>
                     </div>
 
                     <!-- Quantity and Buy Button -->
