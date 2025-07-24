@@ -510,17 +510,22 @@ document.addEventListener('DOMContentLoaded', function() {
         if (cep.length !== 8) return;
 
         // Show loading
-        cepLoading.style.display = 'block';
-        cepError.style.display = 'none';
+        if (cepLoading) cepLoading.style.display = 'block';
+        if (cepError) cepError.style.display = 'none';
         
         // Clear previous data
-        enderecoInput.value = '';
-        bairroInput.value = '';
-        cidadeInput.value = '';
-        ufSelect.value = '';
+        if (enderecoInput) enderecoInput.value = '';
+        if (bairroInput) bairroInput.value = '';
+        if (cidadeInput) cidadeInput.value = '';
+        if (ufSelect) ufSelect.value = '';
 
         try {
             const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+            
+            if (!response.ok) {
+                throw new Error('Erro ao consultar CEP');
+            }
+            
             const data = await response.json();
 
             if (data.erro) {
@@ -528,26 +533,26 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             // Fill form fields
-            enderecoInput.value = data.logradouro || '';
-            bairroInput.value = data.bairro || '';
-            cidadeInput.value = data.localidade || '';
-            ufSelect.value = data.uf || '';
+            if (enderecoInput) enderecoInput.value = data.logradouro || '';
+            if (bairroInput) bairroInput.value = data.bairro || '';
+            if (cidadeInput) cidadeInput.value = data.localidade || '';
+            if (ufSelect) ufSelect.value = data.uf || '';
 
             // Hide loading
-            cepLoading.style.display = 'none';
+            if (cepLoading) cepLoading.style.display = 'none';
             
             // Focus on number field (next input after CEP)
             const numberField = document.getElementById('customer_numero');
             if (numberField) numberField.focus();
 
         } catch (error) {
-            console.error('Erro ao buscar CEP:', error);
-            cepLoading.style.display = 'none';
-            cepError.style.display = 'block';
+            console.warn('Erro ao buscar CEP:', error.message);
+            if (cepLoading) cepLoading.style.display = 'none';
+            if (cepError) cepError.style.display = 'block';
             
             // Hide error after 3 seconds
             setTimeout(() => {
-                cepError.style.display = 'none';
+                if (cepError) cepError.style.display = 'none';
             }, 3000);
         }
     }
@@ -590,11 +595,21 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     async function processPixPayment() {
-        // Validate form
-        const form = document.getElementById('checkout-form');
-        if (!form.checkValidity()) {
-            form.reportValidity();
-            return;
+        // Validate required fields manually
+        const requiredInputs = [
+            { id: 'customer_name', label: 'Nome Completo' },
+            { id: 'customer_email', label: 'E-mail' },
+            { id: 'customer_phone', label: 'Telefone' },
+            { id: 'customer_cpf', label: 'CPF' }
+        ];
+
+        for (const input of requiredInputs) {
+            const element = document.getElementById(input.id);
+            if (!element || !element.value.trim()) {
+                alert(`Por favor, preencha o campo: ${input.label}`);
+                if (element) element.focus();
+                return;
+            }
         }
 
         // Get total amount with PIX discount
@@ -608,22 +623,22 @@ document.addEventListener('DOMContentLoaded', function() {
         const pixDiscountTotal = total * 0.9; // 10% discount
 
         // Show loading
-        finalizeButton.style.display = 'none';
-        paymentLoading.style.display = 'block';
+        if (finalizeButton) finalizeButton.style.display = 'none';
+        if (paymentLoading) paymentLoading.style.display = 'block';
 
         try {
             // Prepare form data
             const formData = new FormData();
-            formData.append('customer_name', document.getElementById('customer_name').value);
-            formData.append('customer_email', document.getElementById('customer_email').value);
+            formData.append('customer_name', document.getElementById('customer_name').value.trim());
+            formData.append('customer_email', document.getElementById('customer_email').value.trim());
             formData.append('customer_phone', document.getElementById('customer_phone').value.replace(/\D/g, ''));
             formData.append('customer_cpf', document.getElementById('customer_cpf').value.replace(/\D/g, ''));
-            formData.append('customer_cep', document.getElementById('customer_cep').value.replace(/\D/g, ''));
-            formData.append('customer_endereco', document.getElementById('customer_endereco').value);
-            formData.append('customer_numero', document.getElementById('customer_numero').value);
-            formData.append('customer_bairro', document.getElementById('customer_bairro').value);
-            formData.append('customer_cidade', document.getElementById('customer_cidade').value);
-            formData.append('customer_uf', document.getElementById('customer_uf').value);
+            formData.append('customer_cep', (document.getElementById('customer_cep').value || '').replace(/\D/g, ''));
+            formData.append('customer_endereco', (document.getElementById('customer_endereco').value || '').trim());
+            formData.append('customer_numero', (document.getElementById('customer_numero').value || '').trim());
+            formData.append('customer_bairro', (document.getElementById('customer_bairro').value || '').trim());
+            formData.append('customer_cidade', (document.getElementById('customer_cidade').value || '').trim());
+            formData.append('customer_uf', (document.getElementById('customer_uf').value || ''));
             formData.append('total_amount', pixDiscountTotal.toFixed(2));
 
             // Make API request
@@ -632,25 +647,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: formData
             });
 
+            if (!response.ok) {
+                throw new Error(`Erro HTTP: ${response.status}`);
+            }
+
             const result = await response.json();
 
             if (result.success) {
                 // Hide loading and show PIX payment section
-                paymentLoading.style.display = 'none';
-                pixPaymentSection.style.display = 'block';
+                if (paymentLoading) paymentLoading.style.display = 'none';
+                if (pixPaymentSection) pixPaymentSection.style.display = 'block';
 
                 // Generate QR Code
-                if (result.transaction.pix_qr_code) {
+                if (result.transaction && result.transaction.pix_qr_code) {
                     generateQRCode(result.transaction.pix_qr_code);
                 }
 
                 // Set PIX copy and paste code
-                if (result.transaction.pix_copy_paste) {
-                    document.getElementById('pix-code').value = result.transaction.pix_copy_paste;
+                if (result.transaction && result.transaction.pix_copy_paste) {
+                    const pixCodeInput = document.getElementById('pix-code');
+                    if (pixCodeInput) {
+                        pixCodeInput.value = result.transaction.pix_copy_paste;
+                    }
                 }
 
                 // Start payment status polling
-                if (result.transaction.hash) {
+                if (result.transaction && result.transaction.hash) {
                     startPaymentStatusPolling(result.transaction.hash);
                 }
             } else {
@@ -658,29 +680,74 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
         } catch (error) {
-            console.error('Erro no pagamento PIX:', error);
-            alert('Erro ao processar pagamento: ' + error.message);
+            console.warn('Erro no pagamento PIX:', error);
+            
+            let errorMessage = 'Erro ao processar pagamento. Tente novamente.';
+            if (error.message && (error.message.includes('network') || error.message.includes('fetch'))) {
+                errorMessage = 'Erro de conexão. Verifique sua internet e tente novamente.';
+            } else if (error.message) {
+                errorMessage = error.message;
+            }
+            
+            alert(errorMessage);
             
             // Show button again
-            paymentLoading.style.display = 'none';
-            finalizeButton.style.display = 'block';
+            if (paymentLoading) paymentLoading.style.display = 'none';
+            if (finalizeButton) finalizeButton.style.display = 'block';
         }
     }
 
     function generateQRCode(qrCodeData) {
         const canvas = document.getElementById('qr-code');
-        QRCode.toCanvas(canvas, qrCodeData, {
-            width: 200,
-            margin: 2,
-            color: {
-                dark: '#000000',
-                light: '#FFFFFF'
-            }
-        }, function (error) {
-            if (error) {
-                console.error('Erro ao gerar QR Code:', error);
-            }
-        });
+        if (!canvas) {
+            console.warn('Canvas QR Code não encontrado');
+            return;
+        }
+        
+        if (typeof QRCode === 'undefined') {
+            console.warn('Biblioteca QRCode não carregada');
+            // Fallback: show the PIX code as text
+            canvas.style.display = 'none';
+            const fallbackDiv = document.createElement('div');
+            fallbackDiv.innerHTML = `
+                <div class="alert alert-info">
+                    <p><strong>QR Code não disponível</strong></p>
+                    <p>Use o código PIX abaixo para efetuar o pagamento</p>
+                </div>
+            `;
+            canvas.parentNode.appendChild(fallbackDiv);
+            return;
+        }
+        
+        try {
+            QRCode.toCanvas(canvas, qrCodeData, {
+                width: 200,
+                margin: 2,
+                color: {
+                    dark: '#000000',
+                    light: '#FFFFFF'
+                }
+            }, function (error) {
+                if (error) {
+                    console.warn('Erro ao gerar QR Code:', error);
+                    // Show fallback message
+                    canvas.style.display = 'none';
+                    const fallbackDiv = document.createElement('div');
+                    fallbackDiv.innerHTML = `
+                        <div class="alert alert-warning">
+                            <p><strong>QR Code temporariamente indisponível</strong></p>
+                            <p>Use o código PIX abaixo para efetuar o pagamento</p>
+                        </div>
+                    `;
+                    canvas.parentNode.appendChild(fallbackDiv);
+                } else {
+                    console.log('QR Code gerado com sucesso');
+                }
+            });
+        } catch (e) {
+            console.warn('Erro na biblioteca QRCode:', e);
+            canvas.style.display = 'none';
+        }
     }
 
     // Copy PIX code to clipboard
