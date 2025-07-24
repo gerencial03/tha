@@ -254,15 +254,7 @@ body.cookie-notice-visible {
     object-position: center;
 }
 
-/* Launch Banner */
-.launch-banner {
-    background-color: #f39c12;
-    color: white;
-    padding: 8px 0;
-    text-align: center;
-    font-weight: 500;
-    font-size: 14px;
-}
+
 
 /* Product Sections */
 .product-section {
