@@ -90,7 +90,6 @@ def product_detail(product_id):
     product = next((p for p in all_products if p['id'] == product_id), None)
     
     if not product:
-        flash('Produto não encontrado!', 'error')
         return redirect(url_for('index'))
     
     # Get similar products (same category)
@@ -122,7 +121,6 @@ def checkout(product_id):
     product = next((p for p in all_products if p['id'] == product_id), None)
     
     if not product:
-        flash('Produto não encontrado!', 'error')
         return redirect(url_for('index'))
     
     # Get quantity from URL parameter or session or default to 1
