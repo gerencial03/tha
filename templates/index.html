@@ -114,19 +114,13 @@
 
                             <!-- Action Button -->
                             <div class="product-action">
-                                {% if product.available %}
-                                    <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn-comprar" style="background-color: #ff6939 !important; color: white !important; border: 1px solid #ff6939 !important; padding: 8px 16px !important; border-radius: 6px !important; text-decoration: none !important; display: flex !important; align-items: center !important; justify-content: center !important; font-size: 13px !important; font-weight: 400 !important; min-height: 36px !important; width: 100% !important;">
-                                        Comprar
-                                    </a>
-                                    <div class="installment-info">
-                                        <small>Pronto!</small>
-                                        <small>Incluindo...</small>
-                                    </div>
-                                {% else %}
-                                    <a href="{{ url_for('notify_when_available', product_id=product.id) }}" class="btn-notify" style="background-color: #f8f9fa !important; color: #6c757d !important; border: 1px solid #dee2e6 !important; padding: 8px 16px !important; border-radius: 6px !important; text-decoration: none !important; display: flex !important; align-items: center !important; justify-content: center !important; font-size: 13px !important; font-weight: 400 !important; min-height: 36px !important; width: 100% !important;">
-                                        Avise-me quando chegar!
-                                    </a>
-                                {% endif %}
+                                <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn-comprar" style="background-color: #ffc107 !important; color: #212529 !important; border: 1px solid #ffc107 !important; padding: 8px 16px !important; border-radius: 6px !important; text-decoration: none !important; display: flex !important; align-items: center !important; justify-content: center !important; font-size: 13px !important; font-weight: 400 !important; min-height: 36px !important; width: 100% !important;">
+                                    Comprar
+                                </a>
+                                <div class="installment-info">
+                                    <small>Pronto!</small>
+                                    <small>Incluindo...</small>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -184,19 +178,13 @@
 
                             <!-- Action Button -->
                             <div class="product-action">
-                                {% if product.available %}
-                                    <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn-comprar" style="background-color: #ff6939 !important; color: white !important; border: 1px solid #ff6939 !important; padding: 8px 16px !important; border-radius: 6px !important; text-decoration: none !important; display: flex !important; align-items: center !important; justify-content: center !important; font-size: 13px !important; font-weight: 400 !important; min-height: 36px !important; width: 100% !important;">
-                                        Comprar
-                                    </a>
-                                    <div class="installment-info">
-                                        <small>Pronto!</small>
-                                        <small>Incluindo...</small>
-                                    </div>
-                                {% else %}
-                                    <a href="{{ url_for('notify_when_available', product_id=product.id) }}" class="btn-notify" style="background-color: #f8f9fa !important; color: #6c757d !important; border: 1px solid #dee2e6 !important; padding: 8px 16px !important; border-radius: 6px !important; text-decoration: none !important; display: flex !important; align-items: center !important; justify-content: center !important; font-size: 13px !important; font-weight: 400 !important; min-height: 36px !important; width: 100% !important;">
-                                        Avise-me quando chegar!
-                                    </a>
-                                {% endif %}
+                                <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn-comprar" style="background-color: #ffc107 !important; color: #212529 !important; border: 1px solid #ffc107 !important; padding: 8px 16px !important; border-radius: 6px !important; text-decoration: none !important; display: flex !important; align-items: center !important; justify-content: center !important; font-size: 13px !important; font-weight: 400 !important; min-height: 36px !important; width: 100% !important;">
+                                    Comprar
+                                </a>
+                                <div class="installment-info">
+                                    <small>Pronto!</small>
+                                    <small>Incluindo...</small>
+                                </div>
                             </div>
                         </div>
                     </div>
