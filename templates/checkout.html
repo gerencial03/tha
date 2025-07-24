@@ -126,7 +126,13 @@
                                 </div>
                                 <div class="col-md-8 mb-3">
                                     <label class="form-label">CEP *</label>
-                                    <input type="text" class="form-control" required>
+                                    <input type="text" id="cep" class="form-control" placeholder="00000-000" maxlength="9" required>
+                                    <div class="loading-cep" id="cep-loading" style="display: none;">
+                                        <small class="text-primary">🔍 Buscando CEP...</small>
+                                    </div>
+                                    <div class="invalid-cep" id="cep-error" style="display: none;">
+                                        <small class="text-danger">❌ CEP não encontrado</small>
+                                    </div>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Número *</label>
@@ -134,23 +140,47 @@
                                 </div>
                                 <div class="col-12 mb-3">
                                     <label class="form-label">Endereço *</label>
-                                    <input type="text" class="form-control" required>
+                                    <input type="text" id="endereco" class="form-control" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Bairro *</label>
-                                    <input type="text" class="form-control" required>
+                                    <input type="text" id="bairro" class="form-control" required>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Cidade *</label>
-                                    <input type="text" class="form-control" required>
+                                    <input type="text" id="cidade" class="form-control" required>
                                 </div>
                                 <div class="col-md-2 mb-3">
                                     <label class="form-label">UF *</label>
-                                    <select class="form-control">
-                                        <option value="SP">SP</option>
-                                        <option value="RJ">RJ</option>
+                                    <select id="uf" class="form-control">
+                                        <option value="">Selecione</option>
+                                        <option value="AC">AC</option>
+                                        <option value="AL">AL</option>
+                                        <option value="AP">AP</option>
+                                        <option value="AM">AM</option>
+                                        <option value="BA">BA</option>
+                                        <option value="CE">CE</option>
+                                        <option value="DF">DF</option>
+                                        <option value="ES">ES</option>
+                                        <option value="GO">GO</option>
+                                        <option value="MA">MA</option>
+                                        <option value="MT">MT</option>
+                                        <option value="MS">MS</option>
                                         <option value="MG">MG</option>
-                                        <!-- Adicionar outros estados -->
+                                        <option value="PA">PA</option>
+                                        <option value="PB">PB</option>
+                                        <option value="PR">PR</option>
+                                        <option value="PE">PE</option>
+                                        <option value="PI">PI</option>
+                                        <option value="RJ">RJ</option>
+                                        <option value="RN">RN</option>
+                                        <option value="RS">RS</option>
+                                        <option value="RO">RO</option>
+                                        <option value="RR">RR</option>
+                                        <option value="SC">SC</option>
+                                        <option value="SP">SP</option>
+                                        <option value="SE">SE</option>
+                                        <option value="TO">TO</option>
                                     </select>
                                 </div>
                             </div>
@@ -352,6 +382,83 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initial update
     updateTotals();
+
+    // CEP Integration
+    const cepInput = document.getElementById('cep');
+    const cepLoading = document.getElementById('cep-loading');
+    const cepError = document.getElementById('cep-error');
+    const enderecoInput = document.getElementById('endereco');
+    const bairroInput = document.getElementById('bairro');
+    const cidadeInput = document.getElementById('cidade');
+    const ufSelect = document.getElementById('uf');
+
+    // Format CEP input
+    cepInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length >= 5) {
+            value = value.substring(0, 5) + '-' + value.substring(5, 8);
+        }
+        e.target.value = value;
+        
+        // Auto-fill when CEP is complete
+        if (value.length === 9) {
+            fillAddressFromCEP(value.replace('-', ''));
+        }
+    });
+
+    // CEP API Integration
+    async function fillAddressFromCEP(cep) {
+        if (cep.length !== 8) return;
+
+        // Show loading
+        cepLoading.style.display = 'block';
+        cepError.style.display = 'none';
+        
+        // Clear previous data
+        enderecoInput.value = '';
+        bairroInput.value = '';
+        cidadeInput.value = '';
+        ufSelect.value = '';
+
+        try {
+            const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+            const data = await response.json();
+
+            if (data.erro) {
+                throw new Error('CEP não encontrado');
+            }
+
+            // Fill form fields
+            enderecoInput.value = data.logradouro || '';
+            bairroInput.value = data.bairro || '';
+            cidadeInput.value = data.localidade || '';
+            ufSelect.value = data.uf || '';
+
+            // Hide loading
+            cepLoading.style.display = 'none';
+            
+            // Focus on number field
+            document.querySelector('input[type="text"]').focus();
+
+        } catch (error) {
+            console.error('Erro ao buscar CEP:', error);
+            cepLoading.style.display = 'none';
+            cepError.style.display = 'block';
+            
+            // Hide error after 3 seconds
+            setTimeout(() => {
+                cepError.style.display = 'none';
+            }, 3000);
+        }
+    }
+
+    // Manual CEP lookup on blur
+    cepInput.addEventListener('blur', function() {
+        const cep = this.value.replace(/\D/g, '');
+        if (cep.length === 8) {
+            fillAddressFromCEP(cep);
+        }
+    });
 });
 </script>
 {% endblock %}
