@@ -73,11 +73,8 @@
                     <div class="product-card">
                         <!-- Product Status Badges -->
                         <div class="product-badges">
-                            {% if not product.available %}
-                                <span class="badge-esgotado">Esgotado</span>
-                            {% endif %}
                             {% if product.free_shipping %}
-                                <span class="badge-frete">Frete grátis</span>
+                                <span class="badge-frete">Frete grátis a partir de R$ 100</span>
                             {% endif %}
                             {% if product.get('limited_stock') %}
                                 <span class="badge-limited">ESTOQUE LIMITADO</span>
@@ -140,11 +137,8 @@
                     <div class="product-card">
                         <!-- Product Status Badges -->
                         <div class="product-badges">
-                            {% if not product.available %}
-                                <span class="badge-esgotado">Esgotado</span>
-                            {% endif %}
                             {% if product.free_shipping %}
-                                <span class="badge-frete">Frete grátis</span>
+                                <span class="badge-frete">Frete grátis a partir de R$ 100</span>
                             {% endif %}
                         </div>
 
