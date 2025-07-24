@@ -226,12 +226,11 @@ body.cookie-notice-visible {
 
 .hero-grid {
     display: grid;
-    grid-template-columns: 350px 1fr;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
     height: 400px;
     max-width: 1200px;
     margin: 0 auto;
-    gap: 40px;
 }
 
 .hero-model {
@@ -241,17 +240,15 @@ body.cookie-notice-visible {
 }
 
 .model-image {
-    width: 320px;
-    height: 380px;
+    width: 280px;
+    height: 350px;
     object-fit: cover;
-    object-position: center top;
-    border-radius: 0;
-    box-shadow: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
 .hero-text-content {
-    padding-left: 0;
-    padding-right: 40px;
+    padding-left: 40px;
 }
 
 .hero-main-title {
