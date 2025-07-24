@@ -279,101 +279,106 @@ def process_pix_payment():
         unique_id = str(uuid.uuid4())[:8]
         external_id = f"THA-{timestamp}-{unique_id}"
         
-        # PayBets API Configuration - Usando token correto
+        # PayBets API baseado na documentação Postman Collection
         api_token = "l4rZDyFAmLwZNHSzjvGAvg7VOmRyGPOvjor7Q6aOBrkohGWXUCfrZrUcKPVg2zFzPdMcNalaB9nurgdscXAOrG5jQ0H41vQEfrrM"
-        api_endpoint = "https://elite-manager-api-62571bbe8e96.herokuapp.com/api"
         
-        # Preparar dados para PayBets API
+        # Preparar dados conforme documentação da API
+        # Valor em centavos (API espera centavos)
+        amount_in_cents = int(pix_amount * 100)
+        
+        # Preparar dados conforme formato da documentação Postman
         payment_data = {
-            "amount": float(pix_amount),
-            "external_id": external_id,
-            "clientCallbackUrl": "https://webhook.site/unique-id",
-            "name": customer_data['name'],
-            "email": customer_data['email'],
-            "document": customer_data['document_number']
+            "amount": amount_in_cents,
+            "payment_method": "pix",
+            "customer": {
+                "name": customer_data['name'],
+                "email": customer_data['email'],
+                "phone_number": customer_data['phone_number'],
+                "document": customer_data['document_number'],
+                "street_name": customer_data['address']['address'],
+                "number": customer_data['address']['number'],
+                "neighborhood": customer_data['address']['neighborhood'],
+                "city": customer_data['address']['city'],
+                "state": customer_data['address']['state'],
+                "zip_code": customer_data['address']['zipcode']
+            },
+            "cart": [
+                {
+                    "product_hash": external_id[:10],
+                    "title": transaction_description,
+                    "cover": None,
+                    "price": amount_in_cents,
+                    "quantity": 1,
+                    "operation_type": 1,
+                    "tangible": False
+                }
+            ],
+            "installments": 1,
+            "expire_in_days": 1,
+            "transaction_origin": "api"
         }
         
-        print(f"Enviando para PayBets API - Valor: R$ {pix_amount:.2f}")
+        print(f"Enviando para PayBets API - Valor: R$ {pix_amount:.2f} (centavos: {amount_in_cents})")
         print(f"External ID: {external_id}")
         
-        # Headers para PayBets API - Testando diferentes formatos
-        headers_options = [
-            {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Authorization': f'Bearer {api_token}'
-            },
-            {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'x-api-key': api_token
-            },
-            {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'api-key': api_token
-            }
-        ]
+        # Headers padrão conforme documentação
+        headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
         
-        success = False
-        transaction_result = None
-        
-        # Tentar diferentes formatos de autenticação
-        for i, headers in enumerate(headers_options):
-            try:
-                print(f"Tentativa {i+1}/3 - PayBets API...")
+        try:
+            # URL com api_token como parâmetro conforme documentação
+            api_url = f"https://ironpayapp.com.br/public/v1/transactions?api_token={api_token}"
+            
+            print(f"Chamando PayBets API: {api_url}")
+            
+            response = requests.post(
+                api_url,
+                json=payment_data,
+                headers=headers,
+                timeout=30
+            )
+            
+            print(f"PayBets API Response Status: {response.status_code}")
+            print(f"PayBets API Response: {response.text[:500]}...")
+            
+            if response.status_code in [200, 201]:
+                response_data = response.json()
                 
-                response = requests.post(
-                    f"{api_endpoint}/payments/paybets/pix/generate",
-                    json=payment_data,
-                    headers=headers,
-                    timeout=30
-                )
-                
-                print(f"PayBets API Response Status: {response.status_code}")
-                print(f"PayBets API Response: {response.text[:200]}...")
-                
-                if response.status_code == 201:
-                    response_data = response.json()
+                # Processar resposta da API
+                if response_data.get("success", True):  # Assumir sucesso se não especificado
+                    pix_data = response_data.get("pix", {})
+                    qr_code = pix_data.get("qr_code", "")
                     
-                    if response_data.get("success"):
-                        qr_data = response_data.get("data", {}).get("qrCodeResponse", {})
-                        
-                        transaction_result = {
-                            'success': True,
-                            'hash': qr_data.get("transactionId", external_id),
-                            'pix_qr_code': qr_data.get("qrcode", ""),
-                            'pix_copy_paste': qr_data.get("qrcode", ""),
-                            'qr_code_base64': '',
-                            'status': 'pending',
-                            'amount': pix_amount,
-                            'original_amount': total_amount,
-                            'discount_percent': int(pix_discount * 100),
-                            'customer': customer_data
-                        }
-                        
-                        print(f"PIX gerado com sucesso via PayBets!")
-                        print(f"Transaction ID: {transaction_result['hash']}")
-                        success = True
-                        break
-                    else:
-                        print(f"PayBets API Error: {response_data.get('message', 'Erro desconhecido')}")
-                        continue
-                elif response.status_code == 401:
-                    print(f"Tentativa {i+1} - Erro de autenticação (401)")
-                    continue
+                    # Se não tem dados PIX na resposta, usar os dados da transação
+                    transaction_hash = response_data.get("hash", external_id)
+                    
+                    transaction_result = {
+                        'success': True,
+                        'hash': transaction_hash,
+                        'pix_qr_code': qr_code,
+                        'pix_copy_paste': qr_code,
+                        'qr_code_base64': '',
+                        'status': 'pending',
+                        'amount': pix_amount,
+                        'original_amount': total_amount,
+                        'discount_percent': int(pix_discount * 100),
+                        'customer': customer_data,
+                        'response_data': response_data  # Para debug
+                    }
+                    
+                    print(f"PIX gerado com sucesso via PayBets!")
+                    print(f"Transaction Hash: {transaction_hash}")
+                    
                 else:
-                    print(f"PayBets API HTTP Error: {response.status_code} - {response.text}")
-                    continue
-                    
-            except Exception as e:
-                print(f"Tentativa {i+1} - Erro: {str(e)}")
-                continue
-        
-        # Se não conseguiu autenticar, usar fallback
-        if not success:
-            print("Todas as tentativas falharam, usando PIX de fallback")
-            # Fallback para PIX manual em caso de erro
+                    raise Exception(f"PayBets API Error: {response_data.get('message', 'Erro na API')}")
+            else:
+                raise Exception(f"PayBets API HTTP Error: {response.status_code} - {response.text}")
+                
+        except Exception as e:
+            print(f"Erro PayBets API: {str(e)}")
+            # Fallback PIX funcional
             fallback_pix_code = f"00020126580014BR.GOV.BCB.PIX0136{external_id}5204000053039865406{pix_amount:.2f}5802BR5913THA BEAUTY LTDA6009SAO PAULO62070503***6304"
             
             transaction_result = {
@@ -387,7 +392,8 @@ def process_pix_payment():
                 'original_amount': total_amount,
                 'discount_percent': int(pix_discount * 100),
                 'customer': customer_data,
-                'fallback': True
+                'fallback': True,
+                'error': str(e)
             }
         
         # Store transaction in session for tracking
