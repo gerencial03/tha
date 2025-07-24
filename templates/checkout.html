@@ -626,19 +626,34 @@ document.addEventListener('DOMContentLoaded', function() {
         const pixTotal = finalTotal * 0.9;
         
         // Update shipping
-        document.getElementById('summary-shipping').textContent = shippingCost === 0 ? 'Grátis' : `R$ ${shippingCost.toFixed(2).replace('.', ',')}`;
+        const shippingElement = document.getElementById('summary-shipping');
+        if (shippingElement) {
+            shippingElement.textContent = shippingCost === 0 ? 'Grátis' : `R$ ${shippingCost.toFixed(2).replace('.', ',')}`;
+            console.log('Frete atualizado:', shippingElement.textContent);
+        }
         
         // Update total
-        document.getElementById('summary-total').textContent = `R$ ${finalTotal.toFixed(2).replace('.', ',')}`;
+        const totalElement = document.getElementById('summary-total');
+        if (totalElement) {
+            totalElement.textContent = `R$ ${finalTotal.toFixed(2).replace('.', ',')}`;
+            console.log('Total atualizado:', totalElement.textContent);
+        }
         
         // Update PIX total
-        document.getElementById('pix-total').textContent = `R$ ${pixTotal.toFixed(2).replace('.', ',')}`;
+        const pixTotalElement = document.getElementById('pix-total');
+        if (pixTotalElement) {
+            pixTotalElement.textContent = `R$ ${pixTotal.toFixed(2).replace('.', ',')}`;
+            console.log('PIX total atualizado:', pixTotalElement.textContent);
+        }
         
         // Update finalize button
         const finalizeButton = document.querySelector('.btn-warning');
         if (finalizeButton) {
             finalizeButton.innerHTML = `🔒 Finalizar Compra via PIX - R$ ${pixTotal.toFixed(2).replace('.', ',')}`;
+            console.log('Botão finalizar atualizado:', pixTotal.toFixed(2));
         }
+        
+        console.log('=== TODOS OS VALORES ATUALIZADOS ===');
     }
     
     function showSuccessMessage(message) {
