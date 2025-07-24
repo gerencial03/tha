@@ -36,8 +36,8 @@ def index():
     session.modified = True
     
     return render_template('index.html', 
-                         linha_toque_essencial=products_data.get('linha_toque_essencial', []),
-                         queridinhos=products_data.get('queridinhos', []),
+                         labubu_collection=products_data.get('labubu_collection', []),
+                         acessorios_labubu=products_data.get('acessorios_labubu', []),
                          cart_count=0)
 
 @app.route('/get_cart_data')

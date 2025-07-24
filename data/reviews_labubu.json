@@ -1,0 +1,110 @@
+{
+  "labubu-original-rosa": [
+    {
+      "name": "Maria Silva",
+      "date": "15/07/2025",
+      "text": "Meu Labubu chegou perfeito! A qualidade é incrível, muito fofo e bem detalhado. Já virou minha peça favorita da coleção!",
+      "image": null
+    },
+    {
+      "name": "João Santos",
+      "date": "12/07/2025", 
+      "text": "Comprei para presente e foi um sucesso! O Labubu rosa é ainda mais lindo pessoalmente. Entrega super rápida!",
+      "image": null
+    },
+    {
+      "name": "Ana Costa",
+      "date": "10/07/2025",
+      "text": "Apaixonada pelo meu Labubu! A cor rosa é perfeita e o acabamento é impecável. Recomendo muito!",
+      "image": null
+    }
+  ],
+  "labubu-original-azul": [
+    {
+      "name": "Pedro Lima",
+      "date": "14/07/2025",
+      "text": "O Labubu azul é lindo demais! Chegou bem embalado e exatamente como esperado. Já quero comprar outros!",
+      "image": null
+    },
+    {
+      "name": "Camila Rodrigues",
+      "date": "11/07/2025",
+      "text": "Primeira compra de Labubu e me apaixonei! A qualidade surpreendeu, muito bem feito. Parabéns!",
+      "image": null
+    }
+  ],
+  "labubu-special-edition": [
+    {
+      "name": "Rafael Oliveira",
+      "date": "16/07/2025",
+      "text": "A edição especial dourada é simplesmente perfeita! O acabamento é premium e chegou com certificado. Vale cada centavo!",
+      "image": null
+    },
+    {
+      "name": "Beatriz Ferreira",
+      "date": "13/07/2025",
+      "text": "Labubu dourado é uma obra de arte! Super bem embalado, numerado e autêntico. Melhor compra que fiz!",
+      "image": null
+    }
+  ],
+  "labubu-mini-set": [
+    {
+      "name": "Lucas Mendes",
+      "date": "17/07/2025",
+      "text": "Kit perfeito para quem está começando! Os 3 mini Labubu são adoráveis e vieram em cores lindas. Recomendo!",
+      "image": null
+    },
+    {
+      "name": "Isabela Torres",
+      "date": "09/07/2025",
+      "text": "Comprei o kit mini e não me arrependo! Cada um tem sua personalidade, muito fofos. Excelente custo-benefício!",
+      "image": null
+    }
+  ],
+  "labubu-glow-dark": [
+    {
+      "name": "Gabriel Souza",
+      "date": "18/07/2025",
+      "text": "O efeito glow in the dark é incrível! Durante o dia já é lindo, mas no escuro fica mágico. Meus filhos amaram!",
+      "image": null
+    }
+  ],
+  "chaveiro-labubu": [
+    {
+      "name": "Fernanda Alves",
+      "date": "19/07/2025", 
+      "text": "Chaveiro muito fofo e bem feito! Levei na bolsa e todo mundo pergunta onde comprei. Adorei!",
+      "image": null
+    },
+    {
+      "name": "Thiago Pereira",
+      "date": "08/07/2025",
+      "text": "Perfeito para quem quer levar o Labubu sempre junto! Resistente e muito bem detalhado.",
+      "image": null
+    }
+  ],
+  "case-labubu-iphone": [
+    {
+      "name": "Larissa Barbosa",
+      "date": "20/07/2025",
+      "text": "Case lindo e protege super bem! O design do Labubu ficou perfeito no meu iPhone. Recomendo!",
+      "image": null
+    }
+  ],
+  "caneca-labubu": [
+    {
+      "name": "Roberto Silva",
+      "date": "21/07/2025",
+      "text": "Caneca de ótima qualidade! Tomo meu café toda manhã pensando no Labubu. Design muito fofo!",
+      "image": null
+    }
+  ],
+  "camiseta-labubu": [
+    {
+      "name": "Juliana Ramos",
+      "date": "22/07/2025",
+      "text": "Camiseta super confortável e a estampa do Labubu é linda! Tecido de qualidade, não desbotou na lavagem.",
+      "image": null
+    }
+  ]
+}
