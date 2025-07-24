@@ -1,37 +1,39 @@
 /* Botões Personalizados - Tha Beauty */
 
-/* Botão de Comprar Principal - Versão Compacta */
+/* Botão de Comprar - Estilo Site Oficial */
 .btn-comprar-melhorado {
-    background: linear-gradient(135deg, #e67e22 0%, #d35400 100%) !important;
+    background: #e67e22 !important;
     color: white !important;
     border: none !important;
-    padding: 8px 16px !important;
-    border-radius: 8px !important;
+    padding: 12px 20px !important;
+    border-radius: 4px !important;
     text-decoration: none !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    font-size: 12px !important;
+    font-size: 14px !important;
     font-weight: 500 !important;
-    min-height: 36px !important;
+    min-height: 40px !important;
     width: 100% !important;
-    transition: all 0.3s ease !important;
-    box-shadow: 0 2px 8px rgba(230, 126, 34, 0.25) !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.3px !important;
+    transition: background-color 0.2s ease !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
     cursor: pointer !important;
+    box-shadow: none !important;
 }
 
 .btn-comprar-melhorado:hover {
-    transform: translateY(-1px) !important;
-    box-shadow: 0 4px 12px rgba(230, 126, 34, 0.35) !important;
+    background: #d35400 !important;
     color: white !important;
     text-decoration: none !important;
+    transform: none !important;
+    box-shadow: none !important;
 }
 
 .btn-comprar-melhorado:active {
-    transform: translateY(0) !important;
-    box-shadow: 0 1px 4px rgba(230, 126, 34, 0.3) !important;
+    background: #c0392b !important;
+    transform: none !important;
+    box-shadow: none !important;
 }
 
 /* Botão de Finalizar Pagamento */
