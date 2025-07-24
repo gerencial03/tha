@@ -27,10 +27,7 @@
                     </div>
                     <div class="card-body">
                         <div class="shipping-options">
-                            {% set subtotal = 0 %}
-                            {% for item_id, item_quantity in checkout_cart.items() %}
-                                {% set subtotal = subtotal + (all_products_dict[item_id].price * item_quantity) %}
-                            {% endfor %}
+                            {% set subtotal = product.price * quantity %}
                             {% if subtotal >= 100 %}
                             <!-- Free shipping only for orders above R$ 100 -->
                             <div class="alert alert-success text-center mb-0 p-4" style="border: 2px solid #28a745; background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);">
@@ -370,19 +367,9 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Calculate total from all cart items
-    let subtotal = 0;
-    const cartItems = document.querySelectorAll('.cart-item');
-    cartItems.forEach(item => {
-        const price = parseFloat(item.dataset.price);
-        const quantity = parseInt(item.dataset.quantity);
-        subtotal += price * quantity;
-    });
-    
-    // Add to checkout function
-    window.addToCheckout = function(productId) {
-        window.location.href = `/add_to_checkout/${productId}`;
-    };
+    const basePrice = {{ product.price }};
+    const quantity = {{ quantity }};
+    const subtotal = basePrice * quantity;
     const shippingOptions = document.querySelectorAll('input[name="shipping"]');
     const summaryShipping = document.getElementById('summary-shipping');
     const summaryTotal = document.getElementById('summary-total');
