@@ -44,6 +44,23 @@
                                 <div class="original-price text-muted text-decoration-line-through" id="original-price" style="font-size: 1.2rem;">R${{ "%.2f"|format(product.original_price) }}</div>
                             </div>
                         {% endif %}
+                        
+                        <!-- PIX Discount -->
+                        <div class="pix-discount-section mt-3 p-3" style="background: linear-gradient(135deg, #32bc9b, #28a085); border-radius: 12px; border: 2px solid #27ae60;">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <span style="font-size: 1.5rem; margin-right: 8px;">💰</span>
+                                    <div>
+                                        <div class="text-white fw-bold" style="font-size: 1.1rem;">PIX com 45% OFF</div>
+                                        <div class="text-white opacity-90" style="font-size: 0.9rem;">Desconto aplicado automaticamente</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-white fw-bold" id="pix-price" style="font-size: 1.8rem;">R${{ "%.2f"|format(product.price * 0.55) }}</div>
+                                    <div class="text-white opacity-90" style="font-size: 0.8rem;">Economia de R${{ "%.2f"|format(product.price * 0.45) }}</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Quantity and Buy Button -->
@@ -223,9 +240,24 @@ document.addEventListener('DOMContentLoaded', function() {
             originalPriceEl.textContent = `R$${totalOriginalPrice.toFixed(2).replace('.', ',')}`;
         }
         
+        // Update PIX price with 45% discount
+        const pixPrice = totalPrice * 0.55;
+        const pixSavings = totalPrice * 0.45;
+        const pixPriceEl = document.getElementById('pix-price');
+        const pixSavingsEl = document.querySelector('.pix-discount-section .opacity-90:last-child');
+        
+        if (pixPriceEl) {
+            pixPriceEl.textContent = `R$${pixPrice.toFixed(2).replace('.', ',')}`;
+        }
+        if (pixSavingsEl) {
+            pixSavingsEl.textContent = `Economia de R$${pixSavings.toFixed(2).replace('.', ',')}`;
+        }
+        
         // Update installments
-        const installmentValue = totalPrice / 12;
-        installmentsEl.textContent = `12x de R$${installmentValue.toFixed(2).replace('.', ',')}`;
+        if (installmentsEl) {
+            const installmentValue = totalPrice / 12;
+            installmentsEl.textContent = `12x de R$${installmentValue.toFixed(2).replace('.', ',')}`;
+        }
     }
     
     // Decrease quantity
