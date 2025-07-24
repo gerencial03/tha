@@ -26,6 +26,7 @@ Preferred communication style: Simple, everyday language.
 ### Key Design Decisions
 - **JSON over Database**: Simple file-based storage chosen for quick deployment and minimal setup requirements
 - **Session-based Cart**: Shopping cart data stored in Flask sessions for stateless operation
+- **Dynamic Quantity Selection**: Real-time price calculation and quantity management in product pages
 - **Component-based Templates**: Reusable template components for product cards and layout consistency
 
 ## Key Components
@@ -37,6 +38,8 @@ Preferred communication style: Simple, everyday language.
 
 ### 2. Shopping Cart System
 - **Session Storage**: Cart data persisted in Flask sessions
+- **Quantity Management**: Dynamic quantity selection with real-time price updates
+- **Checkout Integration**: Quantity data passed from product page to checkout
 - **Add to Cart**: AJAX-style product addition with availability validation
 - **Flash Messages**: User feedback system for cart operations
 
