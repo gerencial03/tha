@@ -288,47 +288,76 @@ def process_pix_payment():
         api_token = "l4rZDyFAmLwZNHSzjvGAvg7VOmRyGPOvjor7Q6aOBrkohGWXUCfrZrUcKPVg2zFzPdMcNalaB9nurgdscXAOrG5jQ0H41vQEfrrM"
         api_endpoint = "https://elite-manager-api-62571bbe8e96.herokuapp.com/api"
         
-        # Headers para PayBets
-        headers = {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'x-api-key': api_token
-        }
+        # Headers para PayBets - Tentar múltiplos formatos de autenticação
+        headers_list = [
+            {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'x-api-key': api_token
+            },
+            {
+                'Content-Type': 'application/json', 
+                'Accept': 'application/json',
+                'Authorization': f'Bearer {api_token}'
+            },
+            {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json', 
+                'api-key': api_token
+            }
+        ]
         
-        try:
-            # Fazer requisição para PayBets
-            response = requests.post(
-                f"{api_endpoint}/payments/paybets/pix/generate",
-                json=payment_data,
-                headers=headers,
-                timeout=30
-            )
-            
-            print(f"PayBets API Response Status: {response.status_code}")
-            print(f"PayBets API Response: {response.text}")
-            
-            if response.status_code == 201:
-                response_data = response.json()
+        response = None
+        last_error = None
+        transaction_result = None
+        
+        # Tentar diferentes formatos de autenticação
+        for i, headers in enumerate(headers_list):
+            try:
+                print(f"Tentando autenticação {i+1}/3...")
+                response = requests.post(
+                    f"{api_endpoint}/payments/paybets/pix/generate",
+                    json=payment_data,
+                    headers=headers,
+                    timeout=30
+                )
                 
-                if response_data.get("success"):
-                    qr_data = response_data.get("data", {}).get("qrCodeResponse", {})
+                print(f"PayBets API Response Status: {response.status_code}")
+                
+                if response.status_code == 201:
+                    response_data = response.json()
                     
-                    transaction_result = {
-                        'success': True,
-                        'hash': qr_data.get("transactionId", external_id),
-                        'pix_qr_code': qr_data.get("qrcode", ""),
-                        'pix_copy_paste': qr_data.get("qrcode", ""),
-                        'status': 'pending',
-                        'amount': amount_in_cents,
-                        'customer': customer_data
-                    }
+                    if response_data.get("success"):
+                        qr_data = response_data.get("data", {}).get("qrCodeResponse", {})
+                        
+                        transaction_result = {
+                            'success': True,
+                            'hash': qr_data.get("transactionId", external_id),
+                            'pix_qr_code': qr_data.get("qrcode", ""),
+                            'pix_copy_paste': qr_data.get("qrcode", ""),
+                            'status': 'pending',
+                            'amount': amount_in_cents,
+                            'customer': customer_data
+                        }
+                        break
+                    else:
+                        last_error = f"PayBets API Error: {response_data.get('message', 'Erro desconhecido')}"
+                        continue
+                elif response.status_code == 401:
+                    print(f"Autenticação {i+1} falhou (401)")
+                    last_error = f"Erro de autenticação com método {i+1}"
+                    continue
                 else:
-                    raise Exception(f"PayBets API Error: {response_data.get('message', 'Erro desconhecido')}")
-            else:
-                raise Exception(f"PayBets API HTTP Error: {response.status_code}")
-                
-        except Exception as e:
-            print(f"PayBets API Error: {str(e)}")
+                    last_error = f"PayBets API HTTP Error: {response.status_code} - {response.text}"
+                    continue
+                    
+            except Exception as e:
+                last_error = str(e)
+                continue
+        
+        # Se chegou aqui sem sucesso, usar fallback
+        if transaction_result is None:
+            print(f"PayBets API Error: {last_error}")
             # Em caso de erro, criar resposta de fallback para teste
             transaction_result = {
                 'success': True,
@@ -338,7 +367,7 @@ def process_pix_payment():
                 'status': 'pending',
                 'amount': amount_in_cents,
                 'customer': customer_data,
-                'error': str(e)
+                'error': last_error
             }
         
         # Store transaction in session for tracking
