@@ -57,19 +57,15 @@
                         <div class="shipping-options">
                             {% set subtotal = product.price * quantity %}
                             {% if subtotal >= 100 %}
-                            <div class="form-check p-3 border rounded mb-2 bg-success bg-opacity-10">
-                                <input class="form-check-input" type="radio" name="shipping" id="free-shipping" value="0" checked data-days="5-10">
-                                <label class="form-check-label w-100" for="free-shipping">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <strong>🎉 Frete GRÁTIS</strong>
-                                            <div class="text-muted">5 a 10 dias úteis</div>
-                                        </div>
-                                        <div class="fw-bold text-success">Grátis</div>
-                                    </div>
-                                </label>
+                            <!-- Free shipping only for orders above R$ 100 -->
+                            <div class="alert alert-success text-center mb-0" style="border: 2px solid #28a745;">
+                                <h5 class="mb-2">🎉 Parabéns! Seu frete é GRÁTIS!</h5>
+                                <p class="mb-1">Compras acima de R$ 100,00 têm frete grátis para todo o Brasil</p>
+                                <small class="text-muted">Entrega em 5 a 10 dias úteis</small>
+                                <input type="hidden" name="shipping" value="0" checked>
                             </div>
                             {% else %}
+                            <!-- Shipping options for orders below R$ 100 -->
                             <div class="form-check p-3 border rounded mb-2">
                                 <input class="form-check-input" type="radio" name="shipping" id="sedex" value="11.90" checked data-days="5-10">
                                 <label class="form-check-label w-100" for="sedex">
@@ -82,7 +78,6 @@
                                     </div>
                                 </label>
                             </div>
-                            {% endif %}
                             
                             <div class="form-check p-3 border rounded">
                                 <input class="form-check-input" type="radio" name="shipping" id="express" value="19.90" data-days="1-3">
@@ -96,6 +91,7 @@
                                     </div>
                                 </label>
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -394,7 +390,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const pixTotal = document.getElementById('pix-total');
 
     function updateTotals() {
-        const selectedShipping = document.querySelector('input[name="shipping"]:checked');
+        let selectedShipping = document.querySelector('input[name="shipping"]:checked');
+        
+        // Handle hidden input for free shipping
+        if (!selectedShipping) {
+            selectedShipping = document.querySelector('input[name="shipping"][type="hidden"]');
+        }
+        
         if (!selectedShipping) {
             console.log('Nenhuma opção de frete selecionada');
             return;
@@ -403,11 +405,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const shippingCost = parseFloat(selectedShipping.value) || 0;
         const total = subtotal + shippingCost;
         const pixDiscountTotal = total * 0.9;
-
-        console.log('Subtotal:', subtotal);
-        console.log('Frete selecionado:', shippingCost);
-        console.log('Total:', total);
-        console.log('PIX total:', pixDiscountTotal);
 
         // Update shipping display
         if (shippingCost === 0) {
@@ -429,16 +426,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Debug: verificar se os elementos existem
-    console.log('Opções de frete encontradas:', shippingOptions.length);
-    console.log('Elemento summary-shipping:', summaryShipping);
-    console.log('Elemento summary-total:', summaryTotal);
-    console.log('Elemento pix-total:', pixTotal);
-
-    shippingOptions.forEach((option, index) => {
-        console.log(`Opção ${index}:`, option.value, option.checked);
+    // Add event listeners only to visible shipping options (not hidden)
+    const visibleShippingOptions = document.querySelectorAll('input[name="shipping"]:not([type="hidden"])');
+    
+    visibleShippingOptions.forEach((option, index) => {
         option.addEventListener('change', function() {
-            console.log('Mudança detectada para:', this.value);
             updateTotals();
         });
     });
