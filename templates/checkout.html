@@ -503,19 +503,25 @@ document.addEventListener('DOMContentLoaded', function() {
             return response.json();
         })
         .then(data => {
-            console.log('Dados recebidos:', data);
+            console.log('Dados recebidos do servidor:', data);
             if (data.success) {
-                // Update the selected products section
+                console.log('RESPOSTA SUCESSO - Iniciando atualizações...');
+                
+                // 1. Atualizar seção "Produtos Selecionados"
+                console.log('1. Atualizando produtos selecionados...');
                 updateSelectedProducts(data.checkout_items);
-                // Update payment summary - ensure this happens
-                console.log('Chamando updatePaymentSummary com:', data.total_value, data.checkout_items);
+                
+                // 2. Atualizar seção "💳 Resumo do Pagamento" 
+                console.log('2. Atualizando resumo do pagamento...');
                 updatePaymentSummary(data.total_value, data.checkout_items);
-                // Show success message
+                
+                // 3. Feedback visual
                 showSuccessMessage('Produto adicionado com sucesso!');
-                // Scroll smoothly to payment summary
                 scrollToPaymentSummary();
+                
+                console.log('TODAS AS ATUALIZAÇÕES CONCLUÍDAS!');
             } else {
-                console.error('Erro na resposta:', data);
+                console.error('Erro na resposta do servidor:', data);
             }
         })
         .catch(error => {
@@ -526,39 +532,68 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     
     function updateSelectedProducts(checkoutItems) {
+        console.log('=== ATUALIZANDO PRODUTOS SELECIONADOS ===');
+        console.log('Produtos para mostrar:', checkoutItems.length);
+        
         const selectedProductsDiv = document.getElementById('selected-products');
+        if (!selectedProductsDiv) {
+            console.error('ERRO: Elemento selected-products não encontrado!');
+            return;
+        }
+        
         selectedProductsDiv.innerHTML = '';
         
-        checkoutItems.forEach((item, index) => {
-            const productHtml = `
-                <div class="row align-items-center mb-3 pb-3 ${index < checkoutItems.length - 1 ? 'border-bottom' : ''}" data-product-id="${item.product.id}">
-                    <div class="col-md-3">
-                        <img src="${item.product.image_url}" alt="${item.product.name}" class="img-fluid rounded">
-                    </div>
-                    <div class="col-md-9">
-                        <h6>${item.product.name}</h6>
-                        <div class="d-flex align-items-center">
-                            <span class="text-muted me-2">Quantidade:</span>
-                            <span class="badge bg-primary fs-6">${item.quantity}x</span>
-                        </div>
-                        <small class="text-muted">${item.product.description}</small>
-                    </div>
+        if (checkoutItems.length === 0) {
+            selectedProductsDiv.innerHTML = `
+                <div class="text-center p-4" style="color: #666;">
+                    <p>Nenhum produto selecionado</p>
                 </div>
             `;
-            selectedProductsDiv.innerHTML += productHtml;
-        });
+        } else {
+            checkoutItems.forEach((item, index) => {
+                console.log(`Adicionando à lista de produtos: ${item.product.name}`);
+                const productHtml = `
+                    <div class="row align-items-center mb-3 pb-3 ${index < checkoutItems.length - 1 ? 'border-bottom' : ''}" data-product-id="${item.product.id}">
+                        <div class="col-md-3">
+                            <img src="${item.product.image_url}" alt="${item.product.name}" class="img-fluid rounded">
+                        </div>
+                        <div class="col-md-9">
+                            <h6>${item.product.name}</h6>
+                            <div class="d-flex align-items-center">
+                                <span class="text-muted me-2">Quantidade:</span>
+                                <span class="badge bg-primary fs-6">${item.quantity}x</span>
+                            </div>
+                            <small class="text-muted">${item.product.description}</small>
+                        </div>
+                    </div>
+                `;
+                selectedProductsDiv.innerHTML += productHtml;
+            });
+        }
+        console.log('=== PRODUTOS SELECIONADOS ATUALIZADOS ===');
     }
     
     function updatePaymentSummary(totalValue, checkoutItems) {
         console.log('=== INICIANDO updatePaymentSummary ===');
-        console.log('Total Value:', totalValue);
-        console.log('Checkout Items:', checkoutItems);
+        console.log('Total Value recebido:', totalValue);
+        console.log('Checkout Items recebidos:', checkoutItems.length, 'produtos');
         
-        // Update subtotal
+        // Update subtotal in payment summary
         const subtotalElement = document.getElementById('summary-subtotal');
         if (subtotalElement) {
-            subtotalElement.textContent = `R$ ${totalValue.toFixed(2).replace('.', ',')}`;
-            console.log('Subtotal atualizado');
+            const formattedTotal = `R$ ${totalValue.toFixed(2).replace('.', ',')}`;
+            subtotalElement.textContent = formattedTotal;
+            console.log('✅ Subtotal atualizado para:', formattedTotal);
+        } else {
+            console.error('❌ ERRO: Elemento summary-subtotal não encontrado!');
+        }
+        
+        // Update total value as well (if different from subtotal)
+        const totalElement = document.getElementById('summary-total');
+        if (totalElement) {
+            const formattedTotal = `R$ ${totalValue.toFixed(2).replace('.', ',')}`;
+            totalElement.textContent = formattedTotal;
+            console.log('✅ Total atualizado para:', formattedTotal);
         }
         
         // Update products info in payment summary
