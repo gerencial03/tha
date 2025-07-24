@@ -101,6 +101,18 @@ Preferred communication style: Simple, everyday language.
   - Updated all product categories to "Coleção Labubu Oficial" and "Acessórios Kawaii Labubu"
   - Created Labubu-specific customer reviews and testimonials
   - Changed store branding to "Labubu Brasil - Colecionáveis Kawaii Oficiais"
+- **Advanced Product Descriptions with Sales Psychology** (July 24, 2025):
+  - Research-based descriptions using authentic Labubu series information
+  - Sales triggers including scarcity, social proof, celebrity endorsements
+  - Technical specifications from Pop Mart official documentation
+  - Investment value propositions with real market data
+  - Urgency elements with limited stock messaging
+  - Each product positioned as premium collectible with unique value
+- **Authentic Customer Photo Integration** (July 24, 2025):
+  - 9 real customer photos integrated into reviews section
+  - Photos showing actual Labubu products in real-life scenarios
+  - Enhanced credibility with visual proof of product quality
+  - Customer testimonials aligned with authentic experiences
 
 ### Previous Changes
 - **PIX Payment Integration**: Complete implementation with PayBets gateway
