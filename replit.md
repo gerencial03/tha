@@ -92,6 +92,14 @@ Preferred communication style: Simple, everyday language.
 - **WSGI Server**: Replace development server with Gunicorn or uWSGI
 
 ### Recent Changes (July 2025)
+- **Review Count Enhancement** (July 24, 2025):
+  - Updated all product review counts to realistic numbers between 149-270 reviews
+  - Enhanced reviews.json with detailed, authentic customer comments
+  - Changed "Avaliar" to "Avaliação" in product detail pages
+  - Added PIX discount display (45% off) in product detail pages
+  - All reviews now emphasize Pop Mart authenticity and Kasing Lung design quality
+
+### Previous Recent Changes (July 2025)
 - **Authentic Product Descriptions Overhaul** (July 24, 2025):
   - Completely removed all fragrance and cosmetic product descriptions
   - Created authentic Labubu descriptions based on official labubu.com.br content

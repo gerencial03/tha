@@ -39,6 +39,30 @@
       "comment": "Sou colecionadora há anos e este é sem dúvida um Labubu oficial. A diferença na qualidade é gritante comparado às falsificações que vi por aí. O rosa é vibrante, o material premium, e vem com todos os hologramas de segurança. Labubu Brasil é realmente o distribuidor oficial. Excelente!",
       "date": "2025-04-24",
       "verified_purchase": true
+    },
+    {
+      "id": 6,
+      "customer_name": "Ana Clara S.",
+      "rating": 5,
+      "comment": "Perfeito! A cor rosa é exatamente como nas fotos oficiais da Pop Mart. Recebi com embalagem lacrada e certificado de autenticidade. É impossível não se apaixonar por esse rostinho travesso!",
+      "date": "2025-07-20",
+      "verified_purchase": true
+    },
+    {
+      "id": 7,
+      "customer_name": "Beatriz M.",
+      "rating": 5,
+      "comment": "Meu segundo Labubu da coleção! A qualidade continua impecável. Material super macio, acabamento perfeito. Só compro aqui porque sei que é garantia de produto original.",
+      "date": "2025-07-18",
+      "verified_purchase": true
+    },
+    {
+      "id": 8,
+      "customer_name": "Carla R.",
+      "rating": 5,
+      "comment": "Produto autêntico Pop Mart! Veio com QR code funcionando, embalagem original. O design do Kasing Lung é genial. Recomendo para todos os colecionadores.",
+      "date": "2025-07-15",
+      "verified_purchase": true
     }
   ],
   "labubu-verde": [
