@@ -26,11 +26,13 @@ def load_reviews():
 def index():
     products_data = load_products()
     
-    # Limpar todas as sessões para deploy limpo
-    session.clear()
-    session['cart'] = {}
-    session['checkout_cart'] = {}
-    session['product_quantity'] = {}
+    # Initialize sessions if they don't exist
+    if 'cart' not in session:
+        session['cart'] = {}
+    if 'checkout_cart' not in session:
+        session['checkout_cart'] = {}
+    if 'product_quantity' not in session:
+        session['product_quantity'] = {}
     session.modified = True
     
     return render_template('index.html', 
@@ -41,9 +43,9 @@ def index():
 @app.route('/get_cart_data')
 def get_cart_data():
     """Rota para obter dados do carrinho para o dropdown"""
-    # Limpar session e retornar carrinho vazio para deploy
-    session.clear()
-    return jsonify({'items': [], 'total': 0, 'count': 0})
+    # Get current cart data from session
+    cart = session.get('cart', {})
+    return jsonify({'items': [], 'total': 0, 'count': len(cart)})
 
 @app.route('/clear_cart')
 def clear_cart():
@@ -146,11 +148,13 @@ def checkout(product_id):
     if 'checkout_cart' not in session:
         session['checkout_cart'] = {}
     
-    # Add the current product to checkout cart if not already there
+    # Add the current product to checkout cart (sum quantities if exists)
     quantity = int(request.args.get('quantity', 1))
-    if product_id not in session['checkout_cart']:
+    if product_id in session['checkout_cart']:
+        session['checkout_cart'][product_id] += quantity
+    else:
         session['checkout_cart'][product_id] = quantity
-        session.modified = True
+    session.modified = True
     
     # Build checkout items from cart
     checkout_items = []
