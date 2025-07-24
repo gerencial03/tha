@@ -112,49 +112,20 @@
                 <!-- Shipping Options -->
                 <div class="card mb-4">
                     <div class="card-header bg-light">
-                        <h5 class="mb-0">🚚 {% if product.price * quantity >= 100 %}Frete Grátis{% else %}Opções de Frete{% endif %}</h5>
+                        <h5 class="mb-0">🚚 Frete Grátis</h5>
                     </div>
                     <div class="card-body">
                         <div class="shipping-options">
-                            {% if total_value >= 100 %}
-                            <!-- Free shipping only for orders above R$ 100 -->
+                            <!-- Always free shipping -->
                             <div class="alert alert-success text-center mb-0 p-4" style="border: 2px solid #28a745; background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);">
                                 <div class="mb-3">
                                     <i class="fas fa-shipping-fast fa-3x text-success"></i>
                                 </div>
-                                <h4 class="mb-2 text-success fw-bold">🎉 Parabéns! Seu frete é GRÁTIS!</h4>
-                                <p class="mb-2 text-dark">Compras acima de R$ 100,00 têm frete grátis para todo o Brasil</p>
+                                <h4 class="mb-2 text-success fw-bold">🎉 Seu frete é GRÁTIS!</h4>
+                                <p class="mb-2 text-dark">Frete grátis para todo o Brasil em todos os pedidos</p>
                                 <div class="badge bg-success fs-6 py-2 px-3">Entrega em 2 a 5 dias úteis</div>
                                 <input type="hidden" name="shipping" value="0">
                             </div>
-                            {% else %}
-                            <!-- Shipping options for orders below R$ 100 -->
-                            <div class="form-check p-3 border rounded mb-2">
-                                <input class="form-check-input" type="radio" name="shipping" id="sedex" value="11.90" checked data-days="5-10">
-                                <label class="form-check-label w-100" for="sedex">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <strong>📦 Sedex</strong>
-                                            <div class="text-muted">5 a 10 dias úteis</div>
-                                        </div>
-                                        <div class="fw-bold">R$ 11,90</div>
-                                    </div>
-                                </label>
-                            </div>
-                            
-                            <div class="form-check p-3 border rounded">
-                                <input class="form-check-input" type="radio" name="shipping" id="express" value="19.90" data-days="1-3">
-                                <label class="form-check-label w-100" for="express">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <strong>⚡ Express</strong>
-                                            <div class="text-muted">1 a 3 dias úteis</div>
-                                        </div>
-                                        <div class="fw-bold">R$ 19,90</div>
-                                    </div>
-                                </label>
-                            </div>
-                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -215,12 +186,12 @@
                             </div>
                             <div class="d-flex justify-content-between mb-2">
                                 <span>Frete:</span>
-                                <span id="summary-shipping">{% if total_value >= 100 %}Grátis{% else %}R$ 11,90{% endif %}</span>
+                                <span id="summary-shipping">Grátis</span>
                             </div>
                             <hr>
                             <div class="d-flex justify-content-between mb-3">
                                 <strong>Total:</strong>
-                                <strong id="summary-total">R${{ "%.2f"|format(total_value + (0 if total_value >= 100 else 11.90)) }}</strong>
+                                <strong id="summary-total">R${{ "%.2f"|format(total_value) }}</strong>
                             </div>
 
                             <!-- PIX Payment Option -->
@@ -233,7 +204,7 @@
                                     <div class="pix-calculation">
                                         <div class="d-flex justify-content-between">
                                             <span>Total com desconto PIX:</span>
-                                            <strong class="text-success" id="pix-total">R${{ "%.2f"|format((total_value + (0 if total_value >= 100 else 11.90)) * 0.55) }}</strong>
+                                            <strong class="text-success" id="pix-total">R${{ "%.2f"|format(total_value * 0.55) }}</strong>
                                         </div>
                                     </div>
                                 </div>
@@ -579,7 +550,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Calculate and update shipping and totals immediately
-        const shippingCost = totalValue >= 100 ? 0 : 11.90;
+        const shippingCost = 0; // Always free shipping
         const finalTotal = totalValue + shippingCost;
         const pixTotal = finalTotal * 0.55;
         
