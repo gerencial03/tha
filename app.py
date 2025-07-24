@@ -135,17 +135,40 @@ def checkout(product_id):
         session['product_quantity'][product_id] = quantity
         session.modified = True
     
-
+    # Initialize or get checkout cart
+    if 'checkout_cart' not in session:
+        session['checkout_cart'] = {}
     
-    # Get similar products for recommendations
+    # Add current product to checkout cart
+    session['checkout_cart'][product_id] = quantity
+    session.modified = True
+    
+    # Get all products in checkout cart with details
+    checkout_items = []
+    total_value = 0
+    for item_id, item_qty in session['checkout_cart'].items():
+        item_product = next((p for p in all_products if p['id'] == item_id), None)
+        if item_product:
+            checkout_items.append({
+                'product': item_product,
+                'quantity': item_qty,
+                'subtotal': item_product['price'] * item_qty
+            })
+            total_value += item_product['price'] * item_qty
+    
+    # Get similar products for recommendations (excluding those in cart)
     if product_id in [p['id'] for p in products_data.get('linha_toque_essencial', [])]:
-        similar_products = [p for p in products_data.get('linha_toque_essencial', []) if p['id'] != product_id][:6]
+        similar_products = [p for p in products_data.get('linha_toque_essencial', []) 
+                          if p['id'] != product_id and p['id'] not in session['checkout_cart']][:6]
     else:
-        similar_products = [p for p in products_data.get('queridinhos', []) if p['id'] != product_id][:6]
+        similar_products = [p for p in products_data.get('queridinhos', []) 
+                          if p['id'] != product_id and p['id'] not in session['checkout_cart']][:6]
     
     return render_template('checkout.html', 
                          product=product,
                          quantity=quantity,
+                         checkout_items=checkout_items,
+                         total_value=total_value,
                          similar_products=similar_products,
                          cart_count=len(session.get('cart', {})))
 
@@ -166,10 +189,11 @@ def buy_product(product_id):
 
 @app.route('/add_to_checkout/<product_id>')
 def add_to_checkout(product_id):
-    # Add product to checkout cart
+    # Add product to checkout cart with quantity 1
     if 'checkout_cart' not in session:
         session['checkout_cart'] = {}
     
+    # Add or increment quantity
     if product_id in session['checkout_cart']:
         session['checkout_cart'][product_id] += 1
     else:
@@ -177,9 +201,9 @@ def add_to_checkout(product_id):
     
     session.modified = True
     
-    # Return to checkout page (use the first product as primary)
-    primary_product = next(iter(session['checkout_cart']))
-    return redirect(url_for('checkout', product_id=primary_product))
+    # Redirect back to current checkout page
+    current_product = next(iter(session['checkout_cart'].keys()))
+    return redirect(url_for('checkout', product_id=current_product))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

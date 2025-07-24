@@ -27,8 +27,7 @@
                     </div>
                     <div class="card-body">
                         <div class="shipping-options">
-                            {% set subtotal = product.price * quantity %}
-                            {% if subtotal >= 100 %}
+                            {% if total_value >= 100 %}
                             <!-- Free shipping only for orders above R$ 100 -->
                             <div class="alert alert-success text-center mb-0 p-4" style="border: 2px solid #28a745; background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);">
                                 <div class="mb-3">
@@ -170,16 +169,16 @@
                         <div class="payment-summary">
                             <div class="d-flex justify-content-between mb-2">
                                 <span>Subtotal:</span>
-                                <span id="summary-subtotal">R${{ "%.2f"|format(subtotal) }}</span>
+                                <span id="summary-subtotal">R${{ "%.2f"|format(total_value) }}</span>
                             </div>
                             <div class="d-flex justify-content-between mb-2">
                                 <span>Frete:</span>
-                                <span id="summary-shipping">{% if subtotal >= 100 %}Grátis{% else %}R$ 11,90{% endif %}</span>
+                                <span id="summary-shipping">{% if total_value >= 100 %}Grátis{% else %}R$ 11,90{% endif %}</span>
                             </div>
                             <hr>
                             <div class="d-flex justify-content-between mb-3">
                                 <strong>Total:</strong>
-                                <strong id="summary-total">R${{ "%.2f"|format(subtotal + (0 if subtotal >= 100 else 11.90)) }}</strong>
+                                <strong id="summary-total">R${{ "%.2f"|format(total_value + (0 if total_value >= 100 else 11.90)) }}</strong>
                             </div>
 
                             <!-- PIX Payment Option -->
@@ -192,7 +191,7 @@
                                     <div class="pix-calculation">
                                         <div class="d-flex justify-content-between">
                                             <span>Total com desconto PIX:</span>
-                                            <strong class="text-success" id="pix-total">R${{ "%.2f"|format((subtotal + (0 if subtotal >= 100 else 11.90)) * 0.9) }}</strong>
+                                            <strong class="text-success" id="pix-total">R${{ "%.2f"|format((total_value + (0 if total_value >= 100 else 11.90)) * 0.9) }}</strong>
                                         </div>
                                     </div>
                                 </div>
@@ -270,27 +269,28 @@
                 </div>
                 <div class="card-body">
                     <div id="selected-products">
-                        <!-- Main product -->
-                        <div class="row align-items-center mb-3 pb-3 border-bottom" data-product-id="{{ product.id }}">
+                        {% for item in checkout_items %}
+                        <div class="row align-items-center mb-3 pb-3 {% if not loop.last %}border-bottom{% endif %}" data-product-id="{{ item.product.id }}">
                             <div class="col-md-2">
-                                <img src="{{ product.image_url }}" alt="{{ product.name }}" class="img-fluid rounded">
+                                <img src="{{ item.product.image_url }}" alt="{{ item.product.name }}" class="img-fluid rounded">
                             </div>
                             <div class="col-md-6">
-                                <h6>{{ product.name }}</h6>
+                                <h6>{{ item.product.name }}</h6>
                                 <div class="d-flex align-items-center">
                                     <span class="text-muted me-2">Quantidade:</span>
-                                    <span class="badge bg-primary fs-6">{{ quantity }}x</span>
+                                    <span class="badge bg-primary fs-6">{{ item.quantity }}x</span>
                                 </div>
                             </div>
                             <div class="col-md-2 text-center">
-                                <div class="fw-bold">R${{ "%.2f"|format(product.price) }}</div>
+                                <div class="fw-bold">R${{ "%.2f"|format(item.product.price) }}</div>
                                 <small class="text-muted">por unidade</small>
                             </div>
                             <div class="col-md-2 text-end">
-                                <div class="fw-bold text-success h5 mb-0">R${{ "%.2f"|format(product.price * quantity) }}</div>
+                                <div class="fw-bold text-success h5 mb-0">R${{ "%.2f"|format(item.subtotal) }}</div>
                                 <small class="text-muted">total</small>
                             </div>
                         </div>
+                        {% endfor %}
                     </div>
                     
                     <!-- Add more products section -->
@@ -367,9 +367,8 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const basePrice = {{ product.price }};
-    const quantity = {{ quantity }};
-    const subtotal = basePrice * quantity;
+    const totalValue = {{ total_value }};
+    const subtotal = totalValue;
     const shippingOptions = document.querySelectorAll('input[name="shipping"]');
     const summaryShipping = document.getElementById('summary-shipping');
     const summaryTotal = document.getElementById('summary-total');
@@ -381,8 +380,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Function to add product to checkout
     window.addProductToCheckout = function(productId) {
-        // Redirect to the product checkout to add it
-        window.location.href = `/checkout/${productId}`;
+        // Add product to checkout cart and refresh page
+        window.location.href = `/add_to_checkout/${productId}`;
     };
 
     function updateTotals() {
