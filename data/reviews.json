@@ -1,0 +1,239 @@
+{
+  "kit-ceu-algodao": [
+    {
+      "name": "Mariana Carvalho",
+      "date": "23/07/2025",
+      "rating": 5,
+      "text": "O cheiro é bem doce de jeito que adoro, o body splash tem vários brilhos e fica lindo na pele, e ainda chegou antes do prazo estava previsto para o dia 05/08 e chegou dia 23/07 ❤️",
+      "image": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=300&h=300&fit=crop"
+    },
+    {
+      "name": "Julia Santos",
+      "date": "22/07/2025",
+      "rating": 5,
+      "text": "Simplesmente apaixonada! O cheiro é muito gostoso e duradouro. A embalagem chegou perfeita e super rápido!",
+      "image": "https://images.unsplash.com/photo-1522338242992-e1a54906a8da?w=300&h=300&fit=crop"
+    },
+    {
+      "name": "Olga",
+      "date": "22/07/2025",
+      "rating": 5,
+      "text": "Muito bom, recomendo!",
+      "image": null
+    },
+    {
+      "name": "Jasmin",
+      "date": "21/07/2025",
+      "rating": 5,
+      "text": "Amei o cheiro e do jeitinho que gosto, amei super!",
+      "image": null
+    },
+    {
+      "name": "Ana Caroline",
+      "date": "20/07/2025",
+      "rating": 5,
+      "text": "Amei, fragrância não é enjoativa uma delícia. Chegou 2 semanas antes do previsto.",
+      "image": null
+    }
+  ],
+  "kit-passion": [
+    {
+      "name": "Letícia Alves",
+      "date": "23/07/2025",
+      "rating": 5,
+      "text": "Esse kit é perfeito! O cheiro é marcante sem ser enjoativo, e a loção hidrata muito bem. Meu namorado elogiou muito o perfume.",
+      "image": "https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=300&h=300&fit=crop"
+    },
+    {
+      "name": "Roberta Lima",
+      "date": "22/07/2025",
+      "rating": 5,
+      "text": "A fragrância é linda, doce na medida certa. O body splash tem boa fixação e a loção deixa a pele super macia.",
+      "image": "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=300&h=300&fit=crop"
+    },
+    {
+      "name": "Camila",
+      "date": "21/07/2025",
+      "rating": 4,
+      "text": "Gostei bastante do produto, o cheiro é bem feminino e romântico.",
+      "image": null
+    },
+    {
+      "name": "Fernanda",
+      "date": "20/07/2025",
+      "rating": 5,
+      "text": "Chegou super rápido e bem embalado. O cheiro é incrível!",
+      "image": null
+    }
+  ],
+  "watermelon-fresh": [
+    {
+      "name": "Beatriz Souza",
+      "date": "23/07/2025",
+      "rating": 5,
+      "text": "Que delícia! O cheiro de melancia é refrescante e a textura é ótima. Perfeito para o verão!",
+      "image": "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=300&h=300&fit=crop"
+    },
+    {
+      "name": "Carolina Mendes",
+      "date": "22/07/2025",
+      "rating": 5,
+      "text": "Produto incrível! Hidrata muito bem e o cheiro é viciante. Minha pele ficou super sedosa.",
+      "image": "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=300&fit=crop"
+    },
+    {
+      "name": "Sabrina",
+      "date": "21/07/2025",
+      "rating": 4,
+      "text": "Gostei muito, o cheiro é bem gostoso e fresco.",
+      "image": null
+    },
+    {
+      "name": "Amanda",
+      "date": "20/07/2025",
+      "rating": 5,
+      "text": "Perfeito! O produto chegou rápido e o cheiro é maravilhoso.",
+      "image": null
+    }
+  ],
+  "kit-aurora": [
+    {
+      "name": "Isabela Rodrigues",
+      "date": "23/07/2025",
+      "rating": 5,
+      "text": "Esse kit é um sonho! O cheiro me lembra manhãs de primavera, muito delicado e elegante.",
+      "image": "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=300&h=300&fit=crop"
+    },
+    {
+      "name": "Giovanna",
+      "date": "22/07/2025",
+      "rating": 5,
+      "text": "Apaixonada pela fragrância! É sofisticada e feminina.",
+      "image": null
+    },
+    {
+      "name": "Larissa",
+      "date": "21/07/2025",
+      "rating": 5,
+      "text": "Produto de qualidade, cheiro maravilhoso e duradouro.",
+      "image": null
+    }
+  ],
+  "kit-noite-estrelada": [
+    {
+      "name": "Vitória Santos",
+      "date": "23/07/2025",
+      "rating": 5,
+      "text": "Fragrância misteriosa e envolvente! Perfeita para a noite, me sinto mais confiante usando.",
+      "image": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=300&h=300&fit=crop"
+    },
+    {
+      "name": "Gabriela",
+      "date": "22/07/2025",
+      "rating": 4,
+      "text": "Muito bom, o cheiro é marcante e elegante.",
+      "image": null
+    },
+    {
+      "name": "Melissa",
+      "date": "21/07/2025",
+      "rating": 5,
+      "text": "Amo essa fragrância! É única e sofisticada.",
+      "image": null
+    }
+  ],
+  "kit-maresia": [
+    {
+      "name": "Rafaela Costa",
+      "date": "23/07/2025",
+      "rating": 5,
+      "text": "Me transporta para a praia! O cheiro é fresco e relaxante, perfeito para quem ama o mar.",
+      "image": "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=300&h=300&fit=crop"
+    },
+    {
+      "name": "Natália",
+      "date": "22/07/2025",
+      "rating": 5,
+      "text": "Produto maravilhoso, o cheiro é refrescante e duradouro.",
+      "image": null
+    },
+    {
+      "name": "Bruna",
+      "date": "21/07/2025",
+      "rating": 4,
+      "text": "Gostei muito da fragrância, bem suave e agradável.",
+      "image": null
+    }
+  ],
+  "kit-dunna": [
+    {
+      "name": "Priscila Oliveira",
+      "date": "23/07/2025",
+      "rating": 5,
+      "text": "Que fragrância incrível! É bem marcante e sofisticada, me sinto poderosa usando.",
+      "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop"
+    },
+    {
+      "name": "Thais",
+      "date": "22/07/2025",
+      "rating": 5,
+      "text": "Produto de qualidade excelente, o cheiro é único.",
+      "image": null
+    },
+    {
+      "name": "Patricia",
+      "date": "21/07/2025",
+      "rating": 4,
+      "text": "Gostei muito, fragrância bem feminina e elegante.",
+      "image": null
+    }
+  ],
+  "noite-estrelada-scrub": [
+    {
+      "name": "Monica Silva",
+      "date": "23/07/2025",
+      "rating": 5,
+      "text": "Esfoliante maravilhoso! Deixa a pele super macia e o cheiro é relaxante, perfeito para a rotina noturna.",
+      "image": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=300&h=300&fit=crop"
+    },
+    {
+      "name": "Carla",
+      "date": "22/07/2025",
+      "rating": 5,
+      "text": "Produto incrível, textura perfeita e resultado imediato.",
+      "image": null
+    }
+  ],
+  "passion-scrub": [
+    {
+      "name": "Daniela Rocha",
+      "date": "23/07/2025",
+      "rating": 5,
+      "text": "O melhor esfoliante que já usei! A textura é perfeita e o cheiro Passion é viciante.",
+      "image": "https://images.unsplash.com/photo-1552046122-03184de85e08?w=300&h=300&fit=crop"
+    },
+    {
+      "name": "Luciana",
+      "date": "22/07/2025",
+      "rating": 4,
+      "text": "Muito bom, deixa a pele bem lisinha.",
+      "image": null
+    }
+  ],
+  "maresia-scrub": [
+    {
+      "name": "Vanessa Martins",
+      "date": "23/07/2025",
+      "rating": 5,
+      "text": "Sensação de spa em casa! O cheiro me lembra férias na praia e a esfoliação é perfeita.",
+      "image": "https://images.unsplash.com/photo-1505944270255-72b8c68c6a70?w=300&h=300&fit=crop"
+    },
+    {
+      "name": "Adriana",
+      "date": "22/07/2025",
+      "rating": 5,
+      "text": "Produto excelente, o resultado na pele é imediato.",
+      "image": null
+    }
+  ]
+}

@@ -13,6 +13,14 @@ def load_products():
     except FileNotFoundError:
         return {"linha_toque_essencial": [], "queridinhos": []}
 
+# Load reviews data
+def load_reviews():
+    try:
+        with open('data/reviews.json', 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
+
 @app.route('/')
 def index():
     products_data = load_products()
@@ -91,37 +99,12 @@ def product_detail(product_id):
     else:
         similar_products = [p for p in products_data.get('queridinhos', []) if p['id'] != product_id][:4]
     
-    # Mock reviews for demonstration
-    reviews = [
-        {
-            "name": "Mariana Carvalho",
-            "date": "23/07/2025",
-            "rating": 5,
-            "text": "O cheiro é bem doce de jeito que adoro, o body splash tem vários brilhos e fica lindo na pele, e ainda chegou antes do prazo estava previsto para o dia 05/08 e chegou dia 23/07 ❤️",
-            "image": "https://cdn.pixabay.com/photo/2020/05/18/16/17/cosmetics-5187421_1280.jpg"
-        },
-        {
-            "name": "Olga",
-            "date": "22/07/2025", 
-            "rating": 5,
-            "text": "Muito bom",
-            "image": None
-        },
-        {
-            "name": "Jasmin",
-            "date": "23/07/2025",
-            "rating": 5,
-            "text": "Amei o cheiro e do jeitinho gosto amei super",
-            "image": None
-        },
-        {
-            "name": "Ana",
-            "date": "23/07/2025",
-            "rating": 5,
-            "text": "Amei, fragrância não é enjoativa uma delícia. Chegou 2 semanas do previsto.",
-            "image": None
-        }
-    ]
+    # Load authentic reviews for this specific product
+    reviews_db = load_reviews()
+    product_reviews = reviews_db.get(product_id, [])
+    
+    # Sort reviews: images first, then text-only
+    reviews = sorted(product_reviews, key=lambda x: (x['image'] is None, x['date']), reverse=True)
     
     return render_template('product_detail.html', 
                          product=product,
