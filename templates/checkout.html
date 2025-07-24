@@ -169,8 +169,8 @@
                         <div class="payment-summary">
                             <!-- Products Info Section -->
                             <div class="mb-3">
-                                {% if checkout_items and checkout_items|length > 1 %}
-                                    <!-- Multiple Products -->
+                                {% if checkout_items %}
+                                    <!-- Show all products in checkout -->
                                     {% for item in checkout_items %}
                                     <div class="mb-2 p-2" style="background-color: #f8f9fa; border-radius: 5px; border: 1px solid #dee2e6;">
                                         <div class="d-flex align-items-center">
@@ -188,7 +188,7 @@
                                     </div>
                                     {% endfor %}
                                 {% else %}
-                                    <!-- Single Product -->
+                                    <!-- Fallback for single product -->
                                     <div class="mb-2 p-2" style="background-color: #f8f9fa; border-radius: 5px; border: 1px solid #dee2e6;">
                                         <div class="d-flex align-items-center">
                                             <img src="{{ product.image_url }}" alt="{{ product.name }}" 
