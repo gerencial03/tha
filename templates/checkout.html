@@ -663,31 +663,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('ERRO: Elemento payment-products-summary não encontrado!');
         }
         
-        // Calculate totals
-        const shippingCost = totalValue >= 100 ? 0 : 11.90;
-        const finalTotal = totalValue + shippingCost;
-        const pixTotal = finalTotal * 0.9;
-        
-        // Update shipping
-        const shippingElement = document.getElementById('summary-shipping');
-        if (shippingElement) {
-            shippingElement.textContent = shippingCost === 0 ? 'Grátis' : `R$ ${shippingCost.toFixed(2).replace('.', ',')}`;
-            console.log('Frete atualizado:', shippingElement.textContent);
-        }
-        
-        // Update total
-        const totalElement = document.getElementById('summary-total');
-        if (totalElement) {
-            totalElement.textContent = `R$ ${finalTotal.toFixed(2).replace('.', ',')}`;
-            console.log('Total atualizado:', totalElement.textContent);
-        }
-        
-        // Update PIX total
-        const pixTotalElement = document.getElementById('pix-total');
-        if (pixTotalElement) {
-            pixTotalElement.textContent = `R$ ${pixTotal.toFixed(2).replace('.', ',')}`;
-            console.log('PIX total atualizado:', pixTotalElement.textContent);
-        }
+        // Note: Shipping, total and PIX total already updated above
         
         // Update finalize button
         const finalizeButton = document.querySelector('.btn-warning');
