@@ -92,6 +92,17 @@ Preferred communication style: Simple, everyday language.
 - **WSGI Server**: Replace development server with Gunicorn or uWSGI
 
 ### Recent Changes (July 2025)
+- **Authentic Product Descriptions Overhaul** (July 24, 2025):
+  - Completely removed all fragrance and cosmetic product descriptions
+  - Created authentic Labubu descriptions based on official labubu.com.br content
+  - All descriptions now focus on: Pop Mart authenticity, Kasing Lung designer credit, official distributor status
+  - Added verification elements: QR codes, certificates, official packaging mentions
+  - Emphasized Labubu Brasil as the only authorized Brazilian distributor
+  - Included celebrity endorsements (Lisa Blackpink, Dua Lipa, Rihanna)
+  - Added collector-focused language with authenticity guarantees
+  - Updated all 8 products with consistent branding and official Pop Mart terminology
+
+### Previous Recent Changes
 - **Complete Store Transformation to Labubu**: Full conversion from beauty products to authentic Labubu collectibles
   - 8 authentic products based on labubu.com.br official store
   - Real pricing: R$ 249.90-599.90 matching Brazilian market
