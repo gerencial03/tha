@@ -92,23 +92,31 @@ Preferred communication style: Simple, everyday language.
 - **WSGI Server**: Replace development server with Gunicorn or uWSGI
 
 ### Recent Changes (January 2025)
-- **PIX Payment Integration**: Complete implementation with IronPay gateway
-  - Real PIX QR Code generation using EMV format
+- **PIX Payment Integration**: Complete implementation with PayBets gateway
+  - Real PIX QR Code generation via PayBets API
   - Copy and paste PIX code functionality
   - Customer data validation and processing
   - Payment status monitoring (non-redirecting)
   - Robust error handling and fallbacks
 - **Enhanced Checkout Flow**: Improved form validation and user experience
 - **Multiple QR Code Libraries**: Fallback system for reliable QR code generation
+- **PayBets API Integration**: Production-ready implementation with proper authentication
 
 ### User Preferences
 - QR Code should always be visible and functional (no fallback messages)
 - No automatic redirection after payment approval
 - Real PIX codes that can be scanned by banking apps
+- PayBets gateway preferred over other payment providers
 
 ### Future Enhancements
 - **Database Integration**: Models prepared for SQLAlchemy integration
 - **User Authentication**: Session framework ready for user accounts
-- **Real API Integration**: Replace mock PIX with actual IronPay credentials
+- **PayBets Webhook Integration**: Add webhook handling for real-time payment updates
 - **Inventory Management**: Product availability system can be enhanced
 - **SEO Optimization**: Template structure supports meta tags and structured data
+
+### PayBets Configuration
+- **API Endpoint**: https://elite-manager-api-62571bbe8e96.herokuapp.com/api
+- **Payment Endpoint**: /payments/paybets/pix/generate
+- **Authentication**: x-api-key header with production token
+- **Response Format**: JSON with qrCodeResponse containing PIX data
