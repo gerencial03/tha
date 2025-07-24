@@ -481,7 +481,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data.success) {
                 // Update the selected products section
                 updateSelectedProducts(data.checkout_items);
-                // Update payment summary
+                // Update payment summary - ensure this happens
+                console.log('Chamando updatePaymentSummary com:', data.total_value, data.checkout_items);
                 updatePaymentSummary(data.total_value, data.checkout_items);
                 // Show success message
                 showSuccessMessage('Produto adicionado com sucesso!');
@@ -521,17 +522,28 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function updatePaymentSummary(totalValue, checkoutItems) {
+        console.log('=== INICIANDO updatePaymentSummary ===');
+        console.log('Total Value:', totalValue);
+        console.log('Checkout Items:', checkoutItems);
+        
         // Update subtotal
-        document.getElementById('summary-subtotal').textContent = `R$ ${totalValue.toFixed(2).replace('.', ',')}`;
+        const subtotalElement = document.getElementById('summary-subtotal');
+        if (subtotalElement) {
+            subtotalElement.textContent = `R$ ${totalValue.toFixed(2).replace('.', ',')}`;
+            console.log('Subtotal atualizado');
+        }
         
         // Update products info in payment summary
         const productsSummaryDiv = document.getElementById('payment-products-summary');
-        console.log('Encontrou div dos produtos:', productsSummaryDiv);
+        console.log('Elemento payment-products-summary encontrado:', !!productsSummaryDiv);
         
         if (productsSummaryDiv) {
+            console.log('Limpando conteúdo anterior...');
             productsSummaryDiv.innerHTML = '';
             
-            checkoutItems.forEach(item => {
+            console.log('Adicionando', checkoutItems.length, 'produtos...');
+            checkoutItems.forEach((item, index) => {
+                console.log(`Processando produto ${index + 1}:`, item.product.name);
                 const productHtml = `
                     <div class="mb-2 p-2 product-summary-item" style="background-color: #f8f9fa; border-radius: 5px; border: 1px solid #dee2e6; position: relative;" data-product-id="${item.product.id}">
                         <button class="btn-remove-product" onclick="removeProductFromSummary('${item.product.id}')" style="position: absolute; top: 5px; right: 5px; background: #dc3545; color: white; border: none; border-radius: 50%; width: 18px; height: 18px; font-size: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center;">×</button>
@@ -551,9 +563,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 `;
                 productsSummaryDiv.innerHTML += productHtml;
             });
-            console.log('Produtos atualizados no resumo:', checkoutItems.length);
+            console.log('=== FIM: Produtos atualizados no resumo:', checkoutItems.length, '===');
         } else {
-            console.error('Não encontrou a div dos produtos no resumo do pagamento');
+            console.error('ERRO: Elemento payment-products-summary não encontrado!');
         }
         
         // Calculate totals
