@@ -146,7 +146,7 @@ def checkout(product_id):
     })
     total_value = product['price'] * quantity
     
-    print(f"Checkout corrigido - Produto: {product['title']}, Preço: R${product['price']:.2f}, Qtd: {quantity}, Total: R${total_value:.2f}")
+    print(f"Checkout corrigido - Produto: {product['name']}, Preço: R${product['price']:.2f}, Qtd: {quantity}, Total: R${total_value:.2f}")
     
     # Limpar carrinho para evitar acúmulo incorreto
     session['checkout_cart'] = {product_id: quantity}
