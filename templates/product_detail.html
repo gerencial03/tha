@@ -145,23 +145,28 @@
                 <div class="review-item border rounded p-3 mb-3">
                     <div class="d-flex justify-content-between align-items-start">
                         <div class="review-stars">
-                            {% for i in range(5) %}
+                            {% for i in range(review.rating) %}
                                 <i class="fas fa-star text-warning"></i>
+                            {% endfor %}
+                            {% for i in range(5 - review.rating) %}
+                                <i class="far fa-star text-muted"></i>
                             {% endfor %}
                         </div>
                         <span class="review-date text-muted">{{ review.date }}</span>
                     </div>
                     
-                    <p class="review-text mt-2">{{ review.text }}</p>
+                    <p class="review-text mt-2 mb-2">{{ review.comment }}</p>
                     
-                    {% if review.image %}
-                    <div class="review-image mb-2">
-                        <img src="{{ review.image }}" alt="Foto da avaliação" class="img-thumbnail" style="max-width: 150px;">
+                    {% if review.verified_purchase %}
+                    <div class="verified-badge mb-2">
+                        <span class="badge bg-success text-white">
+                            <i class="fas fa-check-circle"></i> Compra Verificada
+                        </span>
                     </div>
                     {% endif %}
                     
                     <div class="reviewer-name text-end">
-                        <strong>{{ review.name }}</strong>
+                        <strong>{{ review.customer_name }}</strong>
                     </div>
                 </div>
                 {% endfor %}
