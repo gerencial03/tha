@@ -77,32 +77,36 @@
     <!-- Product Description -->
     <div class="container mt-5">
         <div class="product-description">
-            <h3>Descrição</h3>
+            <h3>Descrição do Produto</h3>
             <div class="description-content">
-                <p>O <strong>{{ product.name.split(':')[0] if ':' in product.name else product.name }}</strong> é como um carinho em forma de fragrância. Inspirado na leveza das nuvens e na doçura do algodão doce, ele transforma a sua rotina de autocuidado em um momento suave, doce e cheio de afeto.</p>
+                <p>{{ product.description }}</p>
                 
-                <p>Com uma fragrância delicadamente envolvente, esse duo une a hidratação que sua pele merece com um perfume leve, alegre e marcante na medida certa.</p>
-                
-                <h5>Você vai amar porque:</h5>
-                <ul>
-                    <li>Tem aquele cheirinho doce, leve e encantador que te faz se sentir abraçada.</li>
-                    <li>Hidrata e perfuma ao mesmo tempo, deixando a pele macia e cheirosa o dia todo.</li>
-                    <li>É perfeito para quem ama fragrâncias delicadas, femininas e com um toque de nostalgia.</li>
-                </ul>
+                <div class="authenticity-info mt-4">
+                    <h5 style="color: #e67e22; margin-bottom: 15px;">🏆 Garantias de Autenticidade</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li>✅ <strong>Pop Mart Oficial:</strong> Produto 100% original</li>
+                                <li>✅ <strong>Designer Kasing Lung:</strong> Criação oficial</li>
+                                <li>✅ <strong>Embalagem Lacrada:</strong> Com hologramas de segurança</li>
+                                <li>✅ <strong>QR Code:</strong> Para verificação de autenticidade</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li>🏪 <strong>Labubu Brasil:</strong> Único distribuidor autorizado</li>
+                                <li>🚚 <strong>Frete Grátis:</strong> Para todo o Brasil</li>
+                                <li>🔐 <strong>Compra Segura:</strong> Garantia de 30 dias</li>
+                                <li>📞 <strong>Suporte:</strong> Atendimento especializado</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
-                <h5>O Kit Contém:</h5>
-                <p><strong>Céu de Algodão – Loção Hidratante 200ml:</strong> Textura leve, hidratação suave e perfume que permanece.</p>
-                <p><strong>Céu de Algodão – Body Splash 200ml:</strong> Fragrância adocicada e delicada para te acompanhar em todos os momentos.</p>
-
-                <h5>Pirâmide Olfativa – Céu de Algodão</h5>
-                <p><strong>Saída:</strong> Acorde Algodão Doce, Limão, Mandarina</p>
-                <p><strong>Corpo:</strong> Jasmim, Fava Tonka, Anis</p>
-                <p><strong>Fundo:</strong> Musk, Vanilla, Caramelo</p>
-
-                <p><strong>Precauções:</strong><br>
-                Evite contato com os olhos.<br>
-                Mantenha fora do alcance de crianças e animais.<br>
-                Em caso de irritação, suspenda o uso e consulte um médico.</p>
+                <div class="warning-info mt-4 p-3" style="background-color: #fff3cd; border-left: 4px solid #ffc107; border-radius: 4px;">
+                    <h6 style="color: #856404; margin-bottom: 10px;">⚠️ Importante - Classificação Etária</h6>
+                    <p style="color: #856404; margin-bottom: 0;"><strong>Recomendado para maiores de 15 anos.</strong> Este é um art toy colecionável, não um brinquedo infantil, conforme orientação oficial da Pop Mart.</p>
+                </div>
             </div>
         </div>
     </div>
