@@ -578,17 +578,41 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Total Value recebido:', totalValue);
         console.log('Checkout Items recebidos:', checkoutItems.length, 'produtos');
         
-        // Update subtotal in payment summary
+        // PRIORITY 1: Update subtotal immediately
         const subtotalElement = document.getElementById('summary-subtotal');
         if (subtotalElement) {
             const formattedTotal = `R$ ${totalValue.toFixed(2).replace('.', ',')}`;
             subtotalElement.textContent = formattedTotal;
-            console.log('✅ Subtotal atualizado para:', formattedTotal);
+            console.log('✅ SUBTOTAL ATUALIZADO INSTANTANEAMENTE:', formattedTotal);
         } else {
-            console.error('❌ ERRO: Elemento summary-subtotal não encontrado!');
+            console.error('❌ ERRO CRÍTICO: Elemento summary-subtotal não encontrado!');
         }
         
-        // Note: Total will be updated later with shipping calculation
+        // Calculate and update shipping and totals immediately
+        const shippingCost = totalValue >= 100 ? 0 : 11.90;
+        const finalTotal = totalValue + shippingCost;
+        const pixTotal = finalTotal * 0.9;
+        
+        // Update shipping immediately
+        const shippingElement = document.getElementById('summary-shipping');
+        if (shippingElement) {
+            shippingElement.textContent = shippingCost === 0 ? 'Grátis' : `R$ ${shippingCost.toFixed(2).replace('.', ',')}`;
+            console.log('✅ FRETE ATUALIZADO INSTANTANEAMENTE:', shippingElement.textContent);
+        }
+        
+        // Update total immediately
+        const totalElement = document.getElementById('summary-total');
+        if (totalElement) {
+            totalElement.textContent = `R$ ${finalTotal.toFixed(2).replace('.', ',')}`;
+            console.log('✅ TOTAL ATUALIZADO INSTANTANEAMENTE:', totalElement.textContent);
+        }
+        
+        // Update PIX total immediately
+        const pixTotalElement = document.getElementById('pix-total');
+        if (pixTotalElement) {
+            pixTotalElement.textContent = `R$ ${pixTotal.toFixed(2).replace('.', ',')}`;
+            console.log('✅ PIX TOTAL ATUALIZADO INSTANTANEAMENTE:', pixTotalElement.textContent);
+        }
         
         // Update products info in payment summary
         const productsSummaryDiv = document.getElementById('payment-products-summary');
