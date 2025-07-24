@@ -205,7 +205,7 @@ function showNotification(message, type = 'info') {
 
 // WhatsApp Integration
 function openWhatsApp() {
-    const phoneNumber = '556298420803';
+    const phoneNumber = '556282471392';
     const message = encodeURIComponent('Olá! Gostaria de saber mais sobre os produtos da Tha Beauty.');
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
     
