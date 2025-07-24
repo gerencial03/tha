@@ -279,58 +279,32 @@ def process_pix_payment():
         unique_id = str(uuid.uuid4())[:8]
         external_id = f"THA-{timestamp}-{unique_id}"
         
-        # PayBets API baseado na documentação Postman Collection
-        api_token = "l4rZDyFAmLwZNHSzjvGAvg7VOmRyGPOvjor7Q6aOBrkohGWXUCfrZrUcKPVg2zFzPdMcNalaB9nurgdscXAOrG5jQ0H41vQEfrrM"
+        # PayBets API usando endpoint correto da documentação
+        api_key = "3d6bd4c17dd31877b77482b341c74d32494a1d6fbdee4c239cf8432b424b1abf"
+        api_url = "https://elite-manager-api-62571bbe8e96.herokuapp.com/api/payments/paybets/pix/generate"
         
-        # Preparar dados conforme documentação da API
-        # Valor em centavos (API espera centavos)
-        amount_in_cents = int(pix_amount * 100)
-        
-        # Preparar dados conforme formato da documentação Postman
+        # Preparar dados conforme documentação PayBets
         payment_data = {
-            "amount": amount_in_cents,
-            "payment_method": "pix",
-            "customer": {
-                "name": customer_data['name'],
-                "email": customer_data['email'],
-                "phone_number": customer_data['phone_number'],
-                "document": customer_data['document_number'],
-                "street_name": customer_data['address']['address'],
-                "number": customer_data['address']['number'],
-                "neighborhood": customer_data['address']['neighborhood'],
-                "city": customer_data['address']['city'],
-                "state": customer_data['address']['state'],
-                "zip_code": customer_data['address']['zipcode']
-            },
-            "cart": [
-                {
-                    "product_hash": external_id[:10],
-                    "title": transaction_description,
-                    "cover": None,
-                    "price": amount_in_cents,
-                    "quantity": 1,
-                    "operation_type": 1,
-                    "tangible": False
-                }
-            ],
-            "installments": 1,
-            "expire_in_days": 1,
-            "transaction_origin": "api"
+            "amount": float(pix_amount),
+            "external_id": external_id,
+            "clientCallbackUrl": "https://webhook.site/unique-id",
+            "name": customer_data['name'],
+            "email": customer_data['email'],
+            "document": customer_data['document_number']
         }
         
-        print(f"Enviando para PayBets API - Valor: R$ {pix_amount:.2f} (centavos: {amount_in_cents})")
+        print(f"Enviando para PayBets API - Valor: R$ {pix_amount:.2f}")
         print(f"External ID: {external_id}")
+        print(f"Dados: {json.dumps(payment_data, indent=2)}")
         
-        # Headers padrão conforme documentação
+        # Headers conforme documentação original
         headers = {
+            'Content-Type': 'application/json',
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'x-api-key': api_key
         }
         
         try:
-            # URL com api_token como parâmetro conforme documentação
-            api_url = f"https://ironpayapp.com.br/public/v1/transactions?api_token={api_token}"
-            
             print(f"Chamando PayBets API: {api_url}")
             
             response = requests.post(
@@ -341,44 +315,40 @@ def process_pix_payment():
             )
             
             print(f"PayBets API Response Status: {response.status_code}")
-            print(f"PayBets API Response: {response.text[:500]}...")
+            print(f"PayBets API Response: {response.text}")
             
             if response.status_code in [200, 201]:
                 response_data = response.json()
                 
-                # Processar resposta da API
-                if response_data.get("success", True):  # Assumir sucesso se não especificado
-                    pix_data = response_data.get("pix", {})
-                    qr_code = pix_data.get("qr_code", "")
-                    
-                    # Se não tem dados PIX na resposta, usar os dados da transação
-                    transaction_hash = response_data.get("hash", external_id)
+                # Processar resposta da API PayBets
+                if response_data.get("success"):
+                    qr_data = response_data.get("data", {}).get("qrCodeResponse", {})
                     
                     transaction_result = {
                         'success': True,
-                        'hash': transaction_hash,
-                        'pix_qr_code': qr_code,
-                        'pix_copy_paste': qr_code,
+                        'hash': qr_data.get("transactionId", external_id),
+                        'pix_qr_code': qr_data.get("qrcode", ""),
+                        'pix_copy_paste': qr_data.get("qrcode", ""),
                         'qr_code_base64': '',
                         'status': 'pending',
                         'amount': pix_amount,
                         'original_amount': total_amount,
                         'discount_percent': int(pix_discount * 100),
                         'customer': customer_data,
-                        'response_data': response_data  # Para debug
+                        'paybets_data': response_data
                     }
                     
                     print(f"PIX gerado com sucesso via PayBets!")
-                    print(f"Transaction Hash: {transaction_hash}")
+                    print(f"Transaction ID: {transaction_result['hash']}")
                     
                 else:
-                    raise Exception(f"PayBets API Error: {response_data.get('message', 'Erro na API')}")
+                    raise Exception(f"PayBets API Error: {response_data.get('message', 'Erro na resposta da API')}")
             else:
                 raise Exception(f"PayBets API HTTP Error: {response.status_code} - {response.text}")
                 
         except Exception as e:
             print(f"Erro PayBets API: {str(e)}")
-            # Fallback PIX funcional
+            # Usar PIX funcional como fallback
             fallback_pix_code = f"00020126580014BR.GOV.BCB.PIX0136{external_id}5204000053039865406{pix_amount:.2f}5802BR5913THA BEAUTY LTDA6009SAO PAULO62070503***6304"
             
             transaction_result = {
