@@ -33,16 +33,9 @@
                             </div>
                             <div class="col-md-5">
                                 <h6>{{ product.name }}</h6>
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center">
-                                        <span class="text-muted me-2">Quantidade:</span>
-                                        <span class="badge bg-primary fs-6">{{ quantity }}x</span>
-                                    </div>
-                                    <div class="quantity-controls d-flex align-items-center">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(-1)">-</button>
-                                        <span class="mx-2 fw-bold" id="current-quantity">{{ quantity }}</span>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(1)">+</button>
-                                    </div>
+                                <div class="d-flex align-items-center">
+                                    <span class="text-muted me-2">Quantidade:</span>
+                                    <span class="badge bg-primary fs-6">{{ quantity }}x</span>
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -410,14 +403,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const summaryTotal = document.getElementById('summary-total');
     const pixTotal = document.getElementById('pix-total');
     
-    // Function to update quantity and redirect with new values
-    window.updateQuantity = function(change) {
-        const currentQuantity = parseInt(document.getElementById('current-quantity').textContent);
-        const newQuantity = Math.max(1, currentQuantity + change);
-        
-        // Redirect to checkout with new quantity to recalculate everything
-        window.location.href = `/checkout/{{ product.id }}?quantity=${newQuantity}`;
-    };
+    console.log('Preço unitário:', basePrice);
+    console.log('Quantidade:', quantity);
+    console.log('Subtotal calculado:', subtotal);
 
     function updateTotals() {
         let selectedShipping = document.querySelector('input[name="shipping"]:checked');

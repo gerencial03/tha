@@ -149,8 +149,10 @@ def buy_product(product_id):
     if 'product_quantity' not in session:
         session['product_quantity'] = {}
     session['product_quantity'][product_id] = quantity
+    session.modified = True
     
-    return redirect(url_for('checkout', product_id=product_id))
+    # Redirect to checkout with quantity parameter to ensure proper calculation
+    return redirect(url_for('checkout', product_id=product_id, quantity=quantity))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
