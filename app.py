@@ -232,26 +232,15 @@ def add_to_checkout_ajax(product_id):
             })
             total_value += subtotal
     
+    print(f"Produto adicionado ao carrinho: {product_id}, Quantidade: {session['checkout_cart'][product_id]}")
+    print(f"Carrinho atual: {session['checkout_cart']}")
+    print(f"Total de produtos no retorno: {len(checkout_items)}")
+    
     return jsonify({
         'success': True,
         'checkout_items': checkout_items,
         'total_value': total_value
     })
-    
-    print(f"Produto adicionado ao carrinho: {product_id}, Quantidade: {session['checkout_cart'][product_id]}")
-    print(f"Carrinho atual: {session['checkout_cart']}")
-    
-    # Redirect back to current checkout page (manter o produto principal)
-    # Se há um produto principal na URL, usar ele, senão usar o primeiro do carrinho
-    referrer = request.referrer
-    if referrer and '/checkout/' in referrer:
-        # Extrair product_id da URL de referência
-        main_product_id = referrer.split('/checkout/')[-1].split('?')[0]
-        return redirect(url_for('checkout', product_id=main_product_id))
-    else:
-        # Fallback: usar o primeiro produto do carrinho
-        current_product = next(iter(session['checkout_cart'].keys()))
-        return redirect(url_for('checkout', product_id=current_product))
 
 @app.route('/process_pix_payment', methods=['POST'])
 def process_pix_payment():
