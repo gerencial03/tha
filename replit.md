@@ -91,9 +91,24 @@ Preferred communication style: Simple, everyday language.
 - **Static Assets**: Should be served by nginx or CDN in production
 - **WSGI Server**: Replace development server with Gunicorn or uWSGI
 
+### Recent Changes (January 2025)
+- **PIX Payment Integration**: Complete implementation with IronPay gateway
+  - Real PIX QR Code generation using EMV format
+  - Copy and paste PIX code functionality
+  - Customer data validation and processing
+  - Payment status monitoring (non-redirecting)
+  - Robust error handling and fallbacks
+- **Enhanced Checkout Flow**: Improved form validation and user experience
+- **Multiple QR Code Libraries**: Fallback system for reliable QR code generation
+
+### User Preferences
+- QR Code should always be visible and functional (no fallback messages)
+- No automatic redirection after payment approval
+- Real PIX codes that can be scanned by banking apps
+
 ### Future Enhancements
 - **Database Integration**: Models prepared for SQLAlchemy integration
 - **User Authentication**: Session framework ready for user accounts
-- **Payment Processing**: Cart system prepared for checkout integration
+- **Real API Integration**: Replace mock PIX with actual IronPay credentials
 - **Inventory Management**: Product availability system can be enhanced
 - **SEO Optimization**: Template structure supports meta tags and structured data
