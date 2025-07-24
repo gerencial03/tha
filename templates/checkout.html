@@ -58,11 +58,14 @@
                             {% set subtotal = product.price * quantity %}
                             {% if subtotal >= 100 %}
                             <!-- Free shipping only for orders above R$ 100 -->
-                            <div class="alert alert-success text-center mb-0" style="border: 2px solid #28a745;">
-                                <h5 class="mb-2">🎉 Parabéns! Seu frete é GRÁTIS!</h5>
-                                <p class="mb-1">Compras acima de R$ 100,00 têm frete grátis para todo o Brasil</p>
-                                <small class="text-muted">Entrega em 5 a 10 dias úteis</small>
-                                <input type="hidden" name="shipping" value="0" checked>
+                            <div class="alert alert-success text-center mb-0 p-4" style="border: 2px solid #28a745; background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);">
+                                <div class="mb-3">
+                                    <i class="fas fa-shipping-fast fa-3x text-success"></i>
+                                </div>
+                                <h4 class="mb-2 text-success fw-bold">🎉 Parabéns! Seu frete é GRÁTIS!</h4>
+                                <p class="mb-2 text-dark">Compras acima de R$ 100,00 têm frete grátis para todo o Brasil</p>
+                                <div class="badge bg-success fs-6 py-2 px-3">Entrega em 5 a 10 dias úteis</div>
+                                <input type="hidden" name="shipping" value="0">
                             </div>
                             {% else %}
                             <!-- Shipping options for orders below R$ 100 -->
