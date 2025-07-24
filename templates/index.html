@@ -166,4 +166,186 @@
 </section>
 
 {% endif %}
+<!-- Customer Reviews Section -->
+<section class="reviews-section py-5" style="background-color: #f8f9fa;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold mb-3" style="color: #333;">⭐ O que nossos clientes dizem</h2>
+            <p class="text-muted">Avaliações reais de quem já experimentou nossos produtos</p>
+        </div>
+        
+        <div class="row g-4">
+            <!-- Review 1 - With Photo -->
+            <div class="col-lg-4 col-md-6">
+                <div class="review-card h-100 p-4" style="background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="review-avatar me-3" style="width: 50px; height: 50px; background: linear-gradient(45deg, #e67e22, #f39c12); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                            M
+                        </div>
+                        <div>
+                            <h6 class="mb-0">Mariana Silva</h6>
+                            <div class="stars mb-1">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                            </div>
+                            <small class="text-muted">15 de janeiro de 2025</small>
+                        </div>
+                    </div>
+                    <p class="mb-3">"Simplesmente apaixonada! O cheiro é incrível e dura o dia todo. A textura da loção é perfeita, não oleosa. Super recomendo!"</p>
+                    <img src="{{ url_for('static', filename='images/reviews/review1.jpg') }}" alt="Review photo" class="img-fluid rounded" style="max-height: 200px; width: 100%; object-fit: cover;">
+                </div>
+            </div>
+            
+            <!-- Review 2 - With Photo -->
+            <div class="col-lg-4 col-md-6">
+                <div class="review-card h-100 p-4" style="background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="review-avatar me-3" style="width: 50px; height: 50px; background: linear-gradient(45deg, #e67e22, #f39c12); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                            C
+                        </div>
+                        <div>
+                            <h6 class="mb-0">Camila Rodrigues</h6>
+                            <div class="stars mb-1">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                            </div>
+                            <small class="text-muted">8 de dezembro de 2024</small>
+                        </div>
+                    </div>
+                    <p class="mb-3">"Chegou super rápido! A fragrância é delicada e feminina, exatamente como eu queria. Já virei cliente fiel!"</p>
+                    <img src="{{ url_for('static', filename='images/reviews/review2.jpg') }}" alt="Review photo" class="img-fluid rounded" style="max-height: 200px; width: 100%; object-fit: cover;">
+                </div>
+            </div>
+            
+            <!-- Review 3 - With Photo -->
+            <div class="col-lg-4 col-md-6">
+                <div class="review-card h-100 p-4" style="background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="review-avatar me-3" style="width: 50px; height: 50px; background: linear-gradient(45deg, #e67e22, #f39c12); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                            A
+                        </div>
+                        <div>
+                            <h6 class="mb-0">Ana Beatriz</h6>
+                            <div class="stars mb-1">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                            </div>
+                            <small class="text-muted">22 de novembro de 2024</small>
+                        </div>
+                    </div>
+                    <p class="mb-3">"Produto de qualidade excepcional! O kit chegou bem embalado e o perfume é maravilhoso. Vale cada centavo!"</p>
+                    <img src="{{ url_for('static', filename='images/reviews/review3.jpg') }}" alt="Review photo" class="img-fluid rounded" style="max-height: 200px; width: 100%; object-fit: cover;">
+                </div>
+            </div>
+            
+            <!-- Review 4 - Text Only -->
+            <div class="col-lg-4 col-md-6">
+                <div class="review-card h-100 p-4" style="background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="review-avatar me-3" style="width: 50px; height: 50px; background: linear-gradient(45deg, #e67e22, #f39c12); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                            J
+                        </div>
+                        <div>
+                            <h6 class="mb-0">Juliana Costa</h6>
+                            <div class="stars mb-1">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                            </div>
+                            <small class="text-muted">5 de outubro de 2024</small>
+                        </div>
+                    </div>
+                    <p class="mb-0">"Comprei para presentear minha irmã e ela amou! A fragrância é suave e duradoura. Atendimento impecável e entrega rápida. Recomendo muito!"</p>
+                </div>
+            </div>
+            
+            <!-- Review 5 - Text Only -->
+            <div class="col-lg-4 col-md-6">
+                <div class="review-card h-100 p-4" style="background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="review-avatar me-3" style="width: 50px; height: 50px; background: linear-gradient(45deg, #e67e22, #f39c12); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                            L
+                        </div>
+                        <div>
+                            <h6 class="mb-0">Larissa Mendes</h6>
+                            <div class="stars mb-1">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                            </div>
+                            <small class="text-muted">18 de setembro de 2024</small>
+                        </div>
+                    </div>
+                    <p class="mb-0">"Excelente custo-benefício! A loção hidrata muito bem e o body splash tem fixação incrível. Já fiz várias compras e sempre fico satisfeita."</p>
+                </div>
+            </div>
+            
+            <!-- Review 6 - Text Only -->
+            <div class="col-lg-4 col-md-6">
+                <div class="review-card h-100 p-4" style="background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="review-avatar me-3" style="width: 50px; height: 50px; background: linear-gradient(45deg, #e67e22, #f39c12); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                            R
+                        </div>
+                        <div>
+                            <h6 class="mb-0">Rafaela Santos</h6>
+                            <div class="stars mb-1">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                            </div>
+                            <small class="text-muted">12 de agosto de 2024</small>
+                        </div>
+                    </div>
+                    <p class="mb-0">"Produtos de altíssima qualidade! O perfume é único e especial. Recebi muitos elogios quando uso. Site confiável e entrega no prazo."</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Trust Indicators -->
+        <div class="row mt-5 pt-4 border-top">
+            <div class="col-md-4 text-center mb-3">
+                <div class="trust-stat">
+                    <h3 class="fw-bold text-success mb-1">4.9/5</h3>
+                    <p class="text-muted mb-0">Avaliação média</p>
+                    <div class="stars">
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-center mb-3">
+                <div class="trust-stat">
+                    <h3 class="fw-bold text-success mb-1">2,847</h3>
+                    <p class="text-muted mb-0">Clientes satisfeitas</p>
+                </div>
+            </div>
+            <div class="col-md-4 text-center mb-3">
+                <div class="trust-stat">
+                    <h3 class="fw-bold text-success mb-1">98%</h3>
+                    <p class="text-muted mb-0">Recomendariam</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 {% endblock %}
