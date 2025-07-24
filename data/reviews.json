@@ -2,80 +2,104 @@
   "labubu-rosa": [
     {
       "id": 1,
-      "customer_name": "Camila R.",
+      "customer_name": "Flavia B.",
       "rating": 5,
-      "comment": "Meu primeiro Labubu e já estou viciada! É muito mais fofo pessoalmente. A qualidade é incrível, material macio e resistente. Chegou super bem embalado!",
-      "date": "2025-07-22",
+      "comment": "Comprei um labubu princesa e recebi hoje. gostei",
+      "date": "2025-07-11",
       "verified_purchase": true
     },
     {
       "id": 2,
-      "customer_name": "Lucas M.",
+      "customer_name": "Maria A. G.",
       "rating": 5,
-      "comment": "Comprei para minha namorada e ela ficou apaixonada! O Labubu rosa é o mais clássico e fofo. Produto autêntico mesmo, dá pra ver a diferença.",
-      "date": "2025-07-20",
+      "comment": "Muito bom super recomendo",
+      "date": "2025-06-26",
       "verified_purchase": true
     },
     {
       "id": 3,
-      "customer_name": "Beatriz S.",
+      "customer_name": "Maria A. C. N. G.",
       "rating": 5,
-      "comment": "OBSESSADA! O Labubu é ainda mais lindo ao vivo. Os detalhes são perfeitos, expressão fofa demais. Já quero comprar mais cores!",
-      "date": "2025-07-18",
+      "comment": "Gostei e recomendo",
+      "date": "2025-06-26",
+      "verified_purchase": true
+    },
+    {
+      "id": 4,
+      "customer_name": "Lisie s. v.",
+      "rating": 5,
+      "comment": "Comprei pra minha filha só porque ela estava pedindo muito, quando o produto chegou me surpreendi com o profissionalismo e qualidade. Recomendo a loja!",
+      "date": "2025-06-24",
+      "verified_purchase": true
+    },
+    {
+      "id": 5,
+      "customer_name": "Maria C.",
+      "rating": 5,
+      "comment": "Produto de altíssima qualidade.. Recomendo",
+      "date": "2025-04-24",
       "verified_purchase": true
     }
   ],
   "labubu-verde": [
     {
-      "id": 4,
-      "customer_name": "Ana Júlia F.",
+      "id": 6,
+      "customer_name": "Ariella G.",
       "rating": 5,
-      "comment": "Verde é minha cor favorita e esse Labubu é simplesmente perfeito! A cor é vibrante e a textura é muito gostosa de apertar. Recomendo!",
-      "date": "2025-07-21",
+      "comment": "Ótimooooo produto",
+      "date": "2025-06-30",
       "verified_purchase": true
     },
     {
-      "id": 5,
-      "customer_name": "Pedro H.",
+      "id": 7,
+      "customer_name": "Giselle M.",
       "rating": 5,
-      "comment": "Produto original, chegou rápido! O verde ficou ainda mais bonito que nas fotos. Minha coleção de Labubu está crescendo!",
-      "date": "2025-07-19",
+      "comment": "O produto demorou mas chegou perfeito.",
+      "date": "2025-06-29",
+      "verified_purchase": true
+    },
+    {
+      "id": 8,
+      "customer_name": "Maria C.",
+      "rating": 5,
+      "comment": "Produto de altíssima qualidade.. Recomendo",
+      "date": "2025-04-24",
       "verified_purchase": true
     }
   ],
   "labubu-coca-cola-rarissimo": [
     {
-      "id": 6,
-      "customer_name": "Marina L.",
+      "id": 9,
+      "customer_name": "Marcelo F.",
       "rating": 5,
-      "comment": "RARÍSSIMO mesmo! A colaboração Labubu x Coca-Cola é incrível. Peça única na minha coleção. Vale cada centavo, qualidade excepcional!",
-      "date": "2025-07-23",
+      "comment": "Chegou certo. Chegou hoje o meu, 9 dias depois da compra. gostei",
+      "date": "2025-06-26",
       "verified_purchase": true
     },
     {
-      "id": 7,
-      "customer_name": "Rodrigo A.",
+      "id": 10,
+      "customer_name": "Sabrina S.",
       "rating": 5,
-      "comment": "Colecionador de toy arts aqui! Esse Labubu Coca-Cola é especial demais. Edição limitada autêntica, detalhes impecáveis. Super recomendo!",
-      "date": "2025-07-17",
+      "comment": "EU AMEIIIIIIIIIIII! Muito fofinho",
+      "date": "2025-06-24",
       "verified_purchase": true
     }
   ],
   "labubu-lacinhos-rosa": [
     {
-      "id": 8,
-      "customer_name": "Sophia N.",
+      "id": 14,
+      "customer_name": "Amanda N.",
       "rating": 5,
-      "comment": "O mais kawaii de todos! Os lacinhos rosa deixam ele ainda mais fofo. Minha filha ama brincar com ele. Qualidade Pop Mart sempre perfeita!",
-      "date": "2025-07-20",
+      "comment": "Eu simplesmente amei muitoooooo",
+      "date": "2025-05-24",
       "verified_purchase": true
     },
     {
-      "id": 9,
-      "customer_name": "Letícia V.",
+      "id": 15,
+      "customer_name": "Tânia V.",
       "rating": 5,
-      "comment": "Apaixonada por esse Labubu! Os lacinhos são um charme a parte. Produto autêntico, embalagem original. Chegou no prazo certinho!",
-      "date": "2025-07-16",
+      "comment": "Produto excelente, chegou rapidinho",
+      "date": "2025-06-30",
       "verified_purchase": true
     }
   ],
@@ -92,30 +116,80 @@
   "labubu-halloween-rarissimo": [
     {
       "id": 11,
-      "customer_name": "Matheus C.",
+      "customer_name": "Simone F.",
       "rating": 5,
-      "comment": "Edição Halloween épica! O Labubu com abóbora é criativo demais. Peça rara que não encontro em lugar nenhum. Muito satisfeito!",
-      "date": "2025-07-18",
+      "comment": "Eu ameeeeeeeei muitoooo. Obrigadaaa",
+      "date": "2025-05-24",
+      "verified_purchase": true
+    },
+    {
+      "id": 12,
+      "customer_name": "Georgia M.",
+      "rating": 5,
+      "comment": "A caixa veio bem embalada e o boneco veio perfeito e sem qualquer dano. A entrega foi bem rápida. Recomendo.",
+      "date": "2025-05-24",
+      "verified_purchase": true
+    },
+    {
+      "id": 13,
+      "customer_name": "Daniele M.",
+      "rating": 5,
+      "comment": "É a coisa mais fofa do planeta, juro! É muito fofinhooooo! Tô apaixonada. A carinha dele é dos Labubus sentados, mas o original é a carinha do Macaron. Sinceramente não me importo com isso pq é realmente muito lindinho!",
+      "date": "2025-05-24",
       "verified_purchase": true
     }
   ],
   "labubu-bege": [
     {
-      "id": 12,
-      "customer_name": "Isabela M.",
+      "id": 16,
+      "customer_name": "Jessica A.",
       "rating": 5,
-      "comment": "Labubu bege é chique! Cor neutra que combina com tudo. Qualidade incrível, muito macio e bem acabado. Entrega super rápida!",
-      "date": "2025-07-21",
+      "comment": "Vocês sao a unica loja confiavel. Eu amei o meu. Obrigadaaaa",
+      "date": "2025-05-24",
+      "verified_purchase": true
+    },
+    {
+      "id": 17,
+      "customer_name": "Ananda F.",
+      "rating": 5,
+      "comment": "Chegou certinho e rápido, eu amei 🤎",
+      "date": "2025-05-24",
       "verified_purchase": true
     }
   ],
   "labubu-azul": [
     {
-      "id": 13,
-      "customer_name": "Thiago R.",
+      "id": 18,
+      "customer_name": "Patricia b. l.",
       "rating": 5,
-      "comment": "Azul vibrante demais! Cor linda que chama atenção. Meu primeiro Labubu e já estou viciado. Produto original, recomendo muito!",
-      "date": "2025-07-19",
+      "comment": "Recebi",
+      "date": "2025-06-30",
+      "verified_purchase": true
+    },
+    {
+      "id": 19,
+      "customer_name": "SAYHURI R. L.",
+      "rating": 5,
+      "comment": "Gostei muito do labubu é muito bonito eu gostei muito muito muito amei muito",
+      "date": "2025-06-24",
+      "verified_purchase": true
+    },
+    {
+      "id": 20,
+      "customer_name": "Maria C.",
+      "rating": 5,
+      "comment": "Amei muito o meu. recebi hoje",
+      "date": "2025-05-24",
+      "verified_purchase": true
+    }
+  ],
+  "labubu-marrom-claro": [
+    {
+      "id": 21,
+      "customer_name": "Giovanna P.",
+      "rating": 5,
+      "comment": "Cor linda e diferente! Muito elegante e combina com tudo. Material de primeira qualidade!",
+      "date": "2025-07-22",
       "verified_purchase": true
     }
   ]
