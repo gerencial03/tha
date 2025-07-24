@@ -134,26 +134,23 @@ def checkout(product_id):
         session['product_quantity'][product_id] = quantity
         session.modified = True
     
-    # Initialize or get checkout cart
-    if 'checkout_cart' not in session:
-        session['checkout_cart'] = {}
-    
-    # Add current product to checkout cart
-    session['checkout_cart'][product_id] = quantity
-    session.modified = True
-    
-    # Get all products in checkout cart with details
+    # CORRIGIDO: Calcular apenas o produto atual, não somar carrinho inteiro
     checkout_items = []
     total_value = 0
-    for item_id, item_qty in session['checkout_cart'].items():
-        item_product = next((p for p in all_products if p['id'] == item_id), None)
-        if item_product:
-            checkout_items.append({
-                'product': item_product,
-                'quantity': item_qty,
-                'subtotal': item_product['price'] * item_qty
-            })
-            total_value += item_product['price'] * item_qty
+    
+    # Calcular apenas o produto atual
+    checkout_items.append({
+        'product': product,
+        'quantity': quantity,
+        'subtotal': product['price'] * quantity
+    })
+    total_value = product['price'] * quantity
+    
+    print(f"Checkout corrigido - Produto: {product['title']}, Preço: R${product['price']:.2f}, Qtd: {quantity}, Total: R${total_value:.2f}")
+    
+    # Limpar carrinho para evitar acúmulo incorreto
+    session['checkout_cart'] = {product_id: quantity}
+    session.modified = True
     
     # Get similar products for recommendations (excluding those in cart)
     if product_id in [p['id'] for p in products_data.get('linha_toque_essencial', [])]:
