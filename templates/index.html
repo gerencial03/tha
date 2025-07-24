@@ -111,9 +111,14 @@
 
                             <!-- Action Button -->
                             <div class="product-action">
-                                <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn-comprar-melhorado">
-                                    Comprar
-                                </a>
+                                <div class="d-flex gap-1 mb-2">
+                                    <button class="btn-comprar-melhorado flex-fill" onclick="addToCart('{{ product.id }}')">
+                                        Adicionar
+                                    </button>
+                                    <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn btn-outline-light btn-sm px-2">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </div>
                                 <div class="installment-info">
                                     <small>Pronto!</small>
                                     <small>Incluindo...</small>
@@ -202,9 +207,14 @@
 
                             <!-- Action Button -->
                             <div class="product-action">
-                                <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn-comprar-melhorado">
-                                    Comprar
-                                </a>
+                                <div class="d-flex gap-1 mb-2">
+                                    <button class="btn-comprar-melhorado flex-fill" onclick="addToCart('{{ product.id }}')">
+                                        Adicionar
+                                    </button>
+                                    <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn btn-outline-light btn-sm px-2">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </div>
                                 <div class="installment-info">
                                     <small>Pronto!</small>
                                     <small>Incluindo...</small>

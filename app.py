@@ -312,6 +312,71 @@ def remove_from_checkout_ajax(product_id):
         'total_value': total_value
     })
 
+@app.route('/get_cart_content')
+def get_cart_content():
+    """Return cart content for dropdown display"""
+    products_data = load_products()
+    all_products = products_data.get('labubu_collection', []) + products_data.get('acessorios_labubu', [])
+    
+    cart_items = []
+    total_count = 0
+    total_value = 0
+    
+    # Get cart from checkout_cart session
+    cart = session.get('checkout_cart', {})
+    
+    for product_id, quantity in cart.items():
+        product = next((p for p in all_products if p['id'] == product_id), None)
+        if product:
+            subtotal = product['price'] * quantity
+            cart_items.append({
+                'id': product_id,
+                'name': product['name'],
+                'price': product['price'],
+                'quantity': quantity,
+                'subtotal': subtotal,
+                'image_url': product['image_url']
+            })
+            total_count += quantity
+            total_value += subtotal
+    
+    return jsonify({
+        'items': cart_items,
+        'total_count': total_count,
+        'total_value': total_value,
+        'is_empty': len(cart_items) == 0
+    })
+
+@app.route('/add_to_cart_ajax/<product_id>', methods=['POST'])
+def add_to_cart_ajax(product_id):
+    """Add product to cart via AJAX"""
+    request_data = request.get_json() or {}
+    quantity = int(request_data.get('quantity', 1))
+    
+    # Initialize checkout cart if not exists
+    if 'checkout_cart' not in session:
+        session['checkout_cart'] = {}
+    
+    # Add or increment quantity
+    if product_id in session['checkout_cart']:
+        session['checkout_cart'][product_id] += quantity
+    else:
+        session['checkout_cart'][product_id] = quantity
+    
+    session.modified = True
+    
+    # Return updated cart info
+    return get_cart_content()
+
+@app.route('/remove_from_cart_ajax/<product_id>', methods=['POST'])
+def remove_from_cart_ajax(product_id):
+    """Remove product from cart via AJAX"""
+    if 'checkout_cart' in session and product_id in session['checkout_cart']:
+        del session['checkout_cart'][product_id]
+        session.modified = True
+    
+    return get_cart_content()
+
 @app.route('/process_pix_payment', methods=['POST'])
 def process_pix_payment():
     try:

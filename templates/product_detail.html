@@ -75,9 +75,14 @@
                                 </div>
                             </div>
                             <div class="col-8">
-                                <button class="btn-comprar-melhorado" onclick="buyProduct()">
-                                    Comprar
-                                </button>
+                                <div class="d-flex gap-2">
+                                    <button class="btn-comprar-melhorado flex-fill" onclick="addToCartFromDetail('{{ product.id }}')">
+                                        Adicionar ao Carrinho
+                                    </button>
+                                    <button class="btn btn-success btn-sm px-3" onclick="buyProduct()">
+                                        Comprar
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
