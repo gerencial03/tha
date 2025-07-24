@@ -134,23 +134,33 @@ def checkout(product_id):
         session['product_quantity'][product_id] = quantity
         session.modified = True
     
-    # CORRIGIDO: Calcular apenas o produto atual, não somar carrinho inteiro
+    # CORRIGIDO: Suporte para múltiplos produtos no checkout
     checkout_items = []
     total_value = 0
     
-    # Calcular apenas o produto atual
-    checkout_items.append({
-        'product': product,
-        'quantity': quantity,
-        'subtotal': product['price'] * quantity
-    })
-    total_value = product['price'] * quantity
+    # Inicializar carrinho se não existir
+    if 'checkout_cart' not in session:
+        session['checkout_cart'] = {}
     
-    print(f"Checkout corrigido - Produto: {product['name']}, Preço: R${product['price']:.2f}, Qtd: {quantity}, Total: R${total_value:.2f}")
-    
-    # Limpar carrinho para evitar acúmulo incorreto
-    session['checkout_cart'] = {product_id: quantity}
+    # Adicionar/atualizar produto atual no carrinho
+    session['checkout_cart'][product_id] = quantity
     session.modified = True
+    
+    # Calcular todos os produtos no carrinho
+    for item_id, item_qty in session['checkout_cart'].items():
+        item_product = next((p for p in all_products if p['id'] == item_id), None)
+        if item_product:
+            subtotal = item_product['price'] * item_qty
+            checkout_items.append({
+                'product': item_product,
+                'quantity': item_qty,
+                'subtotal': subtotal
+            })
+            total_value += subtotal
+    
+    print(f"Checkout - {len(checkout_items)} produto(s), Total: R${total_value:.2f}")
+    for item in checkout_items:
+        print(f"  - {item['product']['name']}: {item['quantity']}x R${item['product']['price']:.2f} = R${item['subtotal']:.2f}")
     
     # Get similar products for recommendations (excluding those in cart)
     if product_id in [p['id'] for p in products_data.get('linha_toque_essencial', [])]:
@@ -197,9 +207,20 @@ def add_to_checkout(product_id):
     
     session.modified = True
     
-    # Redirect back to current checkout page
-    current_product = next(iter(session['checkout_cart'].keys()))
-    return redirect(url_for('checkout', product_id=current_product))
+    print(f"Produto adicionado ao carrinho: {product_id}, Quantidade: {session['checkout_cart'][product_id]}")
+    print(f"Carrinho atual: {session['checkout_cart']}")
+    
+    # Redirect back to current checkout page (manter o produto principal)
+    # Se há um produto principal na URL, usar ele, senão usar o primeiro do carrinho
+    referrer = request.referrer
+    if referrer and '/checkout/' in referrer:
+        # Extrair product_id da URL de referência
+        main_product_id = referrer.split('/checkout/')[-1].split('?')[0]
+        return redirect(url_for('checkout', product_id=main_product_id))
+    else:
+        # Fallback: usar o primeiro produto do carrinho
+        current_product = next(iter(session['checkout_cart'].keys()))
+        return redirect(url_for('checkout', product_id=current_product))
 
 @app.route('/process_pix_payment', methods=['POST'])
 def process_pix_payment():
