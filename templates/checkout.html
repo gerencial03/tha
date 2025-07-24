@@ -167,6 +167,45 @@
                     </div>
                     <div class="card-body">
                         <div class="payment-summary">
+                            <!-- Product Info Section -->
+                            <div class="selected-products mb-3">
+                                <h6 class="mb-2 text-muted">🛍️ Seus Produtos:</h6>
+                                {% if checkout_items %}
+                                    {% for item in checkout_items %}
+                                    <div class="product-item mb-2 p-2 bg-light rounded">
+                                        <div class="row align-items-center">
+                                            <div class="col-3">
+                                                <img src="{{ item.product.image_url }}" alt="{{ item.product.name }}" class="img-fluid rounded" style="max-height: 40px; object-fit: cover;">
+                                            </div>
+                                            <div class="col-6">
+                                                <small class="fw-bold">{{ item.product.name }}</small>
+                                                <br><small class="text-muted">{{ item.quantity }}x R$ {{ "%.2f"|format(item.product.price) }}</small>
+                                            </div>
+                                            <div class="col-3 text-end">
+                                                <small class="fw-bold">R$ {{ "%.2f"|format(item.subtotal) }}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="product-item mb-2 p-2 bg-light rounded">
+                                        <div class="row align-items-center">
+                                            <div class="col-3">
+                                                <img src="{{ product.image_url }}" alt="{{ product.name }}" class="img-fluid rounded" style="max-height: 40px; object-fit: cover;">
+                                            </div>
+                                            <div class="col-6">
+                                                <small class="fw-bold">{{ product.name }}</small>
+                                                <br><small class="text-muted">{{ quantity }}x R$ {{ "%.2f"|format(product.price) }}</small>
+                                            </div>
+                                            <div class="col-3 text-end">
+                                                <small class="fw-bold">R$ {{ "%.2f"|format(product.price * quantity) }}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <hr class="my-3">
+                            
                             <div class="d-flex justify-content-between mb-2">
                                 <span>Subtotal:</span>
                                 <span id="summary-subtotal">R${{ "%.2f"|format(total_value) }}</span>
