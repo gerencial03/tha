@@ -168,7 +168,7 @@
                     <div class="card-body">
                         <div class="payment-summary">
                             <!-- Products Info Section -->
-                            <div class="mb-3">
+                            <div class="mb-3" id="payment-products-summary">
                                 {% if checkout_items %}
                                     <!-- Show all products in checkout -->
                                     {% for item in checkout_items %}
@@ -523,7 +523,9 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('summary-subtotal').textContent = `R$ ${totalValue.toFixed(2).replace('.', ',')}`;
         
         // Update products info in payment summary
-        const productsSummaryDiv = document.querySelector('.payment-summary .mb-3');
+        const productsSummaryDiv = document.getElementById('payment-products-summary');
+        console.log('Encontrou div dos produtos:', productsSummaryDiv);
+        
         if (productsSummaryDiv) {
             productsSummaryDiv.innerHTML = '';
             
@@ -546,6 +548,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 `;
                 productsSummaryDiv.innerHTML += productHtml;
             });
+            console.log('Produtos atualizados no resumo:', checkoutItems.length);
+        } else {
+            console.error('Não encontrou a div dos produtos no resumo do pagamento');
         }
         
         // Calculate totals
