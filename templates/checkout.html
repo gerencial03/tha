@@ -167,20 +167,43 @@
                     </div>
                     <div class="card-body">
                         <div class="payment-summary">
-                            <!-- Compact Product Info -->
-                            <div class="mb-3 p-2" style="background-color: #f8f9fa; border-radius: 5px; border: 1px solid #dee2e6;">
-                                <div class="d-flex align-items-center">
-                                    <img src="{{ product.image_url }}" alt="{{ product.name }}" 
-                                         class="rounded me-2" style="width: 35px; height: 35px; object-fit: cover;">
-                                    <div style="flex: 1;">
-                                        <div style="font-size: 11px; font-weight: 600; color: #333; margin-bottom: 2px;">
-                                            {{ product.name }}
-                                        </div>
-                                        <div style="font-size: 9px; color: #666;">
-                                            Quantidade: {{ quantity }} × R$ {{ "%.2f"|format(product.price) }}
+                            <!-- Products Info Section -->
+                            <div class="mb-3">
+                                {% if checkout_items and checkout_items|length > 1 %}
+                                    <!-- Multiple Products -->
+                                    {% for item in checkout_items %}
+                                    <div class="mb-2 p-2" style="background-color: #f8f9fa; border-radius: 5px; border: 1px solid #dee2e6;">
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{ item.product.image_url }}" alt="{{ item.product.name }}" 
+                                                 class="rounded me-2" style="width: 35px; height: 35px; object-fit: cover;">
+                                            <div style="flex: 1;">
+                                                <div style="font-size: 11px; font-weight: 600; color: #333; margin-bottom: 2px;">
+                                                    {{ item.product.name }}
+                                                </div>
+                                                <div style="font-size: 9px; color: #666;">
+                                                    Quantidade: {{ item.quantity }} × R$ {{ "%.2f"|format(item.product.price) }}
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <!-- Single Product -->
+                                    <div class="mb-2 p-2" style="background-color: #f8f9fa; border-radius: 5px; border: 1px solid #dee2e6;">
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{ product.image_url }}" alt="{{ product.name }}" 
+                                                 class="rounded me-2" style="width: 35px; height: 35px; object-fit: cover;">
+                                            <div style="flex: 1;">
+                                                <div style="font-size: 11px; font-weight: 600; color: #333; margin-bottom: 2px;">
+                                                    {{ product.name }}
+                                                </div>
+                                                <div style="font-size: 9px; color: #666;">
+                                                    Quantidade: {{ quantity }} × R$ {{ "%.2f"|format(product.price) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
                             </div>
                             
                             <div class="d-flex justify-content-between mb-2">
