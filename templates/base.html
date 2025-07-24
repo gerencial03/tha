@@ -69,11 +69,25 @@
                 
                 <!-- Carrinho -->
                 <div class="col-2 text-end">
-                    <div class="cart-icon position-relative">
-                        <a href="#" class="cart-link" style="color: white; font-size: 20px; text-decoration: none;">
+                    <div class="cart-dropdown position-relative dropdown">
+                        <a href="#" class="cart-link dropdown-toggle" data-bs-toggle="dropdown" style="color: white; font-size: 20px; text-decoration: none;" id="cartDropdown">
                             <i class="fas fa-shopping-cart"></i>
-                            <span class="cart-count-badge" style="position: absolute; top: -8px; right: -8px; background: white; color: #e67e22; border-radius: 50%; width: 18px; height: 18px; font-size: 12px; display: flex; align-items: center; justify-content: center; font-weight: bold;">0</span>
+                            <span class="cart-count-badge" id="cartCountBadge" style="position: absolute; top: -8px; right: -8px; background: white; color: #e67e22; border-radius: 50%; width: 18px; height: 18px; font-size: 12px; display: flex; align-items: center; justify-content: center; font-weight: bold;">0</span>
                         </a>
+                        
+                        <!-- Dropdown do Carrinho -->
+                        <div class="dropdown-menu dropdown-menu-end cart-dropdown-menu" style="width: 350px; max-height: 400px; overflow-y: auto;">
+                            <div class="px-3 py-2 border-bottom">
+                                <h6 class="mb-0">🛒 Meu Carrinho</h6>
+                            </div>
+                            
+                            <div id="cartDropdownContent">
+                                <div class="text-center py-4 text-muted">
+                                    <i class="fas fa-shopping-cart fa-2x mb-2"></i>
+                                    <p>Carrinho vazio</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -299,6 +313,93 @@
         });
     </script>
     
+    <!-- Cart Dropdown Script -->
+    <script>
+        // Carrinho Dropdown Functionality
+        function updateCartDropdown() {
+            fetch('/get_cart_data')
+                .then(response => response.json())
+                .then(data => {
+                    const cartCountBadge = document.getElementById('cartCountBadge');
+                    const cartDropdownContent = document.getElementById('cartDropdownContent');
+                    
+                    // Update cart count
+                    cartCountBadge.textContent = data.count;
+                    cartCountBadge.style.display = data.count > 0 ? 'flex' : 'none';
+                    
+                    // Update dropdown content
+                    if (data.count === 0) {
+                        cartDropdownContent.innerHTML = `
+                            <div class="text-center py-4 text-muted">
+                                <i class="fas fa-shopping-cart fa-2x mb-2"></i>
+                                <p>Carrinho vazio</p>
+                            </div>
+                        `;
+                    } else {
+                        let cartHTML = '';
+                        
+                        data.items.forEach(item => {
+                            cartHTML += `
+                                <div class="cart-item p-3 border-bottom">
+                                    <div class="row align-items-center">
+                                        <div class="col-3">
+                                            <img src="${item.image_url}" alt="${item.name}" class="img-fluid rounded" style="max-height: 50px; object-fit: cover;">
+                                        </div>
+                                        <div class="col-6">
+                                            <h6 class="mb-1" style="font-size: 12px;">${item.name}</h6>
+                                            <small class="text-muted">${item.quantity}x ${item.formatted_price}</small>
+                                        </div>
+                                        <div class="col-3 text-end">
+                                            <strong style="font-size: 14px;">${item.formatted_subtotal}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        
+                        cartHTML += `
+                            <div class="p-3 bg-light">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <strong>Total: ${data.formatted_total}</strong>
+                                </div>
+                                <button class="btn btn-warning w-100" onclick="goToCheckout()">
+                                    🔒 Finalizar Compra
+                                </button>
+                            </div>
+                        `;
+                        
+                        cartDropdownContent.innerHTML = cartHTML;
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar carrinho:', error);
+                });
+        }
+        
+        function goToCheckout() {
+            // Redirecionar para checkout com o primeiro produto do carrinho
+            fetch('/get_cart_data')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.items.length > 0) {
+                        const firstProductId = data.items[0].id;
+                        window.location.href = `/checkout/${firstProductId}`;
+                    }
+                });
+        }
+        
+        // Atualizar carrinho quando a página carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartDropdown();
+            
+            // Atualizar carrinho quando o dropdown for aberto
+            const cartDropdown = document.getElementById('cartDropdown');
+            if (cartDropdown) {
+                cartDropdown.addEventListener('click', updateCartDropdown);
+            }
+        });
+    </script>
+
     <!-- Page specific scripts -->
     {% block scripts %}{% endblock %}
 </body>

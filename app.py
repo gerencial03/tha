@@ -35,6 +35,41 @@ def index():
                          queridinhos=products_data.get('queridinhos', []),
                          cart_count=len(session['cart']))
 
+@app.route('/get_cart_data')
+def get_cart_data():
+    """Rota para obter dados do carrinho para o dropdown"""
+    if 'checkout_cart' not in session:
+        return jsonify({'items': [], 'total': 0, 'count': 0})
+    
+    products_data = load_products()
+    all_products = products_data.get('linha_toque_essencial', []) + products_data.get('queridinhos', [])
+    
+    cart_items = []
+    total_value = 0
+    
+    for product_id, quantity in session['checkout_cart'].items():
+        product = next((p for p in all_products if p['id'] == product_id), None)
+        if product:
+            subtotal = product['price'] * quantity
+            cart_items.append({
+                'id': product_id,
+                'name': product['name'],
+                'price': product['price'],
+                'quantity': quantity,
+                'subtotal': subtotal,
+                'image_url': product.get('image_url', ''),
+                'formatted_price': f"R$ {product['price']:.2f}".replace('.', ','),
+                'formatted_subtotal': f"R$ {subtotal:.2f}".replace('.', ',')
+            })
+            total_value += subtotal
+    
+    return jsonify({
+        'items': cart_items,
+        'total': total_value,
+        'count': len(cart_items),
+        'formatted_total': f"R$ {total_value:.2f}".replace('.', ',')
+    })
+
 @app.route('/add_to_cart/<product_id>')
 def add_to_cart(product_id):
     if 'cart' not in session:
