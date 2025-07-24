@@ -242,6 +242,42 @@ def add_to_checkout_ajax(product_id):
         'total_value': total_value
     })
 
+@app.route('/remove_from_checkout_ajax/<product_id>', methods=['POST'])
+def remove_from_checkout_ajax(product_id):
+    products_data = load_products()
+    all_products = products_data.get('linha_toque_essencial', []) + products_data.get('queridinhos', [])
+    
+    # Remove product from checkout cart
+    if 'checkout_cart' in session and product_id in session['checkout_cart']:
+        del session['checkout_cart'][product_id]
+        session.modified = True
+    
+    # Build checkout items data
+    checkout_items = []
+    total_value = 0
+    
+    if 'checkout_cart' in session:
+        for item_id, item_qty in session['checkout_cart'].items():
+            item_product = next((p for p in all_products if p['id'] == item_id), None)
+            if item_product:
+                subtotal = item_product['price'] * item_qty
+                checkout_items.append({
+                    'product': item_product,
+                    'quantity': item_qty,
+                    'subtotal': subtotal
+                })
+                total_value += subtotal
+    
+    print(f"Produto removido do carrinho: {product_id}")
+    print(f"Carrinho atual: {session.get('checkout_cart', {})}")
+    print(f"Total de produtos no retorno: {len(checkout_items)}")
+    
+    return jsonify({
+        'success': True,
+        'checkout_items': checkout_items,
+        'total_value': total_value
+    })
+
 @app.route('/process_pix_payment', methods=['POST'])
 def process_pix_payment():
     try:

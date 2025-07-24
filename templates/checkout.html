@@ -172,7 +172,8 @@
                                 {% if checkout_items %}
                                     <!-- Show all products in checkout -->
                                     {% for item in checkout_items %}
-                                    <div class="mb-2 p-2" style="background-color: #f8f9fa; border-radius: 5px; border: 1px solid #dee2e6;">
+                                    <div class="mb-2 p-2 product-summary-item" style="background-color: #f8f9fa; border-radius: 5px; border: 1px solid #dee2e6; position: relative;" data-product-id="{{ item.product.id }}">
+                                        <button class="btn-remove-product" onclick="removeProductFromSummary('{{ item.product.id }}')" style="position: absolute; top: 5px; right: 5px; background: #dc3545; color: white; border: none; border-radius: 50%; width: 18px; height: 18px; font-size: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center;">×</button>
                                         <div class="d-flex align-items-center">
                                             <img src="{{ item.product.image_url }}" alt="{{ item.product.name }}" 
                                                  class="rounded me-2" style="width: 35px; height: 35px; object-fit: cover;">
@@ -189,7 +190,8 @@
                                     {% endfor %}
                                 {% else %}
                                     <!-- Fallback for single product -->
-                                    <div class="mb-2 p-2" style="background-color: #f8f9fa; border-radius: 5px; border: 1px solid #dee2e6;">
+                                    <div class="mb-2 p-2 product-summary-item" style="background-color: #f8f9fa; border-radius: 5px; border: 1px solid #dee2e6; position: relative;" data-product-id="{{ product.id }}">
+                                        <button class="btn-remove-product" onclick="removeProductFromSummary('{{ product.id }}')" style="position: absolute; top: 5px; right: 5px; background: #dc3545; color: white; border: none; border-radius: 50%; width: 18px; height: 18px; font-size: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center;">×</button>
                                         <div class="d-flex align-items-center">
                                             <img src="{{ product.image_url }}" alt="{{ product.name }}" 
                                                  class="rounded me-2" style="width: 35px; height: 35px; object-fit: cover;">
@@ -531,7 +533,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             checkoutItems.forEach(item => {
                 const productHtml = `
-                    <div class="mb-2 p-2" style="background-color: #f8f9fa; border-radius: 5px; border: 1px solid #dee2e6;">
+                    <div class="mb-2 p-2 product-summary-item" style="background-color: #f8f9fa; border-radius: 5px; border: 1px solid #dee2e6; position: relative;" data-product-id="${item.product.id}">
+                        <button class="btn-remove-product" onclick="removeProductFromSummary('${item.product.id}')" style="position: absolute; top: 5px; right: 5px; background: #dc3545; color: white; border: none; border-radius: 50%; width: 18px; height: 18px; font-size: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center;">×</button>
                         <div class="d-flex align-items-center">
                             <img src="${item.product.image_url}" alt="${item.product.name}" 
                                  class="rounded me-2" style="width: 35px; height: 35px; object-fit: cover;">
@@ -592,6 +595,30 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, 3000);
     }
+    
+    // Function to remove product from summary
+    window.removeProductFromSummary = function(productId) {
+        fetch(`/remove_from_checkout_ajax/${productId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Update the selected products section
+                updateSelectedProducts(data.checkout_items);
+                // Update payment summary
+                updatePaymentSummary(data.total_value, data.checkout_items);
+                // Show success message
+                showSuccessMessage('Produto removido!');
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao remover produto:', error);
+        });
+    };
 
     function updateTotals() {
         let selectedShipping = document.querySelector('input[name="shipping"]:checked');
