@@ -136,7 +136,7 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Número *</label>
-                                    <input type="text" class="form-control" required>
+                                    <input type="text" id="numero" class="form-control" required>
                                 </div>
                                 <div class="col-12 mb-3">
                                     <label class="form-label">Endereço *</label>
@@ -256,29 +256,66 @@
                                     </div>
                                 </div>
 
-                                <!-- Trust Badges -->
-                                <div class="trust-badges">
-                                    <div class="mb-3">
-                                        <h6>⭐ Avaliações Verificadas</h6>
-                                        <div class="trust-item d-flex align-items-center mb-2">
-                                            <img src="https://cdn-icons-png.flaticon.com/32/733/733579.png" alt="Reclame Aqui" class="me-2">
-                                            <div>
-                                                <div class="fw-bold">Reclame Aqui</div>
-                                                <div class="stars">⭐⭐⭐⭐⭐ <small>4.8/5</small></div>
+                                <!-- Company Reviews -->
+                                <div class="company-reviews">
+                                    <h6 class="mb-3">💬 O que dizem sobre nós</h6>
+                                    
+                                    <!-- Reclame Aqui Review -->
+                                    <div class="review-comment mb-3 p-3 border-start border-primary border-3" style="background: #f8f9fa;">
+                                        <div class="d-flex align-items-start">
+                                            <div class="company-avatar me-3" style="background: #0066cc; color: white; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 16px;">
+                                                <i class="fas fa-shield-alt"></i>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                                    <strong style="color: #0066cc; font-size: 14px;">Reclame Aqui</strong>
+                                                    <div class="rating">
+                                                        <span style="color: #ffc107;">⭐⭐⭐⭐⭐</span>
+                                                        <small class="text-muted ms-1">5.0</small>
+                                                    </div>
+                                                </div>
+                                                <p class="mb-1 small text-dark">"Empresa com excelente reputação no atendimento ao consumidor. Produtos de qualidade e entrega rápida. Totalmente confiável!"</p>
+                                                <small class="text-muted">Verificado hoje</small>
                                             </div>
                                         </div>
-                                        <div class="trust-item d-flex align-items-center mb-2">
-                                            <img src="https://cdn-icons-png.flaticon.com/32/732/732200.png" alt="Correios" class="me-2">
-                                            <div>
-                                                <div class="fw-bold">Correios</div>
-                                                <div class="small text-success">Entrega Nacional</div>
+                                    </div>
+
+                                    <!-- Correios Review -->
+                                    <div class="review-comment mb-3 p-3 border-start border-warning border-3" style="background: #f8f9fa;">
+                                        <div class="d-flex align-items-start">
+                                            <div class="company-avatar me-3" style="background: #ffcc00; color: #003366; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 16px;">
+                                                <i class="fas fa-truck"></i>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                                    <strong style="color: #003366; font-size: 14px;">Correios</strong>
+                                                    <div class="rating">
+                                                        <span style="color: #ffc107;">⭐⭐⭐⭐⭐</span>
+                                                        <small class="text-muted ms-1">4.8</small>
+                                                    </div>
+                                                </div>
+                                                <p class="mb-1 small text-dark">"Parceiro logístico de confiança. Entregas pontuais e embalagem adequada para produtos de beleza. Rastreamento sempre atualizado."</p>
+                                                <small class="text-muted">Parceiro verificado</small>
                                             </div>
                                         </div>
-                                        <div class="trust-item d-flex align-items-center">
-                                            <img src="https://cdn-icons-png.flaticon.com/32/5968/5968299.png" alt="Mercado Pago" class="me-2">
-                                            <div>
-                                                <div class="fw-bold">Mercado Pago</div>
-                                                <div class="small text-primary">Pagamento Seguro</div>
+                                    </div>
+
+                                    <!-- Mercado Pago Review -->
+                                    <div class="review-comment mb-3 p-3 border-start border-info border-3" style="background: #f8f9fa;">
+                                        <div class="d-flex align-items-start">
+                                            <div class="company-avatar me-3" style="background: #00b5d8; color: white; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 16px;">
+                                                <i class="fas fa-credit-card"></i>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                                    <strong style="color: #00b5d8; font-size: 14px;">Mercado Pago</strong>
+                                                    <div class="rating">
+                                                        <span style="color: #ffc107;">⭐⭐⭐⭐⭐</span>
+                                                        <small class="text-muted ms-1">4.9</small>
+                                                    </div>
+                                                </div>
+                                                <p class="mb-1 small text-dark">"Transações 100% seguras. Sistema antifraude robusto e processamento instantâneo. Loja verificada e aprovada para vendas."</p>
+                                                <small class="text-muted">Certificado de segurança</small>
                                             </div>
                                         </div>
                                     </div>
@@ -437,8 +474,9 @@ document.addEventListener('DOMContentLoaded', function() {
             // Hide loading
             cepLoading.style.display = 'none';
             
-            // Focus on number field
-            document.querySelector('input[type="text"]').focus();
+            // Focus on number field (next input after CEP)
+            const numberField = document.querySelector('input[placeholder]') || document.getElementById('numero');
+            if (numberField) numberField.focus();
 
         } catch (error) {
             console.error('Erro ao buscar CEP:', error);
