@@ -124,8 +124,16 @@ def checkout(product_id):
         flash('Produto não encontrado!', 'error')
         return redirect(url_for('index'))
     
-    # Get quantity from session or default to 1
-    quantity = session.get('product_quantity', {}).get(product_id, 1)
+    # Get quantity from URL parameter or session or default to 1
+    quantity = int(request.args.get('quantity', 0))
+    if quantity == 0:
+        quantity = session.get('product_quantity', {}).get(product_id, 1)
+    else:
+        # Update session with new quantity
+        if 'product_quantity' not in session:
+            session['product_quantity'] = {}
+        session['product_quantity'][product_id] = quantity
+        session.modified = True
     
     return render_template('checkout.html', 
                          product=product,
