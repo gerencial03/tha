@@ -468,9 +468,121 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Function to add product to checkout
     window.addProductToCheckout = function(productId) {
-        // Add product to checkout cart and refresh page
-        window.location.href = `/add_to_checkout/${productId}`;
+        // Send AJAX request to add product and update page dynamically
+        fetch(`/add_to_checkout_ajax/${productId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Update the selected products section
+                updateSelectedProducts(data.checkout_items);
+                // Update payment summary
+                updatePaymentSummary(data.total_value, data.checkout_items);
+                // Show success message
+                showSuccessMessage('Produto adicionado com sucesso!');
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao adicionar produto:', error);
+        });
     };
+    
+    function updateSelectedProducts(checkoutItems) {
+        const selectedProductsDiv = document.getElementById('selected-products');
+        selectedProductsDiv.innerHTML = '';
+        
+        checkoutItems.forEach((item, index) => {
+            const productHtml = `
+                <div class="row align-items-center mb-3 pb-3 ${index < checkoutItems.length - 1 ? 'border-bottom' : ''}" data-product-id="${item.product.id}">
+                    <div class="col-md-2">
+                        <img src="${item.product.image_url}" alt="${item.product.name}" class="img-fluid rounded">
+                    </div>
+                    <div class="col-md-6">
+                        <h6>${item.product.name}</h6>
+                        <div class="d-flex align-items-center">
+                            <span class="text-muted me-2">Quantidade:</span>
+                            <span class="badge bg-primary fs-6">${item.quantity}x</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <div class="fw-bold">R$${item.product.price.toFixed(2).replace('.', ',')}</div>
+                        <small class="text-muted">por unidade</small>
+                    </div>
+                    <div class="col-md-2 text-end">
+                        <div class="fw-bold text-success h5 mb-0">R$${item.subtotal.toFixed(2).replace('.', ',')}</div>
+                        <small class="text-muted">total</small>
+                    </div>
+                </div>
+            `;
+            selectedProductsDiv.innerHTML += productHtml;
+        });
+    }
+    
+    function updatePaymentSummary(totalValue, checkoutItems) {
+        // Update subtotal
+        document.getElementById('summary-subtotal').textContent = `R$ ${totalValue.toFixed(2).replace('.', ',')}`;
+        
+        // Update products info in payment summary
+        const productsSummaryDiv = document.querySelector('.payment-summary .mb-3');
+        productsSummaryDiv.innerHTML = '';
+        
+        checkoutItems.forEach(item => {
+            const productHtml = `
+                <div class="mb-2 p-2" style="background-color: #f8f9fa; border-radius: 5px; border: 1px solid #dee2e6;">
+                    <div class="d-flex align-items-center">
+                        <img src="${item.product.image_url}" alt="${item.product.name}" 
+                             class="rounded me-2" style="width: 35px; height: 35px; object-fit: cover;">
+                        <div style="flex: 1;">
+                            <div style="font-size: 11px; font-weight: 600; color: #333; margin-bottom: 2px;">
+                                ${item.product.name}
+                            </div>
+                            <div style="font-size: 9px; color: #666;">
+                                Quantidade: ${item.quantity} × R$ ${item.product.price.toFixed(2).replace('.', ',')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            productsSummaryDiv.innerHTML += productHtml;
+        });
+        
+        // Calculate totals
+        const shippingCost = totalValue >= 100 ? 0 : 11.90;
+        const finalTotal = totalValue + shippingCost;
+        const pixTotal = finalTotal * 0.9;
+        
+        // Update shipping
+        document.getElementById('summary-shipping').textContent = shippingCost === 0 ? 'Grátis' : `R$ ${shippingCost.toFixed(2).replace('.', ',')}`;
+        
+        // Update total
+        document.getElementById('summary-total').textContent = `R$ ${finalTotal.toFixed(2).replace('.', ',')}`;
+        
+        // Update PIX total
+        document.getElementById('pix-total').textContent = `R$ ${pixTotal.toFixed(2).replace('.', ',')}`;
+    }
+    
+    function showSuccessMessage(message) {
+        // Create and show a temporary success message
+        const alertDiv = document.createElement('div');
+        alertDiv.className = 'alert alert-success alert-dismissible fade show position-fixed';
+        alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+        alertDiv.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        document.body.appendChild(alertDiv);
+        
+        // Auto remove after 3 seconds
+        setTimeout(() => {
+            if (alertDiv.parentNode) {
+                alertDiv.remove();
+            }
+        }, 3000);
+    }
 
     function updateTotals() {
         let selectedShipping = document.querySelector('input[name="shipping"]:checked');

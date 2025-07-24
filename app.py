@@ -190,6 +190,54 @@ def add_to_checkout(product_id):
     
     session.modified = True
     
+    # Get current product for redirect
+    products_data = load_products()
+    all_products = products_data.get('linha_toque_essencial', []) + products_data.get('queridinhos', [])
+    current_product = next((p for p in all_products if p['id'] in session['checkout_cart']), None)
+    
+    if current_product:
+        return redirect(url_for('checkout', product_id=current_product['id']))
+    else:
+        return redirect(url_for('index'))
+
+@app.route('/add_to_checkout_ajax/<product_id>', methods=['POST'])
+def add_to_checkout_ajax(product_id):
+    products_data = load_products()
+    all_products = products_data.get('linha_toque_essencial', []) + products_data.get('queridinhos', [])
+    
+    # Add product to checkout cart
+    if 'checkout_cart' not in session:
+        session['checkout_cart'] = {}
+    
+    # Add or increment quantity
+    if product_id in session['checkout_cart']:
+        session['checkout_cart'][product_id] += 1
+    else:
+        session['checkout_cart'][product_id] = 1
+    
+    session.modified = True
+    
+    # Build checkout items data
+    checkout_items = []
+    total_value = 0
+    
+    for item_id, item_qty in session['checkout_cart'].items():
+        item_product = next((p for p in all_products if p['id'] == item_id), None)
+        if item_product:
+            subtotal = item_product['price'] * item_qty
+            checkout_items.append({
+                'product': item_product,
+                'quantity': item_qty,
+                'subtotal': subtotal
+            })
+            total_value += subtotal
+    
+    return jsonify({
+        'success': True,
+        'checkout_items': checkout_items,
+        'total_value': total_value
+    })
+    
     print(f"Produto adicionado ao carrinho: {product_id}, Quantidade: {session['checkout_cart'][product_id]}")
     print(f"Carrinho atual: {session['checkout_cart']}")
     
