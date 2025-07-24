@@ -411,6 +411,12 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Update PIX total
         pixTotal.textContent = `R$ ${pixDiscountTotal.toFixed(2).replace('.', ',')}`;
+        
+        // Update finalize button
+        const finalizeButton = document.querySelector('.btn-warning');
+        if (finalizeButton) {
+            finalizeButton.innerHTML = `🔒 Finalizar Compra via PIX - R$ ${pixDiscountTotal.toFixed(2).replace('.', ',')}`;
+        }
     }
 
     shippingOptions.forEach(option => {
