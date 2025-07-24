@@ -23,6 +23,19 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='custom-buttons.css') }}">
     
+    <style>
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.7) !important;
+        }
+        
+        .search-input:focus {
+            background: #e67e22 !important;
+            border-color: rgba(255,255,255,0.5) !important;
+            box-shadow: 0 0 0 0.2rem rgba(255,255,255,0.25) !important;
+            color: white !important;
+        }
+    </style>
+    
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧴</text></svg>">
 </head>
@@ -61,9 +74,9 @@
                 <!-- Logo Centralizada -->
                 <div class="col-8 text-center">
                     <div class="logo">
-                        <div style="color: white; font-weight: bold; font-size: 24px; line-height: 1;">
+                        <div style="color: white; font-weight: bold; font-size: 24px; line-height: 1.1; font-family: Arial, sans-serif;">
                             <div>tha</div>
-                            <div style="font-size: 16px;">beauty</div>
+                            <div style="font-size: 14px; font-weight: normal;">beauty</div>
                         </div>
                     </div>
                 </div>
@@ -97,13 +110,18 @@
             <div class="row mb-2">
                 <div class="col-12">
                     <form action="{{ url_for('search') }}" method="GET" class="search-form position-relative">
-                        <input type="text" name="q" placeholder="Buscar" class="form-control search-input" value="{{ search_query or '' }}" style="background: rgba(255,255,255,0.9); border: none; border-radius: 25px; padding: 10px 45px 10px 15px; font-size: 14px;">
-                        <button type="submit" class="search-btn" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #666;">
+                        <input type="text" name="q" placeholder="Buscar" class="form-control search-input" value="{{ search_query or '' }}" style="background: #e67e22; border: 1px solid rgba(255,255,255,0.3); border-radius: 8px; padding: 12px 45px 12px 15px; font-size: 14px; color: white;">
+                        <button type="submit" class="search-btn" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; color: white;">
                             <i class="fas fa-search"></i>
                         </button>
                     </form>
                 </div>
             </div>
+        </div>
+        
+        <!-- Announcement Bar -->
+        <div class="announcement-bar text-center py-2" style="background-color: #f8f9fa; color: #666; font-size: 14px; border-top: 1px solid rgba(255,255,255,0.2);">
+            Lançamento esfoliantes Toque Essencial!
         </div>
     </header>
 
