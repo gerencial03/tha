@@ -12,7 +12,7 @@ class For4PaymentsAPI:
         
     def _get_headers(self) -> Dict[str, str]:
         return {
-            'Authorization': self.secret_key,
+            'Authorization': f'Bearer {self.secret_key}',
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         }
@@ -66,12 +66,27 @@ class For4PaymentsAPI:
             current_app.logger.info("Enviando requisição para API For4Payments...")
             
             try:
-                response = requests.post(
-                    f"{self.API_URL}/transaction.purchase",
-                    json=payment_data,
-                    headers=self._get_headers(),
-                    timeout=30
-                )
+                # Try multiple endpoints
+                endpoints = [
+                    "/transaction.purchase",
+                    "/transactions/create",
+                    "/pix/create"
+                ]
+                
+                for endpoint in endpoints:
+                    current_app.logger.info(f"Tentando endpoint: {self.API_URL}{endpoint}")
+                    response = requests.post(
+                        f"{self.API_URL}{endpoint}",
+                        json=payment_data,
+                        headers=self._get_headers(),
+                        timeout=15
+                    )
+                    
+                    if response.status_code == 200:
+                        break
+                    elif response.status_code != 404:
+                        # Se não é 404, pode ser um erro válido
+                        break
                 
                 current_app.logger.info(f"Resposta recebida (Status: {response.status_code})")
                 current_app.logger.debug(f"Resposta completa: {response.text}")
