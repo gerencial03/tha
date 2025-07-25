@@ -198,13 +198,10 @@
                             <div class="payment-method mb-4">
                                 <div class="alert alert-success">
                                     <h6>💸 Pagamento via PIX</h6>
-                                    <div class="pix-discount mb-2">
-                                        <strong>45% de desconto no PIX!</strong>
-                                    </div>
                                     <div class="pix-calculation">
                                         <div class="d-flex justify-content-between">
-                                            <span>Total com desconto PIX:</span>
-                                            <strong class="text-success" id="pix-total">R${{ "%.2f"|format(total_value * 0.55) }}</strong>
+                                            <span>Total via PIX:</span>
+                                            <strong class="text-success" id="pix-total">R${{ "%.2f"|format(total_value) }}</strong>
                                         </div>
                                     </div>
                                 </div>
@@ -552,7 +549,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Calculate and update shipping and totals immediately
         const shippingCost = 0; // Always free shipping
         const finalTotal = totalValue + shippingCost;
-        const pixTotal = finalTotal * 0.55;
+        const pixTotal = finalTotal;
         
         // Update shipping immediately
         const shippingElement = document.getElementById('summary-shipping');
@@ -771,7 +768,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const shippingCost = parseFloat(selectedShipping.value) || 0;
         const total = subtotal + shippingCost;
-        const pixDiscountTotal = total * 0.55;
+        const total = total ;
 
         // Update shipping display
         if (shippingCost === 0) {
@@ -785,13 +782,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Update PIX total
         if (pixTotalMainElement) {
-            pixTotalMainElement.textContent = `R$ ${pixDiscountTotal.toFixed(2).replace('.', ',')}`;
+            pixTotalMainElement.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
         }
         
         // Update finalize button
         const finalizeButton = document.querySelector('.btn-warning');
         if (finalizeButton) {
-            finalizeButton.innerHTML = `🔒 Finalizar Compra via PIX - R$ ${pixDiscountTotal.toFixed(2).replace('.', ',')}`;
+            finalizeButton.innerHTML = `🔒 Finalizar Compra via PIX - R$ ${total.toFixed(2).replace('.', ',')}`;
         }
     }
 
@@ -945,7 +942,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const shippingCost = selectedShipping ? parseFloat(selectedShipping.value) || 0 : 0;
         const total = subtotal + shippingCost;
-        const pixDiscountTotal = total * 0.55; // 45% discount
+        const total = total ; // 45% discount
 
         // Show loading
         if (finalizeButton) finalizeButton.style.display = 'none';
@@ -964,7 +961,7 @@ document.addEventListener('DOMContentLoaded', function() {
             formData.append('customer_bairro', (document.getElementById('customer_bairro').value || '').trim());
             formData.append('customer_cidade', (document.getElementById('customer_cidade').value || '').trim());
             formData.append('customer_uf', (document.getElementById('customer_uf').value || ''));
-            formData.append('total_amount', pixDiscountTotal.toFixed(2));
+            formData.append('total_amount', totalValue.toFixed(2));
 
             // Make API request
             const response = await fetch('/process_pix_payment', {

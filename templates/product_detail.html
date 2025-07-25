@@ -56,7 +56,7 @@
                                     </div>
                                 </div>
                                 <div class="text-right">
-                                    <div class="text-white fw-bold" id="pix-price" style="font-size: 1.8rem;">R${{ "%.2f"|format(product.price * 0.55) }}</div>
+                                    <div class="text-white fw-bold" id="pix-price" style="font-size: 1.8rem;">R${{ "%.2f"|format(product.price) }}</div>
                                     <div class="text-white opacity-90" style="font-size: 0.8rem;">Economia de R${{ "%.2f"|format(product.price * 0.45) }}</div>
                                 </div>
                             </div>
@@ -245,9 +245,9 @@ document.addEventListener('DOMContentLoaded', function() {
             originalPriceEl.textContent = `R$${totalOriginalPrice.toFixed(2).replace('.', ',')}`;
         }
         
-        // Update PIX price with 45% discount
-        const pixPrice = totalPrice * 0.55;
-        const pixSavings = totalPrice * 0.45;
+        // Update PIX price - same as total price
+        const pixPrice = totalPrice;
+        const pixSavings = 0;
         const pixPriceEl = document.getElementById('pix-price');
         const pixSavingsEl = document.querySelector('.pix-discount-section .opacity-90:last-child');
         

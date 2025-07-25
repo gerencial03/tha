@@ -443,9 +443,8 @@ def process_pix_payment():
         # For4Payments PIX Gateway Integration
         from datetime import datetime
         
-        # Valor com desconto PIX (45%)
-        pix_discount = 0.45
-        pix_amount = total_amount * (1 - pix_discount)
+        # Valor sem desconto - mesmo valor do produto
+        pix_amount = total_amount
         
         print(f"Processando pagamento For4Payments - Valor: R$ {pix_amount:.2f}")
         
@@ -478,7 +477,7 @@ def process_pix_payment():
                 'status': payment_response.get('status', 'pending'),
                 'amount': pix_amount,
                 'original_amount': total_amount,
-                'discount_percent': int(pix_discount * 100),
+                'discount_percent': 0,
                 'customer': customer_data,
                 'for4_data': payment_response
             }
@@ -505,7 +504,7 @@ def process_pix_payment():
                 'status': 'pending',
                 'amount': pix_amount,
                 'original_amount': total_amount,
-                'discount_percent': int(pix_discount * 100),
+                'discount_percent': 0,
                 'customer': customer_data,
                 'fallback': True,
                 'error': str(e)
