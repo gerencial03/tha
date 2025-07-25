@@ -436,8 +436,8 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const totalValue = {{ total_value }};
-    const subtotal = totalValue;
+    let totalValue = {{ total_value }};
+    let subtotal = totalValue;
     const shippingOptions = document.querySelectorAll('input[name="shipping"]');
     const summaryShipping = document.getElementById('summary-shipping');
     const summaryTotal = document.getElementById('summary-total');
@@ -531,10 +531,14 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('=== PRODUTOS SELECIONADOS ATUALIZADOS ===');
     }
     
-    function updatePaymentSummary(totalValue, checkoutItems) {
+    function updatePaymentSummary(newTotalValue, checkoutItems) {
         console.log('=== INICIANDO updatePaymentSummary ===');
-        console.log('Total Value recebido:', totalValue);
+        console.log('Total Value recebido:', newTotalValue);
         console.log('Checkout Items recebidos:', checkoutItems.length, 'produtos');
+        
+        // Update global variables
+        totalValue = newTotalValue;
+        subtotal = newTotalValue;
         
         // PRIORITY 1: Update subtotal immediately
         const subtotalElement = document.getElementById('summary-subtotal');
@@ -768,7 +772,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const shippingCost = parseFloat(selectedShipping.value) || 0;
         const total = subtotal + shippingCost;
-        const total = total ;
 
         // Update shipping display
         if (shippingCost === 0) {
@@ -942,7 +945,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const shippingCost = selectedShipping ? parseFloat(selectedShipping.value) || 0 : 0;
         const total = subtotal + shippingCost;
-        const total = total ; // 45% discount
 
         // Show loading
         if (finalizeButton) finalizeButton.style.display = 'none';
@@ -961,7 +963,7 @@ document.addEventListener('DOMContentLoaded', function() {
             formData.append('customer_bairro', (document.getElementById('customer_bairro').value || '').trim());
             formData.append('customer_cidade', (document.getElementById('customer_cidade').value || '').trim());
             formData.append('customer_uf', (document.getElementById('customer_uf').value || ''));
-            formData.append('total_amount', totalValue.toFixed(2));
+            formData.append('total_amount', total.toFixed(2));
 
             // Make API request
             const response = await fetch('/process_pix_payment', {
