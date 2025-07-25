@@ -415,38 +415,57 @@ def process_pix_payment():
                 'error': f'Campos obrigatórios não preenchidos: {", ".join(missing_fields)}'
             }), 400
         
-        # Calculate total amount
-        total_amount = float(request.form.get('total_amount', 0))
-        if total_amount <= 0:
-            return jsonify({
-                'success': False,
-                'error': 'Valor total inválido'
-            }), 400
-        
-        # Convert to cents for API
-        amount_in_cents = int(total_amount * 100)
-        
-        # Get products for transaction description
+        # Calculate total amount from session cart (more reliable than form)
         products_data = load_products()
         all_products = products_data.get('labubu_collection', []) + products_data.get('acessorios_labubu', [])
         
-        # Build transaction description
-        checkout_items = []
+        # Calculate total from actual cart items
+        calculated_total = 0
+        cart_items = []
         if 'checkout_cart' in session:
             for item_id, item_qty in session['checkout_cart'].items():
                 item_product = next((p for p in all_products if p['id'] == item_id), None)
                 if item_product:
-                    checkout_items.append(f"{item_product['name']} (x{item_qty})")
+                    item_total = item_product['price'] * item_qty
+                    calculated_total += item_total
+                    cart_items.append({
+                        'name': item_product['name'],
+                        'price': item_product['price'],
+                        'quantity': item_qty,
+                        'total': item_total
+                    })
         
-        transaction_description = "Tha Beauty - " + ", ".join(checkout_items) if checkout_items else "Tha Beauty - Compra"
+        # Use calculated total instead of form value
+        total_amount = calculated_total
+        form_total = float(request.form.get('total_amount', 0))
+        
+        print(f"DEBUG PIX CALCULATION:")
+        print(f"  - Form total: R$ {form_total:.2f}")
+        print(f"  - Calculated total: R$ {total_amount:.2f}")
+        print(f"  - Cart items: {len(cart_items)}")
+        for item in cart_items:
+            print(f"    * {item['name']}: {item['quantity']}x R${item['price']:.2f} = R${item['total']:.2f}")
+        
+        if total_amount <= 0:
+            return jsonify({
+                'success': False,
+                'error': 'Carrinho vazio ou valor total inválido'
+            }), 400
+        
+        # Build transaction description from calculated items
+        checkout_items = [f"{item['name']} (x{item['quantity']})" for item in cart_items]
+        transaction_description = "Labubu Brasil - " + ", ".join(checkout_items) if checkout_items else "Labubu Brasil - Compra"
         
         # For4Payments PIX Gateway Integration
         from datetime import datetime
+        import uuid
         
-        # Valor sem desconto - mesmo valor do produto
+        # PIX amount is exactly the calculated total
         pix_amount = total_amount
         
-        print(f"Processando pagamento For4Payments - Valor: R$ {pix_amount:.2f}")
+        print(f"=== PROCESSANDO PAGAMENTO FOR4PAYMENTS ===")
+        print(f"Valor final PIX: R$ {pix_amount:.2f}")
+        print(f"Descrição: {transaction_description}")
         
         # Preparar dados para For4Payments API
         payment_data = {
@@ -479,6 +498,7 @@ def process_pix_payment():
                 'original_amount': total_amount,
                 'discount_percent': 0,
                 'customer': customer_data,
+                'cart_items': cart_items,
                 'for4_data': payment_response
             }
             
@@ -492,8 +512,15 @@ def process_pix_payment():
             unique_id = str(uuid.uuid4())[:8]
             external_id = f"LAB-{timestamp}-{unique_id}"
             
-            # Usar PIX funcional como fallback
-            fallback_pix_code = f"00020126580014BR.GOV.BCB.PIX0136{external_id}5204000053039865406{pix_amount:.2f}5802BR5913LABUBU BRASIL LTDA6009SAO PAULO62070503***6304"
+            # Gerar código PIX manual confiável
+            pix_value_str = f"{pix_amount:.2f}".replace('.', '')
+            pix_length = len(pix_value_str)
+            
+            # Código PIX padrão brasileiro
+            fallback_pix_code = f"00020126580014BR.GOV.BCB.PIX0136{external_id}52040000530398654{pix_length:02d}{pix_value_str}5802BR5913LABUBU BRASIL6009SAO PAULO62070503***6304"
+            
+            print(f"FALLBACK PIX CODE gerado para valor R$ {pix_amount:.2f}")
+            print(f"PIX Code: {fallback_pix_code[:50]}...")
             
             transaction_result = {
                 'success': True,
@@ -506,6 +533,7 @@ def process_pix_payment():
                 'original_amount': total_amount,
                 'discount_percent': 0,
                 'customer': customer_data,
+                'cart_items': cart_items,
                 'fallback': True,
                 'error': str(e)
             }
@@ -515,9 +543,16 @@ def process_pix_payment():
             'hash': transaction_result['hash'],
             'amount': pix_amount,
             'customer': customer_data,
-            'products': checkout_items
+            'cart_items': cart_items,
+            'calculated_total': total_amount
         }
         session.modified = True
+        
+        print(f"=== TRANSAÇÃO FINALIZADA ===")
+        print(f"PIX ID: {transaction_result['hash']}")
+        print(f"Valor cobrado: R$ {pix_amount:.2f}")
+        print(f"Status: {transaction_result['status']}")
+        print(f"Itens: {len(cart_items)} produtos")
         
         return jsonify({
             'success': True,
