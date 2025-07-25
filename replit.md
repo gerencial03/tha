@@ -109,6 +109,11 @@ Preferred communication style: Simple, everyday language.
   - Removida seção "🛒 Produtos Selecionados" da página de checkout
   - Sistema agora permite apenas uma compra por vez conforme solicitado
   - Após pagamento usuário deve voltar para selecionar outros produtos
+  - **Desconto PIX atualizado para 40%** (July 25, 2025):
+  - Alterado desconto PIX de 50% para 40% em todas as páginas
+  - Desconto aplicado automaticamente nos preços dos produtos
+  - Sistema PIX cobra 40% menos do valor original
+  - Interface atualizada mostrando economia real de 40%
 - **Review Count Enhancement** (July 24, 2025):
   - Updated all product review counts to realistic numbers between 149-270 reviews
   - Enhanced reviews.json with detailed, authentic customer comments

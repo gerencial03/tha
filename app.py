@@ -457,8 +457,8 @@ def process_pix_payment():
         checkout_items = [f"{item['name']} (x{item['quantity']})" for item in cart_items]
         transaction_description = "Labubu Brasil - " + ", ".join(checkout_items) if checkout_items else "Labubu Brasil - Compra"
         
-        # Sistema PIX For4Payments - Implementação Real
-        pix_amount = total_amount
+        # Sistema PIX For4Payments - Implementação Real com Desconto de 40%
+        pix_amount = total_amount * 0.60  # Aplicar desconto de 40%
         
         print(f"=== FOR4PAYMENTS PIX REAL - LABUBU BRASIL ===")
         print(f"Valor final PIX: R$ {pix_amount:.2f}")
@@ -493,7 +493,7 @@ def process_pix_payment():
                     'status': payment_response.get('status', 'pending'),
                     'amount': pix_amount,
                     'original_amount': total_amount,
-                    'discount_percent': 0,
+                    'discount_percent': 40,
                     'customer': customer_data,
                     'cart_items': cart_items,
                     'expires_at': payment_response.get('expiresAt', '')
