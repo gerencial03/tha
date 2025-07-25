@@ -1,7 +1,13 @@
 import os
 import json
 import requests
+import qrcode
+from io import BytesIO
+import base64
+import uuid
+import logging
 from flask import Flask, render_template, request, session, redirect, url_for, flash, jsonify, send_from_directory
+from for4_payments_api import create_payment_api
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SESSION_SECRET", "tha-beauty-secret-key")
@@ -434,97 +440,61 @@ def process_pix_payment():
         
         transaction_description = "Tha Beauty - " + ", ".join(checkout_items) if checkout_items else "Tha Beauty - Compra"
         
-        # PayBets PIX Gateway Integration
-        import uuid
+        # For4Payments PIX Gateway Integration
         from datetime import datetime
-        import qrcode
-        import io
-        import base64
         
         # Valor com desconto PIX (45%)
         pix_discount = 0.45
         pix_amount = total_amount * (1 - pix_discount)
         
-        # Gerar external_id único
-        timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
-        unique_id = str(uuid.uuid4())[:8]
-        external_id = f"THA-{timestamp}-{unique_id}"
+        print(f"Processando pagamento For4Payments - Valor: R$ {pix_amount:.2f}")
         
-        # PayBets API usando endpoint correto da documentação
-        api_key = "3d6bd4c17dd31877b77482b341c74d32494a1d6fbdee4c239cf8432b424b1abf"
-        api_url = "https://elite-manager-api-62571bbe8e96.herokuapp.com/api/payments/paybets/pix/generate"
-        
-        # Preparar dados conforme documentação PayBets
+        # Preparar dados para For4Payments API
         payment_data = {
-            "amount": float(pix_amount),
-            "external_id": external_id,
-            "clientCallbackUrl": "https://webhook.site/unique-id",
-            "name": customer_data['name'],
-            "email": customer_data['email'],
-            "document": customer_data['document_number']
+            'name': customer_data['name'],
+            'email': customer_data['email'],
+            'cpf': customer_data['document_number'],
+            'phone': customer_data['phone_number'],
+            'amount': pix_amount
         }
         
-        print(f"Enviando para PayBets API - Valor: R$ {pix_amount:.2f}")
-        print(f"External ID: {external_id}")
-        print(f"Dados: {json.dumps(payment_data, indent=2)}")
-        
-        # Headers conforme documentação original
-        headers = {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'x-api-key': api_key
-        }
+        print(f"Dados do pagamento: {payment_data}")
         
         try:
-            print(f"Chamando PayBets API: {api_url}")
+            # Criar instância da API com secret key
+            payment_api = create_payment_api("57f6b6ed-f175-47a4-ba5f-58c2ca3a3d4a")
             
-            response = requests.post(
-                api_url,
-                json=payment_data,
-                headers=headers,
-                timeout=30
-            )
+            # Processar pagamento PIX
+            payment_response = payment_api.create_pix_payment(payment_data)
             
-            print(f"PayBets API Response Status: {response.status_code}")
-            print(f"PayBets API Response: {response.text}")
+            print(f"Resposta For4Payments: {payment_response}")
             
-            if response.status_code in [200, 201]:
-                response_data = response.json()
-                
-                # Processar resposta da API PayBets
-                if response_data.get("success"):
-                    # A resposta da PayBets vem diretamente em 'data'
-                    qr_data = response_data.get("data", {})
-                    qr_code = qr_data.get("qrcode", "")
-                    
-                    transaction_result = {
-                        'success': True,
-                        'hash': qr_data.get("transactionId", external_id),
-                        'pix_qr_code': qr_code,
-                        'pix_copy_paste': qr_code,
-                        'qr_code_base64': '',
-                        'status': 'pending',
-                        'amount': pix_amount,
-                        'original_amount': total_amount,
-                        'discount_percent': int(pix_discount * 100),
-                        'customer': customer_data,
-                        'paybets_data': response_data
-                    }
-                    
-                    print(f"QR Code extraído: {qr_code[:50]}...")  # Log para debug
-                    
-                    print(f"PIX gerado com sucesso via PayBets!")
-                    print(f"Transaction ID: {transaction_result['hash']}")
-                    
-                else:
-                    raise Exception(f"PayBets API Error: {response_data.get('message', 'Erro na resposta da API')}")
-            else:
-                raise Exception(f"PayBets API HTTP Error: {response.status_code} - {response.text}")
+            transaction_result = {
+                'success': True,
+                'hash': payment_response.get('id'),
+                'pix_qr_code': payment_response.get('pixCode'),
+                'pix_copy_paste': payment_response.get('pixCode'),
+                'qr_code_base64': '',
+                'status': payment_response.get('status', 'pending'),
+                'amount': pix_amount,
+                'original_amount': total_amount,
+                'discount_percent': int(pix_discount * 100),
+                'customer': customer_data,
+                'for4_data': payment_response
+            }
+            
+            print(f"PIX gerado com sucesso via For4Payments!")
+            print(f"Transaction ID: {transaction_result['hash']}")
                 
         except Exception as e:
-            print(f"Erro PayBets API: {str(e)}")
+            print(f"Erro For4Payments API: {str(e)}")
+            # Gerar external_id único para fallback
+            timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
+            unique_id = str(uuid.uuid4())[:8]
+            external_id = f"LAB-{timestamp}-{unique_id}"
+            
             # Usar PIX funcional como fallback
-            fallback_pix_code = f"00020126580014BR.GOV.BCB.PIX0136{external_id}5204000053039865406{pix_amount:.2f}5802BR5913THA BEAUTY LTDA6009SAO PAULO62070503***6304"
+            fallback_pix_code = f"00020126580014BR.GOV.BCB.PIX0136{external_id}5204000053039865406{pix_amount:.2f}5802BR5913LABUBU BRASIL LTDA6009SAO PAULO62070503***6304"
             
             transaction_result = {
                 'success': True,

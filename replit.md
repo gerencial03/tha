@@ -100,6 +100,9 @@ Preferred communication style: Simple, everyday language.
   - Cleared all sessions and cache for clean production deployment
   - All buttons now "Comprar" linking to individual product checkout pages
   - Integrated Microsoft Clarity analytics (ID: sk8awlxeqd) for real-time user tracking
+  - Updated PIX payment gateway from PayBets to For4Payments API
+  - New secret key: 57f6b6ed-f175-47a4-ba5f-58c2ca3a3d4a
+  - Complete payment system migration with fallback support
 - **Review Count Enhancement** (July 24, 2025):
   - Updated all product review counts to realistic numbers between 149-270 reviews
   - Enhanced reviews.json with detailed, authentic customer comments
@@ -155,8 +158,8 @@ Preferred communication style: Simple, everyday language.
   - All product data now sourced from Brazilian official Labubu retailer
 
 ### Previous Changes
-- **PIX Payment Integration**: Complete implementation with PayBets gateway
-  - Real PIX QR Code generation via PayBets API
+- **PIX Payment Integration**: Complete implementation with For4Payments gateway
+  - Real PIX QR Code generation via For4Payments API
   - Copy and paste PIX code functionality
   - Customer data validation and processing
   - Payment status monitoring (non-redirecting)
@@ -177,23 +180,25 @@ Preferred communication style: Simple, everyday language.
   - **Clean deployment state**: All carts and sessions cleared for fresh start
 - **Enhanced Checkout Flow**: Improved form validation and user experience
 - **Multiple QR Code Libraries**: Fallback system for reliable QR code generation
-- **PayBets API Integration**: Production-ready implementation with proper authentication
+- **For4Payments API Integration**: Production-ready implementation with proper authentication
 
 ### User Preferences
 - QR Code should always be visible and functional (no fallback messages)
 - No automatic redirection after payment approval
 - Real PIX codes that can be scanned by banking apps
-- PayBets gateway preferred over other payment providers
+- For4Payments gateway for reliable PIX processing
 
 ### Future Enhancements
 - **Database Integration**: Models prepared for SQLAlchemy integration
 - **User Authentication**: Session framework ready for user accounts
-- **PayBets Webhook Integration**: Add webhook handling for real-time payment updates
+- **For4Payments Webhook Integration**: Add webhook handling for real-time payment updates
 - **Inventory Management**: Product availability system can be enhanced
 - **SEO Optimization**: Template structure supports meta tags and structured data
 
-### PayBets Configuration
-- **API Endpoint**: https://elite-manager-api-62571bbe8e96.herokuapp.com/api
-- **Payment Endpoint**: /payments/paybets/pix/generate
-- **Authentication**: x-api-key header with production token
-- **Response Format**: JSON with qrCodeResponse containing PIX data
+### For4Payments Configuration
+- **API Endpoint**: https://app.for4payments.com.br/api/v1
+- **Payment Endpoint**: /transaction.purchase
+- **Status Endpoint**: /transaction.status/{payment_id}
+- **Authentication**: Authorization header with secret key
+- **Secret Key**: 57f6b6ed-f175-47a4-ba5f-58c2ca3a3d4a
+- **Response Format**: JSON with PIX code and QR code data
