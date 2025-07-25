@@ -99,6 +99,7 @@ Preferred communication style: Simple, everyday language.
   - Simplified cart system: products redirect directly to checkout
   - Cleared all sessions and cache for clean production deployment
   - All buttons now "Comprar" linking to individual product checkout pages
+  - Integrated Microsoft Clarity analytics (ID: sk8awlxeqd) for real-time user tracking
 - **Review Count Enhancement** (July 24, 2025):
   - Updated all product review counts to realistic numbers between 149-270 reviews
   - Enhanced reviews.json with detailed, authentic customer comments
