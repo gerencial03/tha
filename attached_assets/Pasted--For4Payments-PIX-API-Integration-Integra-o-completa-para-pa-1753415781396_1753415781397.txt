@@ -1,0 +1,577 @@
+"""
+For4Payments PIX API Integration
+================================
+Integração completa para pagamentos PIX usando a API For4Payments.
+"""
+import os
+import requests
+import json
+from datetime import datetime, timedelta
+from typing import Dict, Any, Optional
+from dataclasses import dataclass
+@dataclass
+class PaymentRequestData:
+    """
+    Dados necessários para criar um pagamento PIX
+    """
+    name: str
+    email: str
+    cpf: str
+    amount: int  # Valor em centavos
+    phone: Optional[str] = None
+    description: Optional[str] = None
+@dataclass
+class PaymentResponse:
+    """
+    Resposta da criação de pagamento PIX
+    """
+    id: str
+    pix_code: str
+    pix_qr_code: str
+    expires_at: str
+    status: str
+class For4PaymentsAPI:
+    """
+    Classe principal para integração com a API For4Payments
+    """
+    
+    def __init__(self, secret_key: str):
+        """
+        Inicializar a API com chave de autenticação
+        """
+        self.API_URL = "https://app.for4payments.com.br/api/v1"
+        self.secret_key = secret_key
+        
+        # Validar chave de API
+        if not secret_key or len(secret_key) < 10:
+            raise ValueError("Token de autenticação inválido")
+    
+    @classmethod
+    def from_env(cls) -> 'For4PaymentsAPI':
+        """
+        Criar instância da API usando variável de ambiente
+        """
+        secret_key = os.getenv("FOR4PAYMENTS_SECRET_KEY")
+        
+        if not secret_key:
+            raise ValueError(
+                "Chave de API FOR4PAYMENTS_SECRET_KEY não configurada no ambiente"
+            )
+        
+        return cls(secret_key)
+    
+    def _get_headers(self) -> Dict[str, str]:
+        """
+        Headers padrão para as requisições HTTP
+        """
+        return {
+            "Authorization": self.secret_key,
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "User-Agent": "For4Payments-Python-SDK/1.0.0",
+            "Accept-Language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7"
+        }
+    
+    def _validate_payment_data(self, data: PaymentRequestData) -> None:
+        """
+        Validar dados do pagamento antes do envio
+        """
+        # Validar campos obrigatórios
+        if not data.name or not data.name.strip():
+            raise ValueError("Nome é obrigatório")
+        if not data.email or not data.email.strip():
+            raise ValueError("Email é obrigatório")
+        if not data.cpf or not data.cpf.strip():
+            raise ValueError("CPF é obrigatório")
+        if not data.amount or data.amount <= 0:
+            raise ValueError("Valor é obrigatório e deve ser maior que zero")
+        
+        # Validar e formatar CPF
+        cpf = ''.join(filter(str.isdigit, data.cpf))
+        if len(cpf) != 11:
+            raise ValueError("CPF deve conter exatamente 11 dígitos")
+        
+        # Validar email básico
+        if "@" not in data.email or "." not in data.email:
+            raise ValueError("Email inválido")
+        
+        # Validar valor
+        if not isinstance(data.amount, int) or data.amount <= 0:
+            raise ValueError("Valor deve ser um número inteiro positivo em centavos")
+    
+    def create_pix_payment(self, data: PaymentRequestData) -> PaymentResponse:
+        """
+        Criar um pagamento PIX
+        """
+        
+        # Validar dados de entrada
+        self._validate_payment_data(data)
+        
+        # Processar e formatar dados
+        cpf = ''.join(filter(str.isdigit, data.cpf))
+        phone = ''.join(filter(str.isdigit, data.phone)) if data.phone else "11999999999"
+        
+        # Construir payload completo para a API
+        payment_data = {
+            "name": data.name.strip(),
+            "email": data.email.strip(),
+            "cpf": cpf,
+            "phone": phone,
+            "paymentMethod": "PIX",
+            "amount": data.amount,
+            "traceable": True,
+            "items": [
+                {
+                    "title": data.description or "Pagamento PIX",
+                    "quantity": 1,
+                    "unitPrice": data.amount,
+                    "tangible": False
+                }
+            ],
+            # Dados de endereço (obrigatórios)
+            "cep": "01001000",
+            "street": "Praça da Sé",
+            "number": "1",
+            "complement": "",
+            "district": "Sé",
+            "city": "São Paulo",
+            "state": "SP",
+            # Metadados adicionais
+            "externalId": f"pix-{int(datetime.now().timestamp())}",
+            "postbackUrl": "",
+            "checkoutUrl": "",
+            "referrerUrl": "",
+            "utmQuery": "",
+            "fingerPrints": []
+        }
+        
+        try:
+            print(f"[For4Payments] Criando pagamento PIX para {data.email}")
+            print(f"[For4Payments] Valor: R$ {data.amount/100:.2f}")
+            
+            response = requests.post(
+                f"{self.API_URL}/transaction.purchase",
+                json=payment_data,
+                headers=self._get_headers(),
+                timeout=30
+            )
+            
+            print(f"[For4Payments] Status HTTP: {response.status_code}")
+            
+            # Tratar erros HTTP
+            if response.status_code != 200:
+                error_message = self._extract_error_message(response)
+                print(f"[For4Payments] Erro: {error_message}")
+                raise requests.exceptions.RequestException(f"API Error: {error_message}")
+            
+            # Processar resposta de sucesso
+            response_data = response.json()
+            print(f"[For4Payments] Pagamento criado com sucesso")
+            
+            return self._parse_payment_response(response_data)
+            
+        except requests.exceptions.RequestException as e:
+            print(f"[For4Payments] Erro na requisição: {str(e)}")
+            raise
+        except Exception as e:
+            print(f"[For4Payments] Erro inesperado: {str(e)}")
+            raise
+    
+    def _extract_error_message(self, response: requests.Response) -> str:
+        """
+        Extrair mensagem de erro da resposta da API
+        """
+        if response.status_code == 401:
+            return "Falha na autenticação. Verifique sua chave de API."
+        elif response.status_code == 400:
+            return "Dados inválidos enviados para a API."
+        elif response.status_code == 500:
+            return "Erro interno do servidor For4Payments."
+        
+        # Tentar extrair mensagem do JSON
+        try:
+            error_data = response.json()
+            return (
+                error_data.get("message") or 
+                error_data.get("error") or 
+                error_data.get("errors", {}).get("message") or
+                "Erro desconhecido"
+            )
+        except:
+            return response.text or "Erro desconhecido"
+    
+    def _parse_payment_response(self, response_data: Dict[str, Any]) -> PaymentResponse:
+        """
+        Processar resposta da criação de pagamento
+        """
+        # Extrair códigos PIX da resposta real da For4Payments
+        pix_code = response_data.get("pixCode", "")
+        pix_qr_code = response_data.get("qrCode", "")
+        
+        print(f"[For4Payments] PIX Code extraído: {pix_code[:50]}...")
+        print(f"[For4Payments] QR Code extraído: {'Presente' if pix_qr_code else 'Ausente'}")
+        
+        # Extrair data de expiração
+        expires_at = (
+            response_data.get("expiration") or
+            response_data.get("expiresAt") or
+            (datetime.now() + timedelta(minutes=30)).isoformat()
+        )
+        
+        # Extrair status
+        status = response_data.get("status", "pending").lower()
+        
+        # Extrair ID da transação
+        payment_id = (
+            response_data.get("id") or
+            response_data.get("transactionId") or
+            response_data.get("_id") or
+            f"txn-{int(datetime.now().timestamp())}"
+        )
+        
+        return PaymentResponse(
+            id=str(payment_id),
+            pix_code=pix_code,
+            pix_qr_code=pix_qr_code,
+            expires_at=expires_at,
+            status=status
+        )
+    
+    def check_payment_status(self, payment_id: str) -> Dict[str, Any]:
+        """
+        Verificar status de um pagamento
+        """
+        try:
+            print(f"[For4Payments] Verificando status do pagamento {payment_id}")
+            
+            response = requests.get(
+                f"{self.API_URL}/transaction.getPayment",
+                params={"id": payment_id},
+                headers=self._get_headers(),
+                timeout=15
+            )
+            
+            if response.status_code != 200:
+                error_message = self._extract_error_message(response)
+                print(f"[For4Payments] Erro na verificação: {error_message}")
+                return {"status": "error", "message": error_message}
+            
+            response_data = response.json()
+            status = response_data.get("status", "pending").lower()
+            
+            print(f"[For4Payments] Status atual: {status}")
+            
+            return {
+                "status": status,
+                "payment_data": response_data,
+                "paid": status in ["paid", "approved", "completed"],
+                "pending": status in ["pending", "waiting_payment"],
+                "failed": status in ["failed", "cancelled", "expired"]
+            }
+            
+        except Exception as e:
+            print(f"[For4Payments] Erro na verificação de status: {str(e)}")
+            return {"status": "error", "message": str(e)}
+2. ROTAS DO FLASK (adicionar ao seu routes.py ou app.py)
+from flask import Flask, request, session, render_template, jsonify
+from for4_payments import For4PaymentsAPI, PaymentRequestData
+import random
+from datetime import datetime
+@app.route('/checkout')
+def checkout():
+    """Página de checkout com pagamento PIX"""
+    # Capturar parâmetros da URL
+    nome = request.args.get('nome', '')
+    cpf = request.args.get('cpf', '')
+    email = request.args.get('email', '')
+    telefone = request.args.get('telefone', '')
+    
+    # Valor do produto/serviço
+    valor_final = 87.50  # Ajuste conforme necessário
+    
+    # Protocolo único
+    protocolo = f"PAY-2025-{random.randint(100000, 999999)}"
+    try:
+        # Inicializar API For4Payments
+        api = For4PaymentsAPI.from_env()
+        # Criar dados do pagamento
+        payment_data = PaymentRequestData(
+            name=nome,
+            email=email or "usuario@email.com",
+            cpf=cpf or "12345678901",
+            amount=int(valor_final * 100),  # Converter para centavos
+            phone=telefone,
+            description="Seu produto/serviço aqui"  # Personalize
+        )
+        # Tentar criar pagamento PIX real
+        try:
+            payment = api.create_pix_payment(payment_data)
+            # Armazenar ID do pagamento na sessão para verificação
+            session['payment_id'] = payment.id
+            session['protocolo'] = protocolo
+            return render_template('checkout.html', 
+                                 nome=nome,
+                                 cpf=cpf,
+                                 email=email,
+                                 telefone=telefone,
+                                 codigo_pix=payment.pix_code,
+                                 qr_code=payment.pix_qr_code,
+                                 payment_id=payment.id,
+                                 valor_final=valor_final,
+                                 protocolo=protocolo,
+                                 pix_real=True)
+        except Exception as pix_error:
+            print(f"For4Payments temporariamente indisponível: {str(pix_error)}")
+            # Fallback para PIX simulado
+            codigo_pix_simulado = gerar_codigo_pix_simulado(valor_final, protocolo)
+            payment_id_simulado = f"sim-{int(datetime.now().timestamp())}"
+            session['payment_id'] = payment_id_simulado
+            session['protocolo'] = protocolo
+            session['pix_simulado'] = True
+            return render_template('checkout.html', 
+                                 nome=nome,
+                                 cpf=cpf,
+                                 email=email,
+                                 telefone=telefone,
+                                 codigo_pix=codigo_pix_simulado,
+                                 qr_code="",
+                                 payment_id=payment_id_simulado,
+                                 valor_final=valor_final,
+                                 protocolo=protocolo,
+                                 pix_simulado=True)
+    except Exception as e:
+        print(f"Erro crítico no checkout: {str(e)}")
+        return "Erro interno no sistema de pagamento", 500
+def gerar_codigo_pix_simulado(valor, protocolo):
+    """Gerar código PIX simulado para demonstração"""
+    import uuid
+    # Gerar identificador único baseado no protocolo
+    identificador = str(uuid.uuid4()).replace('-', '')[:32]
+    # Valor formatado para PIX (sem ponto decimal)
+    valor_centavos = str(int(valor * 100)).zfill(4)
+    # Código PIX simulado no formato oficial
+    codigo = f"00020126580014BR.GOV.BCB.PIX0136{identificador}52040000530398654{len(valor_centavos):02d}{valor_centavos}5802BR5925SEU NOME EMPRESA AQUI6008BRASILIA62070503{protocolo[-3:]}6304"
+    # Calcular CRC (simplificado para demonstração)
+    crc = hex(hash(codigo) % 65536)[2:].upper().zfill(4)
+    return codigo + crc
+@app.route('/api/verificar-pagamento-pix', methods=['POST'])
+def verificar_pagamento_pix():
+    """API para verificar status do pagamento PIX em tempo real"""
+    try:
+        data = request.get_json()
+        payment_id = data.get('payment_id') or session.get('payment_id')
+        if not payment_id:
+            return jsonify({
+                'sucesso': False,
+                'erro': 'ID do pagamento não encontrado'
+            })
+        # Usar API For4Payments para verificação real
+        try:
+            api = For4PaymentsAPI.from_env()
+            status_result = api.check_payment_status(payment_id)
+            if status_result.get('status') == 'error':
+                return jsonify({
+                    'sucesso': False,
+                    'erro': status_result.get('message', 'Erro na verificação')
+                })
+            # Determinar se foi aprovado
+            if status_result.get('paid'):
+                return jsonify({
+                    'sucesso': True,
+                    'status': 'aprovado',
+                    'redirecionar': '/sucesso'  # Customize conforme necessário
+                })
+            elif status_result.get('failed'):
+                return jsonify({
+                    'sucesso': True,
+                    'status': 'rejeitado'
+                })
+            else:
+                return jsonify({
+                    'sucesso': True,
+                    'status': 'pendente'
+                })
+        except Exception as api_error:
+            print(f"Erro na API For4Payments: {str(api_error)}")
+            return jsonify({
+                'sucesso': False,
+                'erro': 'Erro na verificação do pagamento'
+            })
+    except Exception as e:
+        print(f"Erro na verificação de pagamento: {str(e)}")
+        return jsonify({
+            'sucesso': False,
+            'erro': 'Erro interno do servidor'
+        })
+3. TEMPLATE HTML BÁSICO (checkout.html)
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento PIX</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
+            <h1 class="text-2xl font-bold text-center mb-6">Pagamento PIX</h1>
+            
+            <!-- QR Code -->
+            <div class="text-center mb-6">
+                <div id="qr-code-container" class="flex justify-center">
+                    <canvas id="qr-canvas" width="240" height="240"></canvas>
+                </div>
+            </div>
+            
+            <!-- Código PIX -->
+            <div class="mb-6">
+                <label class="block text-sm font-medium mb-2">Código PIX (Copia e Cola):</label>
+                <div class="relative">
+                    <textarea id="codigo-pix" 
+                              class="w-full p-3 border rounded-lg text-xs font-mono resize-none" 
+                              rows="4" 
+                              readonly>{{ codigo_pix }}</textarea>
+                    <button onclick="copiarCodigo()" 
+                            class="absolute top-2 right-2 bg-blue-500 text-white px-3 py-1 rounded text-xs hover:bg-blue-600">
+                        Copiar
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Valor -->
+            <div class="text-center mb-6">
+                <p class="text-lg font-semibold">Valor: R$ {{ "%.2f"|format(valor_final) }}</p>
+            </div>
+            
+            <!-- Status do Pagamento -->
+            <div id="payment-status" class="mb-4"></div>
+            
+            <!-- Botão de Verificação -->
+            <button id="verificar-pagamento" 
+                    onclick="verificarPagamento()" 
+                    class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700">
+                Verificar Status do Pagamento
+            </button>
+        </div>
+    </div>
+    <script>
+        // Gerar QR Code
+        function gerarQRCode() {
+            const codigoPIX = '{{ codigo_pix }}';
+            const canvas = document.getElementById('qr-canvas');
+            
+            if (codigoPIX && canvas && typeof QRious !== 'undefined') {
+                try {
+                    new QRious({
+                        element: canvas,
+                        value: codigoPIX,
+                        size: 240,
+                        padding: 8,
+                        background: '#FFFFFF',
+                        foreground: '#000000',
+                        level: 'M'
+                    });
+                } catch (error) {
+                    console.error('Erro ao gerar QR Code:', error);
+                }
+            }
+        }
+        
+        // Copiar código PIX
+        function copiarCodigo() {
+            const textarea = document.getElementById('codigo-pix');
+            textarea.select();
+            document.execCommand('copy');
+            alert('Código PIX copiado!');
+        }
+        
+        // Verificar pagamento
+        function verificarPagamento() {
+            const botao = document.getElementById('verificar-pagamento');
+            const statusDiv = document.getElementById('payment-status');
+            
+            botao.innerHTML = 'Verificando...';
+            botao.disabled = true;
+            
+            fetch('/api/verificar-pagamento-pix', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    payment_id: '{{ payment_id }}'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.sucesso) {
+                    if (data.status === 'aprovado') {
+                        statusDiv.innerHTML = '<div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">Pagamento aprovado!</div>';
+                        botao.innerHTML = 'Pagamento Confirmado';
+                        botao.className = 'w-full bg-green-600 text-white py-3 rounded-lg';
+                        
+                        // Redirecionar após sucesso
+                        setTimeout(() => {
+                            window.location.href = data.redirecionar || '/sucesso';
+                        }, 2000);
+                    } else if (data.status === 'pendente') {
+                        statusDiv.innerHTML = '<div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded">Pagamento pendente</div>';
+                    } else {
+                        statusDiv.innerHTML = '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">Pagamento rejeitado</div>';
+                    }
+                } else {
+                    statusDiv.innerHTML = '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">Erro: ' + data.erro + '</div>';
+                }
+                
+                botao.innerHTML = 'Verificar Status do Pagamento';
+                botao.disabled = false;
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                statusDiv.innerHTML = '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">Erro de conexão</div>';
+                botao.innerHTML = 'Verificar Status do Pagamento';
+                botao.disabled = false;
+            });
+        }
+        
+        // Verificação automática a cada 15 segundos
+        setInterval(() => {
+            verificarPagamento();
+        }, 15000);
+        
+        // Inicializar
+        gerarQRCode();
+    </script>
+</body>
+</html>
+4. DEPENDÊNCIAS PYTHON (requirements.txt ou pyproject.toml)
+flask
+requests
+5. VARIÁVEL DE AMBIENTE
+No Replit, adicione a secret:
+
+FOR4PAYMENTS_SECRET_KEY = sua_chave_secreta_aqui
+6. COMO USAR
+Copie o arquivo for4_payments.py para o seu projeto
+Adicione as rotas ao seu arquivo principal do Flask
+Crie o template checkout.html ou adapte o existente
+Configure a variável de ambiente FOR4PAYMENTS_SECRET_KEY
+Teste com a rota /checkout
+7. EXEMPLO DE USO SIMPLES
+from for4_payments import For4PaymentsAPI, PaymentRequestData
+# Criar pagamento
+api = For4PaymentsAPI.from_env()
+payment = api.create_pix_payment(PaymentRequestData(
+    name="João Silva",
+    email="joao@email.com",
+    cpf="12345678901",
+    amount=5000,  # R$ 50,00 em centavos
+    description="Produto Teste"
+))
+print(f"PIX Code: {payment.pix_code}")
+print(f"Payment ID: {payment.id}")
+# Verificar status
+status = api.check_payment_status(payment.id)
+print(f"Status: {status['status']}")

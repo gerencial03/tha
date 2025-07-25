@@ -456,59 +456,54 @@ def process_pix_payment():
         checkout_items = [f"{item['name']} (x{item['quantity']})" for item in cart_items]
         transaction_description = "Labubu Brasil - " + ", ".join(checkout_items) if checkout_items else "Labubu Brasil - Compra"
         
-        # For4Payments PIX Gateway Integration
-        from datetime import datetime
-        import uuid
+        # For4Payments PIX Real - Chaves Corretas do Usuário
+        from for4_payments_api import For4PaymentsAPI, PaymentRequestData
         
         # PIX amount is exactly the calculated total
         pix_amount = total_amount
         
-        print(f"=== PROCESSANDO PAGAMENTO FOR4PAYMENTS ===")
+        print(f"=== FOR4PAYMENTS PIX REAL - LABUBU BRASIL ===")
         print(f"Valor final PIX: R$ {pix_amount:.2f}")
+        print(f"Cliente: {customer_data['name']}")
         print(f"Descrição: {transaction_description}")
         
-        # Preparar dados para For4Payments API
-        payment_data = {
-            'name': customer_data['name'],
-            'email': customer_data['email'],
-            'cpf': customer_data['document_number'],
-            'phone': customer_data['phone_number'],
-            'amount': pix_amount
-        }
-        
-        print(f"Dados do pagamento: {payment_data}")
-        
         try:
-            # Gerar PIX usando nosso sistema direto e confiável
-            pix_result = generate_pix_code(
-                amount=pix_amount,
-                customer_name=customer_data['name']
+            # Criar instância da API For4Payments com chave real
+            payment_api = For4PaymentsAPI("2d17dd02-e382-4c11-abaa-7ec6d05767de")
+            
+            # Criar dados do pagamento
+            payment_data = PaymentRequestData(
+                name=customer_data['name'],
+                email=customer_data['email'],
+                cpf=customer_data['document_number'],
+                amount=int(pix_amount * 100),  # Converter para centavos
+                phone=customer_data['phone_number'],
+                description=transaction_description
             )
             
-            if pix_result['success']:
-                transaction_result = {
-                    'success': True,
-                    'hash': pix_result['transaction_id'],
-                    'pix_qr_code': pix_result['pix_code'],
-                    'pix_copy_paste': pix_result['pix_code'],
-                    'qr_code_base64': '',
-                    'status': 'pending',
-                    'amount': pix_amount,
-                    'original_amount': total_amount,
-                    'discount_percent': 0,
-                    'customer': customer_data,
-                    'cart_items': cart_items,
-                    'pix_key': pix_result['pix_key'],
-                    'merchant_name': pix_result['merchant_name'],
-                    'direct_pix': True
-                }
-                
-                print(f"✅ PIX GERADO COM SUCESSO!")
-                print(f"Transaction ID: {transaction_result['hash']}")
-                print(f"Chave PIX: {pix_result['pix_key']}")
-                print(f"Valor: R$ {pix_amount:.2f}")
-            else:
-                raise Exception("Falha ao gerar código PIX")
+            # Criar pagamento PIX real
+            payment_response = payment_api.create_pix_payment(payment_data)
+            
+            transaction_result = {
+                'success': True,
+                'hash': payment_response.id,
+                'pix_qr_code': payment_response.pix_code,
+                'pix_copy_paste': payment_response.pix_code,
+                'qr_code_base64': payment_response.pix_qr_code,
+                'status': payment_response.status,
+                'amount': pix_amount,
+                'original_amount': total_amount,
+                'discount_percent': 0,
+                'customer': customer_data,
+                'cart_items': cart_items,
+                'for4_real': True,
+                'expires_at': payment_response.expires_at
+            }
+            
+            print(f"✅ PIX REAL CRIADO COM SUCESSO!")
+            print(f"Transaction ID: {transaction_result['hash']}")
+            print(f"PIX Code: {payment_response.pix_code[:50]}...")
+            print(f"Status: {payment_response.status}")
                 
         except Exception as e:
             print(f"Erro For4Payments API: {str(e)}")

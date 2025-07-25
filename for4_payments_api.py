@@ -1,187 +1,229 @@
+"""
+For4Payments PIX API Integration - Labubu Brasil
+Sistema PIX real e funcional com as chaves corretas
+SECRETKEY: 2d17dd02-e382-4c11-abaa-7ec6d05767de
+PUBLICKEY: dc8332ee-56c1-40dd-8253-2b7a62bcb7b4
+"""
 import os
 import requests
-from datetime import datetime
-from flask import current_app
+import json
+from datetime import datetime, timedelta
 from typing import Dict, Any, Optional
+from dataclasses import dataclass
+from flask import current_app
+
+@dataclass
+class PaymentRequestData:
+    name: str
+    email: str
+    cpf: str
+    amount: int  # Valor em centavos
+    phone: Optional[str] = None
+    description: Optional[str] = None
+
+@dataclass
+class PaymentResponse:
+    id: str
+    pix_code: str
+    pix_qr_code: str
+    expires_at: str
+    status: str
 
 class For4PaymentsAPI:
-    API_URL = "https://app.for4payments.com.br/api/v1"
+    """API For4Payments com chaves reais do Labubu Brasil"""
     
     def __init__(self, secret_key: str):
+        self.API_URL = "https://app.for4payments.com.br/api/v1"
         self.secret_key = secret_key
         
+        if not secret_key or len(secret_key) < 10:
+            raise ValueError("Token de autenticação inválido")
+    
     def _get_headers(self) -> Dict[str, str]:
         return {
-            'Authorization': f'Bearer {self.secret_key}',
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            "Authorization": self.secret_key,
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "User-Agent": "For4Payments-Python-SDK/1.0.0",
+            "Accept-Language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7"
         }
     
-    def create_pix_payment(self, data: Dict[str, Any]) -> Dict[str, Any]:
-        """Create a PIX payment request"""
-        # Validate token
-        if not self.secret_key or len(self.secret_key) < 10:
-            raise ValueError("Token de autenticação inválido")
-            
-        # Validate required fields
-        required_fields = ['name', 'email', 'cpf', 'amount']
-        for field in required_fields:
-            if field not in data or not data[field]:
-                raise ValueError(f"Campo obrigatório ausente: {field}")
-
-        try:
-            # Format and validate amount
-            amount_in_cents = int(float(data['amount']) * 100)  # Convert to cents
-            if amount_in_cents <= 0:
-                raise ValueError("Valor do pagamento deve ser maior que zero")
-
-            # Format CPF (remove any non-digits)
-            cpf = ''.join(filter(str.isdigit, data['cpf']))
-            if len(cpf) != 11:
-                raise ValueError("CPF inválido")
-
-            # Validate email format
-            if '@' not in data['email']:
-                raise ValueError("Email inválido")
-
-            payment_data = {
-                "name": data['name'],
-                "email": data['email'],
-                "cpf": cpf,
-                "phone": data.get('phone', '11999999999'),
-                "paymentMethod": "PIX",
-                "amount": amount_in_cents,
-                "items": [{
-                    "title": "Colecionável Labubu",
-                    "quantity": 1,
-                    "unitPrice": amount_in_cents,
-                    "tangible": True
-                }]
-            }
-
-            current_app.logger.info(f"Request payload: {payment_data}")
-            current_app.logger.info(f"Headers: {self._get_headers()}")
+    def _validate_payment_data(self, data: PaymentRequestData) -> None:
+        if not data.name or not data.name.strip():
+            raise ValueError("Nome é obrigatório")
+        if not data.email or not data.email.strip():
+            raise ValueError("Email é obrigatório")
+        if not data.cpf or not data.cpf.strip():
+            raise ValueError("CPF é obrigatório")
+        if not data.amount or data.amount <= 0:
+            raise ValueError("Valor é obrigatório e deve ser maior que zero")
         
-            # Make the API request
-            current_app.logger.info("Enviando requisição para API For4Payments...")
-            
-            try:
-                # Try multiple endpoints
-                endpoints = [
-                    "/transaction.purchase",
-                    "/transactions/create",
-                    "/pix/create"
-                ]
-                
-                for endpoint in endpoints:
-                    current_app.logger.info(f"Tentando endpoint: {self.API_URL}{endpoint}")
-                    response = requests.post(
-                        f"{self.API_URL}{endpoint}",
-                        json=payment_data,
-                        headers=self._get_headers(),
-                        timeout=15
-                    )
-                    
-                    if response.status_code == 200:
-                        break
-                    elif response.status_code != 404:
-                        # Se não é 404, pode ser um erro válido
-                        break
-                
-                current_app.logger.info(f"Resposta recebida (Status: {response.status_code})")
-                current_app.logger.debug(f"Resposta completa: {response.text}")
-                
-                if response.status_code == 200:
-                    response_data = response.json()
-                    current_app.logger.info(f"Resposta da API: {response_data}")
-                    
-                    # Map response fields
-                    return {
-                        'id': response_data.get('id') or response_data.get('transactionId'),
-                        'pixCode': response_data.get('pixCode') or response_data.get('pix', {}).get('code'),
-                        'pixQrCode': response_data.get('pixQrCode') or response_data.get('pix', {}).get('qrCode'),
-                        'expiresAt': response_data.get('expiresAt') or response_data.get('expiration'),
-                        'status': response_data.get('status', 'pending')
-                    }
-                elif response.status_code == 401:
-                    current_app.logger.error("Erro de autenticação com a API For4Payments")
-                    raise ValueError("Falha na autenticação com a API For4Payments. Verifique a chave de API.")
-                else:
-                    error_message = 'Erro ao processar pagamento'
-                    try:
-                        error_data = response.json()
-                        if isinstance(error_data, dict):
-                            error_message = error_data.get('message') or error_data.get('error') or '; '.join(error_data.get('errors', []))
-                            current_app.logger.error(f"Erro da API For4Payments: {error_message}")
-                    except Exception as e:
-                        error_message = f'Erro ao processar pagamento (Status: {response.status_code})'
-                        current_app.logger.error(f"Erro ao processar resposta da API: {str(e)}")
-                    raise ValueError(error_message)
-                    
-            except requests.exceptions.RequestException as e:
-                current_app.logger.error(f"Erro de conexão com a API For4Payments: {str(e)}")
-                raise ValueError("Erro de conexão com o serviço de pagamento. Tente novamente em alguns instantes.")
-                
-        except ValueError as e:
-            current_app.logger.error(f"Erro de validação: {str(e)}")
-            raise
-        except Exception as e:
-            current_app.logger.error(f"Erro inesperado ao processar pagamento: {str(e)}")
-            raise ValueError("Erro interno ao processar pagamento. Por favor, tente novamente.")
+        cpf = ''.join(filter(str.isdigit, data.cpf))
+        if len(cpf) != 11:
+            raise ValueError("CPF deve conter exatamente 11 dígitos")
+        
+        if "@" not in data.email or "." not in data.email:
+            raise ValueError("Email inválido")
+        
+        if not isinstance(data.amount, int) or data.amount <= 0:
+            raise ValueError("Valor deve ser um número inteiro positivo em centavos")
 
-    def check_payment_status(self, payment_id: str) -> Dict[str, Any]:
-        """Check the status of a payment"""
+    def create_pix_payment(self, data: PaymentRequestData) -> PaymentResponse:
+        """Criar pagamento PIX real na For4Payments"""
+        
+        self._validate_payment_data(data)
+        
+        # Processar dados
+        cpf = ''.join(filter(str.isdigit, data.cpf))
+        phone = ''.join(filter(str.isdigit, data.phone)) if data.phone else "11999999999"
+        
+        # Payload completo para API
+        payment_data = {
+            "name": data.name.strip(),
+            "email": data.email.strip(),
+            "cpf": cpf,
+            "phone": phone,
+            "paymentMethod": "PIX",
+            "amount": data.amount,
+            "traceable": True,
+            "items": [{
+                "title": data.description or "Colecionável Labubu",
+                "quantity": 1,
+                "unitPrice": data.amount,
+                "tangible": False
+            }],
+            "cep": "01001000",
+            "street": "Praça da Sé",
+            "number": "1",
+            "complement": "",
+            "district": "Sé",
+            "city": "São Paulo",
+            "state": "SP",
+            "externalId": f"labubu-{int(datetime.now().timestamp())}",
+            "postbackUrl": "",
+            "checkoutUrl": "",
+            "referrerUrl": "",
+            "utmQuery": "",
+            "fingerPrints": []
+        }
+        
         try:
-            response = requests.get(
-                f"{self.API_URL}/transaction.status/{payment_id}",
+            current_app.logger.info(f"[For4Payments] Criando pagamento PIX para {data.email}")
+            current_app.logger.info(f"[For4Payments] Valor: R$ {data.amount/100:.2f}")
+            
+            response = requests.post(
+                f"{self.API_URL}/transaction.purchase",
+                json=payment_data,
                 headers=self._get_headers(),
                 timeout=30
             )
             
-            current_app.logger.info(f"Status check response (Status: {response.status_code})")
-            current_app.logger.debug(f"Status check response body: {response.text}")
+            current_app.logger.info(f"[For4Payments] Status HTTP: {response.status_code}")
             
-            if response.status_code == 200:
-                payment_data = response.json()
-                # Map For4Payments status to our application status
-                status_mapping = {
-                    'pending': 'pending',
-                    'processing': 'pending',
-                    'approved': 'completed',
-                    'completed': 'completed',
-                    'paid': 'completed',
-                    'expired': 'failed',
-                    'failed': 'failed',
-                    'canceled': 'cancelled',
-                    'cancelled': 'cancelled'
-                }
-                
-                current_status = payment_data.get('status', 'pending')
-                mapped_status = status_mapping.get(current_status.lower(), 'pending')
-                
-                current_app.logger.info(f"Payment {payment_id} status: {current_status} -> {mapped_status}")
-                
-                return {
-                    'status': mapped_status,
-                    'pix_qr_code': payment_data.get('pixQrCode') or payment_data.get('pix', {}).get('qrCode'),
-                    'pix_code': payment_data.get('pixCode') or payment_data.get('pix', {}).get('code')
-                }
-            elif response.status_code == 404:
-                current_app.logger.warning(f"Payment {payment_id} not found")
-                return {'status': 'pending'}
-            else:
-                error_message = f"Failed to fetch payment status (Status: {response.status_code})"
-                current_app.logger.error(error_message)
-                return {'status': 'pending'}
-                
+            if response.status_code != 200:
+                error_message = self._extract_error_message(response)
+                current_app.logger.error(f"[For4Payments] Erro: {error_message}")
+                raise requests.exceptions.RequestException(f"API Error: {error_message}")
+            
+            response_data = response.json()
+            current_app.logger.info(f"[For4Payments] Pagamento criado com sucesso")
+            
+            return self._parse_payment_response(response_data)
+            
+        except requests.exceptions.RequestException as e:
+            current_app.logger.error(f"[For4Payments] Erro na requisição: {str(e)}")
+            raise
         except Exception as e:
-            current_app.logger.error(f"Error checking payment status: {str(e)}")
-            return {'status': 'pending'}
+            current_app.logger.error(f"[For4Payments] Erro inesperado: {str(e)}")
+            raise
 
-def create_payment_api(secret_key: Optional[str] = None) -> For4PaymentsAPI:
-    """Factory function to create For4PaymentsAPI instance"""
-    if secret_key is None:
-        secret_key = os.environ.get("FOR4PAYMENTS_SECRET_KEY", "57f6b6ed-f175-47a4-ba5f-58c2ca3a3d4a")
-    if secret_key is None:
-        raise ValueError("FOR4PAYMENTS_SECRET_KEY is required")
+    def _extract_error_message(self, response: requests.Response) -> str:
+        if response.status_code == 401:
+            return "Falha na autenticação. Verifique sua chave de API."
+        elif response.status_code == 400:
+            return "Dados inválidos enviados para a API."
+        elif response.status_code == 500:
+            return "Erro interno do servidor For4Payments."
+        
+        try:
+            error_data = response.json()
+            return (
+                error_data.get("message") or 
+                error_data.get("error") or 
+                error_data.get("errors", {}).get("message") or
+                "Erro desconhecido"
+            )
+        except:
+            return response.text or "Erro desconhecido"
+
+    def _parse_payment_response(self, response_data: Dict[str, Any]) -> PaymentResponse:
+        pix_code = response_data.get("pixCode", "")
+        pix_qr_code = response_data.get("qrCode", "")
+        
+        current_app.logger.info(f"[For4Payments] PIX Code extraído: {pix_code[:50]}...")
+        current_app.logger.info(f"[For4Payments] QR Code extraído: {'Presente' if pix_qr_code else 'Ausente'}")
+        
+        expires_at = (
+            response_data.get("expiration") or
+            response_data.get("expiresAt") or
+            (datetime.now() + timedelta(minutes=30)).isoformat()
+        )
+        
+        status = response_data.get("status", "pending").lower()
+        
+        payment_id = (
+            response_data.get("id") or
+            response_data.get("transactionId") or
+            response_data.get("_id") or
+            f"txn-{int(datetime.now().timestamp())}"
+        )
+        
+        return PaymentResponse(
+            id=str(payment_id),
+            pix_code=pix_code,
+            pix_qr_code=pix_qr_code,
+            expires_at=expires_at,
+            status=status
+        )
+
+    def check_payment_status(self, payment_id: str) -> Dict[str, Any]:
+        """Verificar status de um pagamento"""
+        try:
+            current_app.logger.info(f"[For4Payments] Verificando status do pagamento {payment_id}")
+            
+            response = requests.get(
+                f"{self.API_URL}/transaction.getPayment",
+                params={"id": payment_id},
+                headers=self._get_headers(),
+                timeout=15
+            )
+            
+            if response.status_code != 200:
+                error_message = self._extract_error_message(response)
+                current_app.logger.error(f"[For4Payments] Erro na verificação: {error_message}")
+                return {"status": "error", "message": error_message}
+            
+            response_data = response.json()
+            status = response_data.get("status", "pending").lower()
+            
+            current_app.logger.info(f"[For4Payments] Status atual: {status}")
+            
+            return {
+                "status": status,
+                "payment_data": response_data,
+                "paid": status in ["paid", "approved", "completed"],
+                "pending": status in ["pending", "waiting_payment"],
+                "failed": status in ["failed", "cancelled", "expired"]
+            }
+            
+        except Exception as e:
+            current_app.logger.error(f"[For4Payments] Erro na verificação de status: {str(e)}")
+            return {"status": "error", "message": str(e)}
+
+def create_payment_api(secret_key: str = None) -> For4PaymentsAPI:
+    """Criar instância da API For4Payments com chave correta"""
+    if not secret_key:
+        # Usar nova chave fornecida pelo usuário
+        secret_key = os.environ.get("FOR4PAYMENTS_SECRET_KEY", "2d17dd02-e382-4c11-abaa-7ec6d05767de")
+    
     return For4PaymentsAPI(secret_key)
