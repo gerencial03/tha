@@ -6,6 +6,7 @@ from io import BytesIO
 import base64
 import uuid
 import logging
+import time
 from flask import Flask, render_template, request, session, redirect, url_for, flash, jsonify, send_from_directory
 from for4_payments_api import create_payment_api
 
@@ -481,24 +482,28 @@ def process_pix_payment():
             # Criar pagamento PIX
             payment_response = payment_api.create_pix_payment(payment_data)
             
-            transaction_result = {
-                'success': True,
-                'hash': payment_response['id'],
-                'pix_qr_code': payment_response['pixCode'],
-                'pix_copy_paste': payment_response['pixCode'],
-                'qr_code_base64': payment_response['pixQrCode'],
-                'status': payment_response['status'],
-                'amount': pix_amount,
-                'original_amount': total_amount,
-                'discount_percent': 0,
-                'customer': customer_data,
-                'cart_items': cart_items,
-                'expires_at': payment_response['expiresAt']
-            }
+            # Verificar se a resposta contém dados válidos
+            if payment_response and 'id' in payment_response:
+                transaction_result = {
+                    'success': True,
+                    'hash': payment_response.get('id', f'tx-{int(time.time())}'),
+                    'pix_qr_code': payment_response.get('pixCode', ''),
+                    'pix_copy_paste': payment_response.get('pixCode', ''),
+                    'qr_code_base64': payment_response.get('pixQrCode', ''),
+                    'status': payment_response.get('status', 'pending'),
+                    'amount': pix_amount,
+                    'original_amount': total_amount,
+                    'discount_percent': 0,
+                    'customer': customer_data,
+                    'cart_items': cart_items,
+                    'expires_at': payment_response.get('expiresAt', '')
+                }
+            else:
+                raise ValueError("Resposta inválida da API For4Payments")
             
             print(f"✅ PIX CRIADO COM SUCESSO!")
             print(f"Transaction ID: {transaction_result['hash']}")
-            print(f"Status: {payment_response['status']}")
+            print(f"Status: {payment_response.get('status', 'N/A')}")
                 
         except Exception as e:
             print(f"Erro For4Payments API: {str(e)}")
@@ -511,24 +516,26 @@ def process_pix_payment():
                 'cart_items': cart_items
             }
         
-        # Store transaction in session for tracking
-        session['current_transaction'] = {
-            'hash': transaction_result['hash'],
-            'amount': pix_amount,
-            'customer': customer_data,
-            'cart_items': cart_items,
-            'calculated_total': total_amount
-        }
+        # Store transaction in session for tracking apenas se sucesso
+        if transaction_result.get('success'):
+            session['current_transaction'] = {
+                'hash': transaction_result['hash'],
+                'amount': pix_amount,
+                'customer': customer_data,
+                'cart_items': cart_items,
+                'calculated_total': total_amount
+            }
         session.modified = True
         
         print(f"=== TRANSAÇÃO FINALIZADA ===")
-        print(f"PIX ID: {transaction_result['hash']}")
+        print(f"Sucesso: {transaction_result.get('success', False)}")
+        print(f"PIX ID: {transaction_result.get('hash', 'N/A')}")
         print(f"Valor cobrado: R$ {pix_amount:.2f}")
-        print(f"Status: {transaction_result['status']}")
+        print(f"Status: {transaction_result.get('status', 'N/A')}")
         print(f"Itens: {len(cart_items)} produtos")
         
         return jsonify({
-            'success': True,
+            'success': transaction_result.get('success', False),
             'transaction': transaction_result
         })
             

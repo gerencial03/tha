@@ -28,6 +28,9 @@ class For4PaymentsAPI:
         for field in required_fields:
             if field not in data or not data[field]:
                 raise ValueError(f"Campo obrigatório ausente: {field}")
+        
+        # Log dos dados recebidos
+        current_app.logger.info(f"Dados recebidos para pagamento: {data}")
 
         try:
             # Format and validate amount
@@ -40,26 +43,33 @@ class For4PaymentsAPI:
             if len(cpf) != 11:
                 raise ValueError("CPF inválido")
 
+            # Format phone (remove any non-digits)
+            phone = ''.join(filter(str.isdigit, data.get('phone', '11999999999')))
+            if len(phone) < 10:
+                phone = '11999999999'
+
             # Validate email format
             if '@' not in data['email']:
                 raise ValueError("Email inválido")
 
             payment_data = {
-                "name": data['name'],
-                "email": data['email'],
+                "name": data['name'].strip(),
+                "email": data['email'].strip(),
                 "cpf": cpf,
-                "phone": data.get('phone', '11999999999'),
+                "phone": phone,
                 "paymentMethod": "PIX",
                 "amount": amount_in_cents,
                 "items": [{
-                    "title": data.get('description', 'Colecionável Labubu'),
+                    "title": data.get('description', 'Colecionável Labubu').strip(),
                     "quantity": 1,
                     "unitPrice": amount_in_cents,
                     "tangible": True
                 }]
             }
 
-            current_app.logger.info(f"Request payload: {payment_data}")
+            current_app.logger.info(f"Enviando para For4Payments:")
+            current_app.logger.info(f"URL: {self.API_URL}/transaction.purchase")
+            current_app.logger.info(f"Payload: {payment_data}")
             current_app.logger.info(f"Headers: {self._get_headers()}")
         
             # Make the API request
@@ -92,15 +102,16 @@ class For4PaymentsAPI:
                     current_app.logger.error("Erro de autenticação com a API For4Payments")
                     raise ValueError("Falha na autenticação com a API For4Payments. Verifique a chave de API.")
                 else:
-                    error_message = 'Erro ao processar pagamento'
+                    error_message = f'Erro ao processar pagamento (Status: {response.status_code})'
                     try:
                         error_data = response.json()
+                        current_app.logger.error(f"Resposta de erro completa: {error_data}")
                         if isinstance(error_data, dict):
-                            error_message = error_data.get('message') or error_data.get('error') or '; '.join(error_data.get('errors', []))
+                            error_message = error_data.get('message') or error_data.get('error') or error_data.get('code') or error_message
                             current_app.logger.error(f"Erro da API For4Payments: {error_message}")
                     except Exception as e:
-                        error_message = f'Erro ao processar pagamento (Status: {response.status_code})'
                         current_app.logger.error(f"Erro ao processar resposta da API: {str(e)}")
+                        current_app.logger.error(f"Resposta bruta: {response.text}")
                     raise ValueError(error_message)
                     
             except requests.exceptions.RequestException as e:
@@ -167,4 +178,8 @@ def create_payment_api(secret_key: Optional[str] = None) -> For4PaymentsAPI:
     """Factory function to create For4PaymentsAPI instance"""
     if secret_key is None:
         secret_key = os.environ.get("FOR4PAYMENTS_SECRET_KEY", "2d17dd02-e382-4c11-abaa-7ec6d05767de")
+    
+    if secret_key is None:
+        raise ValueError("Secret key is required")
+    
     return For4PaymentsAPI(secret_key)
