@@ -7,7 +7,7 @@ import base64
 import uuid
 import logging
 from flask import Flask, render_template, request, session, redirect, url_for, flash, jsonify, send_from_directory
-# Sistema PIX removido - aguardando nova documentação
+from for4_payments_api import create_payment_api
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SESSION_SECRET", "tha-beauty-secret-key")
@@ -456,22 +456,60 @@ def process_pix_payment():
         checkout_items = [f"{item['name']} (x{item['quantity']})" for item in cart_items]
         transaction_description = "Labubu Brasil - " + ", ".join(checkout_items) if checkout_items else "Labubu Brasil - Compra"
         
-        # Sistema PIX - Aguardando nova documentação do usuário
+        # Sistema PIX For4Payments - Implementação Real
         pix_amount = total_amount
         
-        print(f"=== SISTEMA PIX TEMPORARIAMENTE DESABILITADO ===")
-        print(f"Aguardando nova documentação e chaves do usuário")
-        print(f"Valor: R$ {pix_amount:.2f}")
+        print(f"=== FOR4PAYMENTS PIX REAL - LABUBU BRASIL ===")
+        print(f"Valor final PIX: R$ {pix_amount:.2f}")
+        print(f"Cliente: {customer_data['name']}")
+        print(f"Descrição: {transaction_description}")
         
-        # Retorno temporário até nova implementação
-        transaction_result = {
-            'success': False,
-            'error': 'Sistema PIX temporariamente desabilitado. Aguardando nova implementação.',
-            'amount': pix_amount,
-            'original_amount': total_amount,
-            'customer': customer_data,
-            'cart_items': cart_items
-        }
+        try:
+            # Criar instância da API For4Payments com sua chave
+            payment_api = create_payment_api("2d17dd02-e382-4c11-abaa-7ec6d05767de")
+            
+            # Preparar dados do pagamento
+            payment_data = {
+                'name': customer_data['name'],
+                'email': customer_data['email'],
+                'cpf': customer_data['document_number'],
+                'phone': customer_data['phone_number'],
+                'amount': pix_amount,
+                'description': transaction_description
+            }
+            
+            # Criar pagamento PIX
+            payment_response = payment_api.create_pix_payment(payment_data)
+            
+            transaction_result = {
+                'success': True,
+                'hash': payment_response['id'],
+                'pix_qr_code': payment_response['pixCode'],
+                'pix_copy_paste': payment_response['pixCode'],
+                'qr_code_base64': payment_response['pixQrCode'],
+                'status': payment_response['status'],
+                'amount': pix_amount,
+                'original_amount': total_amount,
+                'discount_percent': 0,
+                'customer': customer_data,
+                'cart_items': cart_items,
+                'expires_at': payment_response['expiresAt']
+            }
+            
+            print(f"✅ PIX CRIADO COM SUCESSO!")
+            print(f"Transaction ID: {transaction_result['hash']}")
+            print(f"Status: {payment_response['status']}")
+                
+        except Exception as e:
+            print(f"Erro For4Payments API: {str(e)}")
+            transaction_result = {
+                'success': False,
+                'error': f'Erro ao processar pagamento PIX: {str(e)}',
+                'amount': pix_amount,
+                'original_amount': total_amount,
+                'customer': customer_data,
+                'cart_items': cart_items
+            }
         
         # Store transaction in session for tracking
         session['current_transaction'] = {
