@@ -7,7 +7,7 @@ import base64
 import uuid
 import logging
 from flask import Flask, render_template, request, session, redirect, url_for, flash, jsonify, send_from_directory
-from for4_payments_api import create_payment_api
+# Sistema PIX removido - aguardando nova documentação
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SESSION_SECRET", "tha-beauty-secret-key")
@@ -456,121 +456,22 @@ def process_pix_payment():
         checkout_items = [f"{item['name']} (x{item['quantity']})" for item in cart_items]
         transaction_description = "Labubu Brasil - " + ", ".join(checkout_items) if checkout_items else "Labubu Brasil - Compra"
         
-        # For4Payments PIX Real - Chaves Corretas do Usuário
-        from for4_payments_api import For4PaymentsAPI, PaymentRequestData
-        
-        # PIX amount is exactly the calculated total
+        # Sistema PIX - Aguardando nova documentação do usuário
         pix_amount = total_amount
         
-        print(f"=== FOR4PAYMENTS PIX REAL - LABUBU BRASIL ===")
-        print(f"Valor final PIX: R$ {pix_amount:.2f}")
-        print(f"Cliente: {customer_data['name']}")
-        print(f"Descrição: {transaction_description}")
+        print(f"=== SISTEMA PIX TEMPORARIAMENTE DESABILITADO ===")
+        print(f"Aguardando nova documentação e chaves do usuário")
+        print(f"Valor: R$ {pix_amount:.2f}")
         
-        try:
-            # Criar instância da API For4Payments com chave real
-            payment_api = For4PaymentsAPI("2d17dd02-e382-4c11-abaa-7ec6d05767de")
-            
-            # Criar dados do pagamento
-            payment_data = PaymentRequestData(
-                name=customer_data['name'],
-                email=customer_data['email'],
-                cpf=customer_data['document_number'],
-                amount=int(pix_amount * 100),  # Converter para centavos
-                phone=customer_data['phone_number'],
-                description=transaction_description
-            )
-            
-            # Criar pagamento PIX real
-            payment_response = payment_api.create_pix_payment(payment_data)
-            
-            transaction_result = {
-                'success': True,
-                'hash': payment_response.id,
-                'pix_qr_code': payment_response.pix_code,
-                'pix_copy_paste': payment_response.pix_code,
-                'qr_code_base64': payment_response.pix_qr_code,
-                'status': payment_response.status,
-                'amount': pix_amount,
-                'original_amount': total_amount,
-                'discount_percent': 0,
-                'customer': customer_data,
-                'cart_items': cart_items,
-                'for4_real': True,
-                'expires_at': payment_response.expires_at
-            }
-            
-            print(f"✅ PIX REAL CRIADO COM SUCESSO!")
-            print(f"Transaction ID: {transaction_result['hash']}")
-            print(f"PIX Code: {payment_response.pix_code[:50]}...")
-            print(f"Status: {payment_response.status}")
-                
-        except Exception as e:
-            print(f"Erro For4Payments API: {str(e)}")
-            # Gerar external_id único para fallback
-            timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
-            unique_id = str(uuid.uuid4())[:8]
-            external_id = f"LAB-{timestamp}-{unique_id}"
-            
-            # Gerar código PIX EMV padrão brasileiro funcional
-            import hashlib
-            
-            # Chave PIX real para Labubu Brasil
-            pix_key = "labubu.brasil@gmail.com"
-            merchant_name = "LABUBU BRASIL"
-            merchant_city = "SAO PAULO"
-            
-            # Formatar valor (sem ponto decimal)
-            amount_str = f"{pix_amount:.2f}"
-            
-            # Montar payload PIX EMV padrão
-            payload_format_indicator = "01"
-            point_of_initiation = "12"
-            merchant_account_info = f"0014BR.GOV.BCB.PIX01{len(pix_key):02d}{pix_key}"
-            merchant_category_code = "0000"
-            transaction_currency = "986"
-            transaction_amount = f"{len(amount_str):02d}{amount_str}"
-            country_code = "BR"
-            merchant_name_field = f"{len(merchant_name):02d}{merchant_name}"
-            merchant_city_field = f"{len(merchant_city):02d}{merchant_city}"
-            additional_data = f"05{len(external_id):02d}{external_id}"
-            
-            # Montar código PIX
-            pix_code_data = (
-                f"00{len(payload_format_indicator):02d}{payload_format_indicator}"
-                f"01{len(point_of_initiation):02d}{point_of_initiation}"
-                f"26{len(merchant_account_info):02d}{merchant_account_info}"
-                f"52{len(merchant_category_code):02d}{merchant_category_code}"
-                f"53{len(transaction_currency):02d}{transaction_currency}"
-                f"54{transaction_amount}"
-                f"58{len(country_code):02d}{country_code}"
-                f"59{merchant_name_field}"
-                f"60{merchant_city_field}"
-                f"62{len(additional_data):02d}{additional_data}"
-            )
-            
-            # Calcular CRC16 (simplificado)
-            crc16 = format(abs(hash(pix_code_data)) % 65536, '04X')
-            fallback_pix_code = f"{pix_code_data}63{crc16}"
-            
-            print(f"FALLBACK PIX CODE gerado para valor R$ {pix_amount:.2f}")
-            print(f"PIX Code: {fallback_pix_code[:50]}...")
-            
-            transaction_result = {
-                'success': True,
-                'hash': external_id,
-                'pix_qr_code': fallback_pix_code,
-                'pix_copy_paste': fallback_pix_code,
-                'qr_code_base64': '',
-                'status': 'pending',
-                'amount': pix_amount,
-                'original_amount': total_amount,
-                'discount_percent': 0,
-                'customer': customer_data,
-                'cart_items': cart_items,
-                'fallback': True,
-                'error': str(e)
-            }
+        # Retorno temporário até nova implementação
+        transaction_result = {
+            'success': False,
+            'error': 'Sistema PIX temporariamente desabilitado. Aguardando nova implementação.',
+            'amount': pix_amount,
+            'original_amount': total_amount,
+            'customer': customer_data,
+            'cart_items': cart_items
+        }
         
         # Store transaction in session for tracking
         session['current_transaction'] = {

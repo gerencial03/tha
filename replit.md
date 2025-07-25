@@ -100,9 +100,9 @@ Preferred communication style: Simple, everyday language.
   - Cleared all sessions and cache for clean production deployment
   - All buttons now "Comprar" linking to individual product checkout pages
   - Integrated Microsoft Clarity analytics (ID: sk8awlxeqd) for real-time user tracking
-  - Updated PIX payment gateway from PayBets to For4Payments API
-  - New secret key: 57f6b6ed-f175-47a4-ba5f-58c2ca3a3d4a
-  - Complete payment system migration with fallback support
+  - **Sistema PIX completamente removido** conforme solicitação do usuário
+  - Todas as implementações anteriores de PIX foram limpas
+  - Aguardando nova documentação e chaves PIX para implementação
 - **Review Count Enhancement** (July 24, 2025):
   - Updated all product review counts to realistic numbers between 149-270 reviews
   - Enhanced reviews.json with detailed, authentic customer comments
