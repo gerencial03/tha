@@ -98,9 +98,12 @@
                             <!-- Price -->
                             <div class="product-price">
                                 <div class="pix-price" style="background: linear-gradient(135deg, #00ff88, #00cc66); color: white; padding: 4px 8px; border-radius: 8px; margin-bottom: 8px; font-weight: bold; font-size: 0.95rem;">
-                                    <i class="fas fa-credit-card" style="margin-right: 5px;"></i>PIX: R${{ "%.2f"|format(product.price) }}
+                                    <i class="fas fa-credit-card" style="margin-right: 5px;"></i>PIX: R${{ "%.2f"|format(product.price * 0.60) }}
                                 </div>
                                 <span class="current-price" style="color: #666; text-decoration: line-through; font-size: 0.9rem;">R${{ "%.2f"|format(product.price) }}</span>
+                                <div class="pix-discount-info" style="font-size: 0.8rem; color: #28a745; font-weight: bold;">
+                                    40% OFF • Economia: R${{ "%.2f"|format(product.price * 0.40) }}
+                                </div>
                                 {% if product.original_price %}
                                     <div class="price-discount">
                                         <span class="discount-badge">-{{ product.discount }}% OFF</span>
@@ -189,9 +192,12 @@
                             <!-- Price -->
                             <div class="product-price">
                                 <div class="pix-price" style="background: linear-gradient(135deg, #00ff88, #00cc66); color: white; padding: 4px 8px; border-radius: 8px; margin-bottom: 8px; font-weight: bold; font-size: 0.95rem;">
-                                    <i class="fas fa-credit-card" style="margin-right: 5px;"></i>PIX: R${{ "%.2f"|format(product.price) }}
+                                    <i class="fas fa-credit-card" style="margin-right: 5px;"></i>PIX: R${{ "%.2f"|format(product.price * 0.60) }}
                                 </div>
                                 <span class="current-price" style="color: #666; text-decoration: line-through; font-size: 0.9rem;">R${{ "%.2f"|format(product.price) }}</span>
+                                <div class="pix-discount-info" style="font-size: 0.8rem; color: #28a745; font-weight: bold;">
+                                    40% OFF • Economia: R${{ "%.2f"|format(product.price * 0.40) }}
+                                </div>
                                 {% if product.original_price %}
                                     <div class="price-discount">
                                         <span class="discount-badge">-{{ product.discount }}% OFF</span>

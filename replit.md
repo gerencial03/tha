@@ -114,6 +114,10 @@ Preferred communication style: Simple, everyday language.
   - Desconto aplicado automaticamente nos preços dos produtos
   - Sistema PIX cobra 40% menos do valor original
   - Interface atualizada mostrando economia real de 40%
+  - **Homepage atualizada com preços com desconto** (July 25, 2025):
+  - Preços na homepage agora mostram valor PIX já com 40% de desconto
+  - Cards dos produtos exibem preço original riscado e preço PIX destacado
+  - Informação de economia (40% OFF) visível em todos os produtos
 - **Review Count Enhancement** (July 24, 2025):
   - Updated all product review counts to realistic numbers between 149-270 reviews
   - Enhanced reviews.json with detailed, authentic customer comments
