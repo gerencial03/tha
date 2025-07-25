@@ -250,16 +250,10 @@
                                     <!-- Payment Status -->
                                     <div id="payment-status" class="text-center">
                                         <p class="mb-2">⏳ Aguardando pagamento...</p>
-                                        <small class="text-muted">O pagamento será confirmado automaticamente</small>
+                                        <small class="text-muted">Escaneie o QR Code ou copie o código PIX</small>
                                     </div>
                                     
-                                    <!-- Success message -->
-                                    <div id="payment-success" class="text-center" style="display: none;">
-                                        <div class="alert alert-success">
-                                            <h5>Pagamento Confirmado</h5>
-                                            <p>Obrigado pela compra!</p>
-                                        </div>
-                                    </div>
+                                    <!-- Success message removed by user request -->
                                 </div>
                             </div>
 
@@ -1154,7 +1148,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         // Payment successful
                         clearInterval(statusInterval);
                         document.getElementById('payment-status').style.display = 'none';
-                        document.getElementById('payment-success').style.display = 'block';
                         
                         // Don't redirect automatically - let user stay on the page
                         console.log('PIX processado com sucesso');

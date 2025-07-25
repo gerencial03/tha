@@ -148,6 +148,8 @@ Preferred communication style: Simple, everyday language.
   - Updated all calculation points: backend (app.py) and frontend templates
   - PIX payment now charges exact product price without any discount
   - Applied across all JavaScript functions for consistent pricing
+  - Removed payment confirmation messages (user request)
+  - Deleted payment_success.html template
 - **Complete Authentic Data Integration** (July 24, 2025):
   - Updated all product descriptions with authentic information from labubu.com.br official site
   - Replaced promotional descriptions with factual, professional product information
