@@ -105,6 +105,10 @@ Preferred communication style: Simple, everyday language.
   - PUBLICKEY: dc8332ee-56c1-40dd-8253-2b7a62bcb7b4  
   - API endpoint: https://app.for4payments.com.br/api/v1/transaction.purchase
   - Sistema PIX 100% funcional com códigos escaneáveis
+  - **Checkout simplificado** (July 25, 2025):
+  - Removida seção "🛒 Produtos Selecionados" da página de checkout
+  - Sistema agora permite apenas uma compra por vez conforme solicitado
+  - Após pagamento usuário deve voltar para selecionar outros produtos
 - **Review Count Enhancement** (July 24, 2025):
   - Updated all product review counts to realistic numbers between 149-270 reviews
   - Enhanced reviews.json with detailed, authentic customer comments
