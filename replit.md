@@ -92,6 +92,13 @@ Preferred communication style: Simple, everyday language.
 - **WSGI Server**: Replace development server with Gunicorn or uWSGI
 
 ### Recent Changes (July 2025)
+- **Production Deploy Preparation** (July 25, 2025):
+  - Removed cart dropdown functionality - only visual icon remains
+  - Updated WhatsApp contact to +55 11 91064-4435 with Labubu-specific message
+  - Fixed Labubu Halloween image with authentic product photo
+  - Simplified cart system: products redirect directly to checkout
+  - Cleared all sessions and cache for clean production deployment
+  - All buttons now "Comprar" linking to individual product checkout pages
 - **Review Count Enhancement** (July 24, 2025):
   - Updated all product review counts to realistic numbers between 149-270 reviews
   - Enhanced reviews.json with detailed, authentic customer comments

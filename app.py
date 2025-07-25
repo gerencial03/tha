@@ -26,13 +26,11 @@ def load_reviews():
 def index():
     products_data = load_products()
     
-    # Initialize sessions if they don't exist
-    if 'cart' not in session:
-        session['cart'] = {}
-    if 'checkout_cart' not in session:
-        session['checkout_cart'] = {}
-    if 'product_quantity' not in session:
-        session['product_quantity'] = {}
+    # Clear all sessions for fresh deploy
+    session.clear()
+    session['cart'] = {}
+    session['checkout_cart'] = {}
+    session['product_quantity'] = {}
     session.modified = True
     
     return render_template('index.html', 
