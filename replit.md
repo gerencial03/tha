@@ -93,12 +93,15 @@ Preferred communication style: Simple, everyday language.
 
 ### Recent Changes (July 2025)
 - **Heroku Deploy Ready** (July 26, 2025):
-  - Sistema PIX For4Payments 100% funcional com chaves reais
+  - Sistema PIX For4Payments 100% funcional com chaves reais (testado com sucesso)
+  - API For4Payments validada: Transaction ID 3a824331-a10e-4ea0-947a-c73c5865fd58
   - Pagamentos PIX testados e aprovados (R$ 149.94 com 40% desconto)
   - Procfile configurado para Heroku com porta dinâmica
   - Removido runtime.txt (conflito com uv), usando apenas .python-version
   - Variáveis de ambiente FOR4PAYMENTS_SECRET_KEY e FOR4PAYMENTS_PUBLIC_KEY configuradas
   - QR Codes e códigos PIX reais escaneáveis por apps bancários
+  - Script heroku_debug.py criado para diagnosticar problemas na Heroku
+  - Guia HEROKU_SETUP.md criado com instruções completas
 - **Production Deploy Preparation** (July 25, 2025):
   - Removed cart dropdown functionality - only visual icon remains
   - Updated WhatsApp contact to +55 11 91064-4435 with Labubu-specific message

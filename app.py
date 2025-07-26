@@ -1,4 +1,5 @@
 import os
+import logging
 import json
 import requests
 import qrcode
@@ -12,6 +13,10 @@ from for4_payments_api import create_payment_api
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SESSION_SECRET", "tha-beauty-secret-key")
+
+# Configure logging for production debugging
+logging.basicConfig(level=logging.INFO)
+app.logger.setLevel(logging.INFO)
 
 # Load products data
 def load_products():
@@ -466,6 +471,11 @@ def process_pix_payment():
         print(f"Descrição: {transaction_description}")
         
         try:
+            # Verificar se variáveis de ambiente estão carregadas
+            print(f"DEBUG ENV - SESSION_SECRET: {'PRESENTE' if os.environ.get('SESSION_SECRET') else 'AUSENTE'}")
+            print(f"DEBUG ENV - FOR4PAYMENTS_SECRET_KEY: {'PRESENTE' if os.environ.get('FOR4PAYMENTS_SECRET_KEY') else 'AUSENTE'}")
+            print(f"DEBUG ENV - FOR4PAYMENTS_PUBLIC_KEY: {'PRESENTE' if os.environ.get('FOR4PAYMENTS_PUBLIC_KEY') else 'AUSENTE'}")
+            
             # Criar instância da API For4Payments com chave das variáveis de ambiente
             payment_api = create_payment_api()
             

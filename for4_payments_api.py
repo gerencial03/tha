@@ -180,6 +180,9 @@ def create_payment_api(secret_key: Optional[str] = None) -> For4PaymentsAPI:
         secret_key = os.environ.get("FOR4PAYMENTS_SECRET_KEY")
     
     if not secret_key:
+        current_app.logger.error("FOR4PAYMENTS_SECRET_KEY não encontrada nas variáveis de ambiente")
+        current_app.logger.error(f"Variáveis disponíveis: {list(os.environ.keys())}")
         raise ValueError("FOR4PAYMENTS_SECRET_KEY environment variable is required")
     
+    current_app.logger.info(f"Chave PIX carregada: {secret_key[:10]}...")
     return For4PaymentsAPI(secret_key)
