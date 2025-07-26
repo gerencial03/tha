@@ -92,6 +92,13 @@ Preferred communication style: Simple, everyday language.
 - **WSGI Server**: Replace development server with Gunicorn or uWSGI
 
 ### Recent Changes (July 2025)
+- **Heroku Deploy Ready** (July 26, 2025):
+  - Sistema PIX For4Payments 100% funcional com chaves reais
+  - Pagamentos PIX testados e aprovados (R$ 149.94 com 40% desconto)
+  - Procfile configurado para Heroku com porta dinâmica
+  - Removido runtime.txt (conflito com uv), usando apenas .python-version
+  - Variáveis de ambiente FOR4PAYMENTS_SECRET_KEY e FOR4PAYMENTS_PUBLIC_KEY configuradas
+  - QR Codes e códigos PIX reais escaneáveis por apps bancários
 - **Production Deploy Preparation** (July 25, 2025):
   - Removed cart dropdown functionality - only visual icon remains
   - Updated WhatsApp contact to +55 11 91064-4435 with Labubu-specific message
@@ -100,11 +107,6 @@ Preferred communication style: Simple, everyday language.
   - Cleared all sessions and cache for clean production deployment
   - All buttons now "Comprar" linking to individual product checkout pages
   - Integrated Microsoft Clarity analytics (ID: sk8awlxeqd) for real-time user tracking
-  - **Sistema PIX For4Payments REAL implementado** (July 26, 2025)
-  - Chaves PIX configuradas via variáveis de ambiente
-  - API endpoint: https://app.for4payments.com.br/api/v1/transaction.purchase
-  - Sistema PIX 100% funcional com códigos escaneáveis reais
-  - QR Codes e códigos PIX funcionais testados
   - **Checkout simplificado** (July 25, 2025):
   - Removida seção "🛒 Produtos Selecionados" da página de checkout
   - Sistema agora permite apenas uma compra por vez conforme solicitado
