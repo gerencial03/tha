@@ -93,10 +93,10 @@ Preferred communication style: Simple, everyday language.
 
 ### Recent Changes (July 2025)
 - **Checkout Reviews Updated** (July 26, 2025):
-  - Atualizados comentários do Reclame Aqui, Correios e Mercado Livre
-  - Foco na confiabilidade do site ao invés dos produtos
-  - Comentários destacam: entrega rápida, site seguro, PIX instantâneo
-  - Testimonials agora enfatizam credibilidade da loja online
+  - Comentários simplificados e mais diretos conforme solicitado
+  - Reclame Aqui: aprovação oficial da plataforma
+  - Correios: foco na entrega rápida e segurança
+  - Mercado Livre: destaque para confiabilidade e PIX instantâneo
 - **Heroku Deploy Ready** (July 26, 2025):
   - Sistema PIX For4Payments 100% funcional com chaves reais (testado com sucesso)
   - API For4Payments validada: Transaction ID 3a824331-a10e-4ea0-947a-c73c5865fd58
