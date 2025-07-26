@@ -30,75 +30,65 @@
 <div class="container">
     <div class="products-list">
         {% for product in labubu_collection %}
-            <div class="product-item">
-                <!-- Product Image -->
-                <div class="product-thumbnail">
-                    <img src="{{ product.image_url }}" alt="{{ product.name }}" loading="lazy">
-                </div>
-
-                <!-- Product Details -->
-                <div class="product-details">
-                    <h3 class="product-title">{{ product.name }}</h3>
-                    
-                    <!-- Rating -->
-                    <div class="product-rating">
-                        {% for i in range(5) %}
-                            <i class="fas fa-star {% if i < product.rating %}filled{% endif %}"></i>
-                        {% endfor %}
-                        <span class="rating-text">({{ product.review_count }})</span>
+            <a href="{{ url_for('product_detail', product_id=product.id) }}" class="product-item-link">
+                <div class="product-item">
+                    <!-- Product Image -->
+                    <div class="product-thumbnail">
+                        <img src="{{ product.image_url }}" alt="{{ product.name }}" loading="lazy">
                     </div>
-                    
-                    <!-- Price -->
-                    <div class="price-container">
-                        <div class="current-price">R$ {{ "%.2f"|format(product.price * 0.60) }}</div>
-                        <div class="installments">em 12x R$ {{ "%.2f"|format((product.price * 0.60) / 12) }}</div>
-                        <div class="shipping-info">Frete grátis</div>
+
+                    <!-- Product Details -->
+                    <div class="product-details">
+                        <h3 class="product-title">{{ product.name }}</h3>
+                        
+                        <!-- Rating -->
+                        <div class="product-rating">
+                            {% for i in range(5) %}
+                                <i class="fas fa-star {% if i < product.rating %}filled{% endif %}"></i>
+                            {% endfor %}
+                            <span class="rating-text">({{ product.review_count }})</span>
+                        </div>
+                        
+                        <!-- Price -->
+                        <div class="price-container">
+                            <div class="current-price">R$ {{ "%.2f"|format(product.price * 0.60) }}</div>
+                            <div class="installments">em 12x R$ {{ "%.2f"|format((product.price * 0.60) / 12) }}</div>
+                            <div class="shipping-info">Frete grátis</div>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Action Button -->
-                <div class="product-actions">
-                    <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn-mercado">
-                        Ver produto
-                    </a>
-                </div>
-            </div>
+            </a>
         {% endfor %}
         
         {% for product in acessorios_labubu %}
-            <div class="product-item">
-                <!-- Product Image -->
-                <div class="product-thumbnail">
-                    <img src="{{ product.image_url }}" alt="{{ product.name }}" loading="lazy">
-                </div>
-
-                <!-- Product Details -->
-                <div class="product-details">
-                    <h3 class="product-title">{{ product.name }}</h3>
-                    
-                    <!-- Rating -->
-                    <div class="product-rating">
-                        {% for i in range(5) %}
-                            <i class="fas fa-star {% if i < product.rating %}filled{% endif %}"></i>
-                        {% endfor %}
-                        <span class="rating-text">({{ product.review_count }})</span>
+            <a href="{{ url_for('product_detail', product_id=product.id) }}" class="product-item-link">
+                <div class="product-item">
+                    <!-- Product Image -->
+                    <div class="product-thumbnail">
+                        <img src="{{ product.image_url }}" alt="{{ product.name }}" loading="lazy">
                     </div>
-                    
-                    <!-- Price -->
-                    <div class="price-container">
-                        <div class="current-price">R$ {{ "%.2f"|format(product.price * 0.60) }}</div>
-                        <div class="installments">em 12x R$ {{ "%.2f"|format((product.price * 0.60) / 12) }}</div>
-                        <div class="shipping-info">Frete grátis</div>
+
+                    <!-- Product Details -->
+                    <div class="product-details">
+                        <h3 class="product-title">{{ product.name }}</h3>
+                        
+                        <!-- Rating -->
+                        <div class="product-rating">
+                            {% for i in range(5) %}
+                                <i class="fas fa-star {% if i < product.rating %}filled{% endif %}"></i>
+                            {% endfor %}
+                            <span class="rating-text">({{ product.review_count }})</span>
+                        </div>
+                        
+                        <!-- Price -->
+                        <div class="price-container">
+                            <div class="current-price">R$ {{ "%.2f"|format(product.price * 0.60) }}</div>
+                            <div class="installments">em 12x R$ {{ "%.2f"|format((product.price * 0.60) / 12) }}</div>
+                            <div class="shipping-info">Frete grátis</div>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Action Button -->
-                <div class="product-actions">
-                    <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn-mercado">
-                        Ver produto
-                    </a>
-                </div>
-            </div>
+            </a>
         {% endfor %}
     </div>
 </div>

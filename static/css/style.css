@@ -203,6 +203,17 @@ body {
     margin: 16px 0;
 }
 
+.product-item-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.product-item-link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
 .product-item {
     background: white;
     border-bottom: 1px solid #eee;
@@ -211,13 +222,14 @@ body {
     align-items: flex-start;
     gap: 16px;
     transition: box-shadow 0.2s;
+    cursor: pointer;
 }
 
 .product-item:hover {
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
-.product-item:first-child {
+.product-item-link:first-child .product-item {
     border-top: 1px solid #eee;
 }
 
@@ -299,32 +311,7 @@ body {
     font-weight: 500;
 }
 
-/* Product Actions */
-.product-actions {
-    flex-shrink: 0;
-    align-self: flex-start;
-}
-
-.btn-mercado {
-    background: #3483fa;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 24px;
-    font-size: 14px;
-    font-weight: 600;
-    text-decoration: none;
-    text-align: center;
-    transition: background-color 0.2s;
-    display: inline-block;
-    min-width: 120px;
-}
-
-.btn-mercado:hover {
-    background: #2968c8;
-    color: white;
-    text-decoration: none;
-}
+/* Removed product actions - entire product is clickable now */
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
@@ -342,14 +329,6 @@ body {
     
     .current-price {
         font-size: 24px;
-    }
-    
-    .product-actions {
-        align-self: stretch;
-    }
-    
-    .btn-mercado {
-        width: 100%;
     }
 }
 
