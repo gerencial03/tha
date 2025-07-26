@@ -26,116 +26,82 @@
 </section>
 {% else %}
 
-<!-- Main Banner - MercadoLivre Style -->
-<section class="mercado-banner">
-    <div class="container-fluid p-0">
-        <div class="banner-slider">
-            <img src="{{ url_for('static', filename='banner-labubu.jpg') }}" alt="Promoções" class="w-100" style="height: 250px; object-fit: cover;">
-        </div>
-    </div>
-</section>
+<!-- Products List - MercadoLivre Style -->
+<div class="container">
+    <div class="products-list">
+        {% for product in labubu_collection %}
+            <div class="product-item">
+                <!-- Product Image -->
+                <div class="product-thumbnail">
+                    <img src="{{ product.image_url }}" alt="{{ product.name }}" loading="lazy">
+                </div>
 
-<!-- Products Section - MercadoLivre Style -->
-<section class="product-section">
-    <div class="container mt-4">
-        <h2 class="section-title">Baseado no que você viu</h2>
-        <div class="row g-3">
-            {% for product in labubu_collection %}
-                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
-                    <div class="product-card h-100">
-                        <!-- Product Image -->
-                        <div class="product-image">
-                            <img src="{{ product.image_url }}" alt="{{ product.name }}" loading="lazy">
-                        </div>
-
-                        <!-- Product Info -->
-                        <div class="product-info">
-                            <h3 class="product-name">{{ product.name }}</h3>
-                            
-                            <!-- Price -->
-                            <div class="product-price mb-2">
-                                R$ {{ "%.2f"|format(product.price * 0.60) }}
-                            </div>
-                            
-                            {% if product.price > (product.price * 0.60) %}
-                                <div class="text-muted small text-decoration-line-through mb-1">
-                                    R$ {{ "%.2f"|format(product.price) }}
-                                </div>
-                                <div class="text-success small mb-2">
-                                    40% OFF
-                                </div>
-                            {% endif %}
-
-                            <div class="installment-info mb-2">
-                                <small>em 12x R$ {{ "%.2f"|format((product.price * 0.60) / 12) }}</small>
-                            </div>
-                            
-                            <div class="d-flex align-items-center mb-2">
-                                <small class="text-success me-2">Frete grátis</small>
-                            </div>
-
-                            <!-- Action Button -->
-                            <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn-comprar-melhorado">
-                                Ver produto
-                            </a>
-                        </div>
+                <!-- Product Details -->
+                <div class="product-details">
+                    <h3 class="product-title">{{ product.name }}</h3>
+                    
+                    <!-- Rating -->
+                    <div class="product-rating">
+                        {% for i in range(5) %}
+                            <i class="fas fa-star {% if i < product.rating %}filled{% endif %}"></i>
+                        {% endfor %}
+                        <span class="rating-text">({{ product.review_count }})</span>
+                    </div>
+                    
+                    <!-- Price -->
+                    <div class="price-container">
+                        <div class="current-price">R$ {{ "%.2f"|format(product.price * 0.60) }}</div>
+                        <div class="installments">em 12x R$ {{ "%.2f"|format((product.price * 0.60) / 12) }}</div>
+                        <div class="shipping-info">Frete grátis</div>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
 
-<!-- Acessórios Section -->
-<section class="product-section">
-    <div class="container mt-4">
-        <h2 class="section-title">Você também pode gostar</h2>
-        <div class="row g-3">
-            {% for product in acessorios_labubu %}
-                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
-                    <div class="product-card h-100">
-                        <!-- Product Image -->
-                        <div class="product-image">
-                            <img src="{{ product.image_url }}" alt="{{ product.name }}" loading="lazy">
-                        </div>
+                <!-- Action Button -->
+                <div class="product-actions">
+                    <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn-mercado">
+                        Ver produto
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+        
+        {% for product in acessorios_labubu %}
+            <div class="product-item">
+                <!-- Product Image -->
+                <div class="product-thumbnail">
+                    <img src="{{ product.image_url }}" alt="{{ product.name }}" loading="lazy">
+                </div>
 
-                        <!-- Product Info -->
-                        <div class="product-info">
-                            <h3 class="product-name">{{ product.name }}</h3>
-                            
-                            <!-- Price -->
-                            <div class="product-price mb-2">
-                                R$ {{ "%.2f"|format(product.price * 0.60) }}
-                            </div>
-                            
-                            {% if product.price > (product.price * 0.60) %}
-                                <div class="text-muted small text-decoration-line-through mb-1">
-                                    R$ {{ "%.2f"|format(product.price) }}
-                                </div>
-                                <div class="text-success small mb-2">
-                                    40% OFF
-                                </div>
-                            {% endif %}
-
-                            <div class="installment-info mb-2">
-                                <small>em 12x R$ {{ "%.2f"|format((product.price * 0.60) / 12) }}</small>
-                            </div>
-                            
-                            <div class="d-flex align-items-center mb-2">
-                                <small class="text-success me-2">Frete grátis</small>
-                            </div>
-
-                            <!-- Action Button -->
-                            <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn-comprar-melhorado">
-                                Ver produto
-                            </a>
-                        </div>
+                <!-- Product Details -->
+                <div class="product-details">
+                    <h3 class="product-title">{{ product.name }}</h3>
+                    
+                    <!-- Rating -->
+                    <div class="product-rating">
+                        {% for i in range(5) %}
+                            <i class="fas fa-star {% if i < product.rating %}filled{% endif %}"></i>
+                        {% endfor %}
+                        <span class="rating-text">({{ product.review_count }})</span>
+                    </div>
+                    
+                    <!-- Price -->
+                    <div class="price-container">
+                        <div class="current-price">R$ {{ "%.2f"|format(product.price * 0.60) }}</div>
+                        <div class="installments">em 12x R$ {{ "%.2f"|format((product.price * 0.60) / 12) }}</div>
+                        <div class="shipping-info">Frete grátis</div>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
+
+                <!-- Action Button -->
+                <div class="product-actions">
+                    <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn-mercado">
+                        Ver produto
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
     </div>
-</section>
+</div>
 
 {% endif %}
 
