@@ -30,7 +30,7 @@
                         <input type="text" 
                                name="q" 
                                class="search-input" 
-                               placeholder="Estou buscando..." 
+                               placeholder="Buscar produtos, marcas e muito mais..." 
                                value="{{ request.args.get('q', '') }}">
                         <button type="submit" class="search-btn">
                             <i class="fas fa-search"></i>
@@ -38,23 +38,25 @@
                     </form>
                 </div>
                 
-                <!-- Header Actions -->
-                <div class="header-actions">
-                    <button class="menu-toggle" onclick="toggleMobileMenu()">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <button class="cart-icon" onclick="alert('Carrinho está vazio. Selecione um produto para comprar!')">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-count" id="cart-count">0</span>
-                    </button>
+                <!-- Location and Actions -->
+                <div class="header-right">
+                    <!-- Location -->
+                    <div class="location-section" onclick="openLocationDialog()">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Informe seu CEP</span>
+                    </div>
+                    
+                    <!-- Actions -->
+                    <div class="header-actions">
+                        <button class="menu-toggle" onclick="toggleMobileMenu()">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <button class="cart-icon" onclick="alert('Carrinho está vazio. Selecione um produto para comprar!')">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count" id="cart-count">0</span>
+                        </button>
+                    </div>
                 </div>
-            </div>
-            
-            <!-- Location Section -->
-            <div class="location-section" onclick="openLocationDialog()">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>Informe seu CEP</span>
-                <i class="fas fa-chevron-right location-arrow"></i>
             </div>
         </div>
     </header>
