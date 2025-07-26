@@ -2,33 +2,6 @@
 
 {% block content %}
 
-
-
-<!-- Hero Banner Labubu -->
-<section class="hero-banner-original">
-    <div class="banner-container" style="position: relative; overflow: hidden;">
-        <img src="{{ url_for('static', filename='banner-labubu.jpg') }}" alt="Labubu Brasil - Colecionáveis Kawaii" class="hero-banner-image" style="width: 100%; height: auto; max-height: 400px; object-fit: cover;">
-        <div style="position: absolute; bottom: 20px; left: 20px; right: 20px; color: white; text-align: center;">
-            <h1 style="font-size: 2.5rem; font-weight: bold; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">🌟 Labubu Brasil</h1>
-            <p style="font-size: 1.2rem; margin-bottom: 20px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">Colecionáveis Kawaii Oficiais</p>
-            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-                <div style="display: flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.6); padding: 8px 12px; border-radius: 20px; backdrop-filter: blur(10px);">
-                    <i class="fas fa-star" style="color: #ffd700;"></i>
-                    <span style="font-size: 0.9rem;">Produtos Autênticos</span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.6); padding: 8px 12px; border-radius: 20px; backdrop-filter: blur(10px);">
-                    <i class="fas fa-shipping-fast" style="color: #00ff88;"></i>
-                    <span style="font-size: 0.9rem;">Frete Grátis Brasil</span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.6); padding: 8px 12px; border-radius: 20px; backdrop-filter: blur(10px);">
-                    <i class="fas fa-heart" style="color: #ff69b4;"></i>
-                    <span style="font-size: 0.9rem;">Vendedor Autorizado</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 {% if search_results is defined %}
 <!-- Search Results -->
 <section class="search-results">
@@ -53,31 +26,23 @@
 </section>
 {% else %}
 
-<!-- PIX Discount Banner -->
-<section class="pix-discount-banner">
-    <div class="container-fluid px-3">
-        <div class="text-center py-2">
-            <small class="text-success fw-bold">🎁 Pagamento no PIX e ganhe 40% OFF!</small>
+<!-- Main Banner - MercadoLivre Style -->
+<section class="mercado-banner">
+    <div class="container-fluid p-0">
+        <div class="banner-slider">
+            <img src="{{ url_for('static', filename='banner-labubu.jpg') }}" alt="Promoções" class="w-100" style="height: 250px; object-fit: cover;">
         </div>
     </div>
 </section>
 
-<!-- Coleção Labubu -->
+<!-- Products Section - MercadoLivre Style -->
 <section class="product-section">
-    <div class="container-fluid px-3">
-        <h2 class="section-title">🎁 Coleção Labubu Oficial</h2>
+    <div class="container mt-4">
+        <h2 class="section-title">Baseado no que você viu</h2>
         <div class="row g-3">
             {% for product in labubu_collection %}
-                <div class="col-6 col-md-4 col-lg-3">
-                    <div class="product-card">
-                        <!-- Product Status Badges -->
-                        <div class="product-badges">
-                            <!-- Removed free shipping badge - now displayed above header -->
-                            {% if product.get('limited_stock') %}
-                                <span class="badge-limited">ESTOQUE LIMITADO</span>
-                            {% endif %}
-                        </div>
-
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <div class="product-card h-100">
                         <!-- Product Image -->
                         <div class="product-image">
                             <img src="{{ product.image_url }}" alt="{{ product.name }}" loading="lazy">
@@ -87,41 +52,32 @@
                         <div class="product-info">
                             <h3 class="product-name">{{ product.name }}</h3>
                             
-                            <!-- Rating -->
-                            <div class="product-rating">
-                                {% for i in range(5) %}
-                                    <i class="fas fa-star {{ 'active' if i < product.rating else '' }}"></i>
-                                {% endfor %}
-                                <span class="review-count">({{ product.review_count }})</span>
-                            </div>
-
                             <!-- Price -->
-                            <div class="product-price">
-                                <div class="pix-price" style="background: linear-gradient(135deg, #00ff88, #00cc66); color: white; padding: 4px 8px; border-radius: 8px; margin-bottom: 8px; font-weight: bold; font-size: 0.95rem;">
-                                    <i class="fas fa-credit-card" style="margin-right: 5px;"></i>PIX: R${{ "%.2f"|format(product.price * 0.60) }}
+                            <div class="product-price mb-2">
+                                R$ {{ "%.2f"|format(product.price * 0.60) }}
+                            </div>
+                            
+                            {% if product.price > (product.price * 0.60) %}
+                                <div class="text-muted small text-decoration-line-through mb-1">
+                                    R$ {{ "%.2f"|format(product.price) }}
                                 </div>
-                                <span class="current-price" style="color: #666; text-decoration: line-through; font-size: 0.9rem;">R${{ "%.2f"|format(product.price) }}</span>
-                                <div class="pix-discount-info" style="font-size: 0.8rem; color: #28a745; font-weight: bold;">
-                                    40% OFF • Economia: R${{ "%.2f"|format(product.price * 0.40) }}
+                                <div class="text-success small mb-2">
+                                    40% OFF
                                 </div>
-                                {% if product.original_price %}
-                                    <div class="price-discount">
-                                        <span class="discount-badge">-{{ product.discount }}% OFF</span>
-                                        <span class="original-price">R${{ "%.2f"|format(product.original_price) }}</span>
-                                    </div>
-                                {% endif %}
+                            {% endif %}
+
+                            <div class="installment-info mb-2">
+                                <small>em 12x R$ {{ "%.2f"|format((product.price * 0.60) / 12) }}</small>
+                            </div>
+                            
+                            <div class="d-flex align-items-center mb-2">
+                                <small class="text-success me-2">Frete grátis</small>
                             </div>
 
                             <!-- Action Button -->
-                            <div class="product-action">
-                                <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn-comprar-melhorado">
-                                    Comprar
-                                </a>
-                                <div class="installment-info">
-                                    <small>Pronto!</small>
-                                    <small>Incluindo...</small>
-                                </div>
-                            </div>
+                            <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn-comprar-melhorado">
+                                Ver produto
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -130,48 +86,14 @@
     </div>
 </section>
 
-<!-- Vídeo Promocional Labubu -->
-<section class="video-section py-5" style="background: linear-gradient(135deg, #ff69b4, #9b59b6); color: white;">
-    <div class="container">
-        <div class="text-center mb-4">
-            <h2 class="fw-bold mb-3">🎬 Conheça o Mundo Labubu</h2>
-            <p class="mb-4">Descubra a magia dos colecionáveis mais amados do mundo kawaii</p>
-        </div>
-        
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-10 col-lg-8">
-                <div class="video-responsive" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.3);">
-                    <iframe 
-                        src="https://www.youtube.com/embed/kI-gkqa3x0Q" 
-                        title="Labubu Collection Video" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        allowfullscreen
-                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 15px;">
-                    </iframe>
-                </div>
-            </div>
-        </div>
-        
-        <div class="text-center mt-4">
-            <small style="opacity: 0.9;">✨ Produtos autênticos • Frete grátis para todo Brasil • Vendedor autorizado ✨</small>
-        </div>
-    </div>
-</section>
-
-<!-- Acessórios Labubu -->
+<!-- Acessórios Section -->
 <section class="product-section">
-    <div class="container-fluid px-3">
-        <h2 class="section-title">✨ Acessórios Kawaii Labubu</h2>
+    <div class="container mt-4">
+        <h2 class="section-title">Você também pode gostar</h2>
         <div class="row g-3">
             {% for product in acessorios_labubu %}
-                <div class="col-6 col-md-4 col-lg-3">
-                    <div class="product-card">
-                        <!-- Product Status Badges -->
-                        <div class="product-badges">
-                            <!-- Removed free shipping badge - now displayed above header -->
-                        </div>
-
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                    <div class="product-card h-100">
                         <!-- Product Image -->
                         <div class="product-image">
                             <img src="{{ product.image_url }}" alt="{{ product.name }}" loading="lazy">
@@ -181,41 +103,32 @@
                         <div class="product-info">
                             <h3 class="product-name">{{ product.name }}</h3>
                             
-                            <!-- Rating -->
-                            <div class="product-rating">
-                                {% for i in range(5) %}
-                                    <i class="fas fa-star {{ 'active' if i < product.rating else '' }}"></i>
-                                {% endfor %}
-                                <span class="review-count">({{ product.review_count }})</span>
-                            </div>
-
                             <!-- Price -->
-                            <div class="product-price">
-                                <div class="pix-price" style="background: linear-gradient(135deg, #00ff88, #00cc66); color: white; padding: 4px 8px; border-radius: 8px; margin-bottom: 8px; font-weight: bold; font-size: 0.95rem;">
-                                    <i class="fas fa-credit-card" style="margin-right: 5px;"></i>PIX: R${{ "%.2f"|format(product.price * 0.60) }}
+                            <div class="product-price mb-2">
+                                R$ {{ "%.2f"|format(product.price * 0.60) }}
+                            </div>
+                            
+                            {% if product.price > (product.price * 0.60) %}
+                                <div class="text-muted small text-decoration-line-through mb-1">
+                                    R$ {{ "%.2f"|format(product.price) }}
                                 </div>
-                                <span class="current-price" style="color: #666; text-decoration: line-through; font-size: 0.9rem;">R${{ "%.2f"|format(product.price) }}</span>
-                                <div class="pix-discount-info" style="font-size: 0.8rem; color: #28a745; font-weight: bold;">
-                                    40% OFF • Economia: R${{ "%.2f"|format(product.price * 0.40) }}
+                                <div class="text-success small mb-2">
+                                    40% OFF
                                 </div>
-                                {% if product.original_price %}
-                                    <div class="price-discount">
-                                        <span class="discount-badge">-{{ product.discount }}% OFF</span>
-                                        <span class="original-price">R${{ "%.2f"|format(product.original_price) }}</span>
-                                    </div>
-                                {% endif %}
+                            {% endif %}
+
+                            <div class="installment-info mb-2">
+                                <small>em 12x R$ {{ "%.2f"|format((product.price * 0.60) / 12) }}</small>
+                            </div>
+                            
+                            <div class="d-flex align-items-center mb-2">
+                                <small class="text-success me-2">Frete grátis</small>
                             </div>
 
                             <!-- Action Button -->
-                            <div class="product-action">
-                                <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn-comprar-melhorado">
-                                    Comprar
-                                </a>
-                                <div class="installment-info">
-                                    <small>Pronto!</small>
-                                    <small>Incluindo...</small>
-                                </div>
-                            </div>
+                            <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn-comprar-melhorado">
+                                Ver produto
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -225,261 +138,5 @@
 </section>
 
 {% endif %}
-<!-- Customer Reviews Section -->
-<section class="reviews-section py-5" style="background-color: #f8f9fa;">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold mb-3" style="color: #333;">💕 O que nossos colecionadores dizem</h2>
-            <p class="text-muted">Avaliações reais de quem já tem seu Labubu</p>
-        </div>
-        
-        <div class="row g-4">
-            <!-- Review 1 - Labubu Branco com Fotos -->
-            <div class="col-lg-4 col-md-6">
-                <div class="review-card h-100 p-4" style="background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="review-avatar me-3" style="width: 50px; height: 50px; background: linear-gradient(45deg, #ff69b4, #ff1493); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
-                            C
-                        </div>
-                        <div>
-                            <h6 class="mb-0">Camila R.</h6>
-                            <div class="stars mb-1">
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                            </div>
-                            <small class="text-muted">22 de julho de 2025</small>
-                        </div>
-                    </div>
-                    <p class="mb-3">"Meu primeiro Labubu e já estou viciada! É muito mais fofo pessoalmente. A qualidade é incrível, material macio e resistente. Chegou super bem embalado!"</p>
-                    <img src="{{ url_for('static', filename='images/reviews/labubu-review-1.jpg') }}" alt="Labubu branco fofo" class="img-fluid rounded" style="max-height: 200px; width: 100%; object-fit: cover;">
-                </div>
-            </div>
-            
-            <!-- Review 2 - Labubu Coca-Cola -->
-            <div class="col-lg-4 col-md-6">
-                <div class="review-card h-100 p-4" style="background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="review-avatar me-3" style="width: 50px; height: 50px; background: linear-gradient(45deg, #dc3545, #ff0000); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
-                            M
-                        </div>
-                        <div>
-                            <h6 class="mb-0">Marina L.</h6>
-                            <div class="stars mb-1">
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                            </div>
-                            <small class="text-muted">23 de julho de 2025</small>
-                        </div>
-                    </div>
-                    <p class="mb-3">"RARÍSSIMO mesmo! A colaboração Labubu x Coca-Cola é incrível. Peça única na minha coleção. Vale cada centavo, qualidade excepcional!"</p>
-                    <img src="{{ url_for('static', filename='images/reviews/labubu-review-2.jpg') }}" alt="Labubu Coca-Cola" class="img-fluid rounded" style="max-height: 200px; width: 100%; object-fit: cover;">
-                </div>
-            </div>
-            
-            <!-- Review 3 - Labubu Rosa e Azul -->
-            <div class="col-lg-4 col-md-6">
-                <div class="review-card h-100 p-4" style="background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="review-avatar me-3" style="width: 50px; height: 50px; background: linear-gradient(45deg, #28a745, #20c997); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
-                            A
-                        </div>
-                        <div>
-                            <h6 class="mb-0">Ana Júlia F.</h6>
-                            <div class="stars mb-1">
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                            </div>
-                            <small class="text-muted">21 de julho de 2025</small>
-                        </div>
-                    </div>
-                    <p class="mb-3">"Comprei dois Labubu de cores diferentes! O rosa e o azul são lindos demais. A textura é muito gostosa de apertar. Recomendo!"</p>
-                    <img src="{{ url_for('static', filename='images/reviews/labubu-review-3.jpg') }}" alt="Labubu rosa e azul" class="img-fluid rounded" style="max-height: 200px; width: 100%; object-fit: cover;">
-                </div>
-            </div>
-            
-            <!-- Review 4 - Labubu Verde Mint -->
-            <div class="col-lg-4 col-md-6">
-                <div class="review-card h-100 p-4" style="background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="review-avatar me-3" style="width: 50px; height: 50px; background: linear-gradient(45deg, #ff69b4, #ffc0cb); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
-                            S
-                        </div>
-                        <div>
-                            <h6 class="mb-0">Sophia N.</h6>
-                            <div class="stars mb-1">
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                            </div>
-                            <small class="text-muted">20 de julho de 2025</small>
-                        </div>
-                    </div>
-                    <p class="mb-3">"O Labubu verde é o mais kawaii! Comprei junto com os cards The Monsters. Qualidade Pop Mart sempre perfeita!"</p>
-                    <img src="{{ url_for('static', filename='images/reviews/labubu-review-4.jpg') }}" alt="Labubu verde com cards" class="img-fluid rounded" style="max-height: 200px; width: 100%; object-fit: cover;">
-                </div>
-            </div>
-            
-            <!-- Review 5 - Labubu Coca-Cola Dupla -->
-            <div class="col-lg-4 col-md-6">
-                <div class="review-card h-100 p-4" style="background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="review-avatar me-3" style="width: 50px; height: 50px; background: linear-gradient(45deg, #007bff, #0056b3); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
-                            T
-                        </div>
-                        <div>
-                            <h6 class="mb-0">Thiago R.</h6>
-                            <div class="stars mb-1">
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                            </div>
-                            <small class="text-muted">19 de julho de 2025</small>
-                        </div>
-                    </div>
-                    <p class="mb-3">"Consegui dois Labubu Coca-Cola! Edição limitada demais. Produto original, recomendo muito para colecionadores!"</p>
-                    <img src="{{ url_for('static', filename='images/reviews/labubu-review-5.jpg') }}" alt="Dois Labubu Coca-Cola" class="img-fluid rounded" style="max-height: 200px; width: 100%; object-fit: cover;">
-                </div>
-            </div>
-            
-            <!-- Review 6 - Labubu Marrom e Branco -->
-            <div class="col-lg-4 col-md-6">
-                <div class="review-card h-100 p-4" style="background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="review-avatar me-3" style="width: 50px; height: 50px; background: linear-gradient(45deg, #6f42c1, #6610f2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
-                            R
-                        </div>
-                        <div>
-                            <h6 class="mb-0">Rodrigo A.</h6>
-                            <div class="stars mb-1">
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                            </div>
-                            <small class="text-muted">17 de julho de 2025</small>
-                        </div>
-                    </div>
-                    <p class="mb-3">"Colecionador aqui! Labubu marrom e branco são especiais. Detalhes impecáveis, qualidade excepcional. Super recomendo!"</p>
-                    <img src="{{ url_for('static', filename='images/reviews/labubu-review-6.jpg') }}" alt="Labubu marrom e branco" class="img-fluid rounded" style="max-height: 200px; width: 100%; object-fit: cover;">
-                </div>
-            </div>
-            
-            <!-- Review 7 - Labubu Azul Keychain -->
-            <div class="col-lg-4 col-md-6">
-                <div class="review-card h-100 p-4" style="background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="review-avatar me-3" style="width: 50px; height: 50px; background: linear-gradient(45deg, #007bff, #0056b3); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
-                            L
-                        </div>
-                        <div>
-                            <h6 class="mb-0">Letícia V.</h6>
-                            <div class="stars mb-1">
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                            </div>
-                            <small class="text-muted">18 de julho de 2025</small>
-                        </div>
-                    </div>
-                    <p class="mb-3">"Labubu azul keychain é perfeito! Uso na bolsa sempre. Material resistente e cor linda. Chegou com adesivo de brinde!"</p>
-                    <img src="{{ url_for('static', filename='images/reviews/labubu-review-7.jpg') }}" alt="Labubu azul keychain" class="img-fluid rounded" style="max-height: 200px; width: 100%; object-fit: cover;">
-                </div>
-            </div>
-            
-            <!-- Review 8 - Labubu Verde no Carro -->
-            <div class="col-lg-4 col-md-6">
-                <div class="review-card h-100 p-4" style="background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="review-avatar me-3" style="width: 50px; height: 50px; background: linear-gradient(45deg, #28a745, #20c997); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
-                            G
-                        </div>
-                        <div>
-                            <h6 class="mb-0">Giovanna P.</h6>
-                            <div class="stars mb-1">
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                            </div>
-                            <small class="text-muted">19 de julho de 2025</small>
-                        </div>
-                    </div>
-                    <p class="mb-3">"Meu Labubu verde vai comigo em todo lugar! Até no carro ele fica lindão. Companheiro kawaii perfeito para o dia a dia!"</p>
-                    <img src="{{ url_for('static', filename='images/reviews/labubu-review-8.jpg') }}" alt="Labubu verde no carro" class="img-fluid rounded" style="max-height: 200px; width: 100%; object-fit: cover;">
-                </div>
-            </div>
-            
-            <!-- Review 9 - Labubu Coca-Cola com Caixa -->
-            <div class="col-lg-4 col-md-6">
-                <div class="review-card h-100 p-4" style="background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="review-avatar me-3" style="width: 50px; height: 50px; background: linear-gradient(45deg, #dc3545, #ff0000); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
-                            I
-                        </div>
-                        <div>
-                            <h6 class="mb-0">Isabela M.</h6>
-                            <div class="stars mb-1">
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                            </div>
-                            <small class="text-muted">20 de julho de 2025</small>
-                        </div>
-                    </div>
-                    <p class="mb-3">"Recebido! Labubu Coca-Cola com a caixa original The Monsters. Embalagem impecável, produto autêntico. Amei demais!"</p>
-                    <img src="{{ url_for('static', filename='images/reviews/labubu-review-9.jpg') }}" alt="Labubu Coca-Cola com caixa" class="img-fluid rounded" style="max-height: 200px; width: 100%; object-fit: cover;">
-                </div>
-            </div>
-        </div>
-        
-        <!-- Trust Indicators -->
-        <div class="row mt-5 pt-4 border-top">
-            <div class="col-md-4 text-center mb-3">
-                <div class="trust-stat">
-                    <h3 class="fw-bold text-success mb-1">4.9/5</h3>
-                    <p class="text-muted mb-0">Avaliação média</p>
-                    <div class="stars">
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 text-center mb-3">
-                <div class="trust-stat">
-                    <h3 class="fw-bold text-success mb-1">1,245</h3>
-                    <p class="text-muted mb-0">Colecionadores felizes</p>
-                </div>
-            </div>
-            <div class="col-md-4 text-center mb-3">
-                <div class="trust-stat">
-                    <h3 class="fw-bold text-success mb-1">98%</h3>
-                    <p class="text-muted mb-0">Recomendariam</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 {% endblock %}

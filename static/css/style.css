@@ -1,20 +1,22 @@
-/* Root Variables */
+/* Root Variables - MercadoLivre Theme */
 :root {
-    --primary-color: #FF6B35;
-    --primary-dark: #E5602F;
-    --secondary-color: #FFF5F2;
+    --primary-color: #FFE600;
+    --primary-dark: #E6CF00;
+    --secondary-color: #FFF9C4;
     --text-dark: #333333;
     --text-gray: #666666;
     --text-light: #999999;
     --border-color: #E5E5E5;
-    --success-color: #28a745;
+    --success-color: #00A650;
     --warning-color: #ffc107;
     --danger-color: #dc3545;
     --white: #FFFFFF;
     --shadow: 0 2px 10px rgba(0,0,0,0.1);
     --shadow-hover: 0 4px 20px rgba(0,0,0,0.15);
-    --border-radius: 8px;
-    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --border-radius: 6px;
+    --font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    --mercado-blue: #3483FA;
+    --mercado-yellow: #FFE600;
 }
 
 /* Global Styles */
@@ -33,51 +35,192 @@ body {
 
 
 
-/* Header */
+/* Header - MercadoLivre Style */
 .header {
-    background-color: #e67e22;
-    color: white;
+    background-color: var(--mercado-yellow);
+    color: #333;
     position: sticky;
     top: 0;
     z-index: 999;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
 }
 
-.menu-toggle {
-    border: none !important;
-    box-shadow: none !important;
-}
-
-.menu-toggle:hover {
-    color: rgba(255,255,255,0.8) !important;
-}
-
-.search-input:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(255,255,255,0.3);
-}
-
-.search-btn:hover {
-    color: #333 !important;
-}
-
-.logo-tha {
-    display: block;
+/* MercadoLivre Header Components */
+.mercado-search {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    padding: 8px 45px 8px 12px;
     font-size: 16px;
-    font-weight: 700;
+    color: #333;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
-.logo-beauty {
-    display: block;
+.mercado-search:focus {
+    outline: none;
+    border-color: #3483FA;
+    box-shadow: 0 0 0 2px rgba(52, 131, 250, 0.2);
+}
+
+.mercado-search::placeholder {
+    color: #999;
+}
+
+.search-btn-mercado {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #666;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.search-btn-mercado:hover {
+    color: #3483FA;
+}
+
+.mercado-menu-btn {
+    background: none;
+    border: none;
+    color: #333;
+    font-size: 18px;
+    padding: 8px;
+}
+
+.mercado-menu-btn:hover {
+    color: #3483FA;
+}
+
+.mercado-cart {
+    color: #333;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.mercado-cart:hover {
+    color: #3483FA;
+}
+
+.mercado-location {
+    background: rgba(255,255,255,0.3);
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.mercado-location:hover {
+    background: rgba(255,255,255,0.5);
+}
+
+/* MercadoLivre Footer Styles */
+.mercado-footer {
+    margin-top: auto;
+}
+
+.mercado-footer-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.mercado-footer-bottom {
+    background-color: #f8f9fa;
+    border-top: 1px solid #e5e5e5;
+}
+
+/* Product Cards - MercadoLivre Style */
+.product-card {
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.product-card:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    border-color: #ddd;
+}
+
+.product-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px 4px 0 0;
+}
+
+.product-info {
+    padding: 12px;
+}
+
+.product-name {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 8px;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.product-price {
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.installment-info {
     font-size: 12px;
-    font-weight: 400;
+    color: #00a650;
+    margin-top: 4px;
 }
 
-.header-actions {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 20px;
+/* Buttons - MercadoLivre Style */
+.btn-comprar-melhorado {
+    background-color: #3483FA;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+}
+
+.btn-comprar-melhorado:hover {
+    background-color: #2968C8;
+    color: white;
+    text-decoration: none;
+}
+
+/* Main content background */
+main {
+    background-color: #ebebeb;
+    min-height: calc(100vh - 200px);
+}
+
+/* Section styling */
+.product-section {
+    background: white;
+    margin: 0;
+    padding: 20px 0;
+}
+
+.section-title {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 600;
 }
 
 .search-container {

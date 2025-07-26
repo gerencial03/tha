@@ -7,6 +7,7 @@ This is a Flask-based e-commerce platform for Tha Beauty, a beauty and personal 
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+Design theme: MercadoLivre-inspired layout with yellow header, circular logo, and clean product cards.
 
 ## System Architecture
 
