@@ -47,7 +47,7 @@ body {
 .mercado-logo {
     width: 134px;
     height: 34px;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 134 34"><path d="M0 27.284C4.641 30.575 12.016 33 22.34 33c11.369 0 18.253-2.713 21.978-6.183l-3.63-4.293c-2.713 2.667-8.476 4.787-18.348 4.787-9.411 0-15.356-2.305-18.348-5.207L0 9.684c0 9.591 3.166 14.597 7.343 17.6v0ZM47.158 0v32.57h5.162V23.733h4.933c11.649 0 18.325-4.833 18.325-12.295v4.641c0-7.462-6.676-12.079-18.325-12.079v0Zm5.162 4.687h4.733c8.891 0 13.163 2.896 13.163 7.65v0c0 4.754-4.272 7.85-13.163 7.85h-4.733v0ZM107.708 3.881c-8.615 0-14.143 6.543-14.143 14.744v0c0 8.201 5.528 14.744 14.143 14.744v0c8.614 0 14.142-6.543 14.142-14.744v0c0-8.201-5.528-14.744-14.142-14.744v0Zm0 4.874c5.252 0 8.598 4.049 8.598 9.87v0c0 5.821-3.346 9.87-8.598 9.87v0c-5.253 0-8.599-4.049-8.599-9.87v0c0-5.821 3.346-9.87 8.599-9.87v0Z" fill="%233483fa"/></svg>') no-repeat center;
+    background: url('https://raw.githubusercontent.com/gerencial03/imagens/refs/heads/main/mercado-libre-removebg-preview.png') no-repeat center;
     background-size: contain;
     flex-shrink: 0;
     cursor: pointer;
