@@ -92,6 +92,11 @@ Preferred communication style: Simple, everyday language.
 - **WSGI Server**: Replace development server with Gunicorn or uWSGI
 
 ### Recent Changes (July 2025)
+- **Checkout Reviews Updated** (July 26, 2025):
+  - Atualizados comentários do Reclame Aqui, Correios e Mercado Livre
+  - Foco na confiabilidade do site ao invés dos produtos
+  - Comentários destacam: entrega rápida, site seguro, PIX instantâneo
+  - Testimonials agora enfatizam credibilidade da loja online
 - **Heroku Deploy Ready** (July 26, 2025):
   - Sistema PIX For4Payments 100% funcional com chaves reais (testado com sucesso)
   - API For4Payments validada: Transaction ID 3a824331-a10e-4ea0-947a-c73c5865fd58
