@@ -167,82 +167,99 @@ body {
     padding-top: 16px;
 }
 
-/* Products Grid - Real MercadoLivre Style */
-.products-list {
-    background: white;
-    border-radius: 6px;
-    margin-bottom: 32px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+/* Sort Options */
+.sort-options {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    font-size: 14px;
 }
 
-.product-item-link {
+.sort-label {
+    color: rgba(0,0,0,0.55);
+}
+
+.sort-select {
+    border: none;
+    background: none;
+    color: rgba(0,0,0,0.9);
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+}
+
+/* Products Grid - Real MercadoLivre Grid Layout */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.product-card {
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+    border: 1px solid transparent;
+}
+
+.product-card:hover {
+    box-shadow: 0 1px 8px rgba(0,0,0,0.1);
+    border-color: rgba(0,0,0,0.1);
+}
+
+.product-link {
     text-decoration: none;
     color: inherit;
     display: block;
+    height: 100%;
 }
 
-.product-item-link:hover {
+.product-link:hover {
     text-decoration: none;
     color: inherit;
 }
 
-.product-item {
-    padding: 16px 24px;
-    border-bottom: 1px solid #eee;
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.product-item:hover {
-    background-color: #f7f7f7;
-}
-
-.product-item:last-child {
-    border-bottom: none;
-}
-
 /* Product Image */
-.product-thumbnail {
-    width: 160px;
-    height: 160px;
-    flex-shrink: 0;
+.product-image {
+    width: 100%;
+    height: 220px;
     overflow: hidden;
-    border-radius: 4px;
     background: #f5f5f5;
+    position: relative;
 }
 
-.product-thumbnail img {
+.product-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-/* Product Details */
-.product-details {
-    flex: 1;
-    min-width: 0;
+/* Product Info */
+.product-info {
+    padding: 16px;
 }
 
 .product-title {
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 400;
     color: rgba(0,0,0,0.9);
-    line-height: 1.25;
-    margin-bottom: 4px;
+    line-height: 1.3;
+    margin-bottom: 8px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    height: 36px;
 }
 
 /* Product Rating */
 .product-rating {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 2px;
     margin-bottom: 8px;
 }
 
@@ -255,34 +272,51 @@ body {
     color: #ddd;
 }
 
-.rating-text {
+.rating-count {
     font-size: 12px;
     color: rgba(0,0,0,0.55);
-    margin-left: 2px;
+    margin-left: 4px;
 }
 
 /* Price Section */
-.price-container {
-    margin-top: 16px;
+.old-price {
+    font-size: 12px;
+    color: rgba(0,0,0,0.45);
+    text-decoration: line-through;
+    margin-bottom: 2px;
 }
 
 .current-price {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 300;
     color: rgba(0,0,0,0.9);
     margin-bottom: 4px;
 }
 
-.installments {
-    font-size: 14px;
-    color: rgba(0,0,0,0.55);
+.discount {
+    font-size: 12px;
+    color: #00a650;
+    font-weight: 500;
     margin-bottom: 8px;
 }
 
-.shipping-info {
-    font-size: 14px;
+.shipping {
+    font-size: 12px;
     color: #00a650;
     font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.shipping-brand {
+    font-size: 12px;
+    color: rgba(0,0,0,0.55);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.shipping-brand i {
+    color: #3483fa;
 }
 
 /* Footer */
@@ -364,21 +398,21 @@ body {
         margin-left: auto;
     }
     
-    .product-item {
-        flex-direction: column;
+    .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
         gap: 12px;
-        padding: 16px;
     }
     
-    .product-thumbnail {
-        width: 100%;
-        height: 200px;
-        align-self: center;
-        max-width: 200px;
+    .product-image {
+        height: 160px;
+    }
+    
+    .product-info {
+        padding: 12px;
     }
     
     .current-price {
-        font-size: 20px;
+        font-size: 18px;
     }
     
     .col-md-4 {
@@ -389,15 +423,21 @@ body {
 }
 
 @media (max-width: 480px) {
-    .product-item {
-        padding: 12px;
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
     }
     
-    .product-thumbnail {
-        height: 150px;
+    .product-info {
+        padding: 8px;
     }
     
     .product-title {
+        font-size: 12px;
+        height: 32px;
+    }
+    
+    .current-price {
         font-size: 16px;
     }
 }
