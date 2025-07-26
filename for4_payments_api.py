@@ -12,7 +12,7 @@ class For4PaymentsAPI:
         
     def _get_headers(self) -> Dict[str, str]:
         return {
-            'Authorization': self.secret_key,
+            'Authorization': f'Bearer {self.secret_key}',
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         }
