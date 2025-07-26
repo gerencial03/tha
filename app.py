@@ -466,8 +466,8 @@ def process_pix_payment():
         print(f"Descrição: {transaction_description}")
         
         try:
-            # Criar instância da API For4Payments com sua chave
-            payment_api = create_payment_api("2d17dd02-e382-4c11-abaa-7ec6d05767de")
+            # Criar instância da API For4Payments com chave das variáveis de ambiente
+            payment_api = create_payment_api()
             
             # Preparar dados do pagamento
             payment_data = {

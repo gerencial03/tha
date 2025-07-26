@@ -12,7 +12,7 @@ class For4PaymentsAPI:
         
     def _get_headers(self) -> Dict[str, str]:
         return {
-            'Authorization': f'Bearer {self.secret_key}',
+            'Authorization': self.secret_key,
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         }
@@ -90,11 +90,11 @@ class For4PaymentsAPI:
                     response_data = response.json()
                     current_app.logger.info(f"Resposta da API: {response_data}")
                     
-                    # Mapeamento correto dos campos
+                    # Mapeamento correto dos campos da resposta For4Payments
                     return {
                         'id': response_data.get('id') or response_data.get('transactionId'),
-                        'pixCode': response_data.get('pixCode') or response_data.get('pix', {}).get('code'),
-                        'pixQrCode': response_data.get('pixQrCode') or response_data.get('pix', {}).get('qrCode'),
+                        'pixCode': response_data.get('pixCode', ''),
+                        'pixQrCode': response_data.get('pixQrCode', ''),
                         'expiresAt': response_data.get('expiresAt') or response_data.get('expiration'),
                         'status': response_data.get('status', 'pending')
                     }
@@ -177,9 +177,9 @@ class For4PaymentsAPI:
 def create_payment_api(secret_key: Optional[str] = None) -> For4PaymentsAPI:
     """Factory function to create For4PaymentsAPI instance"""
     if secret_key is None:
-        secret_key = os.environ.get("FOR4PAYMENTS_SECRET_KEY", "2d17dd02-e382-4c11-abaa-7ec6d05767de")
+        secret_key = os.environ.get("FOR4PAYMENTS_SECRET_KEY")
     
-    if secret_key is None:
-        raise ValueError("Secret key is required")
+    if not secret_key:
+        raise ValueError("FOR4PAYMENTS_SECRET_KEY environment variable is required")
     
     return For4PaymentsAPI(secret_key)
