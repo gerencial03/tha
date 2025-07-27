@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- MercadoLivre Product Layout - Exact Replica -->
+<div class="ml-product-container">
+    <!-- Breadcrumb Navigation -->
+    <div class="ml-breadcrumb">
+        <a href="{{ url_for('index') }}">Voltar aos resultados</a>
+    </div>
+
+    <!-- Main Product Section -->
+    <div class="ml-product-main">
+        <!-- Left Column - Images -->
+        <div class="ml-product-gallery">
+            <div class="ml-main-image">
+                <img src="{{ product.image_url }}" alt="{{ product.name }}" id="main-product-image">
+            </div>
+        </div>
+
+        <!-- Right Column - Product Info -->
+        <div class="ml-product-info">
+            <!-- Product Status -->
+            <div class="ml-product-status">
+                <span class="ml-condition">Novo</span>
+                <span class="ml-sales">| +{{ product.review_count }} vendidos</span>
+            </div>
+
+            <!-- Product Title -->
+            <h1 class="ml-product-title">{{ product.name }}</h1>
+
+            <!-- Rating Section -->
+            <div class="ml-rating-section">
+                <div class="ml-stars">
+                    {% for i in range(5) %}
+                        {% if i < product.rating %}
+                            <i class="fas fa-star"></i>
+                        {% else %}
+                            <i class="fas fa-star star-empty"></i>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <a href="#reviews" class="ml-rating-link">{{ product.rating }} ({{ product.review_count }})</a>
+            </div>
+
+            <!-- Price Section -->
+            <div class="ml-price-section">
+                {% if product.original_price %}
+                    <div class="ml-original-price">R$ {{ "%.2f"|format(product.original_price) }}</div>
+                {% endif %}
+                <div class="ml-current-price">R$ {{ "%.2f"|format(product.price) }}</div>
+                <div class="ml-installments">12x R$ {{ "%.2f"|format(product.price/12) }}</div>
+            </div>
+
+            <!-- Payment Methods -->
+            <div class="ml-payment-methods">
+                <a href="#" class="ml-payment-link">Ver os meios de pagamento</a>
+            </div>
+
+            <!-- Quantity and Buy Section -->
+            <div class="ml-buy-section">
+                <div class="ml-quantity">
+                    <label>Quantidade:</label>
+                    <div class="ml-quantity-selector">
+                        <button type="button" onclick="changeQuantity(-1)">-</button>
+                        <input type="number" id="quantity" value="1" min="1" max="10">
+                        <button type="button" onclick="changeQuantity(1)">+</button>
+                        <span class="ml-stock">(+25 disponíveis)</span>
+                    </div>
+                </div>
+
+                <div class="ml-action-buttons">
+                    <a href="{{ url_for('checkout', product_id=product.id) }}" class="ml-btn-buy" onclick="setCheckoutQuantity()">
+                        Comprar agora
+                    </a>
+                    <button class="ml-btn-cart" onclick="alert('Produto adicionado ao carrinho!')">
+                        Adicionar ao carrinho
+                    </button>
+                </div>
+            </div>
+
+            <!-- Seller Info -->
+            <div class="ml-seller-info">
+                <div class="ml-seller-section">
+                    <h3>Vendido por</h3>
+                    <div class="ml-seller-name">LABUBU BRASIL</div>
+                    <div class="ml-seller-stats">
+                        <span>+500 vendas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Features -->
+    <div class="ml-features-section">
+        <h2>O que você precisa saber sobre este produto</h2>
+        <ul class="ml-features-list">
+            <li>Produto 100% Original Pop Mart</li>
+            <li>Designer oficial: Kasing Lung</li>
+            <li>Colecionável autêntico</li>
+            <li>Acessórios incluídos: boneca</li>
+            <li>Material: PVC de alta qualidade</li>
+        </ul>
+    </div>
+
+    <!-- Product Description -->
+    <div class="ml-description-section">
+        <h2>Descrição</h2>
+        <div class="ml-description-content">
+            {{ product.description|safe }}
+        </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <div class="ml-reviews-section" id="reviews">
+        <h2>Opiniões sobre o produto</h2>
+        <div class="ml-rating-summary">
+            <div class="ml-rating-score">
+                <span class="ml-score">{{ product.rating }}</span>
+                <div class="ml-stars-large">
+                    {% for i in range(5) %}
+                        {% if i < product.rating %}
+                            <i class="fas fa-star"></i>
+                        {% else %}
+                            <i class="fas fa-star star-empty"></i>  
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="ml-total-reviews">{{ product.review_count }} avaliações</div>
+            </div>
+        </div>
+
+        <!-- Individual Reviews -->
+        <div class="ml-reviews-list">
+            {% if reviews %}
+                {% for review in reviews[:3] %}
+                <div class="ml-review-item">
+                    <div class="ml-review-header">
+                        <div class="ml-reviewer-name">{{ review.name }}</div>
+                        <div class="ml-review-stars">
+                            {% for i in range(5) %}
+                                {% if i < review.rating %}
+                                    <i class="fas fa-star"></i>
+                                {% else %}
+                                    <i class="fas fa-star star-empty"></i>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="ml-review-text">{{ review.comment }}</div>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+// Quantity functionality
+function changeQuantity(delta) {
+    const quantityInput = document.getElementById('quantity');
+    let currentValue = parseInt(quantityInput.value) || 1;
+    const newValue = Math.max(1, Math.min(10, currentValue + delta));
+    quantityInput.value = newValue;
+}
+
+function setCheckoutQuantity() {
+    const quantity = document.getElementById('quantity').value;
+    sessionStorage.setItem('checkoutQuantity', quantity);
+}
+</script>
+{% endblock %}

@@ -137,7 +137,7 @@ def product_detail(product_id):
     # Sort reviews: images first (priority), then text-only  
     reviews = sorted(product_reviews, key=lambda x: (x.get('image') is None, x.get('date', '')), reverse=False)
     
-    return render_template('product_detail.html', 
+    return render_template('product_detail_ml.html', 
                          product=product,
                          similar_products=similar_products,
                          reviews=reviews,
