@@ -16,49 +16,36 @@
     <meta name="keywords" content="Labubu, Pop Mart, colecionáveis, kawaii, Brasil">
 </head>
 <body>
-    <!-- MercadoLivre Header - Exact Replica -->
-    <header class="mercado-header">
-        <div class="header-container">
-            <div class="header-row">
-                <!-- Logo -->
-                <div class="logo-section">
-                    <img src="{{ url_for('static', filename='images/mercado-libre-original.png') }}" 
-                         alt="MercadoLivre" 
-                         class="mercado-logo" 
-                         onclick="window.location.href='{{ url_for('index') }}'"
-                    >
-                </div>
-                
-                <!-- Search Bar -->
-                <div class="search-section">
-                    <form class="search-form" action="{{ url_for('search') }}" method="GET">
-                        <input type="text" 
-                               name="q" 
-                               class="search-input" 
-                               placeholder="Buscar produtos, marcas e muito mais..." 
-                               value="{{ request.args.get('q', '') }}">
-                        <button type="submit" class="search-btn">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </form>
-                </div>
-                
-                <!-- Menu e Carrinho -->
-                <div class="header-actions">
-                    <button class="menu-btn">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <button class="cart-btn" onclick="alert('Carrinho vazio. Selecione um produto!')">
-                        <i class="fas fa-shopping-cart"></i>
-                    </button>
-                </div>
+    <!-- MercadoLivre Header - Exact Copy -->
+    <header class="ml-header">
+        <div class="ml-header-main">
+            <!-- Logo -->
+            <div class="ml-logo">
+                <img src="{{ url_for('static', filename='images/mercado-libre-original.png') }}" 
+                     alt="MercadoLivre" onclick="window.location.href='{{ url_for('index') }}'">
             </div>
             
-            <!-- Location Bar -->
-            <div class="location-bar">
-                <i class="fas fa-map-marker-alt location-icon"></i>
-                <span class="location-text">Informar seu CEP</span>
+            <!-- Search -->
+            <div class="ml-search">
+                <input type="text" placeholder="Buscar produtos, marcas e muito mais..." class="ml-search-input">
+                <button class="ml-search-btn"><i class="fas fa-search"></i></button>
             </div>
+            
+            <!-- Menu -->
+            <div class="ml-menu">
+                <button class="ml-menu-btn"><i class="fas fa-bars"></i></button>
+            </div>
+            
+            <!-- Cart -->
+            <div class="ml-cart">
+                <button class="ml-cart-btn"><i class="fas fa-shopping-cart"></i></button>
+            </div>
+        </div>
+        
+        <!-- Location -->
+        <div class="ml-location">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Informar seu CEP</span>
         </div>
     </header>
 

@@ -18,78 +18,65 @@ body {
     padding: 0 16px;
 }
 
-/* MercadoLivre Header - Exact Like Image */
-.mercado-header {
+/* MercadoLivre Header - Exact Copy */
+.ml-header {
     background: #fff159;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 1px 0 rgba(0,0,0,0.1);
 }
 
-.header-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0;
-}
-
-.header-row {
+.ml-header-main {
     display: flex;
     align-items: center;
-    padding: 8px 16px;
-    gap: 16px;
+    padding: 10px 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 12px;
 }
 
-.logo-section {
+.ml-logo {
     flex-shrink: 0;
 }
 
-.mercado-logo {
-    height: 40px;
+.ml-logo img {
+    height: 34px;
     width: auto;
     cursor: pointer;
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
 }
 
-.search-section {
+.ml-search {
     flex: 1;
     max-width: 600px;
-}
-
-.search-form {
-    display: flex;
     position: relative;
 }
 
-.search-input {
+.ml-search-input {
     width: 100%;
-    height: 40px;
+    height: 39px;
     border: none;
     border-radius: 2px;
-    padding: 0 50px 0 16px;
+    padding: 7px 48px 9px 15px;
     font-size: 16px;
     background: white;
     box-shadow: 0 1px 2px rgba(0,0,0,0.2);
     outline: none;
-    font-family: Arial, sans-serif;
 }
 
-.search-input::placeholder {
+.ml-search-input::placeholder {
     color: #999;
-    font-size: 16px;
 }
 
-.search-input:focus {
+.ml-search-input:focus {
     box-shadow: 0 0 0 2px #3483fa;
 }
 
-.search-btn {
+.ml-search-btn {
     position: absolute;
     right: 0;
     top: 0;
-    height: 40px;
-    width: 40px;
+    height: 39px;
+    width: 46px;
     border: none;
     background: #eee;
     border-radius: 0 2px 2px 0;
@@ -99,55 +86,75 @@ body {
     justify-content: center;
 }
 
-.search-btn:hover {
+.ml-search-btn:hover {
     background: #ddd;
 }
 
-.search-btn i {
+.ml-search-btn i {
     color: #666;
     font-size: 16px;
 }
 
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 16px;
+.ml-menu {
+    margin-left: 16px;
 }
 
-.menu-btn, .cart-btn {
+.ml-menu-btn {
     background: none;
     border: none;
     cursor: pointer;
     padding: 8px;
     border-radius: 4px;
-    transition: background-color 0.2s;
 }
 
-.menu-btn:hover, .cart-btn:hover {
+.ml-menu-btn:hover {
     background-color: rgba(0,0,0,0.05);
 }
 
-.menu-btn i, .cart-btn i {
-    font-size: 20px;
+.ml-menu-btn i {
+    font-size: 18px;
     color: #333;
 }
 
-.location-bar {
+.ml-cart {
+    margin-left: 8px;
+}
+
+.ml-cart-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.ml-cart-btn:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+.ml-cart-btn i {
+    font-size: 18px;
+    color: #333;
+}
+
+.ml-location {
     display: flex;
     align-items: center;
-    padding: 6px 16px;
+    padding: 8px 16px;
     background: #fff159;
     border-top: 1px solid rgba(0,0,0,0.1);
     font-size: 12px;
     color: #333;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.location-icon {
+.ml-location i {
     margin-right: 6px;
     font-size: 12px;
 }
 
-.location-text {
+.ml-location span {
     font-size: 12px;
 }
 
