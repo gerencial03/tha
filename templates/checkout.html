@@ -68,35 +68,46 @@
                                             <input type="tel" id="customer_phone" name="customer_phone" class="mp-input" required placeholder="(11) 99999-9999">
                                         </div>
                                     </div>
-                                <div class="col-md-8 mb-3">
-                                    <label class="form-label">CEP *</label>
-                                    <input type="text" id="customer_cep" name="customer_cep" class="form-control" placeholder="00000-000" maxlength="9" required>
-                                    <div class="loading-cep" id="cep-loading" style="display: none;">
-                                        <small class="text-primary">🔍 Buscando CEP...</small>
+                                    <div class="col-md-8 mb-3">
+                                        <div class="mp-input-group">
+                                            <label class="mp-label">CEP</label>
+                                            <input type="text" id="customer_cep" name="customer_cep" class="mp-input" placeholder="00000-000" maxlength="9" required>
+                                            <div class="loading-cep" id="cep-loading" style="display: none;">
+                                                <small class="text-primary">🔍 Buscando CEP...</small>
+                                            </div>
+                                            <div class="invalid-cep" id="cep-error" style="display: none;">
+                                                <small class="text-danger">❌ CEP não encontrado</small>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="invalid-cep" id="cep-error" style="display: none;">
-                                        <small class="text-danger">❌ CEP não encontrado</small>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mp-input-group">
+                                            <label class="mp-label">Número</label>
+                                            <input type="text" id="customer_numero" name="customer_numero" class="mp-input" required>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label class="form-label">Número *</label>
-                                    <input type="text" id="customer_numero" name="customer_numero" class="form-control" required>
-                                </div>
-                                <div class="col-12 mb-3">
-                                    <label class="form-label">Endereço *</label>
-                                    <input type="text" id="customer_endereco" name="customer_endereco" class="form-control" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Bairro *</label>
-                                    <input type="text" id="customer_bairro" name="customer_bairro" class="form-control" required>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label class="form-label">Cidade *</label>
-                                    <input type="text" id="customer_cidade" name="customer_cidade" class="form-control" required>
-                                </div>
-                                <div class="col-md-2 mb-3">
-                                    <label class="form-label">UF *</label>
-                                    <select id="customer_uf" name="customer_uf" class="form-control">
+                                    <div class="col-12 mb-3">
+                                        <div class="mp-input-group">
+                                            <label class="mp-label">Endereço</label>
+                                            <input type="text" id="customer_endereco" name="customer_endereco" class="mp-input" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="mp-input-group">
+                                            <label class="mp-label">Bairro</label>
+                                            <input type="text" id="customer_bairro" name="customer_bairro" class="mp-input" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mp-input-group">
+                                            <label class="mp-label">Cidade</label>
+                                            <input type="text" id="customer_cidade" name="customer_cidade" class="mp-input" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <div class="mp-input-group">
+                                            <label class="mp-label">UF</label>
+                                            <select id="customer_uf" name="customer_uf" class="mp-input">
                                         <option value="">Selecione</option>
                                         <option value="AC">AC</option>
                                         <option value="AL">AL</option>
@@ -125,21 +136,21 @@
                                         <option value="SP">SP</option>
                                         <option value="SE">SE</option>
                                         <option value="TO">TO</option>
-                                    </select>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Shipping Options -->
-                <div class="card mb-4">
-                    <div class="card-header bg-light">
-                        <h5 class="mb-0">🚚 Frete Grátis</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="shipping-options">
-                            <!-- Always free shipping -->
+                    <!-- Shipping Section -->
+                    <div class="mp-section">
+                        <div class="mp-section-header">
+                            <h3>Frete</h3>
+                            <p class="mp-subtitle">Entrega grátis para todo o Brasil</p>
+                        </div>
+                        <div class="mp-form-container">
                             <div class="alert alert-success text-center mb-0 p-4" style="border: 2px solid #28a745; background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);">
                                 <div class="mb-3">
                                     <i class="fas fa-shipping-fast fa-3x text-success"></i>
@@ -152,7 +163,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
                 <!-- Right Column - Summary -->
                 <div class="col-lg-5">
@@ -178,15 +188,15 @@
                             <div class="mp-price-breakdown">
                                 <div class="mp-price-row">
                                     <span>Produtos</span>
-                                    <span>R$ {{ "%.2f"|format(total_value) }}</span>
+                                    <span id="summary-subtotal">R$ {{ "%.2f"|format(total_value) }}</span>
                                 </div>
                                 <div class="mp-price-row">
                                     <span>Frete</span>
-                                    <span class="mp-free">Grátis</span>
+                                    <span id="summary-shipping" class="mp-free">Grátis</span>
                                 </div>
                                 <div class="mp-price-total">
                                     <span>Total</span>
-                                    <span>R$ {{ "%.2f"|format(total_value) }}</span>
+                                    <span id="summary-total">R$ {{ "%.2f"|format(total_value) }}</span>
                                 </div>
                             </div>
 
@@ -213,7 +223,7 @@
                                         </div>
                                         <div class="mp-pix-total">
                                             <span>Por: </span>
-                                            <span class="mp-price-highlight">R$ {{ "%.2f"|format(total_value * 0.60) }}</span>
+                                            <span id="pix-total" class="mp-price-highlight">R$ {{ "%.2f"|format(total_value * 0.60) }}</span>
                                         </div>
                                         <div class="mp-savings">
                                             Você economiza R$ {{ "%.2f"|format(total_value * 0.40) }}
