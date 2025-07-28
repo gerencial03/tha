@@ -47,8 +47,9 @@
                 {% if product.original_price %}
                     <div class="ml-original-price">R$ {{ "%.2f"|format(product.original_price) }}</div>
                 {% endif %}
-                <div class="ml-current-price">R$ {{ "%.2f"|format(product.price) }}</div>
-                <div class="ml-installments">12x R$ {{ "%.2f"|format(product.price/12) }}</div>
+                <div class="ml-current-price">R$ {{ "%.2f"|format(product.price * 0.6) }}</div>
+                <div class="ml-installments">12x R$ {{ "%.2f"|format((product.price * 0.6)/12) }}</div>
+                <div class="ml-pix-discount">40% OFF no PIX - Economia de R$ {{ "%.2f"|format(product.price * 0.4) }}</div>
             </div>
 
             <!-- Payment Methods -->
