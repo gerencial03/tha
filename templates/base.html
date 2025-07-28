@@ -22,7 +22,12 @@
             <!-- Main Header Row -->
             <div class="header-top">
                 <!-- Logo -->
-                <div class="mercado-logo" onclick="window.location.href='{{ url_for('index') }}'"></div>
+                <img src="{{ url_for('static', filename='images/mercado-libre-logo.png') }}" 
+                 alt="MercadoLivre" 
+                 class="mercado-logo-img" 
+                 onclick="window.location.href='{{ url_for('index') }}'"
+                 style="width: 180px; height: 48px; cursor: pointer; margin-right: 32px; object-fit: contain; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;"
+            >
                 
                 <!-- Search Bar -->
                 <div class="search-container">
