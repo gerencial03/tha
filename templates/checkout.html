@@ -228,49 +228,55 @@
                             </button>
                             
                             <!-- Loading state -->
-                            <div id="payment-loading" class="text-center" style="display: none;">
-                                <div class="spinner-border text-warning" role="status">
-                                    <span class="visually-hidden">Processando...</span>
-                                </div>
-                                <p class="mt-2">Processando seu pagamento...</p>
+                            <div id="payment-loading" class="mp-loading" style="display: none;">
+                                <div class="mp-loading-spinner"></div>
+                                <p>Gerando código PIX...</p>
                             </div>
                             
                             <!-- PIX Payment Section -->
-                            <div id="pix-payment-section" style="display: none;">
-                                <div class="alert alert-info">
-                                    <h5 class="alert-heading">📱 Pagamento PIX Gerado!</h5>
-                                    <hr>
+                            <div id="pix-payment-section" class="mp-pix-payment" style="display: none;">
+                                <div class="mp-pix-success">
+                                    <div class="mp-pix-title">
+                                        <i class="fab fa-pix"></i>
+                                        <h4>PIX gerado com sucesso!</h4>
+                                    </div>
                                     
                                     <!-- QR Code -->
-                                    <div class="text-center mb-3">
-                                        <div id="qr-code-container" class="mb-3">
-                                            <div class="bg-white p-3 rounded d-inline-block">
-                                                <canvas id="qr-code"></canvas>
-                                            </div>
+                                    <div class="mp-qr-section">
+                                        <div class="mp-qr-container">
+                                            <canvas id="qr-code"></canvas>
                                         </div>
-                                        <p><strong>Escaneie o QR Code com seu banco</strong></p>
+                                        <p class="mp-qr-instruction">Escaneie o código com o app do seu banco</p>
                                     </div>
                                     
                                     <!-- PIX Copy and Paste -->
-                                    <div class="mb-3">
-                                        <label class="form-label"><strong>Ou copie e cole o código PIX:</strong></label>
-                                        <div class="input-group">
-                                            <input type="text" id="pix-code" class="form-control" readonly>
-                                            <button class="btn-copiar-pix" type="button" id="copy-pix-code">
-                                                📋 Copiar
+                                    <div class="mp-pix-code-section">
+                                        <label class="mp-pix-label">Ou copie e cole o código PIX:</label>
+                                        <div class="mp-copy-container">
+                                            <input type="text" id="pix-code" class="mp-pix-input" readonly>
+                                            <button class="mp-copy-btn" type="button" id="copy-pix-code">
+                                                <i class="fas fa-copy"></i>
+                                                Copiar
                                             </button>
+                                        </div>
+                                        <div id="copy-feedback" class="mp-copy-feedback" style="display: none;">
+                                            <i class="fas fa-check"></i>
+                                            Código copiado!
                                         </div>
                                     </div>
                                     
                                     <!-- Payment Status -->
-                                    <div id="payment-status" class="text-center">
-                                        <p class="mb-2">⏳ Aguardando pagamento...</p>
-                                        <small class="text-muted">Escaneie o QR Code ou copie o código PIX</small>
+                                    <div class="mp-payment-status">
+                                        <div class="mp-status-icon">
+                                            <i class="fas fa-clock"></i>
+                                        </div>
+                                        <p>Aguardando confirmação do pagamento...</p>
+                                        <small>O pagamento será confirmado automaticamente</small>
                                     </div>
-                                    
-                                    <!-- Success message removed by user request -->
                                 </div>
                             </div>
+                            
+
 
                             <!-- Security Icons -->
                             <div class="security-section">
@@ -941,8 +947,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (paymentLoading) paymentLoading.style.display = 'none';
                 if (pixPaymentSection) pixPaymentSection.style.display = 'block';
 
-                // Generate QR Code
-                if (result.transaction && result.transaction.pix_qr_code) {
+                // Generate QR Code using For4Payments response
+                if (result.transaction && result.transaction.qr_code_base64) {
+                    // Use base64 QR Code from For4Payments
+                    const canvas = document.getElementById('qr-code');
+                    const ctx = canvas.getContext('2d');
+                    const img = new Image();
+                    img.onload = function() {
+                        canvas.width = 200;
+                        canvas.height = 200;
+                        ctx.drawImage(img, 0, 0, 200, 200);
+                    };
+                    img.src = 'data:image/png;base64,' + result.transaction.qr_code_base64;
+                } else if (result.transaction && result.transaction.pix_qr_code) {
+                    // Fallback: Generate QR Code from PIX code
                     generateQRCode(result.transaction.pix_qr_code);
                 }
 
@@ -951,6 +969,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     const pixCodeInput = document.getElementById('pix-code');
                     if (pixCodeInput) {
                         pixCodeInput.value = result.transaction.pix_copy_paste;
+                    }
+                } else if (result.transaction && result.transaction.pix_qr_code) {
+                    const pixCodeInput = document.getElementById('pix-code');
+                    if (pixCodeInput) {
+                        pixCodeInput.value = result.transaction.pix_qr_code;
                     }
                 }
 
@@ -1085,21 +1108,45 @@ document.addEventListener('DOMContentLoaded', function() {
     // Copy PIX code to clipboard
     document.getElementById('copy-pix-code').addEventListener('click', function() {
         const pixCode = document.getElementById('pix-code');
-        pixCode.select();
-        document.execCommand('copy');
         
-        // Visual feedback
-        const button = this;
-        const originalText = button.textContent;
-        button.textContent = '✅ Copiado!';
-        button.classList.add('btn-success');
-        button.classList.remove('btn-outline-secondary');
+        // Modern clipboard API
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(pixCode.value).then(() => {
+                showCopyFeedback();
+            }).catch(() => {
+                // Fallback to old method
+                pixCode.select();
+                document.execCommand('copy');
+                showCopyFeedback();
+            });
+        } else {
+            // Fallback for older browsers
+            pixCode.select();
+            document.execCommand('copy');
+            showCopyFeedback();
+        }
         
-        setTimeout(() => {
-            button.textContent = originalText;
-            button.classList.remove('btn-success');
-            button.classList.add('btn-outline-secondary');
-        }, 2000);
+        function showCopyFeedback() {
+            // Show feedback message
+            const feedback = document.getElementById('copy-feedback');
+            if (feedback) {
+                feedback.style.display = 'flex';
+                setTimeout(() => {
+                    feedback.style.display = 'none';
+                }, 2000);
+            }
+            
+            // Update button visual
+            const button = document.getElementById('copy-pix-code');
+            const originalHtml = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check"></i> Copiado!';
+            button.style.background = '#00a650';
+            
+            setTimeout(() => {
+                button.innerHTML = originalHtml;
+                button.style.background = '#3483fa';
+            }, 2000);
+        }
     });
 
     function startPaymentStatusPolling(transactionHash) {
