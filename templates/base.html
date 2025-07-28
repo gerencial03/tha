@@ -19,19 +19,19 @@
     <!-- MercadoLivre Header - Exact Replica -->
     <header class="mercado-header">
         <div class="header-container">
-            <!-- Main Header Row -->
-            <div class="header-top">
+            <div class="header-row">
                 <!-- Logo -->
-                <img src="{{ url_for('static', filename='images/mercado-libre-logo.png') }}?v=2025011" 
-                 alt="MercadoLivre" 
-                 class="mercado-logo-img" 
-                 onclick="window.location.href='{{ url_for('index') }}'"
-                 style="width: 180px; height: 48px; cursor: pointer; margin-right: 24px; margin-left: 8px; object-fit: contain; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; filter: none;"
-            >
+                <div class="logo-section">
+                    <img src="{{ url_for('static', filename='images/mercado-libre-original.png') }}" 
+                         alt="MercadoLivre" 
+                         class="mercado-logo" 
+                         onclick="window.location.href='{{ url_for('index') }}'"
+                    >
+                </div>
                 
                 <!-- Search Bar -->
-                <div class="search-container">
-                    <form class="search-form" action="#" method="GET">
+                <div class="search-section">
+                    <form class="search-form" action="{{ url_for('search') }}" method="GET">
                         <input type="text" 
                                name="q" 
                                class="search-input" 
@@ -43,25 +43,21 @@
                     </form>
                 </div>
                 
-                <!-- Location and Actions -->
-                <div class="header-right">
-                    <!-- Location -->
-                    <div class="location-section" onclick="openLocationDialog()">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Informe seu CEP</span>
-                    </div>
-                    
-                    <!-- Actions -->
-                    <div class="header-actions">
-                        <button class="menu-toggle" onclick="toggleMobileMenu()">
-                            <i class="fas fa-bars"></i>
-                        </button>
-                        <button class="cart-icon" onclick="alert('Carrinho está vazio. Selecione um produto para comprar!')">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span class="cart-count" id="cart-count">0</span>
-                        </button>
-                    </div>
+                <!-- Menu e Carrinho -->
+                <div class="header-actions">
+                    <button class="menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <button class="cart-btn" onclick="alert('Carrinho vazio. Selecione um produto!')">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
                 </div>
+            </div>
+            
+            <!-- Location Bar -->
+            <div class="location-bar">
+                <i class="fas fa-map-marker-alt location-icon"></i>
+                <span class="location-text">Informar seu CEP</span>
             </div>
         </div>
     </header>
