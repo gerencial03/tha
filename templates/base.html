@@ -22,11 +22,11 @@
             <!-- Main Header Row -->
             <div class="header-top">
                 <!-- Logo -->
-                <img src="{{ url_for('static', filename='images/mercado-libre-logo.png') }}" 
+                <img src="{{ url_for('static', filename='images/mercado-libre-logo.png') }}?v={{ range(1000, 9999) | random }}" 
                  alt="MercadoLivre" 
                  class="mercado-logo-img" 
                  onclick="window.location.href='{{ url_for('index') }}'"
-                 style="width: 180px; height: 48px; cursor: pointer; margin-right: 32px; object-fit: contain; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;"
+                 style="width: 180px; height: 48px; cursor: pointer; margin-right: 32px; object-fit: contain; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; filter: none;"
             >
                 
                 <!-- Search Bar -->
