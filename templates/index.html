@@ -89,5 +89,99 @@
             </div>
         {% endfor %}
     </div>
+    
+    <!-- Customer Reviews Section -->
+    <div class="customer-reviews-section">
+        <div class="reviews-header">
+            <h2>O que nossos clientes dizem</h2>
+            <div class="overall-rating">
+                <div class="rating-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <span class="rating-text">4.9 de 5 estrelas baseado em 2.847 avaliações</span>
+            </div>
+        </div>
+        
+        <div class="reviews-grid">
+            <!-- Review 1 with customer photo -->
+            <div class="review-card featured">
+                <div class="review-header">
+                    <div class="customer-photo">
+                        <img src="{{ url_for('static', filename='images/customer1.jpg') }}" alt="Cliente" onerror="this.src='https://via.placeholder.com/48x48/4285f4/white?text=AC'">
+                    </div>
+                    <div class="customer-info">
+                        <h4>Ana Carolina S.</h4>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="review-text">"Simplesmente apaixonada pelos Labubus! A qualidade é incrível, veio certinho como na foto. Minha coleção está crescendo!"</p>
+                <div class="review-photos">
+                    <img src="/attached_assets/Imagem do WhatsApp de 2025-07-24 à(s) 10.01.17_3192b2b3_1753362157302.jpg" alt="Foto do produto">
+                    <img src="/attached_assets/Imagem do WhatsApp de 2025-07-24 à(s) 10.01.17_32d813b4_1753362157301.jpg" alt="Foto do produto">
+                </div>
+            </div>
+            
+            <!-- Review 2 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="customer-info">
+                        <h4>Marcos V.</h4>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="review-text">"Produto original, embalagem perfeita. Chegou rapidinho pelo Correios. Recomendo!"</p>
+            </div>
+            
+            <!-- Review 3 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="customer-info">
+                        <h4>Julia M.</h4>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="review-text">"Loja confiável, produtos autênticos. Minha filha adorou o Labubu Halloween!"</p>
+            </div>
+            
+            <!-- Review 4 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="customer-info">
+                        <h4>Roberto L.</h4>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="review-text">"Excelente atendimento e produto de qualidade. Vale cada centavo!"</p>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
