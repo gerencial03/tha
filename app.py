@@ -492,14 +492,25 @@ def process_pix_payment():
             # Criar pagamento PIX
             payment_response = payment_api.create_pix_payment(payment_data)
             
-            # Verificar se a resposta contém dados válidos
+            # Verificar se a resposta contém dados válidos  
+            print(f"DEBUG - Resposta For4Payments completa: {payment_response}")
+            
             if payment_response and 'id' in payment_response:
+                # Mapear corretamente os campos da resposta For4Payments
+                pix_code = payment_response.get('pixCode', '')
+                qr_code_data = payment_response.get('pixQrCode', '')
+                
+                print(f"DEBUG - PIX Code: {pix_code[:50] if pix_code else 'VAZIO'}...")
+                print(f"DEBUG - QR Code: {'PRESENTE' if qr_code_data else 'AUSENTE'}")
+                
                 transaction_result = {
                     'success': True,
                     'hash': payment_response.get('id', f'tx-{int(time.time())}'),
-                    'pix_qr_code': payment_response.get('pixCode', ''),
-                    'pix_copy_paste': payment_response.get('pixCode', ''),
-                    'qr_code_base64': payment_response.get('pixQrCode', ''),
+                    'pixCode': pix_code,  # Campo correto da API
+                    'pix_qr_code': pix_code,
+                    'pix_copy_paste': pix_code,
+                    'pixQrCode': qr_code_data,  # Campo correto da API  
+                    'qr_code_base64': qr_code_data,
                     'status': payment_response.get('status', 'pending'),
                     'amount': pix_amount,
                     'original_amount': total_amount,
@@ -514,6 +525,8 @@ def process_pix_payment():
             print(f"✅ PIX CRIADO COM SUCESSO!")
             print(f"Transaction ID: {transaction_result['hash']}")
             print(f"Status: {payment_response.get('status', 'N/A')}")
+            print(f"PIX Code length: {len(transaction_result.get('pixCode', ''))}")
+            print(f"QR Code present: {'YES' if transaction_result.get('pixQrCode') else 'NO'}")
                 
         except Exception as e:
             print(f"Erro For4Payments API: {str(e)}")

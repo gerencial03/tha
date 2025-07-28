@@ -958,7 +958,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (pixPaymentSection) pixPaymentSection.style.display = 'block';
 
                 // Generate QR Code using For4Payments response
-                if (result.transaction && result.transaction.qr_code_base64) {
+                console.log('Transaction data:', result.transaction);
+                
+                // Check all possible QR code fields from For4Payments API
+                let qrCodeData = null;
+                let pixCode = null;
+                
+                if (result.transaction) {
+                    // Check for base64 QR code
+                    qrCodeData = result.transaction.qr_code_base64 || result.transaction.pixQrCode;
+                    // Check for PIX code
+                    pixCode = result.transaction.pix_copy_paste || result.transaction.pix_qr_code || result.transaction.pixCode;
+                    
+                    console.log('QR Code Data:', qrCodeData);
+                    console.log('PIX Code:', pixCode);
+                }
+                
+                if (qrCodeData) {
                     // Use base64 QR Code from For4Payments
                     const canvas = document.getElementById('qr-code');
                     const ctx = canvas.getContext('2d');
@@ -967,24 +983,37 @@ document.addEventListener('DOMContentLoaded', function() {
                         canvas.width = 200;
                         canvas.height = 200;
                         ctx.drawImage(img, 0, 0, 200, 200);
+                        console.log('QR Code base64 carregado com sucesso');
                     };
-                    img.src = 'data:image/png;base64,' + result.transaction.qr_code_base64;
-                } else if (result.transaction && result.transaction.pix_qr_code) {
+                    img.onerror = function() {
+                        console.error('Erro ao carregar QR Code base64, usando fallback');
+                        if (pixCode) {
+                            generateQRCode(pixCode);
+                        }
+                    };
+                    // Remove data:image prefix if present
+                    if (qrCodeData.startsWith('data:image')) {
+                        img.src = qrCodeData;
+                    } else {
+                        img.src = 'data:image/png;base64,' + qrCodeData;
+                    }
+                } else if (pixCode) {
                     // Fallback: Generate QR Code from PIX code
-                    generateQRCode(result.transaction.pix_qr_code);
+                    console.log('Gerando QR Code do código PIX:', pixCode);
+                    generateQRCode(pixCode);
+                } else {
+                    console.error('Nenhum QR Code ou código PIX encontrado na resposta');
                 }
 
                 // Set PIX copy and paste code
-                if (result.transaction && result.transaction.pix_copy_paste) {
+                if (pixCode) {
                     const pixCodeInput = document.getElementById('pix-code');
                     if (pixCodeInput) {
-                        pixCodeInput.value = result.transaction.pix_copy_paste;
+                        pixCodeInput.value = pixCode;
+                        console.log('Código PIX definido:', pixCode.substring(0, 50) + '...');
                     }
-                } else if (result.transaction && result.transaction.pix_qr_code) {
-                    const pixCodeInput = document.getElementById('pix-code');
-                    if (pixCodeInput) {
-                        pixCodeInput.value = result.transaction.pix_qr_code;
-                    }
+                } else {
+                    console.error('Nenhum código PIX encontrado na resposta');
                 }
 
                 // Start payment status polling
