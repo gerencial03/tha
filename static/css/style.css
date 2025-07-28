@@ -29,7 +29,7 @@ body {
 .ml-header-main {
     display: flex;
     align-items: center;
-    padding: 10px 8px;
+    padding: 14px 8px;
     max-width: 1200px;
     margin: 0 auto;
     gap: 16px;
@@ -40,11 +40,12 @@ body {
 }
 
 .ml-logo img {
-    height: 62px;
+    height: 72px;
     width: auto;
     cursor: pointer;
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
+    margin-top: 4px;
 }
 
 .ml-search {
@@ -170,7 +171,8 @@ body {
     }
     
     .ml-logo img {
-        height: 46px;
+        height: 52px;
+        margin-top: 2px;
     }
     
     .ml-search {
@@ -220,7 +222,8 @@ body {
     }
     
     .ml-logo img {
-        height: 38px;
+        height: 42px;
+        margin-top: 1px;
     }
     
     .ml-search-input {
