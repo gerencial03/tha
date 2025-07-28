@@ -29,10 +29,10 @@ body {
 .ml-header-main {
     display: flex;
     align-items: center;
-    padding: 10px 16px;
+    padding: 10px 8px;
     max-width: 1200px;
     margin: 0 auto;
-    gap: 12px;
+    gap: 16px;
 }
 
 .ml-logo {
@@ -49,8 +49,9 @@ body {
 
 .ml-search {
     flex: 1;
-    max-width: 600px;
+    max-width: 800px;
     position: relative;
+    margin-right: auto;
 }
 
 .ml-search-input {
@@ -63,6 +64,7 @@ body {
     background: white;
     box-shadow: 0 1px 2px rgba(0,0,0,0.2);
     outline: none;
+    min-width: 400px;
 }
 
 .ml-search-input::placeholder {
@@ -98,7 +100,7 @@ body {
 }
 
 .ml-menu {
-    margin-left: 16px;
+    margin-left: auto;
 }
 
 .ml-menu-btn {
@@ -119,7 +121,7 @@ body {
 }
 
 .ml-cart {
-    margin-left: 8px;
+    margin-left: 4px;
 }
 
 .ml-cart-btn {
