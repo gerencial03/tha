@@ -40,7 +40,7 @@ body {
 }
 
 .ml-logo img {
-    height: 42px;
+    height: 52px;
     width: auto;
     cursor: pointer;
     image-rendering: -webkit-optimize-contrast;
@@ -170,7 +170,7 @@ body {
     }
     
     .ml-logo img {
-        height: 32px;
+        height: 38px;
     }
     
     .ml-search {
@@ -220,7 +220,7 @@ body {
     }
     
     .ml-logo img {
-        height: 28px;
+        height: 32px;
     }
     
     .ml-search-input {
