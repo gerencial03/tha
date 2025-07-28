@@ -1098,6 +1098,341 @@ body {
     }
 }
 
+/* Mercado Pago Checkout Styles */
+.mp-checkout-container {
+    background: #f5f5f5;
+    min-height: 100vh;
+    padding-bottom: 40px;
+}
+
+.mp-progress-section {
+    background: white;
+    padding: 20px 0;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.mp-progress-steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.mp-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+}
+
+.mp-step-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e6e6e6;
+    color: #999;
+    font-size: 16px;
+}
+
+.mp-step.completed .mp-step-icon {
+    background: #00a650;
+    color: white;
+}
+
+.mp-step.active .mp-step-icon {
+    background: #3483fa;
+    color: white;
+}
+
+.mp-step span {
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
+}
+
+.mp-step.completed span,
+.mp-step.active span {
+    color: #333;
+}
+
+.mp-main-container {
+    padding: 32px 0;
+}
+
+.mp-section {
+    background: white;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+
+.mp-section-header h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.mp-subtitle {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 24px;
+}
+
+.mp-input-group {
+    margin-bottom: 16px;
+}
+
+.mp-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
+}
+
+.mp-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border-color 0.2s;
+    background: white;
+}
+
+.mp-input:focus {
+    outline: none;
+    border-color: #3483fa;
+    box-shadow: 0 0 0 2px rgba(52, 131, 250, 0.1);
+}
+
+.mp-summary-container {
+    background: white;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 20px;
+}
+
+.mp-summary-header h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.mp-product-summary {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+}
+
+.mp-product-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.mp-product-info h4 {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.mp-product-info p {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+.mp-original-price {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.mp-price-breakdown {
+    margin-bottom: 24px;
+}
+
+.mp-price-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.mp-price-total {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-top: 1px solid #eee;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.mp-free {
+    color: #00a650;
+    font-weight: 500;
+}
+
+.mp-payment-method {
+    margin-bottom: 24px;
+}
+
+.mp-pix-option {
+    border: 2px solid #3483fa;
+    border-radius: 8px;
+    padding: 16px;
+    background: #f8fafe;
+}
+
+.mp-pix-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.mp-pix-icon {
+    width: 32px;
+    height: 32px;
+    background: #3483fa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+}
+
+.mp-pix-info h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.mp-pix-info p {
+    font-size: 12px;
+    color: #666;
+    margin: 0;
+}
+
+.mp-discount-badge {
+    background: #ff6600;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: auto;
+}
+
+.mp-pix-pricing {
+    margin-top: 12px;
+}
+
+.mp-original-total {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.mp-crossed {
+    text-decoration: line-through;
+}
+
+.mp-pix-total {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.mp-price-highlight {
+    color: #00a650;
+}
+
+.mp-savings {
+    font-size: 12px;
+    color: #00a650;
+    font-weight: 500;
+}
+
+.mp-btn-primary {
+    width: 100%;
+    background: #3483fa;
+    color: white;
+    border: none;
+    padding: 16px 24px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.mp-btn-primary:hover {
+    background: #2968c8;
+}
+
+.mp-btn-primary:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* Mobile Responsive for Checkout */
+@media (max-width: 768px) {
+    .mp-progress-steps {
+        gap: 20px;
+    }
+    
+    .mp-step span {
+        font-size: 12px;
+    }
+    
+    .mp-step-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+    
+    .mp-main-container {
+        padding: 16px 0;
+    }
+    
+    .mp-section {
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+    
+    .mp-summary-container {
+        padding: 16px;
+        position: static;
+    }
+    
+    .mp-section-header h3 {
+        font-size: 20px;
+    }
+    
+    .mp-subtitle {
+        font-size: 14px;
+    }
+}
+
 .product-card {
     background: white;
     border-radius: 4px;
