@@ -40,9 +40,11 @@ body {
 }
 
 .ml-logo img {
-    height: 34px;
+    height: 42px;
     width: auto;
     cursor: pointer;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
 }
 
 .ml-search {
